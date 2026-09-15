@@ -50,9 +50,9 @@ export default async function TakeAssessmentPage({
     );
   }
 
-  // Safe columns only — no correct_answer
+  // Safe columns only — using questions_public view (no correct_answer column exposed)
   const { data: questions } = await supabase
-    .from('questions')
+    .from('questions_public')
     .select('id, assessment_id, question_text, question_type, options, marks, skill_category, sequence')
     .eq('assessment_id', assessmentId)
     .order('sequence', { ascending: true });

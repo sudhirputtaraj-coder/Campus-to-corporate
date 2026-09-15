@@ -1,6 +1,6 @@
 'use server';
 
-import { createClient } from '@/lib/supabase/server';
+import { createClient, createServiceClient } from '@/lib/supabase/server';
 import { revalidatePath } from 'next/cache';
 
 async function getAuthStudent() {
@@ -199,7 +199,7 @@ export async function submitAssessment(
 
   const { data: attempt } = await supabase
     .from('assessment_attempts')
-    .select('id, student_id, assessment_id, status, attempt_number')
+    .select('id, student_id, assessment_id, status, attempt_number, created_at')
     .eq('id', attemptId)
     .eq('student_id', student.id)
     .single();
@@ -209,8 +209,38 @@ export async function submitAssessment(
     return { error: 'This attempt has already been submitted.' };
   }
 
-  // Load questions WITH correct answers (server-side only)
-  const { data: questions } = await supabase
+  const { data: assessment } = await supabase
+    .from('assessments')
+    .select('course_id, passing_score, duration_minutes')
+    .eq('id', attempt.assessment_id)
+    .single();
+
+  // Server-side timer enforcement
+  const durationMinutes = Number(assessment?.duration_minutes ?? 0);
+  if (durationMinutes > 0 && attempt.created_at) {
+    const elapsedMs = Date.now() - new Date(attempt.created_at).getTime();
+    const elapsedMinutes = elapsedMs / (1000 * 60);
+    const graceBufferMinutes = 2; // 2 minute buffer for network latency
+    if (elapsedMinutes > durationMinutes + graceBufferMinutes) {
+      await supabase
+        .from('assessment_attempts')
+        .update({
+          status: 'SUBMITTED',
+          score: 0,
+          percentage: 0,
+          obtained_marks: 0,
+          passed: false,
+          completed_at: new Date().toISOString(),
+        })
+        .eq('id', attemptId);
+
+      return { error: 'Assessment time limit exceeded. Attempt marked as timed out.' };
+    }
+  }
+
+  // Load questions WITH correct answers (server-side only, via service client after verifying auth & attempt ownership)
+  const serviceClient = createServiceClient();
+  const { data: questions } = await serviceClient
     .from('questions')
     .select('id, question_type, correct_answer, marks')
     .eq('assessment_id', attempt.assessment_id);
@@ -228,7 +258,7 @@ export async function submitAssessment(
   let obtainedMarks = 0;
   let needsManual = false;
 
-  const answerRows = questions.map((q) => {
+  const answerRows = questions.map((q: any) => {
     totalMarks += Number(q.marks) || 0;
     const submitted = answers.find((a) => a.questionId === q.id);
     const answerText = submitted?.answerText?.trim() ?? '';
@@ -270,12 +300,6 @@ export async function submitAssessment(
   const percentage =
     totalMarks > 0 ? Math.round((obtainedMarks / totalMarks) * 10000) / 100 : 0;
 
-  const { data: assessment } = await supabase
-    .from('assessments')
-    .select('passing_score')
-    .eq('id', attempt.assessment_id)
-    .single();
-
   const passingScore = Number(assessment?.passing_score ?? 60);
   const status = needsManual ? 'PENDING_EVALUATION' : 'GRADED';
   const passed = needsManual ? null : percentage >= passingScore;
@@ -297,6 +321,39 @@ export async function submitAssessment(
   if (updError) {
     console.error('submitAssessment attempt', updError);
     return { error: 'Something went wrong. Please try again.' };
+  }
+
+  // Course Progress & Certificate Connection
+  if (passed && assessment?.course_id) {
+    const courseId = assessment.course_id;
+
+    // Recalculate completion percentage
+    const { data: pct } = await supabase.rpc('recalc_enrollment_progress', {
+      p_student_id: student.id,
+      p_course_id: courseId,
+    });
+
+    const completionPercentage = Number(pct ?? 0);
+
+    // If course is 100% complete, verify certificate issuance
+    if (completionPercentage >= 100) {
+      const { data: existingCert } = await serviceClient
+        .from('certificates')
+        .select('id')
+        .eq('student_id', student.id)
+        .eq('course_id', courseId)
+        .maybeSingle();
+
+      if (!existingCert) {
+        const certNumber = `CERT-${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).substring(2, 6).toUpperCase()}`;
+        await serviceClient.from('certificates').insert({
+          student_id: student.id,
+          course_id: courseId,
+          certificate_number: certNumber,
+          issue_date: new Date().toISOString(),
+        });
+      }
+    }
   }
 
   await supabase.from('audit_logs').insert({
