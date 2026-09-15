@@ -3,6 +3,83 @@
 import { createClient, createServiceClient } from '@/lib/supabase/server';
 import { revalidatePath } from 'next/cache';
 
+/** Server-side action to sync/issue missing certificates for all 100% completed courses of the authenticated student */
+export async function syncStudentCertificates() {
+  const { supabase, student, error } = await getAuthStudent();
+  if (error || !student) return { error: error || 'Unauthorized' };
+
+  // Find all enrollments with completion_percentage >= 100
+  const { data: enrollments } = await supabase
+    .from('enrollments')
+    .select('course_id, completion_percentage')
+    .eq('student_id', student.id)
+    .gte('completion_percentage', 100);
+
+  if (!enrollments || enrollments.length === 0) {
+    return { success: true, count: 0 };
+  }
+
+  let issuedCount = 0;
+  for (const enr of enrollments) {
+    const cert = await checkAndIssueCertificate(student.id, enr.course_id);
+    if (cert) issuedCount++;
+  }
+
+  revalidatePath('/student/certificates');
+  revalidatePath('/student/dashboard');
+
+  return { success: true, count: issuedCount };
+}
+
+/** Server-side helper to verify 100% completion and issue certificate if eligible */
+export async function checkAndIssueCertificate(studentId: string, courseId: string) {
+  const serviceClient = createServiceClient();
+
+  // 1. Verify enrollment exists
+  const { data: enrollment } = await serviceClient
+    .from('enrollments')
+    .select('id, completion_percentage, status')
+    .eq('student_id', studentId)
+    .eq('course_id', courseId)
+    .maybeSingle();
+
+  if (!enrollment) return null;
+
+  // 2. Check if completion >= 100%
+  const pct = Number(enrollment.completion_percentage ?? 0);
+  if (pct < 100) return null;
+
+  // 3. Check if certificate already exists (idempotent)
+  const { data: existingCert } = await serviceClient
+    .from('certificates')
+    .select('*')
+    .eq('student_id', studentId)
+    .eq('course_id', courseId)
+    .maybeSingle();
+
+  if (existingCert) return existingCert;
+
+  // 4. Generate unique certificate number & insert record
+  const certNumber = `CERT-${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).substring(2, 6).toUpperCase()}`;
+  const { data: newCert, error } = await serviceClient
+    .from('certificates')
+    .insert({
+      student_id: studentId,
+      course_id: courseId,
+      certificate_number: certNumber,
+      issue_date: new Date().toISOString(),
+    })
+    .select('*')
+    .single();
+
+  if (error) {
+    console.error('checkAndIssueCertificate error:', error);
+    return null;
+  }
+
+  return newCert;
+}
+
 async function getAuthStudent() {
   const supabase = await createClient();
   const {
@@ -66,6 +143,9 @@ export async function markLessonComplete(lessonId: string, courseId: string) {
     console.error('recalc_enrollment_progress', rpcError);
   }
 
+  // Check and issue certificate if course is completed
+  await checkAndIssueCertificate(student.id, courseId);
+
   await supabase.from('audit_logs').insert({
     user_id: student.user_id,
     action: 'LESSON_COMPLETED',
@@ -77,6 +157,7 @@ export async function markLessonComplete(lessonId: string, courseId: string) {
   revalidatePath('/student/learning');
   revalidatePath(`/student/course/${courseId}`);
   revalidatePath('/student/dashboard');
+  revalidatePath('/student/certificates');
 
   return { success: true, completion_percentage: pct ?? 0 };
 }
@@ -328,32 +409,13 @@ export async function submitAssessment(
     const courseId = assessment.course_id;
 
     // Recalculate completion percentage
-    const { data: pct } = await supabase.rpc('recalc_enrollment_progress', {
+    await supabase.rpc('recalc_enrollment_progress', {
       p_student_id: student.id,
       p_course_id: courseId,
     });
 
-    const completionPercentage = Number(pct ?? 0);
-
-    // If course is 100% complete, verify certificate issuance
-    if (completionPercentage >= 100) {
-      const { data: existingCert } = await serviceClient
-        .from('certificates')
-        .select('id')
-        .eq('student_id', student.id)
-        .eq('course_id', courseId)
-        .maybeSingle();
-
-      if (!existingCert) {
-        const certNumber = `CERT-${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).substring(2, 6).toUpperCase()}`;
-        await serviceClient.from('certificates').insert({
-          student_id: student.id,
-          course_id: courseId,
-          certificate_number: certNumber,
-          issue_date: new Date().toISOString(),
-        });
-      }
-    }
+    // Check and issue certificate if course is completed
+    await checkAndIssueCertificate(student.id, courseId);
   }
 
   await supabase.from('audit_logs').insert({

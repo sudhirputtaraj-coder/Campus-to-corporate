@@ -334,3 +334,13 @@ export interface BatchCourseAssignment {
   course?: Course;
   batch?: Batch;
 }
+
+export interface Certificate {
+  id: string;
+  student_id: string;
+  course_id: string;
+  certificate_number: string;
+  issue_date: string;
+  created_at: string;
+  course?: Course;
+}

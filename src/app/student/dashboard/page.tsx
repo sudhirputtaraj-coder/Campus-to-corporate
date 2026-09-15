@@ -67,6 +67,9 @@ export default async function StudentDashboard() {
               <Link href="/student/assessments" className="hover:text-slate-900">
                 Assessments
               </Link>
+              <Link href="/student/certificates" className="hover:text-slate-900">
+                Certificates
+              </Link>
             </nav>
           </div>
           <div className="flex items-center gap-4 text-sm">
@@ -129,16 +132,29 @@ export default async function StudentDashboard() {
 
         <div className="grid sm:grid-cols-2 gap-4 mb-8">
           <Link
-            href="/student/learning"
-            className="bg-white border border-slate-200 rounded-xl p-5 hover:border-slate-300 transition flex items-start gap-3"
+            href="/student/assessments"
+            className="p-4 rounded-xl border border-slate-200 bg-white hover:border-slate-300 transition-colors flex items-center justify-between"
           >
-            <BookOpen className="w-5 h-5 text-blue-600 mt-0.5" />
             <div>
-              <p className="font-semibold text-slate-900">My Learning</p>
+              <p className="font-semibold text-slate-900">Assessments</p>
               <p className="text-sm text-slate-500 mt-0.5">
-                {enrollments.length} enrolled course{enrollments.length === 1 ? '' : 's'}
+                Quizzes and tests
               </p>
             </div>
+            <span className="text-slate-400 font-medium text-sm">→</span>
+          </Link>
+
+          <Link
+            href="/student/certificates"
+            className="p-4 rounded-xl border border-slate-200 bg-white hover:border-slate-300 transition-colors flex items-center justify-between"
+          >
+            <div>
+              <p className="font-semibold text-slate-900">Certificates</p>
+              <p className="text-sm text-slate-500 mt-0.5">
+                Earned course credentials
+              </p>
+            </div>
+            <span className="text-slate-400 font-medium text-sm">→</span>
           </Link>
           <Link
             href="/student/assessments"
