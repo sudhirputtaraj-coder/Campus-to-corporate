@@ -1,21 +1,49 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { GraduationCap, Loader2 } from 'lucide-react';
-import { signup } from '@/lib/auth/actions';
 import { useRouter } from 'next/navigation';
+import { GraduationCap, Loader2 } from 'lucide-react';
+import { createClient } from '@/lib/supabase/client';
 
-export default function RegisterPage() {
-  const [fullName, setFullName] = useState('');
-  const [email, setEmail] = useState('');
+export default function ResetPasswordPage() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [message, setMessage] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [isSessionValid, setIsSessionValid] = useState<boolean | null>(null);
 
   const router = useRouter();
+  const supabase = createClient();
+
+  useEffect(() => {
+    // Verify that Supabase recovery session exists
+    async function checkSession() {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session) {
+        setIsSessionValid(true);
+      } else {
+        // Listen for auth state change (PASSWORD_RECOVERY event)
+        const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+          if (event === 'PASSWORD_RECOVERY' || session) {
+            setIsSessionValid(true);
+          }
+        });
+        
+        // Timeout check if no session acquired after 2 seconds
+        setTimeout(async () => {
+          const { data: { session: currentSession } } = await supabase.auth.getSession();
+          if (!currentSession) {
+            setIsSessionValid(false);
+          }
+        }, 2000);
+
+        return () => subscription.unsubscribe();
+      }
+    }
+    checkSession();
+  }, [supabase]);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -34,23 +62,21 @@ export default function RegisterPage() {
 
     setLoading(true);
 
-    const formData = new FormData();
-    formData.append('email', email);
-    formData.append('password', password);
-    formData.append('full_name', fullName);
+    const { error: updateError } = await supabase.auth.updateUser({
+      password,
+    });
 
-    const result = await signup(formData);
-
-    if (result?.error) {
-      setError(result.error);
+    if (updateError) {
+      setError(updateError.message);
       setLoading(false);
       return;
     }
 
-    setMessage(
-      result?.message || 'Registration successful. Please check your email to confirm your account.'
-    );
+    setMessage('Password updated successfully! Redirecting to login...');
     setLoading(false);
+    setTimeout(() => {
+      router.push('/login');
+    }, 2000);
   }
 
   return (
@@ -60,13 +86,9 @@ export default function RegisterPage() {
           <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-slate-900 mb-4">
             <GraduationCap className="w-6 h-6 text-white" />
           </div>
-
-          <h1 className="text-2xl font-bold text-slate-900">
-            Create your account
-          </h1>
-
+          <h1 className="text-2xl font-bold text-slate-900">Set new password</h1>
           <p className="mt-2 text-sm text-slate-600">
-            Join the Campus-to-Corporate employability platform
+            Enter your new account password below
           </p>
         </div>
 
@@ -86,82 +108,58 @@ export default function RegisterPage() {
             </div>
           )}
 
-          <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">
-              Full name
-            </label>
-
-            <input
-              type="text"
-              required
-              value={fullName}
-              onChange={(e) => setFullName(e.target.value)}
-              className="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              placeholder="Your full name"
-            />
-          </div>
+          {isSessionValid === false && (
+            <div className="bg-amber-50 text-amber-800 text-sm px-3 py-2 rounded-lg mb-4">
+              Invalid or expired password reset link. Please request a new one from the{' '}
+              <Link href="/forgot-password" className="underline font-medium">
+                forgot password page
+              </Link>.
+            </div>
+          )}
 
           <div>
             <label className="block text-sm font-medium text-slate-700 mb-1">
-              Email
+              New Password
             </label>
-
-            <input
-              type="email"
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              placeholder="you@college.edu"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">
-              Password
-            </label>
-
             <input
               type="password"
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              disabled={isSessionValid === false || loading}
+              className="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:opacity-50"
               placeholder="Minimum 6 characters"
             />
           </div>
 
           <div>
             <label className="block text-sm font-medium text-slate-700 mb-1">
-              Confirm password
+              Confirm New Password
             </label>
-
             <input
               type="password"
               required
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              className="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              placeholder="Re-enter your password"
+              disabled={isSessionValid === false || loading}
+              className="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:opacity-50"
+              placeholder="Re-enter new password"
             />
           </div>
 
           <button
             type="submit"
-            disabled={loading}
+            disabled={isSessionValid === false || loading}
             className="w-full bg-slate-900 text-white py-2.5 rounded-lg font-medium hover:bg-slate-800 disabled:opacity-60 flex items-center justify-center gap-2"
           >
             {loading && <Loader2 className="w-4 h-4 animate-spin" />}
-            Create account
+            Update Password
           </button>
         </form>
 
         <p className="mt-6 text-center text-sm text-slate-600">
-          Already have an account?{' '}
-          <Link
-            href="/login"
-            className="text-blue-600 font-medium hover:underline"
-          >
+          Back to{' '}
+          <Link href="/login" className="text-blue-600 font-medium hover:underline">
             Sign in
           </Link>
         </p>
@@ -169,5 +167,3 @@ export default function RegisterPage() {
     </div>
   );
 }
-
-
