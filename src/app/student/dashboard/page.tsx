@@ -61,6 +61,9 @@ export default async function StudentDashboard() {
             </div>
             <nav className="hidden sm:flex gap-4 text-sm text-slate-600">
               <span className="text-slate-900 font-medium">Dashboard</span>
+              <Link href="/student/skills" className="hover:text-slate-900">
+                My Skills
+              </Link>
               <Link href="/student/learning" className="hover:text-slate-900">
                 My Learning
               </Link>
@@ -94,12 +97,11 @@ export default async function StudentDashboard() {
         <div className="grid sm:grid-cols-2 gap-4 mb-8">
           <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
             <p className="text-sm text-slate-500">Employability Score</p>
-            <p className="mt-1 text-4xl font-bold text-slate-900">
-              {student?.employability_score ?? 0}
-              <span className="text-lg text-slate-400 font-normal"> / 100</span>
+            <p className="mt-1 text-xl font-semibold text-slate-900">
+              Not yet available
             </p>
             <p className="mt-2 text-xs text-slate-500">
-              Score engine comes in Phase 3. Currently baseline.
+              View your individual skill measurements in My Skills.
             </p>
           </div>
           <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
@@ -131,6 +133,16 @@ export default async function StudentDashboard() {
         )}
 
         <div className="grid sm:grid-cols-2 gap-4 mb-8">
+          <Link
+            href="/student/skills"
+            className="p-4 rounded-xl border border-blue-200 bg-blue-50 hover:border-blue-400 transition-colors flex items-center justify-between"
+          >
+            <div>
+              <p className="font-semibold text-slate-900">My Skills</p>
+              <p className="text-sm text-slate-600 mt-0.5">Your proficiency, assessment evidence, and history</p>
+            </div>
+            <ArrowRight className="w-5 h-5 shrink-0 text-blue-700" />
+          </Link>
           <Link
             href="/student/assessments"
             className="p-4 rounded-xl border border-slate-200 bg-white hover:border-slate-300 transition-colors flex items-center justify-between"
@@ -223,7 +235,7 @@ export default async function StudentDashboard() {
         <div className="bg-white border border-slate-200 rounded-xl p-6">
           <h2 className="font-semibold text-slate-900 mb-4">Coming in a future phase</h2>
           <div className="grid sm:grid-cols-2 gap-3 text-sm">
-            {['My Skills', 'AI Career Mentor', 'Mock Interview', 'Resume', 'Certificates'].map(
+            {['AI Career Mentor', 'Mock Interview', 'Resume'].map(
               (m) => (
                 <div
                   key={m}
