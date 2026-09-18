@@ -2,6 +2,7 @@
 
 import { createClient, createServiceClient } from '@/lib/supabase/server';
 import { revalidatePath } from 'next/cache';
+import { processAttemptSkills } from '@/lib/skills';
 
 /** Server-side action to sync/issue missing certificates for all 100% completed courses of the authenticated student */
 export async function syncStudentCertificates() {
@@ -402,6 +403,20 @@ export async function submitAssessment(
   if (updError) {
     console.error('submitAssessment attempt', updError);
     return { error: 'Something went wrong. Please try again.' };
+  }
+
+  // Phase 2A: non-fatal skill processing for formal GRADED attempts.
+  // fn_process_attempt_skills() itself guards against practice/non-GRADED
+  // attempts; this call must never block the student's submission.
+  if (status === 'GRADED') {
+    try {
+      const skillResult = await processAttemptSkills(attemptId);
+      if (!skillResult.success) {
+        console.error('Skill calculation error (non-fatal):', skillResult.error);
+      }
+    } catch (err) {
+      console.error('Skill calculation error (non-fatal):', err);
+    }
   }
 
   // Course Progress & Certificate Connection

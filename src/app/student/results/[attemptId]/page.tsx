@@ -34,10 +34,29 @@ export default async function ResultPage({
   if (!attempt) notFound();
 
   // Do not expose correct answers — only student's answers and whether correct
-  const { data: answers } = await supabase
+  const { data: answerRows, error: answersError } = await supabase
     .from('assessment_answers')
-    .select('id, answer_text, is_correct, marks_awarded, question:questions(question_text, marks, question_type)')
+    .select('id, question_id, answer_text, is_correct, marks_awarded')
     .eq('attempt_id', attemptId);
+
+  if (answersError) throw new Error('Unable to load assessment answers. Please try again.');
+
+  // The base questions table is admin-only. Use the same enrollment-scoped
+  // view as the assessment page; it does not expose correct answer keys.
+  const { data: questions, error: questionsError } = await supabase
+    .from('questions_public')
+    .select('id, question_text, marks, sequence')
+    .eq('assessment_id', attempt.assessment_id);
+
+  if (questionsError) console.error('ResultPage question details', questionsError);
+
+  const questionsById = new Map((questions ?? []).map((question) => [question.id, question]));
+  const answers = (answerRows ?? [])
+    .map((answer) => ({ ...answer, question: questionsById.get(answer.question_id) }))
+    .sort((a, b) =>
+      (a.question?.sequence ?? Number.MAX_SAFE_INTEGER) -
+      (b.question?.sequence ?? Number.MAX_SAFE_INTEGER)
+    );
 
   const assessment = attempt.assessment as any;
   const pct = Number(attempt.percentage) || 0;
@@ -106,7 +125,7 @@ export default async function ResultPage({
             <p className="text-xs text-slate-500">
               Correct answer keys are not shown. Auto-graded items show correct/incorrect only.
             </p>
-            {answers.map((ans: any, i: number) => (
+            {answers.map((ans, i) => (
               <div key={ans.id} className="bg-white border border-slate-200 rounded-xl p-4">
                 <div className="flex items-start gap-2">
                   {ans.is_correct === true ? (
@@ -120,13 +139,13 @@ export default async function ResultPage({
                   )}
                   <div className="min-w-0">
                     <p className="text-sm font-medium text-slate-900">
-                      {i + 1}. {ans.question?.question_text}
+                      {i + 1}. {ans.question?.question_text ?? 'Question details unavailable'}
                     </p>
                     <p className="text-sm text-slate-600 mt-1">
                       Your answer: {ans.answer_text || '—'}
                     </p>
                     <p className="text-xs text-slate-400 mt-1">
-                      Marks: {ans.marks_awarded}/{ans.question?.marks ?? 0}
+                      Marks: {ans.marks_awarded}/{ans.question?.marks ?? 'unavailable'}
                       {ans.is_correct == null ? ' · Awaiting evaluation' : ''}
                     </p>
                   </div>
