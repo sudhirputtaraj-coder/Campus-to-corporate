@@ -29,6 +29,7 @@ export default function LandingPage() {
             <a href="#how" className="hover:text-slate-900">How it works</a>
             <a href="#features" className="hover:text-slate-900">Features</a>
             <a href="#colleges" className="hover:text-slate-900">For Colleges</a>
+            <Link href="/programme" className="hover:text-slate-900">For Individuals</Link>
           </nav>
           <div className="flex items-center gap-3">
             <Link href="/login" className="text-sm font-medium text-slate-700 hover:text-slate-900 px-3 py-2">
@@ -45,7 +46,7 @@ export default function LandingPage() {
         <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-blue-50/40 to-slate-100" />
         <div className="relative max-w-6xl mx-auto px-4 sm:px-6 pt-20 pb-24 text-center">
           <p className="text-sm font-semibold text-blue-600 tracking-wide uppercase mb-4">
-            Employability SaaS for Colleges
+            Workplace readiness for colleges and individual students
           </p>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight leading-tight max-w-4xl mx-auto">
             From Campus to Corporate
@@ -54,11 +55,11 @@ export default function LandingPage() {
             Build the skills. Measure the readiness. Prepare for the workplace.
           </p>
           <p className="mt-3 text-slate-500 max-w-xl mx-auto">
-            A multi-tenant platform that helps colleges measure real employability — not just course completion.
+            Learn independently or through your college, with courses, assessments, and evidence of your skill progress.
           </p>
           <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link href="/register" className="inline-flex items-center gap-2 bg-slate-900 text-white px-6 py-3 rounded-lg font-medium hover:bg-slate-800 transition shadow-sm">
-              Get Started
+            <Link href="/programme" className="inline-flex items-center gap-2 bg-slate-900 text-white px-6 py-3 rounded-lg font-medium hover:bg-slate-800 transition shadow-sm">
+              Explore Individual Programme
               <ArrowRight className="w-4 h-4" />
             </Link>
             <Link href="/contact" className="inline-flex items-center gap-2 border border-slate-300 bg-white text-slate-700 px-6 py-3 rounded-lg font-medium hover:bg-slate-50 transition">

@@ -21,6 +21,18 @@ export async function login(formData: FormData) {
     data: { user },
   } = await supabase.auth.getUser();
   if (user) {
+    if (user.user_metadata?.account_type === 'INDIVIDUAL') {
+      const { data: accountProfile } = await supabase.from('profiles')
+        .select('role').eq('user_id', user.id).single();
+      // Signup metadata is not authoritative for role or college membership.
+      if (accountProfile?.role === 'STUDENT') {
+        const { error: setupError } = await supabase.rpc('fn_register_individual_student');
+        if (setupError) {
+          console.error('Individual student setup', setupError);
+          redirect('/student/setup?error=setup');
+        }
+      }
+    }
     await supabase.from('audit_logs').insert({
       user_id: user.id,
       action: 'LOGIN',
@@ -43,7 +55,7 @@ export async function signup(formData: FormData) {
     email,
     password,
     options: {
-      data: { full_name: fullName },
+      data: { full_name: fullName, account_type: 'INDIVIDUAL' },
     },
   });
 
@@ -51,19 +63,28 @@ export async function signup(formData: FormData) {
     return { error: error.message };
   }
 
-  if (data.user) {
-    // Create profile (trigger preferred, but ensure here)
+  if (data.user && data.user.identities?.length !== 0) {
+    // Never overwrite an existing account's role/status on repeated signup.
     const service = createServiceClient();
-    await service.from('profiles').upsert({
+    const { error: profileError } = await service.from('profiles').upsert({
       user_id: data.user.id,
       full_name: fullName,
       email,
       role: 'STUDENT',
       status: 'ACTIVE',
-    });
+    }, { onConflict: 'user_id', ignoreDuplicates: true });
+    if (profileError) {
+      console.error('Signup profile creation', profileError);
+      return { error: 'Your account needs setup assistance. Please contact the platform administrator before trying again.' };
+    }
+    if (data.session) {
+      const { error: setupError } = await supabase.rpc('fn_register_individual_student');
+      if (setupError) redirect('/student/setup?error=setup');
+      redirect('/student/dashboard');
+    }
   }
 
-  return { success: true, message: 'Check your email to confirm your account.' };
+  return { success: true, message: 'Check your email to confirm your account, then return here to sign in.' };
 }
 
 export async function logout() {

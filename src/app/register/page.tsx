@@ -62,11 +62,11 @@ export default function RegisterPage() {
           </div>
 
           <h1 className="text-2xl font-bold text-slate-900">
-            Create your account
+            Create your individual account
           </h1>
 
           <p className="mt-2 text-sm text-slate-600">
-            Join the Campus-to-Corporate employability platform
+            Join independently from any college. No college affiliation is required.
           </p>
         </div>
 
@@ -112,7 +112,7 @@ export default function RegisterPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              placeholder="you@college.edu"
+              placeholder="you@example.com"
             />
           </div>
 
@@ -152,9 +152,12 @@ export default function RegisterPage() {
             className="w-full bg-slate-900 text-white py-2.5 rounded-lg font-medium hover:bg-slate-800 disabled:opacity-60 flex items-center justify-center gap-2"
           >
             {loading && <Loader2 className="w-4 h-4 animate-spin" />}
-            Create account
+            Create free account
           </button>
         </form>
+
+        <p className="mt-4 text-center text-sm text-slate-600">Account creation is free. Programme access requires a separate one-time purchase when payments open. <Link href="/programme" className="text-blue-700 underline">View programme details</Link></p>
+        <p className="mt-3 text-center text-sm text-slate-600">Joining through a participating college? Use the account provided by your college or contact its administrator.</p>
 
         <p className="mt-6 text-center text-sm text-slate-600">
           Already have an account?{' '}

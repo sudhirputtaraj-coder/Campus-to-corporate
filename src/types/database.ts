@@ -70,7 +70,8 @@ export interface Batch {
 export interface Student {
   id: string;
   user_id: string;
-  college_id: string;
+  college_id: string | null;
+  account_type: 'COLLEGE' | 'INDIVIDUAL';
   department_id: string | null;
   batch_id: string | null;
   register_number: string;

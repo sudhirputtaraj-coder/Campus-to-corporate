@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import { GraduationCap, LogOut, BookOpen, ArrowRight } from 'lucide-react';
 import { logout } from '@/lib/auth/actions';
+import ProgrammeStatus from '../programme-status';
 
 export default async function StudentLearningPage() {
   const supabase = await createClient();
@@ -17,18 +18,15 @@ export default async function StudentLearningPage() {
     .eq('user_id', user.id)
     .single();
 
-  const { data: student } = await supabase
+  const { data: student, error: studentError } = await supabase
     .from('students')
-    .select('id')
+    .select('id, account_type')
     .eq('user_id', user.id)
-    .single();
+    .maybeSingle();
 
+  if (studentError) throw new Error('Unable to load your student profile. Please try again.');
   if (!student) {
-    return (
-      <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
-        <p className="text-slate-600">Student profile not found.</p>
-      </div>
-    );
+    redirect('/student/setup');
   }
 
   const { data: enrollments } = await supabase
@@ -70,13 +68,16 @@ export default async function StudentLearningPage() {
 
       <main className="max-w-5xl mx-auto px-4 sm:px-6 py-8">
         <h1 className="text-2xl font-bold text-slate-900 mb-6">My Learning</h1>
+        {student.account_type === 'INDIVIDUAL' && <ProgrammeStatus />}
 
         {!enrollments || enrollments.length === 0 ? (
           <div className="bg-white border border-slate-200 rounded-xl p-10 text-center">
             <BookOpen className="w-10 h-10 text-slate-300 mx-auto mb-3" />
             <p className="text-slate-600">You don&apos;t have any courses assigned yet.</p>
             <p className="text-sm text-slate-400 mt-1">
-              Your college will enroll you in courses when they are assigned to your batch.
+              {student.account_type === 'INDIVIDUAL'
+                ? 'Programme courses will appear here after enrolment. Check your programme status above.'
+                : 'Your college will enroll you in courses when they are assigned to your batch.'}
             </p>
           </div>
         ) : (

@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import { GraduationCap, LogOut, BookOpen, ClipboardList, ArrowRight } from 'lucide-react';
 import { logout } from '@/lib/auth/actions';
+import ProgrammeStatus from '../programme-status';
 
 export default async function StudentDashboard() {
   const supabase = await createClient();
@@ -17,11 +18,14 @@ export default async function StudentDashboard() {
     .eq('user_id', user.id)
     .single();
 
-  const { data: student } = await supabase
+  const { data: student, error: studentError } = await supabase
     .from('students')
     .select('*, college:colleges(name), department:departments(name), batch:batches(name)')
     .eq('user_id', user.id)
-    .single();
+    .maybeSingle();
+
+  if (studentError) throw new Error('Unable to load your student profile. Please try again.');
+  if (!student) redirect('/student/setup');
 
   let enrollments: any[] = [];
   let recentAttempts: any[] = [];
@@ -91,8 +95,11 @@ export default async function StudentDashboard() {
           Welcome, {profile?.full_name || 'Student'}
         </h1>
         <p className="text-slate-600 mb-8">
-          {(student as any)?.college?.name || 'Your college'} · {student?.register_number || '—'}
+          {student.account_type === 'INDIVIDUAL' ? 'Individual student' : (student as any)?.college?.name || 'Your college'}
+          {student.account_type !== 'INDIVIDUAL' && ` · ${student.register_number || '—'}`}
         </p>
+
+        {student.account_type === 'INDIVIDUAL' && <ProgrammeStatus />}
 
         <div className="grid sm:grid-cols-2 gap-4 mb-8">
           <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
