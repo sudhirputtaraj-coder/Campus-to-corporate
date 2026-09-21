@@ -45,6 +45,8 @@ The migration has been reviewed against repository schemas but has NOT been exec
 
 ## Next stage — required before taking payments
 
+Update: test-mode Razorpay checkout and database/server expiry enforcement have now been implemented locally in migrations 007–008 and the payment handlers. See `PAYMENTS_TEST_SETUP.md` for setup, test evidence and remaining live-launch requirements. They are not active in hosted Supabase until the new migrations are applied. The earlier foundation limitations below describe the pre-007 state.
+
 Select and connect a payment provider, define the programme course catalogue, build server-created checkout orders and verified idempotent payment callbacks, grant enrollments only after verified payment, enforce access expiry at the database and server layers, handle failed/refunded/duplicate payments, and implement/test session restrictions.
 
 Existing course/lesson database policies are broader than a paid-content model requires. A page-level paywall alone would be insufficient. This foundation must not be presented as an operational payment gate, subscription service, or account-sharing prevention system.

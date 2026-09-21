@@ -1,4 +1,5 @@
 export type ProgrammePurchase = {
+  payment_mode?: string;
   status: string;
   activated_at: string | null;
   expires_at: string | null;

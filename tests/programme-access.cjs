@@ -64,7 +64,7 @@ function fixture(options = {}) {
       calls.push(['from', table]);
       const filters = [];
       const query = {};
-      for (const method of ['select', 'eq', 'lte', 'gt', 'order', 'limit', 'maybeSingle']) {
+      for (const method of ['select', 'eq', 'lte', 'gt', 'order', 'limit', 'maybeSingle', 'single']) {
         query[method] = (...args) => { calls.push([table, method, ...args]); filters.push([method, ...args]); return query; };
       }
       query.then = (resolve, reject) => {
@@ -72,7 +72,7 @@ function fixture(options = {}) {
         const active = filters.some(f => f[0] === 'eq' && f[1] === 'status');
         return Promise.resolve({ data: table === 'students'
           ? { id: 'own-student', account_type: options.college ? 'COLLEGE' : 'INDIVIDUAL' }
-          : active ? options.active || [] : options.latest || [],
+          : table === 'programme_settings' ? { payment_mode: 'TEST' } : active ? options.active || [] : options.latest || [],
         error: options.queryError || (options.purchaseError && table === 'programme_purchases') ? { message: 'unavailable' } : null }).then(resolve, reject);
       };
       return query;

@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { createClient } from '@/lib/supabase/server';
 import { formatINR } from '@/lib/programme/settings';
+import { testPaymentsEnabled } from '@/lib/programme/razorpay';
+import Checkout from './checkout';
 
 export default async function ProgrammePage() {
   const supabase = await createClient();
@@ -26,6 +28,7 @@ export default async function ProgrammePage() {
             <li>Course completion certificates when requirements are met</li>
           </ul>
           <p className="mt-6 rounded-lg border border-slate-200 p-4 text-sm text-slate-600">Payments are not open yet. You can create your individual profile now; paid course access will become available when enrolment opens.</p>
+          {user && !error && data && testPaymentsEnabled() && <Checkout />}
           <Link href={user ? '/student/setup' : '/register'} className="mt-6 inline-block rounded-lg bg-slate-900 px-5 py-3 font-medium text-white">{user ? 'Continue to my account' : 'Create an individual account'}</Link>
           <p className="mt-4 text-xs text-slate-500">Your price and access duration will be confirmed at checkout. Completing the programme supports workplace preparation; it does not guarantee employment.</p>
         </div>

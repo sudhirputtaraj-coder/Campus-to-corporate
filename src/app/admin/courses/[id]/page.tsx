@@ -27,6 +27,8 @@ export default async function AdminCourseDetailPage({
 
   const { data: course } = await supabase.from('courses').select('*').eq('id', courseId).single();
   if (!course) notFound();
+  const { data: skills, error: skillsError } = await supabase.from('skills').select('id, name').eq('status', 'ACTIVE').order('name');
+  if (skillsError) throw new Error('Unable to load skills. Please try again.');
 
   const { data: modules } = await supabase
     .from('modules')
@@ -39,16 +41,21 @@ export default async function AdminCourseDetailPage({
     lessons: (m.lessons || []).sort((a: any, b: any) => a.sequence - b.sequence),
   }));
 
-  const { data: assessments } = await supabase
+  const { data: assessments, error: assessmentsError } = await supabase
     .from('assessments')
-    .select('*, questions(id, question_text, question_type, marks, sequence, skill_category)')
+    .select('*, questions(id, question_text, question_type, marks, sequence, skill_category, question_skills(skill_id, weight))')
     .eq('course_id', courseId)
     .order('created_at', { ascending: false });
 
-  const assessmentsWithQs = (assessments || []).map((a: any) => ({
+  if (assessmentsError) throw new Error('Unable to load assessment skill mappings.');
+  const assessmentsWithQs = await Promise.all((assessments || []).map(async (a: any) => {
+    const { count, error } = await supabase.from('assessment_attempts').select('id', { count: 'exact', head: true }).eq('assessment_id', a.id);
+    if (error) throw new Error('Unable to check assessment usage.');
+    return {
     ...a,
+    mapping_locked: (count ?? 0) > 0,
     questions: (a.questions || []).sort((x: any, y: any) => x.sequence - y.sequence),
-  }));
+  }; }));
 
   return (
     <div className="min-h-screen bg-slate-50">
@@ -75,9 +82,11 @@ export default async function AdminCourseDetailPage({
         {course.description && <p className="text-slate-600 mt-2">{course.description}</p>}
 
         <CourseStructureForms
+          skills={skills || []}
           courseId={courseId}
           modules={mods.map((m: any) => ({
             id: m.id,
+            skill_id: m.skill_id,
             title: m.title,
             sequence: m.sequence,
             description: m.description,
@@ -92,6 +101,8 @@ export default async function AdminCourseDetailPage({
             id: a.id,
             title: a.title,
             type: a.type,
+            mapping_locked: a.mapping_locked,
+            is_practice: a.is_practice,
             questions: a.questions || [],
           }))}
         />

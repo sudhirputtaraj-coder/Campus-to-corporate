@@ -34,6 +34,10 @@ export async function syncStudentCertificates() {
 
 /** Server-side helper to verify 100% completion and issue certificate if eligible */
 export async function checkAndIssueCertificate(studentId: string, courseId: string) {
+  const auth = await getAuthStudent();
+  if (auth.error || auth.student?.id !== studentId) return null;
+  const { data: allowed, error: accessError } = await auth.supabase.rpc('fn_can_access_course', { p_course_id: courseId });
+  if (accessError || allowed !== true) return null;
   const serviceClient = createServiceClient();
 
   // 1. Verify enrollment exists
@@ -95,6 +99,8 @@ async function getAuthStudent() {
     .single();
 
   if (!student) return { supabase, user, student: null, error: 'Student profile not found' };
+  const { data: allowed, error: accessError } = await supabase.rpc('fn_has_learning_access');
+  if (accessError || allowed !== true) return { supabase, user, student: null, error: 'Active programme access is required. Check My Learning.' };
   return { supabase, user, student, error: null };
 }
 

@@ -121,6 +121,7 @@ export default async function StudentSkillsPage() {
                 <section key={card.id} aria-labelledby={`skill-${card.code}`} className="min-w-0 rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
                   <h2 id={`skill-${card.code}`} className="text-lg font-semibold text-slate-900">{card.name}</h2>
                   {card.description && <p className="mt-1 text-sm text-slate-500">{card.description}</p>}
+                  <Link href={`/student/skills/${card.id}/modules`} className="mt-3 inline-block text-sm font-medium text-blue-700 underline">Learning modules →</Link>
                   {card.score !== null && card.source ? (
                     <>
                       <p className="mt-5 text-3xl font-bold text-slate-900">{card.score.toFixed(2)}<span className="text-lg font-normal text-slate-500">%</span></p>

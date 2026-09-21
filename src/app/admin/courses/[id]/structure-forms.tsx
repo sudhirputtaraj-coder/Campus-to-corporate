@@ -3,14 +3,17 @@
 import { useTransition, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Loader2 } from 'lucide-react';
+import QuestionSkills from './question-skills';
 import {
   createModule,
+  assignModuleSkill,
   createLesson,
   createAssessment,
   createQuestion,
 } from '@/lib/learning/admin-actions';
 
 type Mod = {
+  skill_id: string | null;
   id: string;
   title: string;
   sequence: number;
@@ -19,20 +22,24 @@ type Mod = {
 };
 
 type Asmt = {
+  mapping_locked: boolean;
+  is_practice: boolean;
   id: string;
   title: string;
   type: string;
-  questions: { id: string; question_text: string; question_type: string; marks: number; sequence: number }[];
+  questions: { id: string; question_text: string; question_type: string; marks: number; sequence: number; question_skills: { skill_id: string; weight: number }[] }[];
 };
 
 export function CourseStructureForms({
   courseId,
   modules,
   assessments,
+  skills,
 }: {
   courseId: string;
   modules: Mod[];
   assessments: Asmt[];
+  skills: { id: string; name: string }[];
 }) {
   const router = useRouter();
   const [pending, startTransition] = useTransition();
@@ -65,10 +72,23 @@ export function CourseStructureForms({
         ) : (
           <div className="space-y-4 mb-6">
             {modules.map((m) => (
-              <div key={m.id} className="border border-slate-100 rounded-lg p-4">
+              <div key={m.id} id={`module-${m.id}`} className="border border-slate-100 rounded-lg p-4">
                 <p className="font-medium text-slate-900">
                   {m.sequence}. {m.title}
                 </p>
+                <form className="mt-3 flex flex-wrap gap-2" onSubmit={e => {
+                  e.preventDefault();
+                  const fd = new FormData(e.currentTarget);
+                  run(() => assignModuleSkill(m.id, courseId, fd));
+                }}>
+                  <label className="text-sm text-slate-600">Parent skill
+                    <select name="skill_id" defaultValue={m.skill_id || ''} className="ml-2 rounded-lg border border-slate-300 px-3 py-2">
+                      <option value="">Not assigned</option>
+                      {skills.map(skill => <option key={skill.id} value={skill.id}>{skill.name}</option>)}
+                    </select>
+                  </label>
+                  <button disabled={pending} className="rounded-lg border border-slate-300 px-3 py-2 text-sm">Save skill</button>
+                </form>
                 <ul className="mt-2 space-y-1 text-sm text-slate-600">
                   {m.lessons.map((l) => (
                     <li key={l.id}>
@@ -109,6 +129,12 @@ export function CourseStructureForms({
           }}
         >
           <input name="title" required placeholder="Module title" className="border border-slate-300 rounded-lg px-3 py-2 text-sm" />
+          <label className="text-sm text-slate-600">Parent skill
+            <select name="skill_id" className="ml-2 rounded-lg border border-slate-300 px-3 py-2">
+              <option value="">Not assigned</option>
+              {skills.map(skill => <option key={skill.id} value={skill.id}>{skill.name}</option>)}
+            </select>
+          </label>
           <input name="sequence" type="number" defaultValue={modules.length + 1} className="border border-slate-300 rounded-lg px-3 py-2 text-sm" />
           <input name="description" placeholder="Description" className="sm:col-span-2 border border-slate-300 rounded-lg px-3 py-2 text-sm" />
           <button type="submit" disabled={pending} className="text-sm bg-slate-900 text-white px-3 py-2 rounded-lg hover:bg-slate-800 disabled:opacity-60">
@@ -129,11 +155,17 @@ export function CourseStructureForms({
                 <p className="font-medium text-slate-900">
                   {a.title} <span className="text-xs text-slate-400">({a.type})</span>
                 </p>
+                <p className="mt-2 text-xs text-slate-500">{a.is_practice ? 'Practice assessment: does not change skill scores.' : 'A skill needs at least three mapped questions with a positive marks total for a valid proficiency score.'}</p>
+                <ul className="mt-2 text-xs text-slate-600">{skills.map(skill => {
+                  const count = a.questions.filter(q => q.question_skills?.some(m => m.skill_id === skill.id)).length;
+                  return count ? <li key={skill.id}>{skill.name}: {count} mapped questions{count < 3 ? ' — add more evidence' : ''}</li> : null;
+                })}</ul>
                 <ul className="mt-2 space-y-1 text-sm text-slate-600">
                   {a.questions.map((q) => (
                     <li key={q.id}>
                       — Q{q.sequence}: {q.question_text.slice(0, 80)}
                       {q.question_text.length > 80 ? '…' : ''} ({q.question_type}, {q.marks}m)
+                      <QuestionSkills questionId={q.id} skills={skills} mappings={q.question_skills || []} locked={a.mapping_locked} />
                     </li>
                   ))}
                 </ul>
@@ -157,7 +189,7 @@ export function CourseStructureForms({
                   <input name="correct_answer" placeholder="Correct answer (for auto-grade)" className="border border-slate-300 rounded-lg px-3 py-2 text-sm" />
                   <input name="options" placeholder="Options separated by | (e.g. A|B|C|D)" className="sm:col-span-2 border border-slate-300 rounded-lg px-3 py-2 text-sm" />
                   <input name="marks" type="number" step="0.5" defaultValue={1} className="border border-slate-300 rounded-lg px-3 py-2 text-sm" />
-                  <input name="skill_category" placeholder="Skill category" className="border border-slate-300 rounded-lg px-3 py-2 text-sm" />
+                  <p className="sm:col-span-2 text-xs text-slate-500">After adding a question, open “Skills measured” above to assign its scoring skills.</p>
                   <input name="sequence" type="number" defaultValue={a.questions.length + 1} className="border border-slate-300 rounded-lg px-3 py-2 text-sm" />
                   <button type="submit" disabled={pending} className="text-sm bg-slate-900 text-white px-3 py-2 rounded-lg hover:bg-slate-800 disabled:opacity-60">
                     Add question

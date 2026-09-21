@@ -15,9 +15,12 @@ export async function getMyProgrammeAccess(): Promise<ProgrammeAccessStatus | nu
     if (student.account_type !== 'INDIVIDUAL') return { state: 'unavailable' };
 
     const now = new Date();
-    const fields = 'status, activated_at, expires_at, created_at, price_paise, currency, access_months';
+    const { data: settings, error: settingsError } = await supabase.from('programme_settings')
+      .select('payment_mode').eq('id', 'corporate-readiness').single();
+    if (settingsError || !settings?.payment_mode) return { state: 'unavailable' };
+    const fields = 'status, activated_at, expires_at, created_at, price_paise, currency, access_months, payment_mode';
     const purchases = () => supabase.from('programme_purchases').select(fields)
-      .eq('student_id', student.id).eq('programme_id', 'corporate-readiness');
+      .eq('student_id', student.id).eq('programme_id', 'corporate-readiness').eq('payment_mode', settings.payment_mode);
     // A newer failed/pending order must not hide an older, still-active purchase.
     const [active, latest] = await Promise.all([
       purchases().eq('status', 'PAID').lte('activated_at', now.toISOString())

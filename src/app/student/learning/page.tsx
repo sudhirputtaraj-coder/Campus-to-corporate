@@ -28,6 +28,7 @@ export default async function StudentLearningPage() {
   if (!student) {
     redirect('/student/setup');
   }
+  const { data: canLearn, error: accessError } = await supabase.rpc('fn_has_learning_access');
 
   const { data: enrollments } = await supabase
     .from('enrollments')
@@ -69,6 +70,7 @@ export default async function StudentLearningPage() {
       <main className="max-w-5xl mx-auto px-4 sm:px-6 py-8">
         <h1 className="text-2xl font-bold text-slate-900 mb-6">My Learning</h1>
         {student.account_type === 'INDIVIDUAL' && <ProgrammeStatus />}
+        {accessError && <p role="status" className="mb-4 text-amber-800">Access could not be verified. Please try again later.</p>}
 
         {!enrollments || enrollments.length === 0 ? (
           <div className="bg-white border border-slate-200 rounded-xl p-10 text-center">
@@ -115,13 +117,13 @@ export default async function StudentLearningPage() {
                       </span>
                     </div>
                   </div>
-                  <Link
+                  {canLearn === true && !accessError ? <Link
                     href={`/student/course/${course?.id}`}
                     className="inline-flex items-center justify-center gap-2 bg-slate-900 text-white px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-slate-800 shrink-0"
                   >
                     {pct > 0 ? 'Continue Learning' : 'Start Course'}
                     <ArrowRight className="w-4 h-4" />
-                  </Link>
+                  </Link> : <span className="text-sm text-slate-600">Active programme access required</span>}
                 </div>
               );
             })}

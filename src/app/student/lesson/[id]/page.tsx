@@ -1,3 +1,4 @@
+import { requireLearningAccess } from '@/lib/programme/require-access';
 import { createClient } from '@/lib/supabase/server';
 import { redirect, notFound } from 'next/navigation';
 import Link from 'next/link';
@@ -25,6 +26,7 @@ export default async function StudentLessonPage({
     .single();
 
   if (!student) redirect('/student/dashboard');
+  await requireLearningAccess();
 
   const { data: lesson } = await supabase
     .from('lessons')
@@ -128,6 +130,11 @@ export default async function StudentLessonPage({
             </div>
           )}
         </article>
+        {typeof lesson.resource_url === 'string' && lesson.resource_url.startsWith('https://') && (
+          <a href={lesson.resource_url} target="_blank" rel="noopener noreferrer" className="mt-5 inline-block rounded-lg border border-blue-200 bg-blue-50 px-4 py-3 text-sm font-medium text-blue-700 underline">
+            Open reading material (new tab)
+          </a>
+        )}
 
         <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
           <div className="flex gap-2">

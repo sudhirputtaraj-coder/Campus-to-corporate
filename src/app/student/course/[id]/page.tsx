@@ -1,3 +1,4 @@
+import { requireLearningAccess } from '@/lib/programme/require-access';
 import { createClient } from '@/lib/supabase/server';
 import { redirect, notFound } from 'next/navigation';
 import Link from 'next/link';
@@ -23,6 +24,7 @@ export default async function StudentCoursePage({
     .single();
 
   if (!student) redirect('/student/dashboard');
+  await requireLearningAccess();
 
   const { data: enrollment } = await supabase
     .from('enrollments')

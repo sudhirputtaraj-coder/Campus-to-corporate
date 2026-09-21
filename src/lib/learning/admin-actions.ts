@@ -11,10 +11,10 @@ async function requireSuperAdmin() {
   if (!user) return { supabase, user: null, error: 'Not authenticated' };
   const { data: profile } = await supabase
     .from('profiles')
-    .select('role')
+    .select('role, status')
     .eq('user_id', user.id)
     .single();
-  if (profile?.role !== 'SUPER_ADMIN') {
+  if (profile?.role !== 'SUPER_ADMIN' || profile.status !== 'ACTIVE') {
     return { supabase, user, error: "You don't have permission to access this resource." };
   }
   return { supabase, user, error: null };
@@ -29,8 +29,15 @@ export async function createModule(courseId: string, formData: FormData) {
   const sequence = parseInt(String(formData.get('sequence') || '1'), 10) || 1;
   if (!title) return { error: 'Title is required.' };
 
+  const skillId = String(formData.get('skill_id') || '').trim();
+  if (skillId) {
+    const { data: skill, error: skillError } = await supabase.from('skills').select('id').eq('id', skillId).eq('status', 'ACTIVE').maybeSingle();
+    if (skillError || !skill) return { error: 'Choose an active skill.' };
+  }
+
   const { error: err } = await supabase.from('modules').insert({
     course_id: courseId,
+    skill_id: skillId || null,
     title,
     description,
     sequence,
@@ -48,6 +55,25 @@ export async function createModule(courseId: string, formData: FormData) {
     metadata: { title },
   });
   revalidatePath(`/admin/courses/${courseId}`);
+  revalidatePath('/admin/skills');
+  revalidatePath('/student/skills', 'layout');
+  return { success: true };
+}
+
+export async function assignModuleSkill(moduleId: string, courseId: string, formData: FormData) {
+  const { supabase, user, error } = await requireSuperAdmin();
+  if (error || !user) return { error: error || 'Unauthorized' };
+  const skillId = String(formData.get('skill_id') || '').trim();
+  if (skillId) {
+    const { data: skill, error: skillError } = await supabase.from('skills').select('id').eq('id', skillId).eq('status', 'ACTIVE').maybeSingle();
+    if (skillError || !skill) return { error: 'Choose an active skill.' };
+  }
+  const { data, error: updateError } = await supabase.from('modules').update({ skill_id: skillId || null })
+    .eq('id', moduleId).eq('course_id', courseId).select('id').maybeSingle();
+  if (updateError || !data) return { error: 'The module could not be updated.' };
+  revalidatePath(`/admin/courses/${courseId}`);
+  revalidatePath('/admin/skills');
+  revalidatePath('/student/skills', 'layout');
   return { success: true };
 }
 
@@ -61,6 +87,16 @@ export async function createLesson(moduleId: string, courseId: string, formData:
   const sequence = parseInt(String(formData.get('sequence') || '1'), 10) || 1;
   const duration = parseInt(String(formData.get('duration_minutes') || '0'), 10) || 0;
   if (!title) return { error: 'Title is required.' };
+
+  if (video_url) {
+    try {
+      const url = new URL(video_url);
+      if (url.protocol !== 'https:' || url.username || url.password) return { error: 'Use an HTTPS video embed link.' };
+    } catch { return { error: 'Use a valid HTTPS video embed link.' }; }
+  }
+  const { data: parent, error: parentError } = await supabase.from('modules').select('id')
+    .eq('id', moduleId).eq('course_id', courseId).maybeSingle();
+  if (parentError || !parent) return { error: 'Choose a module in this course.' };
 
   const { error: err } = await supabase.from('lessons').insert({
     module_id: moduleId,
@@ -76,6 +112,7 @@ export async function createLesson(moduleId: string, courseId: string, formData:
     return { error: 'Something went wrong. Please try again.' };
   }
   revalidatePath(`/admin/courses/${courseId}`);
+  revalidatePath('/student/skills', 'layout');
   return { success: true };
 }
 

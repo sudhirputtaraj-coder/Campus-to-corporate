@@ -17,6 +17,8 @@ async function getAuthStudent() {
     .single();
 
   if (!student) return { supabase, user, student: null, error: 'Student profile not found' };
+  const { data: allowed, error: accessError } = await supabase.rpc('fn_has_learning_access');
+  if (accessError || allowed !== true) return { supabase, user, student: null, error: 'Active programme access is required. Check My Learning.' };
   return { supabase, user, student, error: null };
 }
 
