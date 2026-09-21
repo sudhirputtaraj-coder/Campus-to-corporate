@@ -17,7 +17,7 @@ export default async function CollegeDashboard() {
     .eq('user_id', user.id)
     .single();
 
-  if (profile?.role !== 'COLLEGE_ADMIN' && profile?.role !== 'SUPER_ADMIN') {
+  if (profile?.status !== 'ACTIVE' || (profile?.role !== 'COLLEGE_ADMIN' && profile?.role !== 'SUPER_ADMIN')) {
     redirect('/login');
   }
 
@@ -77,10 +77,10 @@ export default async function CollegeDashboard() {
           <h2 className="font-semibold text-slate-900 mb-4">Quick actions</h2>
           <div className="flex flex-wrap gap-3">
             <Link href="/college/students" className="px-4 py-2 bg-slate-900 text-white rounded-lg text-sm font-medium hover:bg-slate-800">
-              Students
+              Students & Progress
             </Link>
             <Link href="/college/students/import" className="px-4 py-2 border border-slate-300 rounded-lg text-sm font-medium hover:bg-slate-50">
-              Import Students (CSV)
+              Assign Students from CSV
             </Link>
             <Link href="/college/departments" className="px-4 py-2 border border-slate-300 rounded-lg text-sm font-medium hover:bg-slate-50">
               Departments

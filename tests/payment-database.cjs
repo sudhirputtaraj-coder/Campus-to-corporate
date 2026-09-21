@@ -25,11 +25,11 @@ async function main() {
     ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON TABLES TO authenticated, service_role;
     ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO anon;`);
   const migrationDir = path.join(__dirname, '../supabase/migrations');
-  for (const file of fs.readdirSync(migrationDir).filter(f => /^(00[1-9]|01[0-4])_/.test(f)).sort()) {
+  for (const file of fs.readdirSync(migrationDir).filter(f => /^(00[1-9]|01[0-5])_/.test(f)).sort()) {
     const sql = fs.readFileSync(path.join(migrationDir, file), 'utf8').replace(/^CREATE EXTENSION.*;$/gm, '');
     await db.exec(sql);
   }
-  check(true, true, 'all fourteen migrations compile on PostgreSQL');
+  check(true, true, 'all fifteen migrations compile on PostgreSQL');
   await db.exec(`INSERT INTO auth.users(id,email,email_confirmed_at) VALUES
     ('${uid(1)}','individual@example.test',now()),('${uid(2)}','other@example.test',now()),('${uid(3)}','college@example.test',now()),('${uid(4)}','admin@example.test',now());
     INSERT INTO profiles(user_id,full_name,email) SELECT id,email,email FROM auth.users;
@@ -246,6 +246,44 @@ async function main() {
   await db.exec('RESET ROLE');
   await db.exec(fs.readFileSync(path.join(migrationDir,'014_college_course_enrolment.sql'),'utf8'));
   check(await scalar(`SELECT count(*) FROM enrollments WHERE course_id='${uid(95)}'`), 3, 'rerunning migration 014 preserves enrolments');
+  await caller(uid(71));
+  check(await scalar(`SELECT count(*) FROM students WHERE user_id='${uid(70)}'`), 1, 'college admin sees own student in directory');
+  check(await scalar(`SELECT count(*) FROM profiles WHERE user_id='${uid(70)}'`), 1, 'college admin sees own student profile');
+  check(await scalar(`SELECT count(*) FROM students WHERE user_id='${uid(81)}'`), 0, 'college admin cannot see other college student');
+  check(await scalar(`SELECT count(*) FROM profiles WHERE user_id='${uid(81)}'`), 0, 'college admin cannot see other college profile');
+  check(await scalar(`SELECT count(*) FROM enrollments WHERE student_id=(SELECT id FROM students WHERE user_id='${uid(70)}') AND course_id='${uid(95)}'`), 1, 'college admin sees own student course progress');
+  const structure=(college,kind,id,data)=>`SELECT fn_manage_college_structure('${uid(college)}','${kind}',${id?`'${id}'`:'null'},'${JSON.stringify(data)}'::jsonb)`;
+  const dept=await scalar(structure(10,'department',null,{name:'Computer Science',code:'cse',status:'ACTIVE'}));
+  check(await scalar(`SELECT code FROM departments WHERE id='${dept}'`),'CSE','college admin creates department with normalized code');
+  const batch=await scalar(structure(10,'batch',null,{name:'2026 intake',department_id:dept,academic_year:'2026-2027',status:'ACTIVE'}));
+  const learner=await scalar(`SELECT id FROM students WHERE user_id='${uid(70)}'`);
+  await db.exec(structure(10,'placement',learner,{department_id:dept,batch_id:batch}));
+  check(await scalar(`SELECT batch_id FROM students WHERE id='${learner}'`),batch,'student assigned to matching department and batch');
+  await denied(structure(10,'placement',learner,{department_id:'',batch_id:batch}),'batch department mismatch rejected');
+  await denied(structure(91,'department',null,{name:'Other',code:'OTHER',status:'ACTIVE'}),'college admin cannot create other-college department');
+  await denied(structure(10,'batch',batch,{name:'Changed',department_id:'',status:'ACTIVE'}),'batch department cannot be silently changed');
+  await denied(structure(10,'department',null,{name:'Duplicate',code:'CSE',status:'ACTIVE'}),'duplicate department code rejected');
+  await caller(uid(4));
+  const otherDept=await scalar(structure(91,'department',null,{name:'Other department',code:'OTHER',status:'ACTIVE'}));
+  await caller(uid(71));
+  await denied(structure(10,'placement',learner,{department_id:otherDept,batch_id:''}),'foreign department rejected for student placement');
+  await denied(structure(10,'department',otherDept,{name:'Intrusion',code:'X',status:'ACTIVE'}),'foreign department update rejected');
+  await db.exec(structure(10,'placement',learner,{department_id:'',batch_id:''}));
+  check(await scalar(`SELECT batch_id IS NULL AND department_id IS NULL FROM students WHERE id='${learner}'`),true,'placement can be cleared');
+  check(await scalar(`SELECT count(*) FROM enrollments WHERE student_id='${learner}'`),1,'placement changes preserve course enrolments');
+  await db.exec(structure(10,'department',dept,{name:'Computing',code:'CSE',status:'INACTIVE'}));
+  await denied(structure(10,'batch',null,{name:'Inactive dept batch',department_id:dept,status:'ACTIVE'}),'inactive department cannot receive new batch');
+  await caller(uid(70));
+  await denied(structure(10,'placement',learner,{department_id:'',batch_id:''}),'student cannot self-assign via structure RPC');
+  await caller(uid(4));
+  await db.exec(`UPDATE profiles SET status='SUSPENDED' WHERE user_id='${uid(71)}'`);
+  await caller(uid(71));
+  await denied(structure(10,'department',null,{name:'Denied',code:'DENIED',status:'ACTIVE'}),'inactive college admin cannot modify structure');
+  await caller(uid(4));
+  await db.exec(`UPDATE profiles SET status='ACTIVE' WHERE user_id='${uid(71)}'`);
+  await db.exec('RESET ROLE');
+  await db.exec(fs.readFileSync(path.join(migrationDir,'015_college_structure.sql'),'utf8'));
+  check(await scalar(`SELECT name FROM departments WHERE id='${dept}'`),'Computing','rerunning structure migration preserves data');
   console.log(`${passed} database checks passed`);
 }
 main().catch(error => { console.error(error.message); process.exitCode = 1; }).finally(() => db.close());

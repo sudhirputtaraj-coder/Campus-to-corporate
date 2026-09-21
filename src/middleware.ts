@@ -52,11 +52,20 @@ export async function middleware(request: NextRequest) {
   if (user) {
     const { data: profile } = await supabase
       .from('profiles')
-      .select('role')
+      .select('role, status')
       .eq('user_id', user.id)
       .single();
 
     const role = profile?.role;
+
+    // End inactive sessions before page guards redirect back to the sign-in page.
+    if (profile && profile.status !== 'ACTIVE') {
+      await supabase.auth.signOut({ scope: 'local' });
+      if (isPublic) return supabaseResponse;
+      const response = NextResponse.redirect(new URL('/login', request.url));
+      for (const cookie of supabaseResponse.cookies.getAll()) response.cookies.set(cookie);
+      return response;
+    }
 
     if (path.startsWith('/admin') && role !== 'SUPER_ADMIN') {
       return NextResponse.redirect(new URL(getDashboardForRole(role), request.url));
