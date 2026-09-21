@@ -79,7 +79,7 @@ export default async function StudentLearningPage() {
             <p className="text-sm text-slate-400 mt-1">
               {student.account_type === 'INDIVIDUAL'
                 ? 'Programme courses will appear here after enrolment. Check your programme status above.'
-                : 'Your college will enroll you in courses when they are assigned to your batch.'}
+                : 'Courses will appear here once your college or platform administrator enrols you.'}
             </p>
           </div>
         ) : (
