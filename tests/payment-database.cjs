@@ -25,11 +25,11 @@ async function main() {
     ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON TABLES TO authenticated, service_role;
     ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO anon;`);
   const migrationDir = path.join(__dirname, '../supabase/migrations');
-  for (const file of fs.readdirSync(migrationDir).filter(f => /^(00[1-9]|01[0-5])_/.test(f)).sort()) {
+  for (const file of fs.readdirSync(migrationDir).filter(f => /^(00[1-9]|01[0-7])_/.test(f)).sort()) {
     const sql = fs.readFileSync(path.join(migrationDir, file), 'utf8').replace(/^CREATE EXTENSION.*;$/gm, '');
     await db.exec(sql);
   }
-  check(true, true, 'all fifteen migrations compile on PostgreSQL');
+  check(true, true, 'all seventeen migrations compile on PostgreSQL');
   await db.exec(`INSERT INTO auth.users(id,email,email_confirmed_at) VALUES
     ('${uid(1)}','individual@example.test',now()),('${uid(2)}','other@example.test',now()),('${uid(3)}','college@example.test',now()),('${uid(4)}','admin@example.test',now());
     INSERT INTO profiles(user_id,full_name,email) SELECT id,email,email FROM auth.users;
@@ -284,6 +284,121 @@ async function main() {
   await db.exec('RESET ROLE');
   await db.exec(fs.readFileSync(path.join(migrationDir,'015_college_structure.sql'),'utf8'));
   check(await scalar(`SELECT name FROM departments WHERE id='${dept}'`),'Computing','rerunning structure migration preserves data');
+  await caller(uid(4));
+  await db.exec('RESET ROLE');
+  await db.exec(`UPDATE departments SET status='ACTIVE' WHERE id='${dept}';
+    INSERT INTO courses(id,title,category,status) VALUES('${uid(97)}','Batch course','Communication','ACTIVE'),('${uid(98)}','Rollback course','Communication','ACTIVE');
+    INSERT INTO college_courses(college_id,course_id) VALUES('${uid(10)}','${uid(97)}'),('${uid(10)}','${uid(98)}');
+    UPDATE students SET department_id='${dept}',batch_id='${batch}' WHERE user_id IN ('${uid(70)}','${uid(80)}','${uid(82)}');
+    INSERT INTO enrollments(student_id,course_id,status,completion_percentage) VALUES('${learner}','${uid(97)}','COMPLETED',100);`);
+  const batchEnrol=(course=97,b=batch)=>`SELECT fn_enrol_batch_course('${b}','${uid(course)}')`;
+  await caller(uid(70));
+  await denied(batchEnrol(),'student cannot invoke batch enrolment');
+  await caller(uid(71));
+  await denied(batchEnrol(20),'college admin cannot enrol an unassigned course');
+  check(await scalar(batchEnrol()),{enrolled:1,existing:1},'batch action excludes suspended profile and counts existing enrolments');
+  check(await scalar(batchEnrol()),{enrolled:0,existing:2},'repeat batch action reports no new enrolments');
+  check(await scalar(`SELECT completion_percentage FROM enrollments WHERE student_id='${learner}' AND course_id='${uid(97)}'`),'100.00','batch enrolment preserves completed progress');
+  const empty=await scalar(structure(10,'batch',null,{name:'Empty batch',department_id:dept,status:'ACTIVE'}));
+  await denied(batchEnrol(97,empty),'empty batch does not create assignment');
+  check(await scalar(`SELECT count(*) FROM batch_course_assignments WHERE batch_id='${empty}'`),0,'empty batch leaves no assignment');
+  await caller(uid(4));
+  const otherBatch=await scalar(structure(91,'batch',null,{name:'Other batch',status:'ACTIVE'}));
+  await caller(uid(71));
+  await denied(batchEnrol(97,otherBatch),'foreign batch rejected');
+  await caller(uid(4));
+  await db.exec(`UPDATE batches SET status='INACTIVE' WHERE id='${batch}'`);
+  await caller(uid(71));await denied(batchEnrol(),'inactive batch rejected');
+  await caller(uid(4));await db.exec(`UPDATE batches SET status='ACTIVE' WHERE id='${batch}'`);
+  await db.exec('RESET ROLE');
+  await db.exec(`CREATE FUNCTION test_reject_batch_assignment() RETURNS trigger LANGUAGE plpgsql AS $$ BEGIN IF NEW.course_id='${uid(98)}' THEN RAISE EXCEPTION 'Simulated assignment failure'; END IF; RETURN NEW; END $$;
+    CREATE TRIGGER test_reject_batch_assignment BEFORE INSERT ON batch_course_assignments FOR EACH ROW EXECUTE FUNCTION test_reject_batch_assignment();`);
+  await caller(uid(71));await denied(batchEnrol(98),'assignment failure rejects whole batch transaction');
+  check(await scalar(`SELECT count(*) FROM enrollments WHERE course_id='${uid(98)}'`),0,'failed assignment rolls back student enrolments');
+  await caller(uid(4));await db.exec(`UPDATE profiles SET status='SUSPENDED' WHERE user_id='${uid(71)}'`);
+  await caller(uid(71));await denied(batchEnrol(),'inactive administrator rejected');
+  await caller(uid(4));await db.exec(`UPDATE profiles SET status='ACTIVE' WHERE user_id='${uid(71)}'`);
+  await db.exec('RESET ROLE');await db.exec(fs.readFileSync(path.join(migrationDir,'016_atomic_batch_enrolment.sql'),'utf8'));
+  check(await scalar(`SELECT count(*) FROM enrollments WHERE course_id='${uid(97)}'`),2,'rerunning batch migration preserves enrolments');
+  await caller(uid(4));
+  await db.exec(`INSERT INTO courses(id,title,category) VALUES('${uid(1000)}','Certificate course','Communication');
+    INSERT INTO modules(id,course_id,title) VALUES('${uid(1001)}','${uid(1000)}','Module');
+    INSERT INTO lessons(id,module_id,title) VALUES('${uid(1002)}','${uid(1001)}','Lesson');
+    INSERT INTO assessments(id,course_id,title,is_practice) VALUES('${uid(1003)}','${uid(1000)}','Formal quiz',false),('${uid(1004)}','${uid(1000)}','Practice',true);
+    INSERT INTO enrollments(student_id,course_id,completion_percentage) VALUES('${learner}','${uid(1000)}',100);`);
+  await caller(uid(70));
+  check(await scalar(`SELECT fn_issue_course_certificate('${uid(1000)}')`),null,'stored 100 percent does not bypass actual lesson completion');
+  await db.exec(`INSERT INTO lesson_progress(student_id,lesson_id,course_id,status) VALUES('${learner}','${uid(1002)}','${uid(1000)}','COMPLETED');`);
+  check(await scalar(`SELECT fn_issue_course_certificate('${uid(1000)}')`),null,'formal assessment pass required for new certificate');
+  await caller(uid(4));
+  await db.exec(`INSERT INTO assessment_attempts(student_id,assessment_id,status,passed) VALUES('${learner}','${uid(1003)}','GRADED',true);`);
+  await caller(uid(70));
+  const cert=await scalar(`SELECT fn_issue_course_certificate('${uid(1000)}')`);
+  check(typeof cert,'string','completed lessons and formal passes issue certificate without practice requirement');
+  check(await scalar(`SELECT fn_issue_course_certificate('${uid(1000)}')`),cert,'repeat issuance returns original certificate');
+  const token=await scalar(`SELECT verification_token FROM certificates WHERE id='${cert}'`);
+  const recipient=await scalar(`SELECT recipient_name FROM certificates WHERE id='${cert}'`);
+  await caller(null,'anon');
+  check((await db.query(`SELECT * FROM fn_verify_certificate('${token}')`)).rows.length,0,'certificate public verification off by default');
+  await denied('SELECT * FROM certificates','anonymous cannot enumerate certificates');
+  await caller(uid(81));
+  await denied(`SELECT fn_set_certificate_sharing('${cert}',true)`,'other student cannot enable sharing');
+  check(await scalar(`SELECT count(*) FROM certificates WHERE id='${cert}'`),0,'other student cannot read private certificate');
+  await caller(uid(70));await db.exec(`SELECT fn_set_certificate_sharing('${cert}',true)`);
+  await caller(null,'anon');
+  const verified=(await db.query(`SELECT * FROM fn_verify_certificate('${token}')`)).rows[0];
+  check(verified.recipient_name,recipient,'shared certificate verifies exact recipient');
+  check(Object.keys(verified).sort(),['certificate_number','course_title','issue_date','recipient_name'],'verification exposes only intended public fields');
+  await caller(uid(4));await db.exec(`UPDATE courses SET title='Renamed course' WHERE id='${uid(1000)}'`);
+  await caller(uid(70));check(await scalar(`SELECT course_title FROM certificates WHERE id='${cert}'`),'Certificate course','issued certificate title remains stable');
+  await db.exec(`SELECT fn_set_certificate_sharing('${cert}',false)`);
+  await caller(null,'anon');check((await db.query(`SELECT * FROM fn_verify_certificate('${token}')`)).rows.length,0,'turning off sharing disables public verification');
+  await db.exec('RESET ROLE');await db.exec(fs.readFileSync(path.join(migrationDir,'017_certificate_delivery.sql'),'utf8'));
+  check(await scalar(`SELECT count(*) FROM certificates WHERE id='${cert}'`),1,'rerunning certificate migration preserves issued records');
+  // Test the handbook after existing fixtures, so their catalogue counts stay meaningful.
+  await db.exec("RESET ROLE; SELECT set_config('request.jwt.claim.sub','',false);");
+  const handbook = require('../content/corporate-readiness-handbook.json');
+  const handbookSql = fs.readFileSync(path.join(migrationDir,'018_readiness_handbook.sql'),'utf8');
+  await db.exec(`INSERT INTO colleges(id,name,code,status) VALUES('${uid(2000)}','Handbook College','HB','ACTIVE');`);
+  for (let n=2001;n<=2008;n++) {
+    await db.exec(`INSERT INTO auth.users(id,email,email_confirmed_at) VALUES('${uid(n)}','hb${n}@example.test',now());
+      INSERT INTO profiles(user_id,full_name,email,status) VALUES('${uid(n)}','Handbook student','hb${n}@example.test','${n===2008?'SUSPENDED':'ACTIVE'}');
+      INSERT INTO students(id,user_id,account_type,college_id,register_number)
+      VALUES('${uid(n+100)}','${uid(n)}','${n===2001 || n===2008?'COLLEGE':'INDIVIDUAL'}',${n===2001 || n===2008?`'${uid(2000)}'`:'null'},'HB-${n}');`);
+  }
+  const handbookMode = await scalar("SELECT payment_mode FROM programme_settings WHERE id='corporate-readiness'");
+  for (const [n,status,start,finish,paymentMode] of [
+    [2003,'PAID','-1 day','5 months',handbookMode],
+    [2004,'PAID','-7 months','-1 day',handbookMode],
+    [2005,'REFUNDED','-1 day','5 months',handbookMode],
+    [2006,'PAID','-1 day','5 months',handbookMode==='TEST'?'LIVE':'TEST'],
+    [2007,'PAID','1 day','6 months',handbookMode],
+  ]) {
+    await db.exec(`INSERT INTO programme_purchases(student_id,programme_id,price_paise,currency,access_months,status,provider_payment_id,activated_at,expires_at,payment_mode)
+      VALUES('${uid(n+100)}','corporate-readiness',50000,'INR',6,'${status}','hb-pay-${n}',now()+interval '${start}',now()+interval '${finish}','${paymentMode}');`);
+  }
+  await db.exec(handbookSql);
+  check(await scalar(`SELECT count(*) FROM modules WHERE course_id='${handbook.id}'`),25,'handbook publishes exactly 25 modules');
+  check(await scalar(`SELECT count(*) FROM lessons l JOIN modules m ON m.id=l.module_id WHERE m.course_id='${handbook.id}'`),39,'handbook publishes 39 lessons');
+  check(await scalar(`SELECT count(*) FROM college_courses WHERE college_id='${uid(2000)}' AND course_id='${handbook.id}'`),1,'handbook available for college batch enrolment');
+  for (let n=2001;n<=2008;n++) {
+    check(await scalar(`SELECT count(*) FROM enrollments WHERE student_id='${uid(n+100)}' AND course_id='${handbook.id}'`),[2001,2003].includes(n)?1:0,`handbook eligibility account ${n}`);
+  }
+  await db.exec(`INSERT INTO enrollments(student_id,course_id) VALUES('${uid(2102)}','${handbook.id}');`);
+  await caller(uid(2001));check(await scalar(`SELECT count(*) FROM lessons l JOIN modules m ON m.id=l.module_id WHERE m.course_id='${handbook.id}'`),39,'college student can read all handbook lessons');
+  await caller(uid(2003));check(await scalar(`SELECT fn_can_access_course('${handbook.id}')`),true,'eligible paid individual can open handbook');
+  await caller(uid(2002));check(await scalar(`SELECT count(*) FROM lessons l JOIN modules m ON m.id=l.module_id WHERE m.course_id='${handbook.id}'`),0,'forced enrolment cannot bypass unpaid access');
+  await caller(null,'anon');await denied('SELECT * FROM lessons','anonymous handbook content remains protected');
+  await db.exec("RESET ROLE; SELECT set_config('request.jwt.claim.sub','',false);");
+  const handbookFirstLesson=handbook.modules[0].lessons[0];
+  await db.exec(`UPDATE lessons SET content='Administrator revised content',status='INACTIVE' WHERE id='${handbookFirstLesson.id}';
+    UPDATE enrollments SET completion_percentage=37,status='SUSPENDED' WHERE student_id='${uid(2101)}' AND course_id='${handbook.id}';`);
+  await db.exec(handbookSql);
+  check(await scalar(`SELECT count(*) FROM lessons l JOIN modules m ON m.id=l.module_id WHERE m.course_id='${handbook.id}'`),39,'repeated handbook import creates no duplicates');
+  check(await scalar(`SELECT content FROM lessons WHERE id='${handbookFirstLesson.id}'`),'Administrator revised content','handbook rerun preserves administrator edits');
+  check(await scalar(`SELECT status FROM lessons WHERE id='${handbookFirstLesson.id}'`),'INACTIVE','handbook rerun preserves hidden lessons');
+  check(Number(await scalar(`SELECT completion_percentage FROM enrollments WHERE student_id='${uid(2101)}' AND course_id='${handbook.id}'`)),37,'handbook rerun preserves progress');
+  check(await scalar(`SELECT status FROM enrollments WHERE student_id='${uid(2101)}' AND course_id='${handbook.id}'`),'SUSPENDED','handbook rerun does not reactivate suspended enrolment');
   console.log(`${passed} database checks passed`);
 }
 main().catch(error => { console.error(error.message); process.exitCode = 1; }).finally(() => db.close());

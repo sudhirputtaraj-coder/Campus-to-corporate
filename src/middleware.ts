@@ -36,7 +36,7 @@ export async function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
 
   // Public routes
-  const publicPaths = ['/', '/login', '/register', '/programme', '/forgot-password', '/reset-password', '/about', '/contact'];
+  const publicPaths = ['/', '/login', '/register', '/programme', '/forgot-password', '/reset-password', '/auth/callback', '/auth/error', '/about', '/contact'];
   const isPublic = publicPaths.some(
     (p) => path === p || path.startsWith('/verify/')
   );

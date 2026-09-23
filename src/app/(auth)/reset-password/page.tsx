@@ -15,34 +15,17 @@ export default function ResetPasswordPage() {
   const [isSessionValid, setIsSessionValid] = useState<boolean | null>(null);
 
   const router = useRouter();
-  const supabase = createClient();
+  const [supabase] = useState(() => createClient());
 
   useEffect(() => {
-    // Verify that Supabase recovery session exists
-    async function checkSession() {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (session) {
-        setIsSessionValid(true);
-      } else {
-        // Listen for auth state change (PASSWORD_RECOVERY event)
-        const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-          if (event === 'PASSWORD_RECOVERY' || session) {
-            setIsSessionValid(true);
-          }
-        });
-        
-        // Timeout check if no session acquired after 2 seconds
-        setTimeout(async () => {
-          const { data: { session: currentSession } } = await supabase.auth.getSession();
-          if (!currentSession) {
-            setIsSessionValid(false);
-          }
-        }, 2000);
-
-        return () => subscription.unsubscribe();
-      }
-    }
-    checkSession();
+    let active = true;
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (active) setIsSessionValid(!!session);
+    });
+    supabase.auth.getUser().then(({ data: { user }, error }) => {
+      if (active) setIsSessionValid(!error && !!user);
+    }).catch(() => { if (active) setIsSessionValid(false); });
+    return () => { active = false; subscription.unsubscribe(); };
   }, [supabase]);
 
   async function handleSubmit(e: React.FormEvent) {
@@ -60,7 +43,9 @@ export default function ResetPasswordPage() {
       return;
     }
 
+    if (isSessionValid !== true) { setError("Open a valid password reset link first."); return; }
     setLoading(true);
+    try {
 
     const { error: updateError } = await supabase.auth.updateUser({
       password,
@@ -72,11 +57,13 @@ export default function ResetPasswordPage() {
       return;
     }
 
-    setMessage('Password updated successfully! Redirecting to login...');
-    setLoading(false);
-    setTimeout(() => {
-      router.push('/login');
-    }, 2000);
+    setMessage('Password updated successfully. Please sign in with your new password.');
+    await supabase.auth.signOut({ scope: 'local' });
+    router.replace('/login');
+    router.refresh();
+    } catch {
+      setError('The request could not be completed. Please try again.');
+    } finally { setLoading(false); }
   }
 
   return (
@@ -126,7 +113,7 @@ export default function ResetPasswordPage() {
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              disabled={isSessionValid === false || loading}
+              disabled={isSessionValid !== true || loading}
               className="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:opacity-50"
               placeholder="Minimum 6 characters"
             />
@@ -141,7 +128,7 @@ export default function ResetPasswordPage() {
               required
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              disabled={isSessionValid === false || loading}
+              disabled={isSessionValid !== true || loading}
               className="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:opacity-50"
               placeholder="Re-enter new password"
             />
@@ -149,7 +136,7 @@ export default function ResetPasswordPage() {
 
           <button
             type="submit"
-            disabled={isSessionValid === false || loading}
+            disabled={isSessionValid !== true || loading}
             className="w-full bg-slate-900 text-white py-2.5 rounded-lg font-medium hover:bg-slate-800 disabled:opacity-60 flex items-center justify-center gap-2"
           >
             {loading && <Loader2 className="w-4 h-4 animate-spin" />}

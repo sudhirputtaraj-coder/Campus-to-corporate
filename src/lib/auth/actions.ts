@@ -4,6 +4,7 @@ import { createClient } from '@/lib/supabase/server';
 import { createServiceClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
+import { emailCallback } from './email-redirect';
 
 export async function login(formData: FormData) {
   const supabase = await createClient();
@@ -46,6 +47,9 @@ export async function login(formData: FormData) {
 }
 
 export async function signup(formData: FormData) {
+  let emailRedirectTo: string;
+  try { emailRedirectTo = await emailCallback('/login'); }
+  catch { return { error: 'Account email links are not configured. Please contact the platform administrator.' }; }
   const supabase = await createClient();
   const email = formData.get('email') as string;
   const password = formData.get('password') as string;
@@ -55,6 +59,7 @@ export async function signup(formData: FormData) {
     email,
     password,
     options: {
+      emailRedirectTo,
       data: { full_name: fullName, account_type: 'INDIVIDUAL' },
     },
   });
@@ -124,11 +129,14 @@ export async function getCurrentProfile() {
 }
 
 export async function resetPassword(formData: FormData) {
+  let redirectTo: string;
+  try { redirectTo = await emailCallback('/reset-password'); }
+  catch { return { error: 'Password reset links are not configured. Please contact the platform administrator.' }; }
   const supabase = await createClient();
   const email = formData.get('email') as string;
 
   const { error } = await supabase.auth.resetPasswordForEmail(email, {
-    redirectTo: `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/reset-password`,
+    redirectTo,
   });
 
   if (error) return { error: error.message };

@@ -2,6 +2,7 @@
 
 import { z } from 'zod';
 import { createClient } from '@/lib/supabase/server';
+import { emailCallback } from './email-redirect';
 
 export async function changeAdminEmail(formData: FormData) {
   const parsed = z.string().trim().email().max(254).safeParse(formData.get('email'));
@@ -31,7 +32,10 @@ export async function changeAdminEmail(formData: FormData) {
   }
   // Supabase handles confirmation using the configured Site URL and secure email change.
   // Never grant a role by email or bypass confirmation with the service client.
-  const { error: updateError } = await supabase.auth.updateUser({ email });
+  let emailRedirectTo: string;
+  try { emailRedirectTo = await emailCallback('/admin/account'); }
+  catch { return { error: 'Email links are not configured. Please contact the platform administrator.' }; }
+  const { error: updateError } = await supabase.auth.updateUser({ email }, { emailRedirectTo });
   if (updateError) return { error: 'Unable to request this email change. Check the address or try again later.' };
   return { success: true, message: 'Email change requested. Follow the confirmation instructions sent to your email addresses. Your administrator permissions stay with this account.' };
 }

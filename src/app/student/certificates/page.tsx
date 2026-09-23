@@ -33,11 +33,12 @@ export default async function StudentCertificatesPage() {
     }
   }
 
-  const { data: certificates } = await supabase
+  const { data: certificates, error: certificateError } = await supabase
     .from('certificates')
     .select('*, course:courses(id, title, category, level)')
     .eq('student_id', student.id)
     .order('issue_date', { ascending: false });
+  if (certificateError) throw new Error('Unable to load certificates. Please try again.');
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col">
@@ -88,7 +89,7 @@ export default async function StudentCertificatesPage() {
             </div>
             <h3 className="text-base font-semibold text-slate-900 mb-1">No certificates earned yet</h3>
             <p className="text-sm text-slate-500 mb-6">
-              You haven't earned any certificates yet. Complete a course to earn your first certificate.
+              Complete all active lessons and pass the formal assessments in a course to earn a certificate.
             </p>
             <Link
               href="/student/learning"
@@ -128,10 +129,10 @@ export default async function StudentCertificatesPage() {
                     <span>Issued {new Date(cert.issue_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
                   </div>
                   <Link
-                    href={`/student/course/${cert.course_id}`}
+                    href={`/student/certificates/${cert.id}`}
                     className="text-blue-600 font-medium hover:underline"
                   >
-                    View Course →
+                    View / Print →
                   </Link>
                 </div>
               </div>

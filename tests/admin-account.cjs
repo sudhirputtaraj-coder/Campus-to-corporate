@@ -36,6 +36,7 @@ function fixture(options = {}) {
   }).outputText;
   vm.runInNewContext(code, { exports, require(id) {
     if (id === 'zod') return require('zod');
+    if (id === './email-redirect') return { emailCallback: async () => 'http://localhost:3002/auth/callback?next=%2Fadmin%2Faccount' };
     if (id === '@/lib/supabase/server') return { createClient: async () => client };
     throw new Error(id);
   } });

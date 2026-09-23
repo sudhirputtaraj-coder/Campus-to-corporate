@@ -94,6 +94,12 @@ export default async function CollegeDashboard() {
             <Link href="/college/courses" className="px-4 py-2 border border-slate-300 rounded-lg text-sm font-medium hover:bg-slate-50">
               Courses / Enroll
             </Link>
+                        <Link href="/college/analytics" className="px-4 py-2 border border-slate-300 rounded-lg text-sm font-medium hover:bg-slate-50">
+              Employability Analytics
+            </Link>
+            <Link href="/college/analytics" className="px-4 py-2 border border-slate-300 rounded-lg text-sm font-medium hover:bg-slate-50">
+              Employability Analytics
+            </Link>
           </div>
         </div>
       </main>

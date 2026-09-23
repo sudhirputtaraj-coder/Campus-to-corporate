@@ -1,0 +1,17 @@
+const {test}=require('node:test'),assert=require('node:assert/strict');const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),ts=require('typescript');
+function load(file,deps={},env={}){const exports={};vm.runInNewContext(ts.transpileModule(fs.readFileSync(path.join(__dirname,'..',file),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2020}}).outputText,{exports,URL,Response,process:{env},require(id){if(!(id in deps))throw Error(id);return deps[id];}});return exports;}
+const origin=load('src/lib/auth/redirect-origin.ts');
+test('local request uses current port instead of stale configured port',()=>assert.equal(origin.authOrigin('http://localhost:3000','http://localhost:3002',false),'http://localhost:3002'));
+test('production ignores request origin and uses configured HTTPS site',()=>assert.equal(origin.authOrigin('https://campus.example','https://attacker.example',true),'https://campus.example'));
+test('unsafe, missing and local production configurations rejected',()=>{for(const url of [undefined,'javascript:alert(1)','http://campus.example','https://localhost','https://user:pass@campus.example','https://campus.example/path','https://campus.example?x=1'])assert.throws(()=>origin.authOrigin(url,null,true));});
+test('untrusted development origin is not used for email',()=>assert.equal(origin.authOrigin('http://localhost:3002','https://attacker.example',false),'http://localhost:3002'));
+test('redirect destination is allowlisted',()=>{for(const next of ['https://attacker.example','//attacker.example','/\\attacker.example','/student/dashboard',null])assert.equal(origin.callbackDestination(next),'/login');assert.equal(origin.callbackDestination('/reset-password'),'/reset-password');});
+function callback(error=false){const calls=[];const route=load('src/app/auth/callback/route.ts',{
+ 'next/server':{NextResponse:{redirect:url=>({location:url.toString()})}},
+ '@/lib/supabase/server':{createClient:async()=>({auth:{exchangeCodeForSession:async code=>{calls.push(code);return {error:error?{}:null};}}})},
+ '@/lib/auth/redirect-origin':origin,
+},{NODE_ENV:'development',NEXT_PUBLIC_APP_URL:'http://localhost:3000'});return {calls,run:route.GET};}
+test('recovery callback exchanges code then opens reset page on same port',async()=>{const f=callback();const r=await f.run(new Request('http://localhost:3002/auth/callback?code=test-code&next=%2Freset-password'));assert.equal(r.location,'http://localhost:3002/reset-password');assert.equal(f.calls[0],'test-code');});
+test('failed, missing and provider-error callbacks show recovery page',async()=>{for(const suffix of ['?code=bad','', '?code=bad&error=expired']){const f=callback(true);assert.equal((await f.run(new Request('http://localhost:3002/auth/callback'+suffix))).location,'http://localhost:3002/auth/error');}});
+test('callback refuses external next location',async()=>{const f=callback();assert.equal((await f.run(new Request('http://localhost:3002/auth/callback?code=test&next=https://attacker.example'))).location,'http://localhost:3002/login');});
+test('email link builder passes same-browser local port',async()=>{const helper=load('src/lib/auth/email-redirect.ts',{'server-only':{},'next/headers':{headers:async()=>new Headers({origin:'http://localhost:3002'})},'./redirect-origin':origin},{NODE_ENV:'development',NEXT_PUBLIC_APP_URL:'http://localhost:3000'});assert.equal(await helper.emailCallback('/reset-password'),'http://localhost:3002/auth/callback?next=%2Freset-password');});

@@ -1,4 +1,5 @@
 'use server';
+import { enrolBatch } from '@/lib/college/batch-enrolment';
 
 import { createClient } from '@/lib/supabase/server';
 import { revalidatePath } from 'next/cache';
@@ -387,65 +388,5 @@ export async function createCourse(formData: FormData) {
 
 /** College Admin: enroll students in a batch into a course */
 export async function enrollBatchInCourse(batchId: string, courseId: string) {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  if (!user) return { error: 'Not authenticated' };
-
-  // RLS will enforce college scope on students/batches
-  const { data: students, error: stErr } = await supabase
-    .from('students')
-    .select('id')
-    .eq('batch_id', batchId)
-    .eq('status', 'ACTIVE');
-
-  if (stErr) {
-    console.error('enrollBatchInCourse students', stErr);
-    return { error: 'Something went wrong. Please try again.' };
-  }
-
-  if (!students || students.length === 0) {
-    return { error: 'No active students found in this batch.' };
-  }
-
-  // Record batch-course assignment
-  await supabase.from('batch_course_assignments').upsert(
-    {
-      batch_id: batchId,
-      course_id: courseId,
-      assigned_by: user.id,
-      status: 'ACTIVE',
-    },
-    { onConflict: 'batch_id,course_id' }
-  );
-
-  const rows = students.map((s) => ({
-    student_id: s.id,
-    course_id: courseId,
-    batch_id: batchId,
-    status: 'ACTIVE' as const,
-  }));
-
-  const { error: enrErr } = await supabase.from('enrollments').upsert(rows, {
-    onConflict: 'student_id,course_id',
-    ignoreDuplicates: true,
-  });
-
-  if (enrErr) {
-    console.error('enrollBatchInCourse enrollments', enrErr);
-    return { error: 'Something went wrong. Please try again.' };
-  }
-
-  await supabase.from('audit_logs').insert({
-    user_id: user.id,
-    action: 'BATCH_COURSE_ENROLLED',
-    entity_type: 'batch',
-    entity_id: batchId,
-    metadata: { course_id: courseId, student_count: students.length },
-  });
-
-  revalidatePath('/college/dashboard');
-  revalidatePath('/college/courses');
-  return { success: true, enrolled: students.length };
+  return enrolBatch(batchId, courseId);
 }

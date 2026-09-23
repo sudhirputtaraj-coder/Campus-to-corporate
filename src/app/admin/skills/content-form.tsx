@@ -31,6 +31,7 @@ export default function ContentForm({ kind, item = {}, moduleId = '', skills = [
     {kind !== 'skill' && <label className="block text-sm">Display order<input className={field} type="number" name="sequence" min={1} max={100000} required defaultValue={item.sequence || 1} /></label>}
     {kind === 'lesson' && <>
       <label className="block text-sm">Written content<textarea className={field} name="content" rows={6} maxLength={100000} defaultValue={item.content || ''} /></label>
+      <p className="text-xs text-slate-500">Use ## before a heading and - before a bullet. Handbook tables can be edited here; keep their vertical bars and separator row.</p>
       <label className="block text-sm">Video embed link (optional)<input className={field} name="video_url" type="url" placeholder="https://…" defaultValue={item.video_url || ''} /></label>
       <label className="block text-sm">Reading / text link (optional)<input className={field} name="resource_url" type="url" placeholder="https://…" defaultValue={item.resource_url || ''} /></label>
       <p className="text-xs text-slate-500">Add another lesson for each additional video or reading link. Use HTTPS links; videos must support embedding.</p>

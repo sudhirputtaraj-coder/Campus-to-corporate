@@ -81,11 +81,15 @@ export default async function AdminDashboard() {
             <Link href="/admin/courses" className="px-4 py-2 bg-slate-900 text-white rounded-lg text-sm font-medium hover:bg-slate-800">
               Manage Courses
             </Link>
+            <Link href="/admin/employability" className="px-4 py-2 border border-slate-300 rounded-lg text-sm font-medium hover:bg-slate-50">
+              Employability Config
+            </Link>
             <Link href="/admin/colleges" className="px-4 py-2 border border-slate-300 rounded-lg text-sm font-medium hover:bg-slate-50">
               Manage Colleges
             </Link>
             <Link href="/admin/users" className="px-4 py-2 border border-slate-300 rounded-lg text-sm font-medium hover:bg-slate-50">
               Manage Users
+            
             </Link>
             <span className="px-4 py-2 text-sm text-slate-400 border border-dashed border-slate-300 rounded-lg">
               Analytics — Coming in future phase

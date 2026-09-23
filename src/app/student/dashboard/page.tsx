@@ -68,6 +68,9 @@ export default async function StudentDashboard() {
               <Link href="/student/skills" className="hover:text-slate-900">
                 My Skills
               </Link>
+              <Link href="/student/employability" className="hover:text-slate-900">
+                Employability
+              </Link>
               <Link href="/student/learning" className="hover:text-slate-900">
                 My Learning
               </Link>

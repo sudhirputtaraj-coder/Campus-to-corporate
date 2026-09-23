@@ -109,6 +109,7 @@ test('lesson action rejects expired access before any learning mutation', async 
     rpc: async name => { calls.push(name); return { data: false, error: null }; },
   };
   const actions = load('src/lib/learning/actions.ts', {
+    '@/lib/college/batch-enrolment': { enrolBatch() { throw new Error('Batch enrolment must not run during lesson progress'); } },
     '@/lib/supabase/server': { createClient: async () => client, createServiceClient: () => { throw new Error('Service client must not be used'); } },
     'next/cache': { revalidatePath() {} }, '@/lib/skills': {},
   });

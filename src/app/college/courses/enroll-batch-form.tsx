@@ -33,7 +33,7 @@ export function EnrollBatchForm({
         setError(res.error);
         return;
       }
-      setSuccess(`Enrolled ${res.enrolled} student(s) successfully.`);
+      setSuccess(`${res.enrolled} new enrolment(s). ${res.existing} existing enrolment(s) kept unchanged.`);
       router.refresh();
     });
   }

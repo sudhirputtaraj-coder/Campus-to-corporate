@@ -58,6 +58,7 @@ function fixture(options = {}) {
     },
   };
   const dependencies = {
+    './email-redirect': { emailCallback: async () => 'http://localhost:3002/auth/callback?next=%2Flogin' },
     '@/lib/supabase/server': { createClient: async () => client, createServiceClient: () => { calls.push(['service']); return client; } },
     'next/navigation': { redirect: url => { throw new Error(`REDIRECT ${url}`); } },
     'next/cache': { revalidatePath() {} },

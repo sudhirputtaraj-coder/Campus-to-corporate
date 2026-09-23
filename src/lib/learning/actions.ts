@@ -1,4 +1,5 @@
 'use server';
+import { enrolBatch } from '@/lib/college/batch-enrolment';
 
 import { createClient, createServiceClient } from '@/lib/supabase/server';
 import { revalidatePath } from 'next/cache';
@@ -36,53 +37,10 @@ export async function syncStudentCertificates() {
 export async function checkAndIssueCertificate(studentId: string, courseId: string) {
   const auth = await getAuthStudent();
   if (auth.error || auth.student?.id !== studentId) return null;
-  const { data: allowed, error: accessError } = await auth.supabase.rpc('fn_can_access_course', { p_course_id: courseId });
-  if (accessError || allowed !== true) return null;
-  const serviceClient = createServiceClient();
-
-  // 1. Verify enrollment exists
-  const { data: enrollment } = await serviceClient
-    .from('enrollments')
-    .select('id, completion_percentage, status')
-    .eq('student_id', studentId)
-    .eq('course_id', courseId)
-    .maybeSingle();
-
-  if (!enrollment) return null;
-
-  // 2. Check if completion >= 100%
-  const pct = Number(enrollment.completion_percentage ?? 0);
-  if (pct < 100) return null;
-
-  // 3. Check if certificate already exists (idempotent)
-  const { data: existingCert } = await serviceClient
-    .from('certificates')
-    .select('*')
-    .eq('student_id', studentId)
-    .eq('course_id', courseId)
-    .maybeSingle();
-
-  if (existingCert) return existingCert;
-
-  // 4. Generate unique certificate number & insert record
-  const certNumber = `CERT-${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).substring(2, 6).toUpperCase()}`;
-  const { data: newCert, error } = await serviceClient
-    .from('certificates')
-    .insert({
-      student_id: studentId,
-      course_id: courseId,
-      certificate_number: certNumber,
-      issue_date: new Date().toISOString(),
-    })
-    .select('*')
-    .single();
-
-  if (error) {
-    console.error('checkAndIssueCertificate error:', error);
-    return null;
-  }
-
-  return newCert;
+  const { data: id, error } = await auth.supabase.rpc('fn_issue_course_certificate', { p_course_id: courseId });
+  if (error || !id) return null;
+  const { data, error: readError } = await auth.supabase.from('certificates').select('*').eq('id', id).eq('student_id', studentId).maybeSingle();
+  return readError ? null : data;
 }
 
 async function getAuthStudent() {
@@ -525,65 +483,5 @@ export async function createCourse(formData: FormData) {
 
 /** College Admin: enroll students in a batch into a course */
 export async function enrollBatchInCourse(batchId: string, courseId: string) {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  if (!user) return { error: 'Not authenticated' };
-
-  // RLS will enforce college scope on students/batches
-  const { data: students, error: stErr } = await supabase
-    .from('students')
-    .select('id')
-    .eq('batch_id', batchId)
-    .eq('status', 'ACTIVE');
-
-  if (stErr) {
-    console.error('enrollBatchInCourse students', stErr);
-    return { error: 'Something went wrong. Please try again.' };
-  }
-
-  if (!students || students.length === 0) {
-    return { error: 'No active students found in this batch.' };
-  }
-
-  // Record batch-course assignment
-  await supabase.from('batch_course_assignments').upsert(
-    {
-      batch_id: batchId,
-      course_id: courseId,
-      assigned_by: user.id,
-      status: 'ACTIVE',
-    },
-    { onConflict: 'batch_id,course_id' }
-  );
-
-  const rows = students.map((s) => ({
-    student_id: s.id,
-    course_id: courseId,
-    batch_id: batchId,
-    status: 'ACTIVE' as const,
-  }));
-
-  const { error: enrErr } = await supabase.from('enrollments').upsert(rows, {
-    onConflict: 'student_id,course_id',
-    ignoreDuplicates: true,
-  });
-
-  if (enrErr) {
-    console.error('enrollBatchInCourse enrollments', enrErr);
-    return { error: 'Something went wrong. Please try again.' };
-  }
-
-  await supabase.from('audit_logs').insert({
-    user_id: user.id,
-    action: 'BATCH_COURSE_ENROLLED',
-    entity_type: 'batch',
-    entity_id: batchId,
-    metadata: { course_id: courseId, student_count: students.length },
-  });
-
-  revalidatePath('/college/dashboard');
-  revalidatePath('/college/courses');
-  return { success: true, enrolled: students.length };
+  return enrolBatch(batchId, courseId);
 }

@@ -6,6 +6,7 @@ import { GraduationCap, LogOut } from 'lucide-react';
 import { logout } from '@/lib/auth/actions';
 import { touchLesson } from '@/lib/learning/actions';
 import { MarkCompleteButton } from './mark-complete-button';
+import { LessonContent } from '../lesson-content';
 
 export default async function StudentLessonPage({
   params,
@@ -121,8 +122,8 @@ export default async function StudentLessonPage({
 
         <article className="mt-6 prose prose-slate max-w-none">
           {lesson.content ? (
-            <div className="bg-white border border-slate-200 rounded-xl p-6 text-slate-700 whitespace-pre-wrap leading-relaxed text-sm sm:text-base">
-              {lesson.content}
+            <div className="bg-white border border-slate-200 rounded-xl p-4 sm:p-6">
+              <LessonContent content={lesson.content} />
             </div>
           ) : (
             <div className="bg-white border border-slate-200 rounded-xl p-6 text-slate-500 text-sm">
