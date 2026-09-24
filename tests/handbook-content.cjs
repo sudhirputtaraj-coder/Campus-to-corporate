@@ -51,7 +51,7 @@ test('escaped separators, multiline text and malformed tables preserve text', ()
   assert.equal(parser.parseLessonText('| A | B |\n| broken |')[0].type, 'paragraph');
 });
 test('handbook import creates no graded assessments, videos, purchases or skill scores', () => {
-  const sql = fs.readFileSync(path.join(__dirname, '../supabase/migrations/018_readiness_handbook.sql'), 'utf8');
+  const sql = fs.readFileSync(path.join(__dirname, '../supabase/migrations/021_readiness_handbook.sql'), 'utf8');
   assert.ok(!/INSERT INTO public\.(assessments|questions|programme_purchases|student_skill_snapshots|student_skill_summaries)/i.test(sql));
   assert.ok(lessons.every(l => !l.video_url));
 });

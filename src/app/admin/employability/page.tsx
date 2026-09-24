@@ -88,7 +88,7 @@ export default async function AdminEmployabilityPage() {
           </div>
           {rows.length === 0 ? (
             <p className="text-sm text-slate-500">
-              No weights found. Run migration 016_phase3_employability.sql after Phase 2A skills exist.
+              No weights found. Run migration 028_scoring_foundation.sql after Phase 2A skills exist.
             </p>
           ) : (
             <WeightEditor rows={rows} />

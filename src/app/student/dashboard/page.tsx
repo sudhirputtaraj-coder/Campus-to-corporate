@@ -107,8 +107,8 @@ export default async function StudentDashboard() {
 
         {student.account_type === 'INDIVIDUAL' && <ProgrammeStatus />}
 
+        <section className="mb-6 rounded-xl border bg-white p-5"><h2 className="text-lg font-semibold">Your next steps</h2><ol className="mt-3 list-decimal space-y-2 pl-5"><li>Student profile created.</li><li><Link href={student.account_type==='INDIVIDUAL'?'/programme':'/student/learning'} className="underline">{student.account_type==='INDIVIDUAL'?'Activate your programme access':'Check your college-assigned courses'}</Link></li><li><Link href="/student/learning" className="underline">Start or resume your learning</Link></li><li><Link href="/student/assessments" className="underline">Complete formal assessments to build skill evidence</Link></li><li><Link href="/student/employability" className="underline">Review your employability score and skill gaps</Link></li></ol></section>
         <div className="grid sm:grid-cols-2 gap-4 mb-8">
-          <Link href="/student/jobs" className="rounded-xl border p-4 font-medium">Job opportunities</Link>
           <Link href="/student/notifications" className="rounded-xl border p-4 font-medium">WhatsApp progress updates</Link>
           <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
             <p className="text-sm text-slate-500">Employability Score</p>

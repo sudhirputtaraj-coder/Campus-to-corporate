@@ -100,5 +100,5 @@ WHERE c.id=COURSE_ID AND c.status='ACTIVE'
 ON CONFLICT (student_id,course_id) DO NOTHING;
 COMMIT;
 '''.replace('COURSE_ID',q(course['id']))]
-(root/'supabase/migrations/018_readiness_handbook.sql').write_text('\n\n'.join(lines),encoding='utf-8')
+(root/'supabase/migrations/021_readiness_handbook.sql').write_text('\n\n'.join(lines),encoding='utf-8')
 print(json.dumps({'course':course['id'],'modules':25,'lessons':sum(len(m['lessons']) for m in course['modules']),'minutes':course['duration_minutes'],'source':course['source']}))

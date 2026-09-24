@@ -40,15 +40,15 @@ export async function updateEmployabilityWeight(skillId: string, weightPercent: 
 
   const { data: profile } = await supabase
     .from('profiles')
-    .select('role')
+    .select('role, status')
     .eq('user_id', user.id)
     .single();
 
-  if (profile?.role !== 'SUPER_ADMIN') {
+  if (profile?.role !== 'SUPER_ADMIN' || profile.status !== 'ACTIVE') {
     return { error: "You don't have permission to access this resource." };
   }
 
-  if (weightPercent < 0 || weightPercent > 100) {
+  if (!Number.isFinite(weightPercent) || weightPercent < 0 || weightPercent > 100) {
     return { error: 'Weight must be between 0 and 100.' };
   }
 

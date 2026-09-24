@@ -95,9 +95,7 @@ export default async function AdminDashboard() {
               Manage Users
             
             </Link>
-            <span className="px-4 py-2 text-sm text-slate-400 border border-dashed border-slate-300 rounded-lg">
-              Analytics — Coming in future phase
-            </span>
+            <Link href="/admin/analytics" className="rounded-lg border px-4 py-2 text-sm font-medium">Platform Analytics</Link>
           </div>
         </div>
       </main>

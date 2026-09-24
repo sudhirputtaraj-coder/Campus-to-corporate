@@ -126,7 +126,7 @@ async function renderPage(options = {}) {
     '@/lib/skills/dashboard': model,
     'next/navigation': { redirect: destination => { throw new Error(`redirect:${destination}`); } },
     'next/link': { __esModule: true, default: props => React.createElement('a', props) },
-    'lucide-react': { GraduationCap: () => null, LogOut: () => null, ArrowLeft: () => null },
+    'lucide-react': { GraduationCap: () => null, LogOut: () => null, ArrowLeft: () => null, Home: () => null },
   });
   const html = renderToStaticMarkup(await page.default());
   return { html, calls };

@@ -1,0 +1,2 @@
+const fs=require('node:fs'),path=require('node:path'),{spawnSync}=require('node:child_process');
+for(const name of fs.readdirSync(path.join(__dirname,'../tests')).filter(n=>n.endsWith('.cjs')).sort()){console.log('\nTEST',name);const run=spawnSync(process.execPath,[path.join(__dirname,'../tests',name)],{stdio:'inherit'});if(run.error){console.error(run.error.message);process.exit(1);}if(run.status!==0)process.exit(run.status||1);}

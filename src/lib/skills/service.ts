@@ -42,5 +42,10 @@ export async function processAttemptSkills(
     return { success: false, error: error.message };
   }
 
+  const { data: attempt } = await supabase.from('assessment_attempts').select('student_id').eq('id', attemptId).single();
+  if (attempt) {
+    const { error: scoringError } = await supabase.rpc('fn_compute_employability_score', { p_student_id: attempt.student_id });
+    if (scoringError) console.error('Employability refresh unavailable:', scoringError.code);
+  }
   return { success: true };
 }

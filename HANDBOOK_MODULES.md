@@ -23,7 +23,7 @@ No videos were supplied. Administrators can add video embed links and reading li
 ## Apply
 
 1. Apply migrations 001–017 first.
-2. Open `supabase/migrations/018_readiness_handbook.sql` and copy the complete file into a new Supabase SQL Editor query. Run the entire query, including BEGIN and COMMIT.
+2. Open `supabase/migrations/021_readiness_handbook.sql` and copy the complete file into a new Supabase SQL Editor query. Run the entire query, including BEGIN and COMMIT.
 3. Refresh the running application. Sign in as an active college student and open **My Learning → Corporate Readiness Handbook**.
 4. Open a module, read its lessons and select **Mark complete** when finished. Check Grammar and Workplace Etiquette for the table layouts. Skill-linked modules also appear through **My Skills**.
 

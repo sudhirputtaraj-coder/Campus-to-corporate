@@ -2,7 +2,7 @@ export const LOGIN_PORTALS = [
   { id: 'individual', title: 'Individual student', description: 'Learning independently, from any college.', role: 'STUDENT' },
   { id: 'college-student', title: 'College student', description: 'Learning through your participating college.', role: 'STUDENT' },
   { id: 'college-admin', title: 'College administrator', description: 'Manage your college and its students.', role: 'COLLEGE_ADMIN' },
-  { id: 'employer', title: 'Employer', description: 'Post jobs and compare college readiness.', role: 'EMPLOYER' },
+  { id: 'employer', title: 'Employer', description: 'Compare college employability scores and readiness.', role: 'EMPLOYER' },
   { id: 'trainer', title: 'Trainer', description: 'Access your assigned batches.', role: 'TRAINER' },
   { id: 'super-admin', title: 'Super Admin', description: 'Manage the platform and programme pricing.', role: 'SUPER_ADMIN' },
 ] as const;

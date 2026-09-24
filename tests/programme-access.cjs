@@ -72,7 +72,7 @@ function fixture(options = {}) {
         const active = filters.some(f => f[0] === 'eq' && f[1] === 'status');
         return Promise.resolve({ data: table === 'students'
           ? { id: 'own-student', account_type: options.college ? 'COLLEGE' : 'INDIVIDUAL' }
-          : table === 'programme_settings' ? { payment_mode: 'TEST' } : active ? options.active || [] : options.latest || [],
+          : table === 'programme_free_access' ? options.freeGrant || null : table === 'programme_settings' ? { payment_mode: 'TEST' } : active ? options.active || [] : options.latest || [],
         error: options.queryError || (options.purchaseError && table === 'programme_purchases') ? { message: 'unavailable' } : null }).then(resolve, reject);
       };
       return query;
@@ -105,4 +105,11 @@ test('database and network errors show unavailable, not not-activated', async ()
     const f = fixture(options);
     assert.equal((await f.access.getMyProgrammeAccess()).state, 'unavailable');
   }
+});
+
+test('free access is active and scoped to the signed-in student', async () => {
+ const f = fixture({freeGrant:{activated_at:'2020-01-01T00:00:00Z',expires_at:'2099-01-01T00:00:00Z',access_months:6}});
+ const result=await f.access.getMyProgrammeAccess();
+ assert.equal(result.state,'active');assert.equal(result.purchase.payment_mode,'FREE');
+ assert.ok(f.calls.some(c=>c[0]==='programme_free_access'&&c[1]==='eq'&&c[2]==='student_id'&&c[3]==='own-student'));
 });

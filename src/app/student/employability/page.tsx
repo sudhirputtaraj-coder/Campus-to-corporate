@@ -42,7 +42,7 @@ export default async function StudentEmployabilityPage() {
   const gaps = await getSkillGaps(student.id);
   const recommendations = buildRecommendations(gaps);
 
-  const score = latest?.score ?? Number(student.employability_score) ?? 0;
+  const score = latest && latest.skills_measured > 0 ? latest.score : null;
   const label = latest?.classification_label ?? 'Not classified yet';
   const provisional = latest?.is_provisional ?? true;
 
@@ -97,8 +97,8 @@ export default async function StudentEmployabilityPage() {
           <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm sm:col-span-1">
             <p className="text-sm text-slate-500">Current score</p>
             <p className="mt-1 text-4xl font-bold text-slate-900">
-              {Math.round(score)}
-              <span className="text-lg text-slate-400 font-normal"> / 100</span>
+              {score === null ? 'Not assessed' : Math.round(score)}
+              <span className="text-lg text-slate-400 font-normal">{score === null ? '' : ' / 100'}</span>
             </p>
             {provisional && (
               <p className="mt-2 text-xs text-amber-700 bg-amber-50 inline-block px-2 py-0.5 rounded">

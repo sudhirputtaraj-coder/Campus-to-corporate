@@ -25,7 +25,7 @@ async function main() {
     ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON TABLES TO authenticated, service_role;
     ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO anon;`);
   const migrationDir = path.join(__dirname, '../supabase/migrations');
-  for (const file of fs.readdirSync(migrationDir).filter(f => /^(00[1-9]|01[0-7])_/.test(f)).sort()) {
+  for (const file of fs.readdirSync(migrationDir).filter(f => /^(00[1-9]|01[0-5]|019|020)_/.test(f)).sort()) {
     const sql = fs.readFileSync(path.join(migrationDir, file), 'utf8').replace(/^CREATE EXTENSION.*;$/gm, '');
     await db.exec(sql);
   }
@@ -318,7 +318,7 @@ async function main() {
   await caller(uid(4));await db.exec(`UPDATE profiles SET status='SUSPENDED' WHERE user_id='${uid(71)}'`);
   await caller(uid(71));await denied(batchEnrol(),'inactive administrator rejected');
   await caller(uid(4));await db.exec(`UPDATE profiles SET status='ACTIVE' WHERE user_id='${uid(71)}'`);
-  await db.exec('RESET ROLE');await db.exec(fs.readFileSync(path.join(migrationDir,'016_atomic_batch_enrolment.sql'),'utf8'));
+  await db.exec('RESET ROLE');await db.exec(fs.readFileSync(path.join(migrationDir,'019_atomic_batch_enrolment.sql'),'utf8'));
   check(await scalar(`SELECT count(*) FROM enrollments WHERE course_id='${uid(97)}'`),2,'rerunning batch migration preserves enrolments');
   await caller(uid(4));
   await db.exec(`INSERT INTO courses(id,title,category) VALUES('${uid(1000)}','Certificate course','Communication');
@@ -353,12 +353,12 @@ async function main() {
   await caller(uid(70));check(await scalar(`SELECT course_title FROM certificates WHERE id='${cert}'`),'Certificate course','issued certificate title remains stable');
   await db.exec(`SELECT fn_set_certificate_sharing('${cert}',false)`);
   await caller(null,'anon');check((await db.query(`SELECT * FROM fn_verify_certificate('${token}')`)).rows.length,0,'turning off sharing disables public verification');
-  await db.exec('RESET ROLE');await db.exec(fs.readFileSync(path.join(migrationDir,'017_certificate_delivery.sql'),'utf8'));
+  await db.exec('RESET ROLE');await db.exec(fs.readFileSync(path.join(migrationDir,'020_certificate_delivery.sql'),'utf8'));
   check(await scalar(`SELECT count(*) FROM certificates WHERE id='${cert}'`),1,'rerunning certificate migration preserves issued records');
   // Test the handbook after existing fixtures, so their catalogue counts stay meaningful.
   await db.exec("RESET ROLE; SELECT set_config('request.jwt.claim.sub','',false);");
   const handbook = require('../content/corporate-readiness-handbook.json');
-  const handbookSql = fs.readFileSync(path.join(migrationDir,'018_readiness_handbook.sql'),'utf8');
+  const handbookSql = fs.readFileSync(path.join(migrationDir,'021_readiness_handbook.sql'),'utf8');
   await db.exec(`INSERT INTO colleges(id,name,code,status) VALUES('${uid(2000)}','Handbook College','HB','ACTIVE');`);
   for (let n=2001;n<=2008;n++) {
     await db.exec(`INSERT INTO auth.users(id,email,email_confirmed_at) VALUES('${uid(n)}','hb${n}@example.test',now());

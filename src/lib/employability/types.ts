@@ -72,6 +72,18 @@ export interface Recommendation {
 }
 
 export interface CollegeAnalyticsSummary {
+  scores_available: boolean;
+  generated_at: string;
+  latest_measurement: string | null;
+  individual_students: number;
+  college_students: number;
+  provisional_students: number;
+  enrolments: number;
+  completed_enrolments: number;
+  students_enrolled: number;
+  average_progress: number | null;
+  graded_attempts: number;
+  college_averages: { college_id: string | null; name: string; students: number; measured: number; average: number | null }[];
   total_students: number;
   students_with_score: number;
   average_score: number | null;
