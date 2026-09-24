@@ -3,9 +3,10 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 const menus: Record<string, [string, string][]> = {
-  student: [['Dashboard','/student/dashboard'],['My Learning','/student/learning'],['Assessments','/student/assessments'],['My Skills','/student/skills'],['Employability','/student/employability'],['Certificates','/student/certificates'],['WhatsApp updates','/student/notifications']],
-  college: [['Dashboard','/college/dashboard'],['Students','/college/students'],['Departments','/college/departments'],['Batches','/college/batches'],['Courses','/college/courses'],['Analytics','/college/analytics']],
-  admin: [['Dashboard','/admin/dashboard'],['Colleges','/admin/colleges'],['Users','/admin/users'],['Skills and modules','/admin/skills'],['Courses','/admin/courses'],['Employability','/admin/employability'],['Programme settings','/admin/programme'],['Account settings','/admin/account']],
+  student: [['Dashboard','/student/dashboard'],['My Learning','/student/learning'],['Assessments','/student/assessments'],['My Skills','/student/skills'],['Employability','/student/employability'],['Certificates','/student/certificates'],['WhatsApp updates','/student/notifications'],['Job opportunities','/student/jobs']],
+  college: [['Dashboard','/college/dashboard'],['Students','/college/students'],['Departments','/college/departments'],['Batches','/college/batches'],['Courses','/college/courses'],['Trainers','/college/trainers'],['Analytics','/college/analytics']],
+  admin: [['Dashboard','/admin/dashboard'],['Colleges','/admin/colleges'],['Users','/admin/users'],['Skills and modules','/admin/skills'],['Courses','/admin/courses'],['Employability','/admin/employability'],['Programme settings','/admin/programme'],['Account settings','/admin/account'],['Employer and trainer access','/admin/access']],
+  employer: [['Dashboard and jobs','/employer/dashboard'],['College readiness','/employer/readiness']],
   trainer: [['Dashboard','/trainer/dashboard']],
 };
 

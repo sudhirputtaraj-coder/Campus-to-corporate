@@ -4,7 +4,7 @@ export function parseProgrammeSettings(price: unknown, months: unknown) {
   const [rupees, paise = ''] = price.trim().split('.');
   const pricePaise = Number(rupees) * 100 + Number(paise.padEnd(2, '0'));
   const accessMonths = Number(months);
-  if (!Number.isSafeInteger(pricePaise) || pricePaise <= 0 || pricePaise > 100000000 || accessMonths < 1 || accessMonths > 120) return null;
+  if (!Number.isSafeInteger(pricePaise) || pricePaise < 0 || pricePaise > 100000000 || accessMonths < 1 || accessMonths > 120) return null;
   return { price_paise: pricePaise, access_months: accessMonths };
 }
 

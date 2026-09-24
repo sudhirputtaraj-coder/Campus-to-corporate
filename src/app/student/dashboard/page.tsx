@@ -108,6 +108,7 @@ export default async function StudentDashboard() {
         {student.account_type === 'INDIVIDUAL' && <ProgrammeStatus />}
 
         <div className="grid sm:grid-cols-2 gap-4 mb-8">
+          <Link href="/student/jobs" className="rounded-xl border p-4 font-medium">Job opportunities</Link>
           <Link href="/student/notifications" className="rounded-xl border p-4 font-medium">WhatsApp progress updates</Link>
           <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
             <p className="text-sm text-slate-500">Employability Score</p>

@@ -33,3 +33,14 @@ export async function saveProgrammeSettings(formData: FormData) {
   revalidatePath('/admin/programme');
   redirect('/admin/programme?saved=1');
 }
+
+export async function activateFreeProgramme() {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) redirect('/login');
+  const { error } = await supabase.rpc('fn_activate_free_programme');
+  if (error) redirect('/programme?error=activation');
+  revalidatePath('/student/dashboard');
+  revalidatePath('/student/learning');
+  redirect('/student/learning');
+}

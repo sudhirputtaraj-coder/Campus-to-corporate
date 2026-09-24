@@ -19,7 +19,7 @@ export default async function StudentSetup({ searchParams }: { searchParams: Pro
         {error && <p role="alert" className="mt-4 rounded-lg bg-amber-50 p-3 text-sm text-amber-900">We could not complete your profile. Confirm your email and try again, or contact the platform administrator for help.</p>}
         <section className="mt-6 rounded-xl border border-blue-200 p-5">
           <h2 className="font-semibold text-slate-900">Join independently</h2>
-          <p className="mt-2 text-sm text-slate-600">For students from any college or without a college affiliation. Creating your profile is free and does not purchase programme access.</p>
+          <p className="mt-2 text-sm text-slate-600">For students from any college or without a college affiliation. Creating your profile is free. After setup, open the programme page to activate the current offer.</p>
           <form action={completeIndividualProfile} className="mt-4">
             <button className="rounded-lg bg-slate-900 px-4 py-3 text-sm font-medium text-white">Create my individual student profile</button>
           </form>

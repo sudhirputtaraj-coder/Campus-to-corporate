@@ -23,7 +23,7 @@ test('decimal rupees preserve paise without floating point drift', () => {
   assert.equal(settings.parseProgrammeSettings('499.99', '12').price_paise, 49999);
   assert.equal(settings.parseProgrammeSettings('0.01', '1').price_paise, 1);
 });
-for (const price of ['0', '-500', '1e3', 'NaN', 'Infinity', '500.001', '', '1000001']) {
+for (const price of ['-500', '1e3', 'NaN', 'Infinity', '500.001', '', '1000001']) {
   test(`reject invalid price ${JSON.stringify(price)}`, () => assert.equal(settings.parseProgrammeSettings(price, '6'), null));
 }
 test('reject noninteger, absent, negative and oversized durations', () => {
@@ -87,7 +87,7 @@ test('admin saves validated values to the single programme row', async () => {
 });
 test('invalid admin input never reaches database update', async () => {
   const f = fixture();
-  await assert.rejects(() => f.actions.saveProgrammeSettings(form('0')), /error=invalid/);
+  await assert.rejects(() => f.actions.saveProgrammeSettings(form('-1')), /error=invalid/);
   assert.ok(!f.calls.some(call => call[0] === 'update'));
 });
 test('missing settings row cannot report success', async () => {
@@ -132,3 +132,5 @@ test('duplicate signup does not create or update a profile', async () => {
   await f.auth.signup(form());
   assert.ok(!f.calls.some(call => call[0] === 'service' || call[0] === 'upsert'));
 });
+
+test('zero price enables free offer', () => assert.equal(settings.parseProgrammeSettings('0', '6').price_paise, 0));

@@ -1,5 +1,7 @@
 'use client';
 
+import PasswordInput from '@/components/password-input';
+
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -106,8 +108,8 @@ export default function ResetPasswordPage() {
             <label className="block text-sm font-medium text-slate-700 mb-1">
               New Password
             </label>
-            <input
-              type="password"
+            <PasswordInput
+
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -121,8 +123,8 @@ export default function ResetPasswordPage() {
             <label className="block text-sm font-medium text-slate-700 mb-1">
               Confirm New Password
             </label>
-            <input
-              type="password"
+            <PasswordInput
+
               required
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}

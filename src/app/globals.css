@@ -140,7 +140,10 @@ input, select, textarea { max-width: 100%; }
 
 /* Frame the logo lettering, excluding the image's large black outer margins. */
 .site-brand-header {
-  background: #000;
+  background: linear-gradient(180deg, #252525 0%, #0c0c0c 32%, #000 58%, #080808 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 2px 5px rgba(0, 0, 0, 0.18);
+  position: relative;
+  isolation: isolate;
   display: flex;
   justify-content: center;
   padding: 4px 16px;
@@ -148,7 +151,7 @@ input, select, textarea { max-width: 100%; }
 }
 .site-brand-link {
   display: block;
-  width: min(100%, 340px);
+  width: min(100%, 290px);
   aspect-ratio: 1380 / 440;
   position: relative;
   overflow: hidden;
@@ -166,6 +169,8 @@ input, select, textarea { max-width: 100%; }
   width: 100%;
   height: auto;
   object-fit: contain;
+  mix-blend-mode: screen;
+  filter: url(#c2c-neon-green);
 }
 /* Let page navigation grow instead of forcing its contents into a short row. */
 .page-navigation,
@@ -186,7 +191,7 @@ input, select, textarea { max-width: 100%; }
   overflow-wrap: anywhere;
 }
 @media (max-width: 639px) {
-  .site-brand-link { width: min(100%, 280px); }
+  .site-brand-link { width: min(100%, 240px); }
 }
 @media print {
   .site-brand-header { display: none; }
@@ -246,3 +251,34 @@ button:disabled,
   opacity: 0.5;
   box-shadow: none;
 }
+
+/* Bottle-green surfaces retain light text; actions use the neon green above. */
+.bg-black, :is(div, section, article, aside).bg-slate-900 {
+  background-color: #064b35;
+}
+.mobile-menu summary { background-color: #1aff8c; }
+.site-home-link {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fff;
+  padding: 10px 12px;
+  font-size: 14px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.site-home-link:hover { color: #baf5cf; }
+.site-home-link:focus-visible { outline-color: #baf5cf; }
+@media (max-width: 639px) {
+  .site-brand-header { flex-direction: column; align-items: center; }
+  .site-home-link {
+    position: static;
+    transform: none;
+    padding: 6px 12px;
+  }
+}
+
+.professional-form label { display: block; }
+.professional-form input:not([type="checkbox"]):not([type="hidden"]),
+.professional-form select, .professional-form textarea { display: block; width: 100%; margin-top: 6px; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; background: white; }

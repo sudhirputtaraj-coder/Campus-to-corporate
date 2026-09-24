@@ -1,0 +1,7 @@
+import Link from 'next/link';
+import { requireProfessional,pageNumber } from '@/lib/professional/access';
+export default async function StudentJobs({searchParams}:{searchParams:Promise<{page?:string}>}){
+ const {client}=await requireProfessional(['STUDENT']);const page=pageNumber((await searchParams).page);
+ const {data,error}=await client.rpc('fn_student_job_posts',{p_page:page});
+ return <main className="px-4 py-8"><div className="mx-auto max-w-4xl"><Link href="/student/dashboard">Back to dashboard</Link><h1 className="mt-4 text-2xl font-bold">Job opportunities</h1><p className="mt-3">Requirements are supplied by approved employers. Follow the application instructions in each post. Your profile and contact details are not automatically shared with employers.</p>{error?<p role="alert">Job opportunities could not be loaded.</p>:<>{!data?.jobs?.length&&<p className="mt-5">No published opportunities yet.</p>}{data?.jobs?.map((job:any)=><section key={job.id} className="mt-5 rounded-xl border bg-white p-5"><h2 className="text-lg font-semibold">{job.title}</h2><p>{job.company_name} · {job.location}</p><p className="mt-2">Employer’s score threshold: {job.minimum_score}%</p><p className="mt-4 whitespace-pre-wrap break-words">{job.requirements}</p></section>)}<nav className="mt-5 flex gap-3">{page>1&&<Link href={`?page=${page-1}`}>Previous</Link>}<span>Page {page}</span>{page*25<(data?.total||0)&&<Link href={`?page=${page+1}`}>Next</Link>}</nav></>}</div></main>;
+}

@@ -15,6 +15,12 @@ export async function getMyProgrammeAccess(): Promise<ProgrammeAccessStatus | nu
     if (student.account_type !== 'INDIVIDUAL') return { state: 'unavailable' };
 
     const now = new Date();
+    const { data: grants, error: grantError } = await supabase.from('programme_free_access')
+      .select('activated_at, expires_at, access_months').eq('student_id', student.id).maybeSingle();
+    if (grantError) return { state: 'unavailable' };
+    const freePurchase = grants ? { ...grants, status: 'PAID', created_at: grants.activated_at, price_paise: 0, currency: 'INR', payment_mode: 'FREE' } : null;
+    if (freePurchase && Date.parse(freePurchase.activated_at) <= now.getTime() && Date.parse(freePurchase.expires_at) > now.getTime())
+      return { state: 'active', purchase: freePurchase };
     const { data: settings, error: settingsError } = await supabase.from('programme_settings')
       .select('payment_mode').eq('id', 'corporate-readiness').single();
     if (settingsError || !settings?.payment_mode) return { state: 'unavailable' };
@@ -28,7 +34,7 @@ export async function getMyProgrammeAccess(): Promise<ProgrammeAccessStatus | nu
       purchases().order('created_at', { ascending: false }).limit(1),
     ]);
     if (active.error || latest.error) return { state: 'unavailable' };
-    return describeProgrammeAccess([...(active.data ?? []), ...(latest.data ?? [])], now.getTime());
+    return describeProgrammeAccess([...(active.data ?? []), ...(latest.data ?? []), ...(freePurchase ? [freePurchase] : [])], now.getTime());
   } catch {
     return { state: 'unavailable' };
   }

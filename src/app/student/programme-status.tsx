@@ -27,7 +27,8 @@ export default async function ProgrammeStatus() {
     <section aria-label="Programme access" className="mb-8 rounded-xl border border-blue-200 bg-blue-50 p-5">
       <h2 className="font-semibold text-slate-900">Corporate Readiness Programme</h2>
       <p className="mt-2 font-medium text-slate-900">{title}</p>
-      {purchase?.payment_mode === 'TEST' && <p className="mt-1 text-sm font-semibold text-amber-800">Test purchase — no real payment</p>}
+      {purchase?.payment_mode === 'FREE' && <p className="mt-1 text-sm font-semibold">Free enrolment — no payment required</p>}
+      {purchase?.payment_mode === 'TEST'  && <p className="mt-1 text-sm font-semibold text-amber-800">Test purchase — no real payment</p>}
       <p className="mt-1 text-sm text-slate-600">{message}</p>
       {showDates && <dl className="mt-3 grid gap-2 text-sm text-slate-700 sm:grid-cols-2">
         <div><dt>Access started / starts (IST)</dt><dd className="font-medium">{date(purchase.activated_at!)}</dd></div>

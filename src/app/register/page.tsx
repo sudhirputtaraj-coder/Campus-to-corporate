@@ -1,5 +1,7 @@
 'use client';
 
+import PasswordInput from '@/components/password-input';
+
 import { useState } from 'react';
 import Link from 'next/link';
 import { Loader2 } from 'lucide-react';
@@ -119,8 +121,8 @@ export default function RegisterPage() {
               Password
             </label>
 
-            <input
-              type="password"
+            <PasswordInput
+
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -134,8 +136,8 @@ export default function RegisterPage() {
               Confirm password
             </label>
 
-            <input
-              type="password"
+            <PasswordInput
+
               required
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
@@ -154,7 +156,7 @@ export default function RegisterPage() {
           </button>
         </form>
 
-        <p className="mt-4 text-center text-sm text-slate-600">Account creation is free. Programme access requires a separate one-time purchase when payments open. <Link href="/programme" className="text-blue-700 underline">View programme details</Link></p>
+        <p className="mt-4 text-center text-sm text-slate-600">Account creation is free. See the current programme offer for free enrolment or paid access. <Link href="/programme" className="text-blue-700 underline">View programme details</Link></p>
         <p className="mt-3 text-center text-sm text-slate-600">Joining through a participating college? Use the account provided by your college or contact its administrator.</p>
 
         <p className="mt-6 text-center text-sm text-slate-600">

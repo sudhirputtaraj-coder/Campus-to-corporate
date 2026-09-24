@@ -17,13 +17,17 @@ export default async function TrainerDashboard() {
     .eq('user_id', user.id)
     .single();
 
-  const { data: trainer } = await supabase
+  if (profile?.role !== 'TRAINER' || profile.status !== 'ACTIVE') redirect('/login');
+
+  const { data: trainer, error: trainerError } = await supabase
     .from('trainers')
-    .select('id')
+    .select('id,status')
     .eq('user_id', user.id)
     .single();
 
-  const { data: assignments } = await supabase
+  if (trainerError || !trainer || trainer.status !== 'ACTIVE') return <main className="p-6"><p>Trainer access is not active or configured. Contact your platform administrator.</p><form action={logout}><button className="mt-4 rounded-lg p-3">Sign out</button></form></main>;
+
+  const { data: assignments, error: assignmentError } = await supabase
     .from('trainer_batch_assignments')
     .select('*, batch:batches(*, department:departments(name))')
     .eq('trainer_id', trainer?.id || '')
@@ -56,7 +60,7 @@ export default async function TrainerDashboard() {
 
         <div className="bg-white border border-slate-200 rounded-xl p-6 mb-6">
           <h2 className="font-semibold text-slate-900 mb-4">My Batches</h2>
-          {!assignments || assignments.length === 0 ? (
+          {assignmentError ? <p role="alert">Assignments could not be loaded. Please try again.</p> : !assignments || assignments.length === 0 ? (
             <p className="text-slate-500 text-sm">No batches assigned yet.</p>
           ) : (
             <ul className="space-y-3">
@@ -66,7 +70,7 @@ export default async function TrainerDashboard() {
                   className="flex items-center justify-between border border-slate-100 rounded-lg px-4 py-3"
                 >
                   <div>
-                    <p className="font-medium text-slate-900">{a.batch?.name}</p>
+                    <Link href={`/trainer/batches/${a.batch_id}`} className="inline-block rounded-lg p-3 font-medium text-slate-900">{a.batch?.name}</Link>
                     <p className="text-sm text-slate-500">
                       {a.batch?.department?.name || '—'} · {a.batch?.academic_year || '—'}
                     </p>
@@ -83,7 +87,7 @@ export default async function TrainerDashboard() {
         <div className="bg-white border border-slate-200 rounded-xl p-6">
           <h2 className="font-semibold text-slate-900 mb-2">Coming soon</h2>
           <p className="text-sm text-slate-500">
-            Attendance, Activities, Evaluations and Reports will be available in later phases.
+            Open an assigned batch above to review student learning progress. Attendance and manual evaluations are not part of this release.
           </p>
         </div>
       </main>

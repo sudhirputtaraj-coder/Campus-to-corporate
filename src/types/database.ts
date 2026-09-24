@@ -1,4 +1,4 @@
-export type UserRole = 'SUPER_ADMIN' | 'COLLEGE_ADMIN' | 'TRAINER' | 'STUDENT';
+export type UserRole = 'SUPER_ADMIN' | 'COLLEGE_ADMIN' | 'TRAINER' | 'STUDENT' | 'EMPLOYER';
 export type EntityStatus = 'ACTIVE' | 'INACTIVE' | 'PENDING' | 'SUSPENDED';
 export type NotificationType =
   | 'SYSTEM'

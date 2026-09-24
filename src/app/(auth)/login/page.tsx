@@ -1,5 +1,7 @@
 'use client';
 
+import PasswordInput from '@/components/password-input';
+
 import { useState } from 'react';
 import Link from 'next/link';
 import { GraduationCap, Loader2, UserRound, Building2, BriefcaseBusiness, ShieldCheck, Presentation } from 'lucide-react';
@@ -71,9 +73,6 @@ export default function LoginPage() {
               <GraduationCap className="mx-auto mb-4 h-10 w-10 text-blue-700" />
               <h2 className="text-xl font-semibold text-slate-900">One platform. Your own workspace.</h2>
               <p className="mt-3 text-sm leading-6 text-slate-500">Select an account type to see its sign-in form.</p>
-            </div> : selected.id === 'employer' ? <div className="py-6">
-              <h2 className="text-xl font-semibold text-slate-900">Employer access is coming soon</h2>
-              <p className="mt-3 text-sm leading-6 text-slate-600">Employer registration and features are still being planned. Sign-in is not available for this account type yet.</p>
             </div> : <>
               <h2 className="text-xl font-semibold text-slate-900">{selected.title} sign-in</h2>
               <p className="mt-2 text-sm text-slate-500">Use the email and password associated with this account.</p>
@@ -85,7 +84,7 @@ export default function LoginPage() {
                 </div>
                 <div>
                   <label htmlFor="login-password" className="mb-2 block text-sm font-medium text-slate-700">Password</label>
-                  <input id="login-password" type="password" autoComplete="current-password" required disabled={loading} value={password} onChange={e => setPassword(e.target.value)} className="w-full rounded-lg border border-slate-300 px-3 py-3 text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500" />
+                  <PasswordInput id="login-password"  autoComplete="current-password" required disabled={loading} value={password} onChange={e => setPassword(e.target.value)} className="w-full rounded-lg border border-slate-300 px-3 py-3 text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500" />
                 </div>
                 <button type="submit" disabled={loading} className="flex w-full items-center justify-center gap-2 rounded-lg bg-slate-900 px-3 py-3 text-sm font-semibold text-white hover:bg-slate-800 disabled:opacity-60">
                   {loading && <Loader2 className="h-4 w-4 animate-spin" />} {loading ? 'Signing in…' : `Sign in as ${selected.title}`}
@@ -95,7 +94,7 @@ export default function LoginPage() {
               <div className="mt-6 border-t border-slate-100 pt-5 text-sm leading-6 text-slate-600">
                 {selected.id === 'individual' ? <p>New here? <Link href="/register" className="font-medium text-blue-700 underline">Create an individual account</Link>. Account creation is free; programme access is purchased separately when payments open.</p> :
                   selected.id === 'super-admin' ? <p>Use an existing Super Admin account. This option does not create an administrator or change your permissions.</p> :
-                    <p>Use the account provided by your {selected.id === 'college-admin' ? 'platform administrator' : 'college administrator'}. Contact them if you need access.</p>}
+                    <p>Use the account provided by your {['college-admin','employer','trainer'].includes(selected.id) ? 'platform administrator' : 'college administrator'}. Contact them if you need access.</p>}
               </div>
             </>}
           </section>

@@ -22,6 +22,7 @@ for (const [portal, role, account_type, destination] of [
   ['college-student', 'STUDENT', 'COLLEGE', '/student/dashboard'],
   ['college-admin', 'COLLEGE_ADMIN', null, '/college/dashboard'],
   ['trainer', 'TRAINER', null, '/trainer/dashboard'],
+  ['employer', 'EMPLOYER', null, '/employer/dashboard'],
   ['super-admin', 'SUPER_ADMIN', null, '/admin/dashboard'],
 ]) {
   test(`${portal} routes an active matching account`, () => {
@@ -31,7 +32,7 @@ for (const [portal, role, account_type, destination] of [
 }
 test('all mismatched role/portal combinations are rejected', () => {
   for (const portal of portals.LOGIN_PORTALS.filter(p => p.role)) {
-    for (const role of ['STUDENT', 'COLLEGE_ADMIN', 'TRAINER', 'SUPER_ADMIN']) {
+    for (const role of ['STUDENT', 'COLLEGE_ADMIN', 'TRAINER', 'SUPER_ADMIN','EMPLOYER']) {
       if (role !== portal.role) assert.ok(portals.resolveLoginPortal(portal.id, { role, status: 'ACTIVE' }, null).error);
     }
   }
@@ -82,9 +83,9 @@ function fixture(options = {}) {
   return { actions, calls };
 }
 const form = portal => ({ get: name => ({ portal, email: 'test@example.com', password: 'test-password' })[name] });
-test('server refuses employer selection before authentication', async () => {
+test('server refuses unknown selection before authentication', async () => {
   const f = fixture();
-  assert.ok((await f.actions.signInToPortal(form('employer'))).error);
+  assert.ok((await f.actions.signInToPortal(form('unknown'))).error);
   assert.equal(f.calls.length, 0);
 });
 test('server clears session after selecting an unauthorized portal', async () => {

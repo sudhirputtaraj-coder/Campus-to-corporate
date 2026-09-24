@@ -73,6 +73,9 @@ export async function middleware(request: NextRequest) {
     if (path.startsWith('/college') && role !== 'COLLEGE_ADMIN' && role !== 'SUPER_ADMIN') {
       return NextResponse.redirect(new URL(getDashboardForRole(role), request.url));
     }
+    if (path.startsWith('/employer') && role !== 'EMPLOYER') {
+      return NextResponse.redirect(new URL(getDashboardForRole(role), request.url));
+    }
     if (path.startsWith('/trainer') && role !== 'TRAINER' && role !== 'SUPER_ADMIN') {
       return NextResponse.redirect(new URL(getDashboardForRole(role), request.url));
     }
@@ -95,6 +98,8 @@ function getDashboardForRole(role?: string) {
       return '/admin/dashboard';
     case 'COLLEGE_ADMIN':
       return '/college/dashboard';
+    case 'EMPLOYER':
+      return '/employer/dashboard';
     case 'TRAINER':
       return '/trainer/dashboard';
     case 'STUDENT':

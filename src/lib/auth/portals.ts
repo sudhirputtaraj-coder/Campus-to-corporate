@@ -2,7 +2,7 @@ export const LOGIN_PORTALS = [
   { id: 'individual', title: 'Individual student', description: 'Learning independently, from any college.', role: 'STUDENT' },
   { id: 'college-student', title: 'College student', description: 'Learning through your participating college.', role: 'STUDENT' },
   { id: 'college-admin', title: 'College administrator', description: 'Manage your college and its students.', role: 'COLLEGE_ADMIN' },
-  { id: 'employer', title: 'Employer', description: 'Employer access is coming soon.', role: null },
+  { id: 'employer', title: 'Employer', description: 'Post jobs and compare college readiness.', role: 'EMPLOYER' },
   { id: 'trainer', title: 'Trainer', description: 'Access your assigned batches.', role: 'TRAINER' },
   { id: 'super-admin', title: 'Super Admin', description: 'Manage the platform and programme pricing.', role: 'SUPER_ADMIN' },
 ] as const;
@@ -21,6 +21,7 @@ export function resolveLoginPortal(
   if (profile.role !== choice.role) return { error: 'This account uses a different sign-in option. Please select the option provided for your account.' };
   if (profile.role === 'SUPER_ADMIN') return { destination: '/admin/dashboard' };
   if (profile.role === 'COLLEGE_ADMIN') return { destination: '/college/dashboard' };
+  if (profile.role === 'EMPLOYER') return { destination: '/employer/dashboard' };
   if (profile.role === 'TRAINER') return { destination: '/trainer/dashboard' };
   if (!student) return { destination: '/student/setup' };
   if (student.status !== 'ACTIVE') return { error: 'Your student account is not active. Please contact your administrator.' };
