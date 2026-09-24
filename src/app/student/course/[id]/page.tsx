@@ -2,7 +2,7 @@ import { requireLearningAccess } from '@/lib/programme/require-access';
 import { createClient } from '@/lib/supabase/server';
 import { redirect, notFound } from 'next/navigation';
 import Link from 'next/link';
-import { GraduationCap, LogOut, CheckCircle2, Circle, PlayCircle } from 'lucide-react';
+import { LogOut, CheckCircle2, Circle, PlayCircle, Home } from 'lucide-react';
 import { logout } from '@/lib/auth/actions';
 
 export default async function StudentCoursePage({
@@ -87,11 +87,14 @@ export default async function StudentCoursePage({
 
   return (
     <div className="min-h-screen bg-slate-50">
-      <header className="bg-white border-b border-slate-200">
+      <header className="page-navigation bg-white border-b border-slate-200">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
           <Link href="/student/learning" className="flex items-center gap-2 text-sm text-slate-600 hover:text-slate-900">
-            <GraduationCap className="w-5 h-5 text-slate-900" />
+            <span className="text-sm font-semibold">Campus-to-Corporate</span>
             <span className="hidden sm:inline">My Learning</span>
+          </Link>
+          <Link href="/" className="text-slate-500 hover:text-slate-900" title="Home">
+            <Home className="w-4 h-4" />
           </Link>
           <form action={logout}>
             <button type="submit" className="text-slate-500 hover:text-slate-900 flex items-center gap-1 text-sm">

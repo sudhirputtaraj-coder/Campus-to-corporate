@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { GraduationCap, Loader2 } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
 import { signup } from '@/lib/auth/actions';
 import { useRouter } from 'next/navigation';
 
@@ -57,9 +57,7 @@ export default function RegisterPage() {
     <div className="min-h-screen flex items-center justify-center bg-slate-50 px-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-slate-900 mb-4">
-            <GraduationCap className="w-6 h-6 text-white" />
-          </div>
+          <span className="text-sm font-semibold">Campus-to-Corporate</span>
 
           <h1 className="text-2xl font-bold text-slate-900">
             Create your individual account

@@ -1,7 +1,7 @@
 import { createClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
-import { GraduationCap, Award, Calendar, CheckCircle2, ArrowRight } from 'lucide-react';
+import { Award, Calendar, CheckCircle2, ArrowRight, Home } from 'lucide-react';
 import { logout } from '@/lib/auth/actions';
 
 export default async function StudentCertificatesPage() {
@@ -42,14 +42,13 @@ export default async function StudentCertificatesPage() {
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col">
-      <header className="bg-white border-b border-slate-200 px-4 sm:px-6 py-4 flex items-center justify-between">
+      <header className="page-navigation bg-white border-b border-slate-200 px-4 sm:px-6 py-4 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <Link
             href="/student/dashboard"
             className="flex items-center gap-2 text-slate-900 font-bold text-lg hover:opacity-80"
           >
-            <GraduationCap className="w-6 h-6 text-blue-600" />
-            <span>Campus to Corporate</span>
+            <span className="text-sm font-semibold">Campus-to-Corporate</span>
           </Link>
           <span className="text-slate-300">|</span>
           <nav className="hidden sm:flex gap-4 text-sm text-slate-600">
@@ -65,6 +64,9 @@ export default async function StudentCertificatesPage() {
             <span className="text-slate-900 font-medium">Certificates</span>
           </nav>
         </div>
+        <Link href="/" className="text-slate-500 hover:text-slate-900" title="Home">
+          <Home className="w-4 h-4" />
+        </Link>
         <form action={logout}>
           <button type="submit" className="text-sm text-slate-600 hover:text-slate-900 font-medium">
             Sign out

@@ -44,24 +44,25 @@ export default function LoginPage() {
     <main className="min-h-screen bg-slate-50 px-4 py-8 sm:py-12">
       <div className="mx-auto max-w-5xl">
         <Link href="/" className="inline-flex items-center gap-2 font-semibold text-slate-900">
-          <GraduationCap className="h-6 w-6" /> Campus-to-Corporate
+          <span className="text-sm font-semibold">Campus-to-Corporate</span>
         </Link>
         <div className="mb-8 mt-8">
           <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">Welcome back</h1>
           <p className="mt-3 text-slate-600">Choose your account type to sign in.</p>
         </div>
         <div className="grid items-start gap-6 lg:grid-cols-2">
-          <section aria-label="Account type" className="grid gap-3 sm:grid-cols-2">
+          <section aria-label="Account type" className="grid gap-2 sm:grid-cols-2">
             {LOGIN_PORTALS.map(item => {
               const Icon = icons[item.id];
               const active = portal === item.id;
               return <button key={item.id} type="button" aria-pressed={active} disabled={loading}
                 onClick={() => { setPortal(item.id); setError(null); setPassword(''); }}
-                className={`rounded-xl border p-5 text-left transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 disabled:opacity-60 ${active ? 'border-blue-600 bg-blue-50 ring-1 ring-blue-600' : 'border-slate-200 bg-white hover:border-blue-300'}`}>
-                <Icon className={`mb-3 h-6 w-6 ${active ? 'text-blue-700' : 'text-slate-600'}`} />
-                <span className="block font-semibold text-slate-900">{item.title}</span>
-                <span className="mt-2 block text-sm leading-5 text-slate-500">{item.description}</span>
-                {item.id === 'employer' && <span className="mt-3 inline-block rounded-full bg-slate-100 px-2 py-1 text-xs text-slate-600">Coming soon</span>}
+                className={`flex items-start gap-3 rounded-xl border px-3 py-3 text-left transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 disabled:opacity-60 ${active ? 'border-blue-600 bg-blue-50 ring-1 ring-blue-600' : 'border-slate-200 bg-white hover:border-blue-300'}`}>
+                <Icon className="mt-0.5 h-5 w-5 shrink-0 text-green-950" />
+                <span className="min-w-0">
+                  <span className="block text-sm font-semibold leading-5 text-slate-900">{item.title}</span>
+                  <span className="mt-1 block text-xs leading-4 text-green-950">{item.description}</span>
+                </span>
               </button>;
             })}
           </section>

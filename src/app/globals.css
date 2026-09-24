@@ -39,6 +39,20 @@ body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
+/* Keep mobile content in the viewport without hiding overflow or clipping tables. */
+main, section, article, .grid > *, .flex > * { min-width: 0; }
+main { overflow-wrap: anywhere; }
+input, select, textarea { max-width: 100%; }
+.mobile-menu summary { min-height: 44px; }
+.mobile-menu a[aria-current="page"] { outline: 2px solid #064e3b; outline-offset: -2px; }
+@media (max-width: 767px) {
+  input:not([type="checkbox"]):not([type="radio"]), select, textarea { font-size: 16px; }
+  button, a[class*="rounded"] { min-height: 44px; }
+  .page-navigation nav { display: none; }
+  .page-navigation { position: static; }
+  .overflow-x-auto { max-width: 100%; overscroll-behavior-x: contain; }
+}
+
 *:focus-visible {
   outline: none;
   box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--neon);
@@ -124,6 +138,60 @@ body {
   }
 }
 
+/* Frame the logo lettering, excluding the image's large black outer margins. */
+.site-brand-header {
+  background: #000;
+  display: flex;
+  justify-content: center;
+  padding: 4px 16px;
+  flex: none;
+}
+.site-brand-link {
+  display: block;
+  width: min(100%, 340px);
+  aspect-ratio: 1380 / 440;
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+}
+.site-brand-link:focus-visible {
+  outline: 3px solid #a3ff12;
+  outline-offset: 3px;
+}
+.site-brand-image {
+  display: block;
+  position: absolute;
+  top: -45.4545%;
+  left: 0;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+/* Let page navigation grow instead of forcing its contents into a short row. */
+.page-navigation,
+.page-navigation .flex {
+  flex-wrap: wrap;
+  min-width: 0;
+  gap: 0.75rem;
+}
+.page-navigation > .flex,
+.page-navigation.flex {
+  height: auto;
+  min-height: 3.5rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+.page-navigation a {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 639px) {
+  .site-brand-link { width: min(100%, 280px); }
+}
+@media print {
+  .site-brand-header { display: none; }
+}
+
 /* Half-white page backgrounds across the app */
 .min-h-screen.bg-slate-50,
 .min-h-screen.bg-white {
@@ -135,41 +203,46 @@ header.bg-white {
   border-color: var(--border) !important;
 }
 
-/* Primary buttons → neon green */
-.bg-slate-900.text-white,
-a.bg-slate-900,
-button.bg-slate-900 {
+/* Shared neon treatment for actionable tabs, buttons and linked cards. */
+:is(button, a[class*="rounded"], a.bg-slate-900, a.border-slate-300,
+    nav a, [role="tab"], .nav-tab-major, .nav-tab-minor,
+    .nav-tab-major-active, .nav-tab-minor-active, .btn-neon):not(:disabled):not([aria-disabled="true"]):not(.site-brand-link) {
   background: linear-gradient(135deg, #1aff8c 0%, #00c853 100%) !important;
   color: #022c22 !important;
-  box-shadow: 0 0 12px rgba(0, 230, 118, 0.35);
+  border-color: #00b84c !important;
+  box-shadow: 0 0 10px rgba(0, 230, 118, 0.25);
+  transition: background 150ms ease, box-shadow 150ms ease;
 }
-.bg-slate-900.text-white:hover,
-a.bg-slate-900:hover,
-button.bg-slate-900:hover {
-  filter: brightness(1.06);
+:is(button, a[class*="rounded"], a.bg-slate-900, a.border-slate-300,
+    nav a, [role="tab"], .nav-tab-major, .nav-tab-minor,
+    .nav-tab-major-active, .nav-tab-minor-active, .btn-neon):not(:disabled):not([aria-disabled="true"]):not(.site-brand-link):hover {
   background: linear-gradient(135deg, #39ff8a 0%, #00e676 100%) !important;
   color: #022c22 !important;
+  box-shadow: 0 0 14px rgba(0, 230, 118, 0.4);
 }
-
-/* Major / active nav tab */
+nav a,
 header nav span.text-slate-900.font-medium {
-  color: #064e3b !important;
-  background: linear-gradient(135deg, rgba(0, 230, 118, 0.35), rgba(0, 200, 83, 0.25));
-  padding: 0.25rem 0.65rem;
-  border-radius: 0.5rem;
-  box-shadow: 0 0 12px rgba(0, 230, 118, 0.35);
+  padding: 0.35rem 0.65rem;
+  border-radius: 0.4rem;
   font-weight: 600;
 }
-
-/* Smaller nav links — soft green */
-header nav a {
-  color: #047857 !important;
-  padding: 0.25rem 0.55rem;
-  border-radius: 0.4rem;
-  font-weight: 500;
-  transition: background 0.15s ease, color 0.15s ease;
+/* Current tabs remain distinguishable from other green tabs. */
+header nav span.text-slate-900.font-medium,
+[role="tab"][aria-selected="true"],
+.nav-tab-major-active,
+.nav-tab-minor-active {
+  background: #00c853 !important;
+  color: #022c22 !important;
+  box-shadow: inset 0 -3px 0 #064e3b;
+  font-weight: 700;
 }
-header nav a:hover {
-  background: #e8faf0 !important;
-  color: #064e3b !important;
+:is(button, a, [role="tab"]):focus-visible {
+  outline: 2px solid #064e3b;
+  outline-offset: 3px;
+}
+button:disabled,
+[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: 0.5;
+  box-shadow: none;
 }

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
-import { GraduationCap, LogOut, ArrowLeft } from 'lucide-react';
+import { LogOut, ArrowLeft, Home } from 'lucide-react';
 import { createClient } from '@/lib/supabase/server';
 import { logout } from '@/lib/auth/actions';
 import {
@@ -73,10 +73,13 @@ export default async function StudentSkillsPage() {
 
   return (
     <div className="min-h-screen bg-slate-50">
-      <header className="border-b border-slate-200 bg-white">
+      <header className="page-navigation border-b border-slate-200 bg-white">
         <div className="mx-auto flex min-h-14 max-w-5xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
           <Link href="/student/dashboard" className="flex items-center gap-2 font-semibold text-slate-900">
-            <GraduationCap className="h-5 w-5" /> Student
+            <span className="text-sm font-semibold">Campus-to-Corporate</span> Student
+          </Link>
+          <Link href="/" className="text-slate-500 hover:text-slate-900" title="Home">
+            <Home className="w-4 h-4" />
           </Link>
           <form action={logout}>
             <button type="submit" className="flex items-center gap-1 text-sm text-slate-600 hover:text-slate-900">

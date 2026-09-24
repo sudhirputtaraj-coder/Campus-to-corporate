@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
-import { GraduationCap, LogOut } from 'lucide-react';
+import Link from 'next/link';
+import { Home, LogOut } from 'lucide-react';
 import { logout } from '@/lib/auth/actions';
 
 export default async function TrainerDashboard() {
@@ -30,14 +31,17 @@ export default async function TrainerDashboard() {
 
   return (
     <div className="min-h-screen bg-slate-50">
-      <header className="bg-white border-b border-slate-200">
+      <header className="page-navigation bg-white border-b border-slate-200">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <GraduationCap className="w-5 h-5 text-slate-900" />
+            <span className="text-sm font-semibold">Campus-to-Corporate</span>
             <span className="font-semibold text-slate-900">Trainer</span>
           </div>
           <div className="flex items-center gap-4 text-sm">
             <span className="text-slate-600">{profile?.full_name}</span>
+            <Link href="/" className="text-slate-500 hover:text-slate-900" title="Home">
+              <Home className="w-4 h-4" />
+            </Link>
             <form action={logout}>
               <button type="submit" className="text-slate-500 hover:text-slate-900 flex items-center gap-1">
                 <LogOut className="w-4 h-4" /> Logout

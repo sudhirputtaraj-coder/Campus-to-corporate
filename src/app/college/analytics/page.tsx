@@ -1,7 +1,7 @@
 import { createClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
-import { GraduationCap, LogOut, BarChart3 } from 'lucide-react';
+import { LogOut, BarChart3, Home } from 'lucide-react';
 import { logout } from '@/lib/auth/actions';
 import { getCollegeAnalytics } from '@/lib/employability';
 
@@ -26,11 +26,11 @@ export default async function CollegeAnalyticsPage() {
 
   return (
     <div className="min-h-screen bg-slate-50">
-      <header className="bg-white border-b border-slate-200">
+      <header className="page-navigation bg-white border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <Link href="/college/dashboard" className="flex items-center gap-2">
-              <GraduationCap className="w-5 h-5 text-slate-900" />
+              <span className="text-sm font-semibold">Campus-to-Corporate</span>
               <span className="font-semibold text-slate-900">College Admin</span>
             </Link>
             <nav className="hidden sm:flex gap-4 text-sm text-slate-600">
@@ -43,6 +43,9 @@ export default async function CollegeAnalyticsPage() {
               </Link>
             </nav>
           </div>
+          <Link href="/" className="text-slate-500 hover:text-slate-900" title="Home">
+            <Home className="w-4 h-4" />
+          </Link>
           <form action={logout}>
             <button type="submit" className="text-slate-500 hover:text-slate-900 flex items-center gap-1 text-sm">
               <LogOut className="w-4 h-4" /> Logout
@@ -130,7 +133,7 @@ export default async function CollegeAnalyticsPage() {
             {analytics.department_averages.length === 0 ? (
               <p className="text-sm text-slate-500">No department scores yet.</p>
             ) : (
-              <table className="w-full text-sm text-left">
+              <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Score averages"><table className="w-full min-w-[20rem] text-sm text-left">
                 <thead className="text-slate-500 border-b border-slate-100">
                   <tr>
                     <th className="py-2 font-medium">Department</th>
@@ -149,7 +152,7 @@ export default async function CollegeAnalyticsPage() {
                       </tr>
                     ))}
                 </tbody>
-              </table>
+              </table></div>
             )}
           </section>
 
@@ -158,7 +161,7 @@ export default async function CollegeAnalyticsPage() {
             {analytics.batch_averages.length === 0 ? (
               <p className="text-sm text-slate-500">No batch scores yet.</p>
             ) : (
-              <table className="w-full text-sm text-left">
+              <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Score averages"><table className="w-full min-w-[20rem] text-sm text-left">
                 <thead className="text-slate-500 border-b border-slate-100">
                   <tr>
                     <th className="py-2 font-medium">Batch</th>
@@ -177,7 +180,7 @@ export default async function CollegeAnalyticsPage() {
                       </tr>
                     ))}
                 </tbody>
-              </table>
+              </table></div>
             )}
           </section>
         </div>

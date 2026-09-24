@@ -1,7 +1,7 @@
 import { createClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
-import { GraduationCap, LogOut, BookOpen, ClipboardList, ArrowRight } from 'lucide-react';
+import { LogOut, BookOpen, ClipboardList, ArrowRight, Home } from 'lucide-react';
 import { logout } from '@/lib/auth/actions';
 import ProgrammeStatus from '../programme-status';
 
@@ -56,11 +56,11 @@ export default async function StudentDashboard() {
 
   return (
     <div className="min-h-screen bg-slate-50">
-      <header className="bg-white border-b border-slate-200">
+      <header className="page-navigation bg-white border-b border-slate-200">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2">
-              <GraduationCap className="w-5 h-5 text-slate-900" />
+              <span className="text-sm font-semibold">Campus-to-Corporate</span>
               <span className="font-semibold text-slate-900">Student</span>
             </div>
             <nav className="hidden sm:flex gap-4 text-sm text-slate-600">
@@ -84,6 +84,9 @@ export default async function StudentDashboard() {
           </div>
           <div className="flex items-center gap-4 text-sm">
             <span className="text-slate-600">{profile?.full_name}</span>
+            <Link href="/" className="text-slate-500 hover:text-slate-900" title="Home">
+              <Home className="w-4 h-4" />
+            </Link>
             <form action={logout}>
               <button type="submit" className="text-slate-500 hover:text-slate-900 flex items-center gap-1">
                 <LogOut className="w-4 h-4" /> Logout
@@ -105,6 +108,7 @@ export default async function StudentDashboard() {
         {student.account_type === 'INDIVIDUAL' && <ProgrammeStatus />}
 
         <div className="grid sm:grid-cols-2 gap-4 mb-8">
+          <Link href="/student/notifications" className="rounded-xl border p-4 font-medium">WhatsApp progress updates</Link>
           <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
             <p className="text-sm text-slate-500">Employability Score</p>
             <p className="mt-1 text-xl font-semibold text-slate-900">
