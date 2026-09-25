@@ -1,3 +1,4 @@
+import { loadLearningPath } from '@/lib/learning/path-data';
 import { requireLearningAccess } from '@/lib/programme/require-access';
 import { createClient } from '@/lib/supabase/server';
 import { redirect, notFound } from 'next/navigation';
@@ -59,17 +60,11 @@ export default async function StudentLessonPage({
   // Touch progress (non-blocking best-effort)
   await touchLesson(lessonId, courseId);
 
-  // Sibling lessons for prev/next
-  const { data: siblings } = await supabase
-    .from('lessons')
-    .select('id, title, sequence')
-    .eq('module_id', lesson.module_id)
-    .eq('status', 'ACTIVE')
-    .order('sequence', { ascending: true });
-
-  const idx = (siblings || []).findIndex((l) => l.id === lessonId);
-  const prev = idx > 0 ? siblings![idx - 1] : null;
-  const next = idx >= 0 && idx < (siblings?.length ?? 0) - 1 ? siblings![idx + 1] : null;
+  // Follow the same cross-module and cross-course sequence as My Learning Path.
+  const path=await loadLearningPath(student.id);
+  const idx=path.lessons.findIndex(l=>l.id===lessonId);
+  const prev=idx>0?path.lessons[idx-1]:null;
+  const next=idx>=0?path.lessons[idx+1]||null:null;
 
   const { data: progress } = await supabase
     .from('lesson_progress')
@@ -140,11 +135,12 @@ export default async function StudentLessonPage({
           </a>
         )}
 
+        {Array.isArray(lesson.practice_questions) && lesson.practice_questions.length>0 && <section className="mt-6 rounded-xl border bg-white p-5"><h2 className="text-lg font-semibold">Practise what you learned</h2><p className="mt-2 text-sm">Think through each question before revealing the answer. This practice does not change your skill score.</p>{lesson.practice_questions.map((q:{question:string;answer:string},i:number)=><details key={i} className="mt-4 border-t pt-3"><summary className="cursor-pointer font-medium">{i+1}. {q.question}</summary><p className="mt-3 whitespace-pre-wrap break-words">{q.answer}</p></details>)}</section>}
         <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
-          <div className="flex gap-2">
+          <div className="flex min-w-0 flex-wrap gap-2">
             {prev ? (
               <Link
-                href={`/student/lesson/${prev.id}`}
+                prefetch={false} href={`/student/lesson/${prev.id}`}
                 className="px-4 py-2.5 border border-slate-300 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50"
               >
                 ← Previous
@@ -154,17 +150,17 @@ export default async function StudentLessonPage({
             )}
             {next ? (
               <Link
-                href={`/student/lesson/${next.id}`}
+                prefetch={false} href={`/student/lesson/${next.id}`}
                 className="px-4 py-2.5 border border-slate-300 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50"
               >
-                Next →
+                Next lesson →
               </Link>
             ) : (
               <Link
-                href={`/student/course/${courseId}`}
+                href="/student/assessments"
                 className="px-4 py-2.5 border border-slate-300 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50"
               >
-                Back to course
+                Review assessments
               </Link>
             )}
           </div>

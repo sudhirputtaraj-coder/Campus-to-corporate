@@ -25,7 +25,7 @@ export default async function StudentSkillsPage() {
   if (studentError || !student) redirect('/student/dashboard');
 
   const [catalogResult, summaryResult, attemptResult] = await Promise.all([
-    supabase.from('skills').select('id, code, name, description').eq('status', 'ACTIVE'),
+    supabase.from('skills').select('*').eq('status', 'ACTIVE'),
     supabase.from('student_skill_summaries')
       .select('skill_id, current_proficiency, last_valid_snapshot_id, last_attempt_id')
       .eq('student_id', student.id),
@@ -94,7 +94,7 @@ export default async function StudentSkillsPage() {
         </Link>
         <div className="mb-6 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
           <div>
-            <h1 className="text-3xl font-bold text-slate-900">My Skills</h1>
+            <h1 className="text-3xl font-bold text-slate-900">My Skill Scores</h1>
             <p className="mt-2 max-w-2xl text-slate-600">See what your formal assessments show about your workplace skills.</p>
           </div>
           <Link href="/student/assessments" className="inline-flex justify-center rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-medium text-white hover:bg-slate-700">

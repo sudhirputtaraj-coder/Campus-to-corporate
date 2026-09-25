@@ -66,15 +66,7 @@ export default async function StudentAssessmentsPage() {
               <span className="text-sm font-semibold">Campus-to-Corporate</span>
               <span className="font-semibold text-slate-900">Student</span>
             </Link>
-            <nav className="hidden sm:flex gap-4 text-sm text-slate-600">
-              <Link href="/student/dashboard" className="hover:text-slate-900">
-                Dashboard
-              </Link>
-              <Link href="/student/learning" className="hover:text-slate-900">
-                My Learning
-              </Link>
-              <span className="text-slate-900 font-medium">Assessments</span>
-            </nav>
+
           </div>
           <div className="flex items-center gap-4 text-sm">
             <span className="text-slate-600 hidden sm:inline">{profile?.full_name}</span>

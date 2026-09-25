@@ -26,7 +26,7 @@ function load(relativePath, dependencies = {}) {
 }
 
 const types = load('src/lib/skills/types.ts');
-const model = load('src/lib/skills/dashboard.ts', { './types': types });
+const model = load('src/lib/skills/dashboard.ts', { '@/lib/learning/path-order': load('src/lib/learning/path-order.ts') });
 const skills = types.SKILL_CODES.map((code, i) => ({ id: `skill-${i}`, code, name: code === 'COMM' ? 'Communication' : code, description: null }));
 const validAttempt = { id: 'valid-attempt', attempt_number: 1, completed_at: '2026-09-18T10:00:00Z', created_at: '2026-09-18T09:00:00Z', assessment: { title: 'Email Etiquette Quiz', is_practice: false } };
 const invalidAttempt = { ...validAttempt, id: 'invalid-attempt', attempt_number: 2, completed_at: '2026-09-19T10:00:00Z' };
@@ -41,7 +41,7 @@ test('seven unmeasured skills stay unscored', () => {
 });
 
 test('latest invalid evidence never replaces the persisted valid score', () => {
-  const card = model.buildSkillCards(skills, [summary], [snapshot, invalidSnapshot], [validAttempt, invalidAttempt], [validAttempt.id, invalidAttempt.id])[0];
+  const card = model.buildSkillCards(skills, [summary], [snapshot, invalidSnapshot], [validAttempt, invalidAttempt], [validAttempt.id, invalidAttempt.id]).find(card => card.code === 'COMM');
   assert.equal(card.score, 66.67);
   assert.equal(card.source.id, snapshot.id);
   assert.equal(card.history[0].id, invalidSnapshot.id);
@@ -49,28 +49,28 @@ test('latest invalid evidence never replaces the persisted valid score', () => {
 });
 
 test('valid zero is a score, not a missing value', () => {
-  const card = model.buildSkillCards(skills, [{ ...summary, current_proficiency: 0 }], [{ ...snapshot, proficiency: 0 }], [validAttempt], [validAttempt.id])[0];
+  const card = model.buildSkillCards(skills, [{ ...summary, current_proficiency: 0 }], [{ ...snapshot, proficiency: 0 }], [validAttempt], [validAttempt.id]).find(card => card.code === 'COMM');
   assert.equal(card.score, 0);
   assert.equal(card.unavailable, false);
 });
 
 test('practice evidence cannot provide a displayed score or history', () => {
   const practice = { ...validAttempt, assessment: { ...validAttempt.assessment, is_practice: true } };
-  const card = model.buildSkillCards(skills, [summary], [snapshot], [practice], [practice.id])[0];
+  const card = model.buildSkillCards(skills, [summary], [snapshot], [practice], [practice.id]).find(card => card.code === 'COMM');
   assert.equal(card.score, null);
   assert.equal(card.unavailable, true);
   assert.equal(card.history.length, 0);
 });
 
 test('old current source remains visible outside the recent history window', () => {
-  const card = model.buildSkillCards(skills, [summary], [snapshot], [validAttempt], [])[0];
+  const card = model.buildSkillCards(skills, [summary], [snapshot], [validAttempt], []).find(card => card.code === 'COMM');
   assert.equal(card.score, 66.67);
   assert.equal(card.source.attempt.id, validAttempt.id);
   assert.equal(card.history.length, 0);
 });
 
 test('broken provenance is unavailable rather than unassessed', () => {
-  const card = model.buildSkillCards(skills, [summary], [], [], [])[0];
+  const card = model.buildSkillCards(skills, [summary], [], [], []).find(card => card.code === 'COMM');
   assert.equal(card.score, null);
   assert.equal(card.unavailable, true);
 });

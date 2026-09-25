@@ -12,7 +12,7 @@ export default async function ModuleEditor({ params }: { params: Promise<{ id: s
   if (profile?.role !== 'SUPER_ADMIN' || profile.status !== 'ACTIVE') redirect('/login');
   const [module, lessons, skills] = await Promise.all([
     client.from('modules').select('*').eq('id', id).maybeSingle(),
-    client.from('lessons').select('id, title, content, video_url, resource_url, duration_minutes, sequence, status').eq('module_id', id).order('sequence').order('id'),
+    client.from('lessons').select('*').eq('module_id', id).order('sequence').order('id'),
     client.from('skills').select('id, name').order('name'),
   ]);
   if (module.error || lessons.error || skills.error) throw new Error('Unable to load content. Check that migration 010 is applied.');
@@ -22,7 +22,7 @@ export default async function ModuleEditor({ params }: { params: Promise<{ id: s
     <h1 className="mt-6 text-3xl font-bold">{module.data.title}</h1>
     <section className="mt-6 rounded-xl border bg-white p-6"><h2 className="mb-4 text-xl font-semibold">Edit module</h2>
       <ContentForm kind="module" item={module.data} skills={skills.data || []} /></section>
-    <h2 className="mt-8 text-2xl font-semibold">Videos, text and reading links</h2>
+    <h2 className="mt-8 text-2xl font-semibold">Lessons, videos, links and practice Q&amp;A</h2><p className="mt-3 text-sm">Add as many lessons as needed. Each lesson can contain text, a video, a reading link and up to 50 practice questions with answers. Student progress is retained when you edit existing lessons.</p><Link href={`/admin/courses/${module.data.course_id}`} className="mt-3 inline-block underline">Manage formal assessments and question-to-skill mappings for this course</Link>
     <div className="mt-4 space-y-4">{lessons.data?.map(lesson => <details key={lesson.id} className="rounded-xl border bg-white p-5">
       <summary className="cursor-pointer font-medium">{lesson.sequence}. {lesson.title} · {lesson.status === 'ACTIVE' ? 'Published' : 'Hidden'}</summary>
       <div className="mt-4"><ContentForm kind="lesson" item={lesson} moduleId={id} /></div>

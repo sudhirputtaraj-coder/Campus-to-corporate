@@ -55,18 +55,7 @@ export default async function StudentEmployabilityPage() {
               <span className="text-sm font-semibold">Campus-to-Corporate</span>
               <span className="font-semibold text-slate-900">Student</span>
             </Link>
-            <nav className="hidden sm:flex gap-4 text-sm text-slate-600">
-              <Link href="/student/dashboard" className="hover:text-slate-900">
-                Dashboard
-              </Link>
-              <Link href="/student/skills" className="hover:text-slate-900">
-                My Skills
-              </Link>
-              <span className="text-slate-900 font-medium">Employability</span>
-              <Link href="/student/learning" className="hover:text-slate-900">
-                My Learning
-              </Link>
-            </nav>
+
           </div>
           <div className="flex items-center gap-4 text-sm">
             <span className="text-slate-600 hidden sm:inline">{profile?.full_name}</span>

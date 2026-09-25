@@ -1,8 +1,9 @@
 import { createClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
-import { LogOut, BookOpen, ClipboardList, ArrowRight, Home } from 'lucide-react';
+import { LogOut, ArrowRight, Home } from 'lucide-react';
 import { logout } from '@/lib/auth/actions';
+import { LearningPath } from '@/components/learning-path';
 import ProgrammeStatus from '../programme-status';
 
 export default async function StudentDashboard() {
@@ -50,10 +51,6 @@ export default async function StudentDashboard() {
     recentAttempts = att || [];
   }
 
-  const continueCourse = enrollments.find(
-    (e) => e.status === 'ACTIVE' && Number(e.completion_percentage) < 100
-  );
-
   return (
     <div className="min-h-screen bg-slate-50">
       <header className="page-navigation bg-white border-b border-slate-200">
@@ -63,24 +60,7 @@ export default async function StudentDashboard() {
               <span className="text-sm font-semibold">Campus-to-Corporate</span>
               <span className="font-semibold text-slate-900">Student</span>
             </div>
-            <nav className="hidden sm:flex gap-4 text-sm text-slate-600">
-              <span className="text-slate-900 font-medium">Dashboard</span>
-              <Link href="/student/skills" className="hover:text-slate-900">
-                My Skills
-              </Link>
-              <Link href="/student/employability" className="hover:text-slate-900">
-                Employability
-              </Link>
-              <Link href="/student/learning" className="hover:text-slate-900">
-                My Learning
-              </Link>
-              <Link href="/student/assessments" className="hover:text-slate-900">
-                Assessments
-              </Link>
-              <Link href="/student/certificates" className="hover:text-slate-900">
-                Certificates
-              </Link>
-            </nav>
+
           </div>
           <div className="flex items-center gap-4 text-sm">
             <span className="text-slate-600">{profile?.full_name}</span>
@@ -105,100 +85,15 @@ export default async function StudentDashboard() {
           {student.account_type !== 'INDIVIDUAL' && ` · ${student.register_number || '—'}`}
         </p>
 
-        {student.account_type === 'INDIVIDUAL' && <ProgrammeStatus />}
-
-        <section className="mb-6 rounded-xl border bg-white p-5"><h2 className="text-lg font-semibold">Your next steps</h2><ol className="mt-3 list-decimal space-y-2 pl-5"><li>Student profile created.</li><li><Link href={student.account_type==='INDIVIDUAL'?'/programme':'/student/learning'} className="underline">{student.account_type==='INDIVIDUAL'?'Activate your programme access':'Check your college-assigned courses'}</Link></li><li><Link href="/student/learning" className="underline">Start or resume your learning</Link></li><li><Link href="/student/assessments" className="underline">Complete formal assessments to build skill evidence</Link></li><li><Link href="/student/employability" className="underline">Review your employability score and skill gaps</Link></li></ol></section>
-        <div className="grid sm:grid-cols-2 gap-4 mb-8">
-          <Link href="/student/notifications" className="rounded-xl border p-4 font-medium">WhatsApp progress updates</Link>
-          <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
-            <p className="text-sm text-slate-500">Employability Score</p>
-            <p className="mt-1 text-xl font-semibold text-slate-900">
-              Not yet available
-            </p>
-            <p className="mt-2 text-xs text-slate-500">
-              View your individual skill measurements in My Skills.
-            </p>
-          </div>
-          <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
-            <p className="text-sm text-slate-500">Profile completion</p>
-            <p className="mt-1 text-4xl font-bold text-slate-900">
-              {student?.profile_completion ?? 0}%
-            </p>
-          </div>
+        <LearningPath studentId={student.id} compact />
+        <div className="mb-6 grid gap-3 sm:grid-cols-2">
+          <Link className="rounded-xl border p-4" href="/student/assessments">Assessments — check what you have learned</Link>
+          <Link className="rounded-xl border p-4" href="/student/skills">My Skill Scores — view assessment evidence</Link>
+          <Link className="rounded-xl border p-4" href="/student/employability">Employability Summary — review your readiness</Link>
+          <Link className="rounded-xl border p-4" href="/student/certificates">Certificates — view earned credentials</Link>
         </div>
-
-        {continueCourse && (
-          <div className="bg-white border border-slate-200 rounded-xl p-5 mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <div>
-              <p className="text-xs text-blue-600 font-medium uppercase">Continue Learning</p>
-              <p className="font-semibold text-slate-900 mt-0.5">
-                {(continueCourse.course as any)?.title}
-              </p>
-              <p className="text-sm text-slate-500">
-                {Number(continueCourse.completion_percentage) || 0}% complete
-              </p>
-            </div>
-            <Link
-              href={`/student/course/${(continueCourse.course as any)?.id}`}
-              className="inline-flex items-center gap-2 bg-slate-900 text-white px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-slate-800"
-            >
-              Continue <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-        )}
-
-        <div className="grid sm:grid-cols-2 gap-4 mb-8">
-          <Link
-            href="/student/skills"
-            className="p-4 rounded-xl border border-blue-200 bg-blue-50 hover:border-blue-400 transition-colors flex items-center justify-between"
-          >
-            <div>
-              <p className="font-semibold text-slate-900">My Skills</p>
-              <p className="text-sm text-slate-600 mt-0.5">Your proficiency, assessment evidence, and history</p>
-            </div>
-            <ArrowRight className="w-5 h-5 shrink-0 text-blue-700" />
-          </Link>
-          <Link
-            href="/student/assessments"
-            className="p-4 rounded-xl border border-slate-200 bg-white hover:border-slate-300 transition-colors flex items-center justify-between"
-          >
-            <div>
-              <p className="font-semibold text-slate-900">Assessments</p>
-              <p className="text-sm text-slate-500 mt-0.5">
-                Quizzes and tests
-              </p>
-            </div>
-            <span className="text-slate-400 font-medium text-sm">→</span>
-          </Link>
-
-          <Link
-            href="/student/certificates"
-            className="p-4 rounded-xl border border-slate-200 bg-white hover:border-slate-300 transition-colors flex items-center justify-between"
-          >
-            <div>
-              <p className="font-semibold text-slate-900">Certificates</p>
-              <p className="text-sm text-slate-500 mt-0.5">
-                Earned course credentials
-              </p>
-            </div>
-            <span className="text-slate-400 font-medium text-sm">→</span>
-          </Link>
-          <Link
-            href="/student/assessments"
-            className="bg-white border border-slate-200 rounded-xl p-5 hover:border-slate-300 transition flex items-start gap-3"
-          >
-            <ClipboardList className="w-5 h-5 text-blue-600 mt-0.5" />
-            <div>
-              <p className="font-semibold text-slate-900">Assessments</p>
-              <p className="text-sm text-slate-500 mt-0.5">
-                {recentAttempts.length > 0
-                  ? `Latest: ${recentAttempts[0].percentage ?? '—'}%`
-                  : 'View and take assessments'}
-              </p>
-            </div>
-          </Link>
-        </div>
-
+        {student.account_type === 'INDIVIDUAL' && <details className="mb-6 rounded-xl border bg-white p-4"><summary className="cursor-pointer font-medium">Programme access and expiry</summary><ProgrammeStatus /></details>}
+        <Link className="mb-6 inline-block text-sm underline" href="/student/notifications">WhatsApp preferences</Link>
         {enrollments.length > 0 && (
           <section className="mb-8">
             <h2 className="font-semibold text-slate-900 mb-3">Enrolled courses</h2>
@@ -247,21 +142,6 @@ export default async function StudentDashboard() {
           </section>
         )}
 
-        <div className="bg-white border border-slate-200 rounded-xl p-6">
-          <h2 className="font-semibold text-slate-900 mb-4">Coming in a future phase</h2>
-          <div className="grid sm:grid-cols-2 gap-3 text-sm">
-            {['AI Career Mentor', 'Mock Interview', 'Resume'].map(
-              (m) => (
-                <div
-                  key={m}
-                  className="px-4 py-3 border border-dashed border-slate-300 rounded-lg text-slate-400"
-                >
-                  {m}
-                </div>
-              )
-            )}
-          </div>
-        </div>
       </main>
     </div>
   );

@@ -1,9 +1,10 @@
 'use client';
 import Link from 'next/link';
+import { studentLinks } from './student-navigation';
 import { usePathname } from 'next/navigation';
 
 const menus: Record<string, [string, string][]> = {
-  student: [['Dashboard','/student/dashboard'],['My Learning','/student/learning'],['Assessments','/student/assessments'],['My Skills','/student/skills'],['Employability','/student/employability'],['Certificates','/student/certificates'],['WhatsApp updates','/student/notifications']],
+  student: [...studentLinks.map(([label,href]):[string,string]=>[label,href]),['WhatsApp preferences','/student/notifications']],
   college: [['Dashboard','/college/dashboard'],['Students','/college/students'],['Departments','/college/departments'],['Batches','/college/batches'],['Courses','/college/courses'],['Trainers','/college/trainers'],['Analytics','/college/analytics']],
   admin: [['Dashboard','/admin/dashboard'],['Analytics','/admin/analytics'],['Colleges','/admin/colleges'],['Users','/admin/users'],['Skills and modules','/admin/skills'],['Courses','/admin/courses'],['Employability','/admin/employability'],['Programme settings','/admin/programme'],['Account settings','/admin/account'],['Employer and trainer access','/admin/access']],
   employer: [['Dashboard','/employer/dashboard'],['College readiness','/employer/readiness']],

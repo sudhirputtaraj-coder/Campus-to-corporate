@@ -1,3 +1,5 @@
+import { loadLearningPath } from '@/lib/learning/path-data';
+import { cleanModuleTitle, nextUnfinished } from '@/lib/learning/path-order';
 import { requireLearningAccess } from '@/lib/programme/require-access';
 import { createClient } from '@/lib/supabase/server';
 import { redirect, notFound } from 'next/navigation';
@@ -63,7 +65,7 @@ export default async function StudentCoursePage({
     .order('sequence', { ascending: true });
 
   // Sort lessons by sequence
-  const mods = (modules || []).map((m: any) => ({
+  let mods = (modules || []).map((m: any) => ({
     ...m,
     lessons: (m.lessons || [])
       .filter((l: any) => l.status === 'ACTIVE')
@@ -78,6 +80,11 @@ export default async function StudentCoursePage({
 
   const progressMap = new Map((progress || []).map((p) => [p.lesson_id, p.status]));
   const pct = Number(enrollment.completion_percentage) || 0;
+  const path=await loadLearningPath(student.id);
+  const courseLessons=path.lessons.filter(l=>l.course_id===courseId);
+  const rank=new Map(path.skills.map((skill,index)=>[skill.id,index]));
+  mods=mods.sort((a,b)=>(rank.get(a.skill_id)??999)-(rank.get(b.skill_id)??999)||a.sequence-b.sequence||a.id.localeCompare(b.id));
+  const nextLesson=nextUnfinished(courseLessons,path.completed);
 
   const { data: assessments } = await supabase
     .from('assessments')
@@ -91,7 +98,7 @@ export default async function StudentCoursePage({
         <div className="max-w-5xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
           <Link href="/student/learning" className="flex items-center gap-2 text-sm text-slate-600 hover:text-slate-900">
             <span className="text-sm font-semibold">Campus-to-Corporate</span>
-            <span className="hidden sm:inline">My Learning</span>
+            <span className="hidden sm:inline">My Learning Path</span>
           </Link>
           <Link href="/" className="text-slate-500 hover:text-slate-900" title="Home">
             <Home className="w-4 h-4" />
@@ -119,16 +126,17 @@ export default async function StudentCoursePage({
           <div className="h-full bg-blue-600 rounded-full" style={{ width: `${Math.min(100, pct)}%` }} />
         </div>
 
+        {nextLesson && <Link prefetch={false} href={`/student/lesson/${nextLesson.id}`} className="mt-6 inline-block rounded-lg px-4 py-3">Continue: {nextLesson.title} →</Link>}
         <section className="mt-10 space-y-6">
           <h2 className="text-lg font-semibold text-slate-900">Modules & Lessons</h2>
           {mods.length === 0 ? (
             <p className="text-slate-500 text-sm">No modules published yet.</p>
           ) : (
-            mods.map((mod: any) => (
+            mods.map((mod: any, moduleIndex: number) => (
               <div key={mod.id} className="bg-white border border-slate-200 rounded-xl overflow-hidden">
                 <div className="px-5 py-3 border-b border-slate-100 bg-slate-50">
                   <h3 className="font-medium text-slate-900">
-                    {mod.sequence}. {mod.title}
+                    Module {moduleIndex+1}: {cleanModuleTitle(mod.title)}
                   </h3>
                   {mod.description && (
                     <p className="text-sm text-slate-500 mt-0.5">{mod.description}</p>
@@ -140,7 +148,7 @@ export default async function StudentCoursePage({
                     return (
                       <li key={lesson.id}>
                         <Link
-                          href={`/student/lesson/${lesson.id}`}
+                          prefetch={false} href={`/student/lesson/${lesson.id}`}
                           className="flex items-center gap-3 px-5 py-3 hover:bg-slate-50 transition"
                         >
                           {st === 'COMPLETED' ? (

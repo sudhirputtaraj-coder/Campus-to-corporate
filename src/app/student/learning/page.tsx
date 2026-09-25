@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import { LogOut, BookOpen, ArrowRight, Home } from 'lucide-react';
 import { logout } from '@/lib/auth/actions';
+import { LearningPath } from '@/components/learning-path';
 import ProgrammeStatus from '../programme-status';
 
 export default async function StudentLearningPage() {
@@ -46,15 +47,7 @@ export default async function StudentLearningPage() {
               <span className="text-sm font-semibold">Campus-to-Corporate</span>
               <span className="font-semibold text-slate-900">Student</span>
             </Link>
-            <nav className="hidden sm:flex gap-4 text-sm text-slate-600">
-              <Link href="/student/dashboard" className="hover:text-slate-900">
-                Dashboard
-              </Link>
-              <span className="text-slate-900 font-medium">My Learning</span>
-              <Link href="/student/assessments" className="hover:text-slate-900">
-                Assessments
-              </Link>
-            </nav>
+
           </div>
           <div className="flex items-center gap-4 text-sm">
             <span className="text-slate-600 hidden sm:inline">{profile?.full_name}</span>
@@ -71,8 +64,11 @@ export default async function StudentLearningPage() {
       </header>
 
       <main className="max-w-5xl mx-auto px-4 sm:px-6 py-8">
-        <h1 className="text-2xl font-bold text-slate-900 mb-6">My Learning</h1>
-        {student.account_type === 'INDIVIDUAL' && <ProgrammeStatus />}
+        <h1 className="text-2xl font-bold text-slate-900 mb-6">My Learning Path</h1>
+        <LearningPath studentId={student.id} />
+        {student.account_type === 'INDIVIDUAL' && <details className="mb-6 rounded-xl border p-4"><summary>Programme access and expiry</summary><ProgrammeStatus /></details>}
+        <h2 className="mb-4 text-xl font-semibold">Course library</h2>
+        <p className="mb-4 text-sm text-slate-600">These are the courses supplying your learning path above. Use the numbered skills to study in order.</p>
         {accessError && <p role="status" className="mb-4 text-amber-800">Access could not be verified. Please try again later.</p>}
 
         {!enrollments || enrollments.length === 0 ? (
@@ -124,7 +120,7 @@ export default async function StudentLearningPage() {
                     href={`/student/course/${course?.id}`}
                     className="inline-flex items-center justify-center gap-2 bg-slate-900 text-white px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-slate-800 shrink-0"
                   >
-                    {pct > 0 ? 'Continue Learning' : 'Start Course'}
+                    View course outline
                     <ArrowRight className="w-4 h-4" />
                   </Link> : <span className="text-sm text-slate-600">Active programme access required</span>}
                 </div>

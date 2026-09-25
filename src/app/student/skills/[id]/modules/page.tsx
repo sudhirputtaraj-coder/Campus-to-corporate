@@ -22,7 +22,7 @@ export default async function SkillModules({ params }: { params: Promise<{ id: s
   if (result.error) throw new Error('Unable to load learning modules. Please try again.');
   return <main className="min-h-screen bg-slate-50 px-4 py-8">
     <div className="mx-auto max-w-4xl">
-      <Link href="/student/skills" className="text-sm text-blue-700 underline">Back to My Skills</Link>
+      <Link href="/student/skills" className="text-sm text-blue-700 underline">Back to My Skill Scores</Link>
       <h1 className="mt-6 text-3xl font-bold text-slate-900">{skill.name}</h1>
       <p className="mt-2 text-slate-600">{skill.description}</p>
       <h2 className="mt-8 text-xl font-semibold">Learning modules</h2>
@@ -35,7 +35,7 @@ export default async function SkillModules({ params }: { params: Promise<{ id: s
           <p className="mt-1 text-xs text-slate-500">{module.course?.title}</p>
           {module.description && <p className="mt-2 text-slate-600">{module.description}</p>}
           <ul className="mt-4 space-y-3">{(module.lessons || []).filter((l: any) => l.status === 'ACTIVE').sort((a: any, b: any) => a.sequence - b.sequence).map((lesson: any) =>
-            <li key={lesson.id}><Link href={`/student/lesson/${lesson.id}`} className="text-blue-700 underline">{lesson.title}</Link></li>)}</ul>
+            <li key={lesson.id}><Link prefetch={false} href={`/student/lesson/${lesson.id}`} className="text-blue-700 underline">{lesson.title}</Link></li>)}</ul>
           {!module.lessons?.some((l: any) => l.status === 'ACTIVE') && <p className="mt-3 text-sm text-slate-500">Lessons will be added here.</p>}
         </section>)}</div>}
     </div>

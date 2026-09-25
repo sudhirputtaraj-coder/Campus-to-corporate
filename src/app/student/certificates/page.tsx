@@ -51,18 +51,7 @@ export default async function StudentCertificatesPage() {
             <span className="text-sm font-semibold">Campus-to-Corporate</span>
           </Link>
           <span className="text-slate-300">|</span>
-          <nav className="hidden sm:flex gap-4 text-sm text-slate-600">
-            <Link href="/student/dashboard" className="hover:text-slate-900">
-              Dashboard
-            </Link>
-            <Link href="/student/learning" className="hover:text-slate-900">
-              My Learning
-            </Link>
-            <Link href="/student/assessments" className="hover:text-slate-900">
-              Assessments
-            </Link>
-            <span className="text-slate-900 font-medium">Certificates</span>
-          </nav>
+
         </div>
         <Link href="/" className="text-slate-500 hover:text-slate-900" title="Home">
           <Home className="w-4 h-4" />

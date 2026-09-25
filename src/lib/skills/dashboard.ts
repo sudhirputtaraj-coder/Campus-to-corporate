@@ -1,10 +1,11 @@
-import { SKILL_CODES } from './types';
+import { orderSkills } from '@/lib/learning/path-order';
 
 export interface DashboardSkill {
   id: string;
   code: string;
   name: string;
   description: string | null;
+  display_order?: number;
 }
 
 export interface DashboardSummary {
@@ -41,14 +42,7 @@ export function buildSkillCards(
 ) {
   const attemptById = new Map(attempts.map(attempt => [attempt.id, attempt]));
   const recentIds = new Set(recentAttemptIds);
-  const skillOrder: readonly string[] = SKILL_CODES;
-  const order = (code: string) => {
-    const index = skillOrder.indexOf(code);
-    return index < 0 ? skillOrder.length : index;
-  };
-
-  return [...skills]
-    .sort((a, b) => order(a.code) - order(b.code) || a.name.localeCompare(b.name))
+  return orderSkills(skills)
     .map(skill => {
       const summary = summaries.find(row => row.skill_id === skill.id);
       const measurements = snapshots
