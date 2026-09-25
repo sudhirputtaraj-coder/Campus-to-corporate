@@ -49,12 +49,6 @@ export default async function AdminEmployabilityPage() {
               <span className="text-sm font-semibold">Campus-to-Corporate</span>
               <span className="font-semibold text-slate-900">Super Admin</span>
             </Link>
-            <nav className="hidden sm:flex gap-4 text-sm text-slate-600">
-              <Link href="/admin/dashboard" className="hover:text-slate-900">
-                Dashboard
-              </Link>
-              <span className="text-slate-900 font-medium">Employability</span>
-            </nav>
           </div>
           <Link href="/" className="text-slate-500 hover:text-slate-900" title="Home">
             <Home className="w-4 h-4" />

@@ -34,12 +34,6 @@ export default async function AdminCoursesPage() {
               <span className="text-sm font-semibold">Campus-to-Corporate</span>
               <span className="font-semibold text-slate-900">Super Admin</span>
             </Link>
-            <nav className="hidden sm:flex gap-4 text-sm text-slate-600">
-              <Link href="/admin/dashboard" className="hover:text-slate-900">
-                Dashboard
-              </Link>
-              <span className="text-slate-900 font-medium">Courses</span>
-            </nav>
           </div>
           <div className="flex items-center gap-4 text-sm">
             <span className="text-slate-600">{profile?.full_name}</span>

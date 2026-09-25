@@ -1,3 +1,4 @@
+import { adminLinks } from '@/lib/admin-navigation';
 import { createClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
@@ -76,26 +77,7 @@ export default async function AdminDashboard() {
         <div className="bg-white border border-slate-200 rounded-xl p-6">
           <h2 className="font-semibold text-slate-900 mb-4">Quick actions</h2>
           <div className="flex flex-wrap gap-3">
-            <Link href="/admin/access" className="rounded-lg border px-4 py-2">Employer &amp; Trainer Access</Link>
-            <Link href="/admin/account" className="px-4 py-2 border border-slate-300 rounded-lg text-sm font-medium hover:bg-slate-50">Account Settings</Link>
-            <Link href="/admin/skills" className="px-4 py-2 bg-slate-900 text-white rounded-lg text-sm font-medium hover:bg-slate-800">Manage Skill Modules</Link>
-            <Link href="/admin/programme" className="px-4 py-2 bg-slate-900 text-white rounded-lg text-sm font-medium hover:bg-slate-800">
-              Individual Programme Settings
-            </Link>
-            <Link href="/admin/courses" className="px-4 py-2 bg-slate-900 text-white rounded-lg text-sm font-medium hover:bg-slate-800">
-              Manage Courses
-            </Link>
-            <Link href="/admin/employability" className="px-4 py-2 border border-slate-300 rounded-lg text-sm font-medium hover:bg-slate-50">
-              Employability Config
-            </Link>
-            <Link href="/admin/colleges" className="px-4 py-2 border border-slate-300 rounded-lg text-sm font-medium hover:bg-slate-50">
-              Manage Colleges
-            </Link>
-            <Link href="/admin/users" className="px-4 py-2 border border-slate-300 rounded-lg text-sm font-medium hover:bg-slate-50">
-              Manage Users
-            
-            </Link>
-            <Link href="/admin/analytics" className="rounded-lg border px-4 py-2 text-sm font-medium">Platform Analytics</Link>
+            {adminLinks.slice(1).map(([label,href])=><Link key={href} href={href} className="rounded-lg border px-4 py-2 text-sm font-medium">{label}</Link>)}
           </div>
         </div>
       </main>
