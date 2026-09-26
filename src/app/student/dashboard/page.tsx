@@ -86,6 +86,7 @@ export default async function StudentDashboard() {
         </p>
 
         <LearningPath studentId={student.id} compact />
+        <Link className="mb-6 block rounded-xl border bg-white p-4" href="/student/communication-coach">Communication Coach — practise speaking in Kannada and English</Link>
         <div className="mb-6 grid gap-3 sm:grid-cols-2">
           <Link className="rounded-xl border p-4" href="/student/assessments">Assessments — check what you have learned</Link>
           <Link className="rounded-xl border p-4" href="/student/skills">My Skill Scores — view assessment evidence</Link>

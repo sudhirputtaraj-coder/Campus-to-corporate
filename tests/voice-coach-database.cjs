@@ -1,0 +1,47 @@
+// Isolated PostgreSQL; never connects to hosted Supabase or an AI provider.
+const { PGlite } = require('@electric-sql/pglite');
+const fs = require('node:fs'), path = require('node:path'), assert = require('node:assert/strict');
+const db = new PGlite();
+const one = '00000000-0000-4000-8000-000000000001', two = '00000000-0000-4000-8000-000000000002';
+const migration = fs.readFileSync(path.join(__dirname, '../supabase/migrations/033_voice_coach_usage.sql'), 'utf8');
+const scalar = async sql => Object.values((await db.query(sql)).rows[0])[0];
+const caller = async (role, id = one) => db.exec(`RESET ROLE; SELECT set_config('request.jwt.claim.role','${role}',false); SELECT set_config('request.jwt.claim.sub','${id}',false); SET ROLE ${role};`);
+const reserve = (id = one, perUser = 2, global = 3) => scalar(`SELECT fn_reserve_voice_coach_request('${id}',${perUser},${global})`);
+async function main() {
+  await db.exec(`CREATE ROLE anon; CREATE ROLE authenticated; CREATE ROLE service_role BYPASSRLS;
+    CREATE SCHEMA auth; CREATE TABLE auth.users(id UUID PRIMARY KEY);
+    CREATE FUNCTION auth.uid() RETURNS UUID LANGUAGE sql STABLE AS $$ SELECT nullif(current_setting('request.jwt.claim.sub',true),'')::uuid $$;
+    CREATE FUNCTION auth.role() RETURNS TEXT LANGUAGE sql STABLE AS $$ SELECT current_setting('request.jwt.claim.role',true) $$;
+    GRANT USAGE ON SCHEMA public,auth TO anon,authenticated,service_role;
+    CREATE TABLE profiles(user_id UUID PRIMARY KEY,role TEXT,status TEXT);
+    CREATE TABLE students(user_id UUID PRIMARY KEY,status TEXT);
+    GRANT SELECT ON profiles,students TO authenticated;
+    INSERT INTO auth.users VALUES('${one}'),('${two}');
+    INSERT INTO profiles VALUES('${one}','STUDENT','ACTIVE'),('${two}','STUDENT','ACTIVE');
+    INSERT INTO students VALUES('${one}','ACTIVE'),('${two}','ACTIVE');`);
+  await db.exec(migration);
+  await caller('anon'); await assert.rejects(() => reserve());
+  await caller('authenticated'); await assert.rejects(() => reserve());
+  await assert.rejects(() => db.exec(`INSERT INTO voice_coach_usage VALUES('${one}',current_date,0,now())`));
+  await caller('service_role');
+  assert.equal((await reserve()).allowed, true);
+  assert.equal((await reserve()).reason, 'cooldown');
+  await db.exec(`RESET ROLE; UPDATE voice_coach_usage SET last_request_at=now()-interval '6 seconds'`);
+  await caller('service_role'); assert.equal((await reserve()).remaining, 0);
+  assert.equal((await reserve()).reason, 'student_limit');
+  assert.equal((await reserve(two)).allowed, true);
+  assert.equal((await reserve(two)).reason, 'platform_limit');
+  await assert.rejects(() => reserve(one, 101, 3));
+  await caller('authenticated', one); assert.equal(await scalar('SELECT sum(requests) FROM voice_coach_usage'), 2);
+  await assert.rejects(() => db.exec('UPDATE voice_coach_usage SET requests=0'));
+  await caller('authenticated', two); assert.equal(await scalar('SELECT sum(requests) FROM voice_coach_usage'), 1);
+  await db.exec(`RESET ROLE; UPDATE profiles SET status='SUSPENDED' WHERE user_id='${two}'`);
+  await caller('service_role'); await assert.rejects(() => reserve(two));
+  await caller('authenticated', two); assert.equal(await scalar('SELECT count(*) FROM voice_coach_usage'), 0);
+  await db.exec('RESET ROLE'); await db.exec(migration);
+  assert.equal(await scalar('SELECT sum(requests) FROM voice_coach_usage'), 3);
+  await db.exec(`UPDATE voice_coach_usage SET usage_date=usage_date-1; UPDATE profiles SET status='ACTIVE'`);
+  await caller('service_role'); assert.equal((await reserve()).remaining, 1);
+  console.log('PASS voice coach database: RLS, server-only reservation, atomic limits, cooldown, active-account checks, daily reset and rerun');
+}
+main().catch(error => { console.error(error); process.exitCode = 1; }).finally(() => db.close());
