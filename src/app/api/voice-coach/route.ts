@@ -82,14 +82,14 @@ export async function POST(request: Request) {
       return reply({ error }, 429);
     }
     if (action === 'question') {
-      return reply({ audio: await speak(`${question.en} ${question.kn}`, request.signal), remaining: quota.remaining });
+      return reply({ audio: await speak(question.en, request.signal), remaining: quota.remaining });
     }
     if (audio) transcript = await transcribeAudio(audio, request.signal);
     const feedback = await generateFeedback(question.en, transcript, request.signal);
     const nextQuestion = getQuestion(scenario, index + 1);
     let speech: string | null = null;
     try {
-      speech = await speak(`${feedback.strength} ${feedback.kannadaExplanation} Here is a natural English version. ${feedback.improvedEnglish} ${feedback.practiceTip} ${nextQuestion ? `When you are ready, choose the next question. ${nextQuestion.en}` : 'You have finished this practice set. You can retry any answer.'}`, request.signal);
+      speech = await speak(`${feedback.strength} ${feedback.explanation} Here is a natural English version. ${feedback.improvedEnglish} ${feedback.practiceTip} ${nextQuestion ? `When you are ready, choose the next question. ${nextQuestion.en}` : 'You have finished this practice set. You can retry any answer.'}`, request.signal);
     } catch { /* Keep useful written feedback if speech generation alone fails. */ }
     return reply({ transcript, feedback, audio: speech, remaining: quota.remaining,
       ...(speech ? {} : { audioWarning: 'Audio is unavailable for this response. Your written feedback is ready below.' }) });

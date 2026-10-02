@@ -31,6 +31,8 @@ test('student outside scope returns not found before querying private progress',
   const page=load('src/app/college/students/[studentId]/page.tsx',{
     'react/jsx-runtime':require('react/jsx-runtime'),'next/link':()=>null,zod:require('zod'),
     '@/lib/college/structure-data':{structureRows:async()=>[]},'../../structure-form':()=>null,
+    '@/components/college-student-performance':{CollegeStudentPerformance:()=>null},
+    '@/lib/college/performance':{performanceFilters:{safeParse:()=>({success:true,data:{}})},reportUrl:()=>'/college/students'},
     'next/navigation':{redirect(){throw Error('redirect');},notFound(){throw Error('not found');}},
     '@/lib/college/student-directory':{collegeDirectoryAccess:async()=>access,collegeStudents:()=>({eq:()=>({maybeSingle:async()=>({data:null})})}),directoryPage:()=>1,relationName:()=>''},
   }).default;

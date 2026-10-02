@@ -180,10 +180,9 @@ export default function VoiceCoach({ enabled, dailyLimit }: { enabled: boolean; 
     <section className="rounded-xl border bg-white p-5 sm:p-6">
       <p className="text-sm text-slate-600">Question {questionIndex + 1} of {scenario.questions.length}</p>
       <h2 className="mt-2 text-xl font-semibold">{question.en}</h2>
-      <p lang="kn" className="mt-3 leading-relaxed">{question.kn}</p>
       <p className="mt-4 text-sm text-slate-600">Read or listen → record or type → send your answer → hear feedback → retry or move to the next question.</p>
       <div className="mt-4 rounded-lg bg-slate-50 p-4 text-sm">
-        <p>You are practising with an AI coach. The voice is AI-generated, with a requested Indian English speaking style. Kannada and accent quality may vary.</p>
+        <p>You are practising with an AI coach. The voice is AI-generated, with a requested Indian English speaking style. The exact accent may vary.</p>
         <p className="mt-2">Feedback is based on the words recognised in your answer. It does not measure pronunciation or change your official skill scores.</p>
         <label className="mt-3 flex items-start gap-3">
           <input type="checkbox" className="mt-1" checked={consent} disabled={busy} onChange={event => { setConsent(event.target.checked); if (!event.target.checked) clearPractice(); }} />
@@ -205,7 +204,7 @@ export default function VoiceCoach({ enabled, dailyLimit }: { enabled: boolean; 
         </div>
         {clip && <p className="mt-2 text-sm">Recording ready to send.</p>}
       </div> : <div className="mt-4">
-        <label htmlFor="coach-answer" className="block font-medium">Your answer in Kannada, English or both</label>
+        <label htmlFor="coach-answer" className="block font-medium">Your answer in English</label>
         <textarea id="coach-answer" value={answer} disabled={busy} maxLength={MAX_TRANSCRIPT_CHARS} onChange={event => setAnswer(event.target.value)} rows={5} className="mt-2 w-full rounded-lg border p-3" />
         <button type="button" disabled={!canPractise || busy || !answer.trim()} onClick={() => void submit('text')} className="mt-3 rounded-lg px-4 py-3">Get feedback</button>
       </div>}
@@ -224,7 +223,7 @@ export default function VoiceCoach({ enabled, dailyLimit }: { enabled: boolean; 
       <h3 className="mt-5 font-semibold">What worked</h3><p className="mt-1 whitespace-pre-wrap">{feedback.strength}</p>
       <h3 className="mt-4 font-semibold">One thing to improve</h3><p className="mt-1 whitespace-pre-wrap">{feedback.improvement}</p>
       <h3 className="mt-4 font-semibold">Try saying it this way</h3><p className="mt-2 rounded-lg bg-green-50 p-4 whitespace-pre-wrap">{feedback.improvedEnglish}</p>
-      <h3 className="mt-4 font-semibold">Explanation in Kannada</h3><p lang="kn" className="mt-2 leading-relaxed whitespace-pre-wrap">{feedback.kannadaExplanation}</p>
+      <h3 className="mt-4 font-semibold">Why this works</h3><p lang="en" className="mt-2 leading-relaxed whitespace-pre-wrap">{feedback.explanation}</p>
       <h3 className="mt-4 font-semibold">Practise again</h3><p className="mt-1 whitespace-pre-wrap">{feedback.practiceTip}</p>
     </section>}
     <div className="flex flex-wrap gap-3">

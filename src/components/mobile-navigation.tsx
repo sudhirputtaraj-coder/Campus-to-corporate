@@ -1,12 +1,13 @@
 'use client';
 import Link from 'next/link';
 import { adminLinks } from '@/lib/admin-navigation';
+import { collegeLinks } from '@/lib/college-navigation';
 import { studentLinks } from './student-navigation';
 import { usePathname } from 'next/navigation';
 
 const menus: Record<string, [string, string][]> = {
   student: [...studentLinks.map(([label,href]):[string,string]=>[label,href]),['WhatsApp preferences','/student/notifications']],
-  college: [['Dashboard','/college/dashboard'],['Students','/college/students'],['Departments','/college/departments'],['Batches','/college/batches'],['Courses','/college/courses'],['Trainers','/college/trainers'],['Analytics','/college/analytics']],
+  college: collegeLinks.map(([label,href]):[string,string]=>[label,href]),
   admin: adminLinks.map(([label,href]):[string,string]=>[label,href]),
   employer: [['Dashboard','/employer/dashboard'],['College readiness','/employer/readiness']],
   trainer: [['Dashboard','/trainer/dashboard']],

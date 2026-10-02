@@ -28,9 +28,8 @@ export default async function CommunicationCoachPage() {
   return <main className="mx-auto max-w-4xl px-4 py-8 sm:px-6">
     <Link href={preview ? '/admin/dashboard' : '/student/learning'}>{preview ? 'Back to admin dashboard' : 'Back to My Learning Path'}</Link>
     <p className="mt-6 text-sm font-semibold uppercase tracking-wide">Communication practice</p>
-    <h1 className="mt-2 text-3xl font-bold">Your Kannada–English Communication Coach</h1>
-    <p className="mt-3 text-slate-600">Practise introductions, interviews and workplace conversations. Speak in Kannada, English or both, then learn a clearer way to express your ideas in English.</p>
-    <p lang="kn" className="mt-2 text-slate-600">ಕನ್ನಡ ಅಥವಾ ಇಂಗ್ಲಿಷ್‌ನಲ್ಲಿ ಮಾತನಾಡಿ. ಸರಳ ವಿವರಣೆ ಮತ್ತು ಉದಾಹರಣೆಗಳೊಂದಿಗೆ ಅಭ್ಯಾಸ ಮಾಡಿ.</p>
+    <h1 className="mt-2 text-3xl font-bold">Your English Communication Coach</h1>
+    <p className="mt-3 text-slate-600">Practise introductions, interviews and workplace conversations. Practise speaking in English and learn clearer ways to express your ideas.</p>
     {notice && <p role="status" className="mt-5 rounded-xl border border-amber-200 bg-amber-50 p-4 text-amber-950">{notice}</p>}
     <VoiceCoach enabled={enabled} dailyLimit={dailyLimits().student} />
   </main>;

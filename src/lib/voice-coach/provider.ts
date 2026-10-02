@@ -30,8 +30,9 @@ export async function transcribeAudio(audio: File, signal?: AbortSignal): Promis
   const form = new FormData();
   form.set('file', audio);
   form.set('model', process.env.OPENAI_TRANSCRIPTION_MODEL || 'gpt-4o-mini-transcribe');
-  // Leave language detection enabled: students may switch between Kannada and English.
-  form.set('prompt', 'Workplace communication practice in Kannada and English. Preserve the original languages; do not translate.');
+  // English-only practice, including regional English accents.
+  form.set('language', 'en');
+  form.set('prompt', 'English workplace communication practice. Transcribe the spoken words faithfully; do not invent or improve the answer.');
   const response = await providerFetch('audio/transcriptions', form, false, signal);
   const data = await response.json();
   if (typeof data.text !== 'string' || !data.text.trim() || data.text.length > 3000) {
@@ -65,7 +66,7 @@ export async function speak(text: string, signal?: AbortSignal): Promise<string>
   const response = await providerFetch('audio/speech', JSON.stringify({
     model: process.env.OPENAI_SPEECH_MODEL || 'gpt-4o-mini-tts', voice: 'coral',
     input: text.slice(0, 4000), response_format: 'mp3',
-    instructions: 'You are a warm, patient bilingual Kannada-English coach. Use clear, natural Indian English pronunciation, not a caricature. Read Kannada passages naturally in Kannada. Speak at a moderate teaching pace and pause briefly between explanations and English examples. Read the supplied text only.',
+    instructions: 'You are a warm, patient English-only communication coach. Use clear, natural Indian English pronunciation, not a caricature. Speak only in English. Speak at a moderate teaching pace and pause briefly between explanations and English examples. Read the supplied text only.',
   }), true, signal);
   return Buffer.from(await response.arrayBuffer()).toString('base64');
 }

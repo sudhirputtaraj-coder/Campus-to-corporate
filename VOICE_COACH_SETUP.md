@@ -1,12 +1,12 @@
-# Kannada–English Communication Coach
+# English Communication Coach
 
 Student navigation: My Learning Path → Communication Coach → Assessments. Also linked from the student dashboard. Super Admin can preview `/student/communication-coach`; AI requests require an active student account and current learning access.
 
 ## First version
 
-- Three practice situations: introductions, interviews, meetings/updates. Each has three questions in English and Kannada.
+- Three practice situations: introductions, interviews, meetings/updates. Each has three questions in English.
 - Student listens to a question or reads it, records up to 45 seconds, and explicitly sends the answer. The coach waits until submission. This is turn-based practice, not an always-listening live call.
-- Feedback includes a strength, one improvement, an English rewrite, a Kannada explanation and a retry tip. AI-generated audio is prompted to use natural Indian English and Kannada. Validate the actual accent and code-switching with Kannada speakers before release; an exact accent is not guaranteed.
+- Feedback includes a strength, one improvement, an English rewrite, a simple English explanation and a retry tip. AI-generated audio is prompted to use natural Indian English. Validate the actual voice with students before release; an exact accent is not guaranteed.
 - Typed answers and transcript corrections are supported. Written feedback remains usable if speech generation fails. Mobile browsers may require tapping Play after a response.
 - Feedback evaluates the transcript's wording/structure. It does not measure pronunciation, emotion, confidence or employability. No official score, certificate, learning completion or employer report is changed.
 
@@ -30,7 +30,7 @@ The server validates origin, authentication, role, active learning entitlement, 
 
 Automated tests use mocked AI responses and isolated PGlite, with no paid AI requests or hosted DB writes. They cover auth/role/entitlement, consent, input/audio bounds, server-derived identity, quota failure, privacy headers, partial speech failures, model response validation, RLS, limits and migration reruns.
 
-Manual acceptance before release: Kannada-only, English-only and mixed answers; microphone denied; silence/noisy audio and inaccurate transcript correction; answer cancel before/after recording; navigation during recording; slow/offline network; audio autoplay blocked; quota exhausted; expired/suspended student; simultaneous requests; student/public/admin role restrictions. Ask Kannada-speaking reviewers to evaluate explanations and listen to the Indian English voice. Live voice quality and provider billing are unverified until credentials and a supervised test are available.
+Manual acceptance before release: English answers and polite redirection of non-English typed answers; microphone denied; silence/noisy audio and inaccurate transcript correction; answer cancel before/after recording; navigation during recording; slow/offline network; audio autoplay blocked; quota exhausted; expired/suspended student; simultaneous requests; student/public/admin role restrictions. Ask reviewers to evaluate the English explanations and listen to the Indian English voice. Live voice quality and provider billing are unverified until credentials and a supervised test are available.
 
 Official references checked during implementation:
 - https://developers.openai.com/api/docs/guides/speech-to-text
