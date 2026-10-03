@@ -63,7 +63,7 @@ export default function LoginPage() {
                 <Icon className="mt-0.5 h-5 w-5 shrink-0 text-green-950" />
                 <span className="min-w-0">
                   <span className="block text-sm font-semibold leading-5 text-slate-900">{item.title}</span>
-                  <span className="mt-1 block text-xs leading-4 text-green-950">{item.description}</span>
+                  <span className="mt-1 block text-xs font-normal leading-5 text-green-950">{item.description}</span>
                 </span>
               </button>;
             })}

@@ -2,6 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Locally served variable fonts: no third-party font request or build-time download. */
+@font-face {
+  font-family: 'Geist Sans';
+  src: url('/fonts/Geist-Variable.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Geist Sans';
+  src: url('/fonts/Geist-Italic-Variable.woff2') format('woff2');
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
 :root {
   /* Surfaces — half-white / soft mint white */
   --bg: #f3f8f5;
@@ -10,6 +26,8 @@
   --border: #d7ebe0;
 
   /* Brand greens */
+  --action-neon-start: #1aff8c;
+  --action-neon-end: #00c853;
   --neon: #00e676;
   --neon-bright: #39ff8a;
   --neon-deep: #00c853;
@@ -18,6 +36,7 @@
   --soft-green-text: #047857;
 
   /* Text */
+  --font-ui: 'Geist Sans', 'Segoe UI', Arial, sans-serif;
   --ink: #0f1f17;
   --muted: #4b6356;
 
@@ -36,8 +55,61 @@ body {
   background-color: var(--bg);
   color: var(--ink);
   @apply antialiased;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: var(--font-ui);
+  font-size: 1rem;
+  line-height: 1.65;
+  font-weight: 400;
+  font-kerning: normal;
 }
+
+/* Shared type hierarchy across role dashboards, learning, forms and reports. */
+h1, h2, h3, h4 {
+  text-wrap: balance;
+  overflow-wrap: break-word;
+}
+h1 { letter-spacing: -0.035em; line-height: 1.15; font-weight: 650; }
+h2 { letter-spacing: -0.025em; line-height: 1.3; font-weight: 600; }
+h3, h4 { letter-spacing: -0.015em; line-height: 1.4; font-weight: 600; }
+main h1 { font-size: clamp(1.75rem, 1.4rem + 1.2vw, 2.25rem); font-weight: 650; line-height: 1.18; }
+p { text-wrap: pretty; }
+button, input, select, textarea { font-family: inherit; }
+button, [role="tab"], summary { line-height: 1.4; letter-spacing: -0.01em; }
+:where(button, [role="tab"]) { font-size: 0.875rem; font-weight: 600; }
+label { font-size: 0.875rem; font-weight: 550; line-height: 1.5; }
+input, select, textarea { font-weight: 400; letter-spacing: normal; }
+table { font-size: 0.875rem; line-height: 1.55; font-variant-numeric: tabular-nums; }
+th { font-weight: 600; letter-spacing: -0.01em; }
+td { vertical-align: top; }
+/* Keep score columns and changing percentages aligned. */
+.text-2xl, .text-3xl, .text-4xl, .text-5xl, progress { font-variant-numeric: tabular-nums; }
+.landing-hero-title { font-size: clamp(2.5rem, 1.7rem + 3vw, 4.25rem); line-height: 1.08; font-weight: 650; letter-spacing: -0.045em; }
+.landing-journey {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.2em;
+  max-width: 100%;
+  padding-top: 0.35em;
+  padding-bottom: 0.35em;
+  color: #000000;
+  font-size: clamp(2rem, 4.4vw, 3.75rem);
+  font-weight: 750;
+}
+.journey-word { display: inline-flex; align-items: center; gap: 0.12em; white-space: nowrap; }
+.journey-symbol {
+  display: block;
+  flex-shrink: 0;
+  pointer-events: none;
+  filter: drop-shadow(0 9px 7px rgb(16 42 32 / 18%));
+}
+.journey-cap { width: 1.25em; height: 0.98em; }
+.journey-tie { width: 0.55em; height: 0.88em; }
+@media (max-width: 639px) {
+  .landing-journey { flex-direction: column; align-items: center; gap: 0; font-size: clamp(2.4rem, 11vw, 4rem); padding-top: 0; }
+  .journey-word { margin-bottom: 0.25em; }
+}
+.landing-eyebrow { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.09em; }
+.landing-section-title { font-size: clamp(1.5rem, 1.1rem + 1.5vw, 2rem); }
 
 /* Keep mobile content in the viewport without hiding overflow or clipping tables. */
 main, section, article, .grid > *, .flex > * { min-width: 0; }
@@ -161,16 +233,10 @@ input, select, textarea { max-width: 100%; }
   outline: 3px solid #a3ff12;
   outline-offset: 3px;
 }
-.site-brand-image {
+.site-brand-art {
   display: block;
-  position: absolute;
-  top: -45.4545%;
-  left: 0;
   width: 100%;
-  height: auto;
-  object-fit: contain;
-  mix-blend-mode: screen;
-  filter: url(#c2c-neon-green);
+  height: 100%;
 }
 /* Let page navigation grow instead of forcing its contents into a short row. */
 .page-navigation,
@@ -212,7 +278,7 @@ header.bg-white {
 :is(button, a[class*="rounded"], a.bg-slate-900, a.border-slate-300,
     nav a, [role="tab"], .nav-tab-major, .nav-tab-minor,
     .nav-tab-major-active, .nav-tab-minor-active, .btn-neon):not(:disabled):not([aria-disabled="true"]):not(.site-brand-link) {
-  background: linear-gradient(135deg, #1aff8c 0%, #00c853 100%) !important;
+  background: linear-gradient(135deg, var(--action-neon-start) 0%, var(--action-neon-end) 100%) !important;
   color: #022c22 !important;
   border-color: #00b84c !important;
   box-shadow: 0 0 10px rgba(0, 230, 118, 0.25);
@@ -227,8 +293,11 @@ header.bg-white {
 }
 nav a,
 header nav span.text-slate-900.font-medium {
-  padding: 0.35rem 0.65rem;
+  padding: 0.6rem 0.85rem;
   border-radius: 0.4rem;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
   font-weight: 600;
 }
 /* Current tabs remain distinguishable from other green tabs. */
@@ -257,11 +326,16 @@ button:disabled,
   background-color: #064b35;
 }
 .mobile-menu summary { background-color: #1aff8c; }
-.site-home-link {
+.site-account-actions {
   position: absolute;
   right: 20px;
   top: 50%;
   transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.site-home-link {
   color: #fff;
   padding: 10px 12px;
   font-size: 14px;
@@ -270,13 +344,16 @@ button:disabled,
 }
 .site-home-link:hover { color: #baf5cf; }
 .site-home-link:focus-visible { outline-color: #baf5cf; }
-@media (max-width: 639px) {
+@media (max-width: 767px) {
   .site-brand-header { flex-direction: column; align-items: center; }
-  .site-home-link {
+  .site-account-actions {
     position: static;
     transform: none;
-    padding: 6px 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 4px 0;
   }
+  .site-home-link { padding: 6px 12px; }
 }
 
 .professional-form label { display: block; }
