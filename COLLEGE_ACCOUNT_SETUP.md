@@ -1,3 +1,5 @@
+> **Student onboarding update:** After migration 036, college administrators can add students and manage access from **Students & Access**. Students verify their email and choose their own password at `/join`. See [the student access guide](COLLEGE_STUDENT_ACCESS.md). The Super Admin workflow below remains available for initial college administrator setup and reviewed account linking.
+
 # College account setup
 
 Apply migration 013_college_account_setup.sql in Supabase SQL Editor after 012.

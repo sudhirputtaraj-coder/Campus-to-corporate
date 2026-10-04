@@ -27,7 +27,7 @@ export default async function StudentSetup({ searchParams }: { searchParams: Pro
         </section>
         <section className="mt-5 rounded-xl border border-slate-200 p-5">
           <h2 className="font-semibold text-slate-900">Joining through your college?</h2>
-          <p className="mt-2 text-sm text-slate-600">Ask your college administrator to link this email to your student record. Your college manages your learning access.</p>
+          <p className="mt-2 text-sm text-slate-600">Ask your college administrator to add this email in Students & Access, then accept your invitation. Your college manages your learning access.</p><Link href="/join" className="mt-4 inline-block rounded-lg bg-slate-900 px-4 py-3 text-sm font-medium text-white">Find my college invitation</Link>
         </section>
       </div>
     </main>

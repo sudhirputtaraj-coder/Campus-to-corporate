@@ -1,7 +1,9 @@
 'use client';
-import { useState, useTransition } from 'react';
+import { useState, useTransition, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { saveSkill, saveModule, saveLesson } from '@/lib/skills/content-actions';
+
+import { LessonPreview, type LessonPreviewData } from './lesson-preview';
 
 type PracticeQuestion = {question:string;answer:string};
 type Item = { practice_questions?: PracticeQuestion[]; display_order?: number; id?: string; name?: string; title?: string; description?: string | null; status?: string;
@@ -12,9 +14,11 @@ export default function ContentForm({ kind, item = {}, moduleId = '', skills = [
   const [pending, startTransition] = useTransition();
   const [message, setMessage] = useState('');
   const router = useRouter();
+  const formRef = useRef<HTMLFormElement>(null);
+  const [preview, setPreview] = useState<LessonPreviewData | null>(null);
   const [questions,setQuestions]=useState<PracticeQuestion[]>(item.practice_questions||[]);
   const field = 'mt-1 block w-full rounded-lg border border-slate-300 bg-white p-2 text-sm';
-  return <form className="space-y-3" onSubmit={event => {
+  return <form ref={formRef} className="space-y-3" onChange={() => setPreview(null)} onSubmit={event => {
     event.preventDefault(); const form = event.currentTarget; const data = new FormData(form); setMessage('');
     startTransition(async () => {
       try {
@@ -50,10 +54,14 @@ export default function ContentForm({ kind, item = {}, moduleId = '', skills = [
       </fieldset>
       <label className="block text-sm">Duration in minutes<input className={field} name="duration_minutes" type="number" min={0} max={100000} required defaultValue={item.duration_minutes ?? 0} /></label>
     </>}
-    <label className="block text-sm">Visibility<select className={field} name="status" defaultValue={item.status || 'ACTIVE'}>
-      <option value="ACTIVE">Published</option><option value="INACTIVE">Hidden</option>
+    <label className="block text-sm">Visibility<select className={field} name="status" defaultValue={item.status || 'INACTIVE'}>
+      <option value="ACTIVE">Published</option><option value="INACTIVE">Draft / hidden</option>
       {item.status && !['ACTIVE', 'INACTIVE'].includes(item.status) && <option value={item.status} disabled>{item.status} — choose a visibility</option>}
     </select></label>
+    <p className="text-xs text-slate-600">New content stays hidden until you choose Published and save. The course, module and parent skill must also be published. Editing a published lesson updates it for current learners without resetting their progress.</p>
+    {kind === 'lesson' && <><button type="button" className="rounded-lg border px-4 py-2 text-sm" onClick={() => {
+      if (!formRef.current) return; const data = new FormData(formRef.current); setPreview({ title: String(data.get('title') || ''), content: String(data.get('content') || ''), video: String(data.get('video_url') || ''), resource: String(data.get('resource_url') || ''), questions });
+    }}>Preview current lesson</button>{preview && <LessonPreview data={preview} />}</>}
     <button disabled={pending} className="rounded-lg bg-slate-900 px-4 py-2 text-sm text-white disabled:opacity-50">{pending ? 'Saving…' : item.id ? 'Save changes' : `Add ${kind}`}</button>
     {message && <p role="status" className="text-sm text-slate-700">{message}</p>}
   </form>;

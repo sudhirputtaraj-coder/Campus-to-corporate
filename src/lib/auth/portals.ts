@@ -23,7 +23,7 @@ export function resolveLoginPortal(
   if (profile.role === 'COLLEGE_ADMIN') return { destination: '/college/dashboard' };
   if (profile.role === 'EMPLOYER') return { destination: '/employer/dashboard' };
   if (profile.role === 'TRAINER') return { destination: '/trainer/dashboard' };
-  if (!student) return { destination: '/student/setup' };
+  if (!student) return { destination: portal === 'college-student' ? '/join' : '/student/setup' };
   if (student.status !== 'ACTIVE') return { error: 'Your student account is not active. Please contact your administrator.' };
   const expectedType = portal === 'individual' ? 'INDIVIDUAL' : 'COLLEGE';
   if (student.account_type !== expectedType) return { error: `Please choose ${student.account_type === 'COLLEGE' ? 'College student' : 'Individual student'} to sign in to this account.` };

@@ -7,4 +7,4 @@ export function authOrigin(configured:string|undefined,requestOrigin:string|null
   if(production?(u.protocol!=='https:'||local(u)):(!local(u)&&u.protocol!=='https:'))throw Error('Configure a valid site URL. Production requires HTTPS.');
   return u.origin;
 }
-export function callbackDestination(next:string|null){return next==='/reset-password'?next:next==='/admin/account'?next:'/login';}
+export function callbackDestination(next:string|null){return next==='/join'?next:next==='/reset-password'?next:next==='/admin/account'?next:'/login';}

@@ -39,7 +39,7 @@ export function CreateCourseForm() {
       onSubmit={handleSubmit}
       className="bg-white border border-slate-200 rounded-xl p-5 space-y-4"
     >
-      <h2 className="font-semibold text-slate-900">Create course</h2>
+      <h2 className="font-semibold text-slate-900">Create draft course</h2><p className="text-sm text-slate-600">Start with a hidden course. Add modules and lessons, preview the content, then publish when ready.</p>
       {error && (
         <div className="bg-red-50 text-red-700 text-sm px-3 py-2 rounded-lg">{error}</div>
       )}

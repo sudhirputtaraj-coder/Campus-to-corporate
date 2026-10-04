@@ -157,7 +157,7 @@ export default function RegisterPage() {
         </form>
 
         <p className="mt-4 text-center text-sm text-slate-600">Account creation is free. See the current programme offer for free enrolment or paid access. <Link href="/programme" className="text-blue-700 underline">View programme details</Link></p>
-        <p className="mt-3 text-center text-sm text-slate-600">Joining through a participating college? Use the account provided by your college or contact its administrator.</p>
+        <p className="mt-3 text-center text-sm text-slate-600">Joining through a participating college? <Link href="/join" className="text-blue-700 underline">Create your login and join your college</Link>.</p>
 
         <p className="mt-6 text-center text-sm text-slate-600">
           Already have an account?{' '}

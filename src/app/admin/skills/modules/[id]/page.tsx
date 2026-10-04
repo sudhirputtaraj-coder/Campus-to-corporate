@@ -24,7 +24,7 @@ export default async function ModuleEditor({ params }: { params: Promise<{ id: s
       <ContentForm kind="module" item={module.data} skills={skills.data || []} /></section>
     <h2 className="mt-8 text-2xl font-semibold">Lessons, videos, links and practice Q&amp;A</h2><p className="mt-3 text-sm">Add as many lessons as needed. Each lesson can contain text, a video, a reading link and up to 50 practice questions with answers. Student progress is retained when you edit existing lessons.</p><Link href={`/admin/courses/${module.data.course_id}`} className="mt-3 inline-block underline">Manage formal assessments and question-to-skill mappings for this course</Link>
     <div className="mt-4 space-y-4">{lessons.data?.map(lesson => <details key={lesson.id} className="rounded-xl border bg-white p-5">
-      <summary className="cursor-pointer font-medium">{lesson.sequence}. {lesson.title} · {lesson.status === 'ACTIVE' ? 'Published' : 'Hidden'}</summary>
+      <summary className="cursor-pointer font-medium">{lesson.sequence}. {lesson.title} · {lesson.status === 'ACTIVE' ? 'Published' : 'Draft / hidden'}</summary>
       <div className="mt-4"><ContentForm kind="lesson" item={lesson} moduleId={id} /></div>
     </details>)}</div>
     <section className="mt-6 rounded-xl border bg-white p-6"><h2 className="mb-4 text-xl font-semibold">Add lesson or resource</h2>

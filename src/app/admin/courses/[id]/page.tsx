@@ -3,6 +3,7 @@ import { redirect, notFound } from 'next/navigation';
 import Link from 'next/link';
 import { LogOut, Home } from 'lucide-react';
 import { logout } from '@/lib/auth/actions';
+import { PublicationControls } from '@/components/publication-controls';
 import { CourseStructureForms } from './structure-forms';
 
 export default async function AdminCourseDetailPage({
@@ -19,11 +20,11 @@ export default async function AdminCourseDetailPage({
 
   const { data: profile } = await supabase
     .from('profiles')
-    .select('full_name, role')
+    .select('full_name, role, status')
     .eq('user_id', user.id)
     .single();
 
-  if (profile?.role !== 'SUPER_ADMIN') redirect('/login');
+  if (profile?.role !== 'SUPER_ADMIN' || profile.status !== 'ACTIVE') redirect('/login');
 
   const { data: course } = await supabase.from('courses').select('*').eq('id', courseId).single();
   if (!course) notFound();
@@ -43,7 +44,7 @@ export default async function AdminCourseDetailPage({
 
   const { data: assessments, error: assessmentsError } = await supabase
     .from('assessments')
-    .select('*, questions(id, question_text, question_type, marks, sequence, skill_category, question_skills(skill_id, weight))')
+    .select('*, questions(id, question_text, question_type, correct_answer, options, marks, sequence, skill_category, question_skills(skill_id, weight))')
     .eq('course_id', courseId)
     .order('created_at', { ascending: false });
 
@@ -84,17 +85,21 @@ export default async function AdminCourseDetailPage({
         </p>
         {course.description && <p className="text-slate-600 mt-2">{course.description}</p>}
 
+        <PublicationControls kind="course" id={courseId} status={course.status} />
+        <p className="my-4 text-sm text-slate-600">Prepare content as drafts. Open a module’s lesson editor to write, preview and publish lessons. Publish the module and course when the first complete learning sequence is ready. Enrolment is managed separately.</p>
         <CourseStructureForms
           skills={skills || []}
           courseId={courseId}
           modules={mods.map((m: any) => ({
             id: m.id,
+            status: m.status,
             skill_id: m.skill_id,
             title: m.title,
             sequence: m.sequence,
             description: m.description,
             lessons: (m.lessons || []).map((l: any) => ({
               id: l.id,
+              status: l.status,
               title: l.title,
               sequence: l.sequence,
               duration_minutes: l.duration_minutes,
@@ -103,6 +108,7 @@ export default async function AdminCourseDetailPage({
           assessments={assessmentsWithQs.map((a: any) => ({
             id: a.id,
             title: a.title,
+            status: a.status,
             type: a.type,
             mapping_locked: a.mapping_locked,
             is_practice: a.is_practice,

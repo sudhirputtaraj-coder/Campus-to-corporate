@@ -2,6 +2,7 @@
 
 import { createClient } from '@/lib/supabase/server';
 import { revalidatePath } from 'next/cache';
+import { z } from 'zod';
 
 async function requireSuperAdmin() {
   const supabase = await createClient();
@@ -41,11 +42,11 @@ export async function createModule(courseId: string, formData: FormData) {
     title,
     description,
     sequence,
-    status: 'ACTIVE',
+    status: 'INACTIVE',
   });
   if (err) {
     console.error(err);
-    return { error: 'Something went wrong. Please try again.' };
+    return { error: err.code === 'P0001' ? err.message : 'Something went wrong. Please try again.' };
   }
   await supabase.from('audit_logs').insert({
     user_id: user.id,
@@ -105,11 +106,11 @@ export async function createLesson(moduleId: string, courseId: string, formData:
     video_url,
     sequence,
     duration_minutes: duration,
-    status: 'ACTIVE',
+    status: 'INACTIVE',
   });
   if (err) {
     console.error(err);
-    return { error: 'Something went wrong. Please try again.' };
+    return { error: err.code === 'P0001' ? err.message : 'Something went wrong. Please try again.' };
   }
   revalidatePath(`/admin/courses/${courseId}`);
   revalidatePath('/student/skills', 'layout');
@@ -124,9 +125,10 @@ export async function createAssessment(courseId: string, formData: FormData) {
   const description = (formData.get('description') as string)?.trim() || null;
   const type = (formData.get('type') as string) || 'MCQ';
   const duration = parseInt(String(formData.get('duration_minutes') || '30'), 10) || 30;
-  const passing = parseFloat(String(formData.get('passing_score') || '60')) || 60;
+  const passing = Number(formData.get('passing_score') ?? 60);
   if (!title) return { error: 'Title is required.' };
 
+  if (!['MCQ', 'MIXED', 'TRUE_FALSE'].includes(type) || !Number.isInteger(duration) || duration < 1 || duration > 240 || !Number.isFinite(passing) || passing < 0 || passing > 100) return { error: 'Choose an automatic assessment, 1–240 minutes, and a pass mark from 0 to 100.' };
   const { data, error: err } = await supabase
     .from('assessments')
     .insert({
@@ -136,15 +138,16 @@ export async function createAssessment(courseId: string, formData: FormData) {
       type,
       duration_minutes: duration,
       passing_score: passing,
-      status: 'ACTIVE',
+      status: 'INACTIVE',
       created_by: user.id,
+      is_practice: formData.get('is_practice') === 'yes',
     })
     .select('id')
     .single();
 
   if (err) {
     console.error(err);
-    return { error: 'Something went wrong. Please try again.' };
+    return { error: err.code === 'P0001' ? err.message : 'Something went wrong. Please try again.' };
   }
   await supabase.from('audit_logs').insert({
     user_id: user.id,
@@ -164,7 +167,7 @@ export async function createQuestion(assessmentId: string, courseId: string, for
   const question_text = (formData.get('question_text') as string)?.trim();
   const question_type = (formData.get('question_type') as string) || 'MCQ';
   const correct_answer = (formData.get('correct_answer') as string)?.trim() || null;
-  const marks = parseFloat(String(formData.get('marks') || '1')) || 1;
+  const marks = Number(formData.get('marks') ?? 1);
   const skill_category = (formData.get('skill_category') as string)?.trim() || null;
   const sequence = parseInt(String(formData.get('sequence') || '1'), 10) || 1;
   const optionsRaw = (formData.get('options') as string)?.trim() || '';
@@ -175,8 +178,14 @@ export async function createQuestion(assessmentId: string, courseId: string, for
       : [];
 
   if (!question_text) return { error: 'Question text is required.' };
+  if (!['MCQ', 'MULTIPLE_CHOICE', 'TRUE_FALSE'].includes(question_type) || !correct_answer || !Number.isFinite(marks) || marks <= 0) return { error: 'Pilot assessments require an automatically graded question, a correct answer and positive marks.' };
 
-  const { error: err } = await supabase.from('questions').insert({
+  if (options.length < 2 || options.length > 10 || new Set(options.map(v => v.toLowerCase())).size !== options.length || !options.some(v => v.toLowerCase() === correct_answer.toLowerCase())) return { error: 'Use 2–10 distinct choices and a correct answer matching one choice.' };
+  const questionId = String(formData.get('question_id') || '');
+  if (questionId && !z.string().uuid().safeParse(questionId).success) return { error: 'Invalid question.' };
+  const { data: parent, error: parentError } = await supabase.from('assessments').select('id,status').eq('id', assessmentId).eq('course_id', courseId).maybeSingle();
+  if (parentError || !parent || parent.status === 'ACTIVE') return { error: 'Edit questions in a draft assessment. Hide an unused assessment, or create a draft copy of an attempted one.' };
+  const values = {
     assessment_id: assessmentId,
     question_text,
     question_type,
@@ -185,15 +194,18 @@ export async function createQuestion(assessmentId: string, courseId: string, for
     marks,
     skill_category,
     sequence,
-  });
+  };
+  const query = questionId ? supabase.from('questions').update(values).eq('id', questionId).eq('assessment_id', assessmentId) : supabase.from('questions').insert(values);
+  const { data: saved, error: err } = await query.select('id').maybeSingle();
+  if (!err && !saved) return { error: 'Question not found. Refresh and try again.' };
 
   if (err) {
     console.error(err);
-    return { error: 'Something went wrong. Please try again.' };
+    return { error: err.code === 'P0001' ? err.message : 'Something went wrong. Please try again.' };
   }
   await supabase.from('audit_logs').insert({
     user_id: user.id,
-    action: 'QUESTION_CREATED',
+    action: questionId ? 'QUESTION_UPDATED' : 'QUESTION_CREATED',
     entity_type: 'assessment',
     entity_id: assessmentId,
   });

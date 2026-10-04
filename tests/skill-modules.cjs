@@ -23,6 +23,7 @@ function fixture(options = {}) {
     compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2020 },
   }).outputText;
   vm.runInNewContext(code, { exports, URL, console, require(id) {
+    if (id === 'zod') return require('zod');
     if (id === '@/lib/supabase/server') return { createClient: async () => client };
     if (id === 'next/cache') return { revalidatePath() {} };
     throw new Error(id);
@@ -43,6 +44,7 @@ test('new module saves its skill and course without changing scores', async () =
   assert.ok((await f.actions.createModule('course', form())).success);
   assert.equal(f.writes[0].data.skill_id, 'communication');
   assert.equal(f.writes[0].data.course_id, 'course');
+  assert.equal(f.writes[0].data.status, 'INACTIVE');
   assert.ok(f.writes.every(w => ['modules', 'audit_logs'].includes(w.table)));
 });
 test('invalid skill cannot be assigned', async () => {

@@ -93,6 +93,7 @@ export default function LoginPage() {
               </form>
               <div className="mt-6 border-t border-slate-100 pt-5 text-sm leading-6 text-slate-600">
                 {selected.id === 'individual' ? <p>New here? <Link href="/register" className="font-medium text-blue-700 underline">Create an individual account</Link>. Account creation is free; programme access is purchased separately when payments open.</p> :
+                  selected.id === 'college-student' ? <p>First time joining your college? <Link href="/join" className="font-medium text-blue-700 underline">Create your login & join your college</Link>. Use the email your college administrator added and choose your own password. Already joined? Sign in above.</p> :
                   selected.id === 'super-admin' ? <p>Use an existing Super Admin account. This option does not create an administrator or change your permissions.</p> :
                     <p>Use the account provided by your {['college-admin','employer','trainer'].includes(selected.id) ? 'platform administrator' : 'college administrator'}. Contact them if you need access.</p>}
               </div>

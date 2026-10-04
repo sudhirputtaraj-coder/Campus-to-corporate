@@ -25,6 +25,7 @@ export async function CollegePerformance({params,mode='reports'}:{params:Record<
   }));
   const url=(path:string,changes:Partial<PerformanceFilters>={})=>reportUrl(path,f,{page:undefined,...changes});
   return <main className="mx-auto max-w-7xl px-4 py-8">
+    <Link href="/college/students/access" className="mb-4 inline-block rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white">Add students & manage access</Link>
     <h1 className="text-3xl font-bold">{mode==='students'?'Student Performance':mode==='support'?'Students Needing Support':mode==='dashboard'?'College Dashboard':'College Employability Reports'}</h1>
     <p className="my-3">Active college students in your authorised colleges. Individual programme students are excluded.</p>
     <CollegeReportFilters key={JSON.stringify(f)} base={base} filters={f} options={options.map(o=>o.rows)} benchmark={data?.benchmark} support={mode==='support'}/>

@@ -3,6 +3,9 @@
 import { useTransition, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Loader2 } from 'lucide-react';
+import Link from 'next/link';
+import { PublicationControls } from '@/components/publication-controls';
+import QuestionEditor from './question-editor';
 import QuestionSkills from './question-skills';
 import {
   createModule,
@@ -13,21 +16,23 @@ import {
 } from '@/lib/learning/admin-actions';
 
 type Mod = {
+  status: string;
   skill_id: string | null;
   id: string;
   title: string;
   sequence: number;
   description: string | null;
-  lessons: { id: string; title: string; sequence: number; duration_minutes: number }[];
+  lessons: { status: string; id: string; title: string; sequence: number; duration_minutes: number }[];
 };
 
 type Asmt = {
+  status: string;
   mapping_locked: boolean;
   is_practice: boolean;
   id: string;
   title: string;
   type: string;
-  questions: { id: string; question_text: string; question_type: string; marks: number; sequence: number; question_skills: { skill_id: string; weight: number }[] }[];
+  questions: { correct_answer: string | null; options: string[]; id: string; question_text: string; question_type: string; marks: number; sequence: number; question_skills: { skill_id: string; weight: number }[] }[];
 };
 
 export function CourseStructureForms({
@@ -53,7 +58,7 @@ export function CourseStructureForms({
       const res = await fn();
       if (res.error) setErr(res.error);
       else {
-        setMsg('Saved successfully.');
+        setMsg('Saved. New content is draft / hidden until you publish it.');
         router.refresh();
       }
     });
@@ -74,8 +79,9 @@ export function CourseStructureForms({
             {modules.map((m) => (
               <div key={m.id} id={`module-${m.id}`} className="border border-slate-100 rounded-lg p-4">
                 <p className="font-medium text-slate-900">
-                  {m.sequence}. {m.title}
+                  {m.sequence}. {m.title} · {m.status === 'ACTIVE' ? 'Published' : 'Draft / hidden'}
                 </p>
+                <Link href={`/admin/skills/modules/${m.id}`} className="my-3 inline-block rounded-lg border px-3 py-2 text-sm underline">Write, edit & preview lessons / publish module</Link>
                 <form className="mt-3 flex flex-wrap gap-2" onSubmit={e => {
                   e.preventDefault();
                   const fd = new FormData(e.currentTarget);
@@ -92,7 +98,7 @@ export function CourseStructureForms({
                 <ul className="mt-2 space-y-1 text-sm text-slate-600">
                   {m.lessons.map((l) => (
                     <li key={l.id}>
-                      — {l.sequence}. {l.title} ({l.duration_minutes} min)
+                      — {l.sequence}. {l.title} ({l.duration_minutes} min) · {l.status === 'ACTIVE' ? 'Published' : 'Draft / hidden'}
                     </li>
                   ))}
                 </ul>
@@ -102,7 +108,6 @@ export function CourseStructureForms({
                     e.preventDefault();
                     const fd = new FormData(e.currentTarget);
                     run(() => createLesson(m.id, courseId, fd));
-                    e.currentTarget.reset();
                   }}
                 >
                   <input name="title" required placeholder="Lesson title" className="border border-slate-300 rounded-lg px-3 py-2 text-sm" />
@@ -111,7 +116,7 @@ export function CourseStructureForms({
                   <input name="video_url" placeholder="Video URL (optional)" className="border border-slate-300 rounded-lg px-3 py-2 text-sm" />
                   <textarea name="content" placeholder="Lesson content" rows={2} className="sm:col-span-2 border border-slate-300 rounded-lg px-3 py-2 text-sm" />
                   <button type="submit" disabled={pending} className="text-sm bg-slate-900 text-white px-3 py-2 rounded-lg hover:bg-slate-800 disabled:opacity-60">
-                    {pending ? <Loader2 className="w-4 h-4 animate-spin inline" /> : 'Add lesson'}
+                    {pending ? <Loader2 className="w-4 h-4 animate-spin inline" /> : 'Add draft lesson'}
                   </button>
                 </form>
               </div>
@@ -125,7 +130,6 @@ export function CourseStructureForms({
             e.preventDefault();
             const fd = new FormData(e.currentTarget);
             run(() => createModule(courseId, fd));
-            e.currentTarget.reset();
           }}
         >
           <input name="title" required placeholder="Module title" className="border border-slate-300 rounded-lg px-3 py-2 text-sm" />
@@ -138,7 +142,7 @@ export function CourseStructureForms({
           <input name="sequence" type="number" defaultValue={modules.length + 1} className="border border-slate-300 rounded-lg px-3 py-2 text-sm" />
           <input name="description" placeholder="Description" className="sm:col-span-2 border border-slate-300 rounded-lg px-3 py-2 text-sm" />
           <button type="submit" disabled={pending} className="text-sm bg-slate-900 text-white px-3 py-2 rounded-lg hover:bg-slate-800 disabled:opacity-60">
-            Add module
+            Add draft module
           </button>
         </form>
       </section>
@@ -151,10 +155,11 @@ export function CourseStructureForms({
         ) : (
           <div className="space-y-4 mb-6">
             {assessments.map((a) => (
-              <div key={a.id} className="border border-slate-100 rounded-lg p-4">
+              <div key={a.id} id={`assessment-${a.id}`} className="border border-slate-100 rounded-lg p-4">
                 <p className="font-medium text-slate-900">
                   {a.title} <span className="text-xs text-slate-400">({a.type})</span>
                 </p>
+                <PublicationControls kind="assessment" id={a.id} status={a.status} title={a.title} locked={a.mapping_locked} />
                 <p className="mt-2 text-xs text-slate-500">{a.is_practice ? 'Practice assessment: does not change skill scores.' : 'A skill needs at least three mapped questions with a positive marks total for a valid proficiency score.'}</p>
                 <ul className="mt-2 text-xs text-slate-600">{skills.map(skill => {
                   const count = a.questions.filter(q => q.question_skills?.some(m => m.skill_id === skill.id)).length;
@@ -165,36 +170,33 @@ export function CourseStructureForms({
                     <li key={q.id}>
                       — Q{q.sequence}: {q.question_text.slice(0, 80)}
                       {q.question_text.length > 80 ? '…' : ''} ({q.question_type}, {q.marks}m)
-                      <QuestionSkills questionId={q.id} skills={skills} mappings={q.question_skills || []} locked={a.mapping_locked} />
+                      <QuestionSkills questionId={q.id} skills={skills} mappings={q.question_skills || []} locked={a.mapping_locked || a.status === 'ACTIVE'} />
+                      {!a.mapping_locked && a.status !== 'ACTIVE' && <QuestionEditor question={q} assessmentId={a.id} courseId={courseId} />}
                     </li>
                   ))}
                 </ul>
-                <form
+                {!a.mapping_locked && a.status !== 'ACTIVE' && <form
                   className="mt-3 grid sm:grid-cols-2 gap-2"
                   onSubmit={(e) => {
                     e.preventDefault();
                     const fd = new FormData(e.currentTarget);
                     run(() => createQuestion(a.id, courseId, fd));
-                    e.currentTarget.reset();
                   }}
                 >
                   <input name="question_text" required placeholder="Question text" className="sm:col-span-2 border border-slate-300 rounded-lg px-3 py-2 text-sm" />
                   <select name="question_type" className="border border-slate-300 rounded-lg px-3 py-2 text-sm">
                     <option value="MCQ">MCQ</option>
                     <option value="TRUE_FALSE">True/False</option>
-                    <option value="SHORT_ANSWER">Short answer</option>
-                    <option value="WRITTEN">Written</option>
-                    <option value="SCENARIO">Scenario</option>
                   </select>
-                  <input name="correct_answer" placeholder="Correct answer (for auto-grade)" className="border border-slate-300 rounded-lg px-3 py-2 text-sm" />
+                  <input name="correct_answer" required placeholder="Correct answer" className="border border-slate-300 rounded-lg px-3 py-2 text-sm" />
                   <input name="options" placeholder="Options separated by | (e.g. A|B|C|D)" className="sm:col-span-2 border border-slate-300 rounded-lg px-3 py-2 text-sm" />
                   <input name="marks" type="number" step="0.5" defaultValue={1} className="border border-slate-300 rounded-lg px-3 py-2 text-sm" />
-                  <p className="sm:col-span-2 text-xs text-slate-500">After adding a question, open “Skills measured” above to assign its scoring skills.</p>
+                  <p className="sm:col-span-2 text-xs text-slate-500">Pilot assessments use automatic grading. After adding a question, open “Skills measured” above to assign its scoring skills. Questions and answer keys are locked after the first attempt.</p>
                   <input name="sequence" type="number" defaultValue={a.questions.length + 1} className="border border-slate-300 rounded-lg px-3 py-2 text-sm" />
                   <button type="submit" disabled={pending} className="text-sm bg-slate-900 text-white px-3 py-2 rounded-lg hover:bg-slate-800 disabled:opacity-60">
                     Add question
                   </button>
-                </form>
+                </form>}
               </div>
             ))}
           </div>
@@ -206,9 +208,9 @@ export function CourseStructureForms({
             e.preventDefault();
             const fd = new FormData(e.currentTarget);
             run(() => createAssessment(courseId, fd));
-            e.currentTarget.reset();
           }}
         >
+          <label className="sm:col-span-2 text-sm"><input type="checkbox" name="is_practice" value="yes" /> Practice only — does not affect skill scores</label>
           <input name="title" required placeholder="Assessment title" className="border border-slate-300 rounded-lg px-3 py-2 text-sm" />
           <select name="type" className="border border-slate-300 rounded-lg px-3 py-2 text-sm">
             <option value="MCQ">MCQ</option>
@@ -219,7 +221,7 @@ export function CourseStructureForms({
           <input name="passing_score" type="number" defaultValue={60} className="border border-slate-300 rounded-lg px-3 py-2 text-sm" />
           <input name="description" placeholder="Description" className="sm:col-span-2 border border-slate-300 rounded-lg px-3 py-2 text-sm" />
           <button type="submit" disabled={pending} className="text-sm bg-slate-900 text-white px-3 py-2 rounded-lg hover:bg-slate-800 disabled:opacity-60">
-            Add assessment
+            Add draft assessment
           </button>
         </form>
       </section>
