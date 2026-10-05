@@ -5,15 +5,7 @@ import { Loader2 } from 'lucide-react';
 import { createCourse } from '@/lib/learning/actions';
 import { useRouter } from 'next/navigation';
 
-const CATEGORIES = [
-  'Corporate Communication',
-  'Corporate Readiness',
-  'Interview Preparation',
-  'Problem Solving',
-  'Career Readiness',
-];
-
-export function CreateCourseForm() {
+export function CreateCourseForm({ skills, selectedSkill = '' }: { skills: { id: string; name: string; status: string }[]; selectedSkill?: string }) {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
   const [pending, startTransition] = useTransition();
@@ -54,11 +46,12 @@ export function CreateCourseForm() {
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1">Category *</label>
-          <select name="category" required className="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm">
-            {CATEGORIES.map((c) => (
-              <option key={c} value={c}>
-                {c}
+          <label className="block text-sm font-medium text-slate-700 mb-1" htmlFor="course-skill">Skill *</label>
+          <select id="course-skill" name="skill_id" defaultValue={selectedSkill} required className="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm">
+            <option value="" disabled>Choose a skill</option>
+            {skills.map((c) => (
+              <option key={c.id} value={c.id}>
+                {c.name}{c.status !== 'ACTIVE' ? ' (draft / hidden)' : ''}
               </option>
             ))}
           </select>
@@ -91,9 +84,10 @@ export function CreateCourseForm() {
           placeholder="Brief course description"
         />
       </div>
+      {!skills.length && <p className="text-sm text-amber-700">Add a skill in Manage Skills first, then create its courses here.</p>}
       <button
         type="submit"
-        disabled={pending}
+        disabled={pending || !skills.length}
         className="inline-flex items-center gap-2 bg-slate-900 text-white px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-slate-800 disabled:opacity-60"
       >
         {pending && <Loader2 className="w-4 h-4 animate-spin" />}

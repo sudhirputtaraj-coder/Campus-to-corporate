@@ -1,12 +1,13 @@
 import { createClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
-import { LogOut, BookOpen, ArrowRight, Home } from 'lucide-react';
+import { LogOut, Home } from 'lucide-react';
 import { logout } from '@/lib/auth/actions';
 import { LearningPath } from '@/components/learning-path';
 import ProgrammeStatus from '../programme-status';
 
-export default async function StudentLearningPage() {
+export default async function StudentLearningPage({ searchParams }: { searchParams: Promise<{ skill?: string }> }) {
+  const { skill } = await searchParams;
   const supabase = await createClient();
   const {
     data: { user },
@@ -29,15 +30,6 @@ export default async function StudentLearningPage() {
   if (!student) {
     redirect('/student/setup');
   }
-  const { data: canLearn, error: accessError } = await supabase.rpc('fn_has_learning_access');
-
-  const { data: enrollments } = await supabase
-    .from('enrollments')
-    .select('*, course:courses(*)')
-    .eq('student_id', student.id)
-    .in('status', ['ACTIVE', 'COMPLETED'])
-    .order('enrollment_date', { ascending: false });
-
   return (
     <div className="min-h-screen bg-slate-50">
       <header className="page-navigation bg-white border-b border-slate-200">
@@ -65,69 +57,9 @@ export default async function StudentLearningPage() {
 
       <main className="max-w-5xl mx-auto px-4 sm:px-6 py-8">
         <h1 className="text-2xl font-bold text-slate-900 mb-6">My Learning Path</h1>
-        <LearningPath studentId={student.id} />
-        {student.account_type === 'INDIVIDUAL' && <details className="mb-6 rounded-xl border p-4"><summary>Programme access and expiry</summary><ProgrammeStatus /></details>}
-        <h2 className="mb-4 text-xl font-semibold">Course library</h2>
-        <p className="mb-4 text-sm text-slate-600">These are the courses supplying your learning path above. Use the numbered skills to study in order.</p>
-        {accessError && <p role="status" className="mb-4 text-amber-800">Access could not be verified. Please try again later.</p>}
-
-        {!enrollments || enrollments.length === 0 ? (
-          <div className="bg-white border border-slate-200 rounded-xl p-10 text-center">
-            <BookOpen className="w-10 h-10 text-slate-300 mx-auto mb-3" />
-            <p className="text-slate-600">You don&apos;t have any courses assigned yet.</p>
-            <p className="text-sm text-slate-400 mt-1">
-              {student.account_type === 'INDIVIDUAL'
-                ? 'Programme courses will appear here after enrolment. Check your programme status above.'
-                : 'Courses will appear here once your college or platform administrator enrols you.'}
-            </p>
-          </div>
-        ) : (
-          <div className="grid gap-4">
-            {enrollments.map((enr: any) => {
-              const course = enr.course;
-              const pct = Number(enr.completion_percentage) || 0;
-              return (
-                <div
-                  key={enr.id}
-                  className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4"
-                >
-                  <div className="min-w-0 flex-1">
-                    <p className="text-xs font-medium text-blue-600 uppercase tracking-wide">
-                      {course?.category || 'Course'}
-                    </p>
-                    <h2 className="text-lg font-semibold text-slate-900 mt-0.5 truncate">
-                      {course?.title || 'Untitled course'}
-                    </h2>
-                    <p className="text-sm text-slate-500 mt-1 line-clamp-2">
-                      {course?.description || 'No description'}
-                    </p>
-                    <div className="mt-3 flex items-center gap-3">
-                      <div className="flex-1 max-w-xs h-2 bg-slate-100 rounded-full overflow-hidden">
-                        <div
-                          className="h-full bg-blue-600 rounded-full transition-all"
-                          style={{ width: `${Math.min(100, pct)}%` }}
-                        />
-                      </div>
-                      <span className="text-sm font-medium text-slate-700 tabular-nums">
-                        {pct}%
-                      </span>
-                      <span className="text-xs px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">
-                        {enr.status}
-                      </span>
-                    </div>
-                  </div>
-                  {canLearn === true && !accessError ? <Link
-                    href={`/student/course/${course?.id}`}
-                    className="inline-flex items-center justify-center gap-2 bg-slate-900 text-white px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-slate-800 shrink-0"
-                  >
-                    View course outline
-                    <ArrowRight className="w-4 h-4" />
-                  </Link> : <span className="text-sm text-slate-600">Active programme access required</span>}
-                </div>
-              );
-            })}
-          </div>
-        )}
+        <p className="mb-6 text-slate-600">Choose a skill, open a module, then work through its lessons and practice.</p>
+        <LearningPath studentId={student.id} selectedSkill={skill} />
+        {student.account_type === 'INDIVIDUAL' && <details className="mt-6 rounded-xl border p-4"><summary>Programme access and expiry</summary><ProgrammeStatus /></details>}
       </main>
     </div>
   );

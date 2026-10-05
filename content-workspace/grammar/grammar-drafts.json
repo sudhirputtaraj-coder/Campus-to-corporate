@@ -1,0 +1,2181 @@
+{
+  "version": 1,
+  "course": {
+    "id": "625e02f4-77cf-530f-956a-ae5614e29787",
+    "title": "English Grammar",
+    "description": "Four separate grammar modules: Parts of Speech, Articles, Prepositions and Tenses. Includes explanations, reference tables and self-study practice with answer explanations.",
+    "level": "BEGINNER",
+    "status": "INACTIVE",
+    "duration_minutes": 505
+  },
+  "skill_code": "COMM",
+  "modules": [
+    {
+      "id": "0827da82-d000-5a82-82e6-49d02ffbadbf",
+      "course_id": "625e02f4-77cf-530f-956a-ae5614e29787",
+      "title": "1. Parts of Speech",
+      "description": "Parts of Speech: The Building Blocks of Every Sentence",
+      "sequence": 1,
+      "status": "INACTIVE"
+    },
+    {
+      "id": "bba5f88a-a5a1-555c-b1e0-32f39021da50",
+      "course_id": "625e02f4-77cf-530f-956a-ae5614e29787",
+      "title": "2. Articles",
+      "description": "Articles: A, An, The, and When to Use Nothing",
+      "sequence": 2,
+      "status": "INACTIVE"
+    },
+    {
+      "id": "586449ae-3eb8-5c59-a5bb-226613b9dfb1",
+      "course_id": "625e02f4-77cf-530f-956a-ae5614e29787",
+      "title": "3. Prepositions",
+      "description": "Prepositions: Small Words, Big Impact",
+      "sequence": 3,
+      "status": "INACTIVE"
+    },
+    {
+      "id": "12317970-9ddb-5de8-b1e3-cc7e6534c4a0",
+      "course_id": "625e02f4-77cf-530f-956a-ae5614e29787",
+      "title": "4. Tenses",
+      "description": "Tenses: Showing Time Clearly in Your English",
+      "sequence": 4,
+      "status": "INACTIVE"
+    }
+  ],
+  "lessons": [
+    {
+      "id": "917bfa8e-130b-5a7c-bd85-987ba77d5636",
+      "module_id": "0827da82-d000-5a82-82e6-49d02ffbadbf",
+      "title": "Introduction and learning objectives",
+      "sequence": 1,
+      "content": "CAMPUS TO CORPORATE  |  COMMUNICATION SKILLS  |  ENGLISH GRAMMAR\n\nParts of Speech: The Building Blocks of Every Sentence\n\nImagine a toolbox. A hammer and a screwdriver are both useful, but you cannot swap them and expect the job to go well. Words work the same way. Every word in a sentence has a job, and when a word is used for the wrong job, the sentence feels wrong even if you cannot say why.\n\nEnglish has eight jobs, called parts of speech: nouns, pronouns, verbs, adjectives, adverbs, prepositions, conjunctions and interjections. Once you can recognise them, you can fix your own mistakes, understand why a sentence is wrong, and write with more control in resumes, emails and interviews.\n\nPrepositions are big enough to deserve their own module (Module 3), so here we focus on the other seven and show how they work together.\n\n## Three questions that reveal any word's job\n\n- What is this word doing in this sentence? Naming something, replacing a name, showing action, describing, joining or reacting?\n\n- Which word does it describe, replace or connect? A word's job is always about its neighbours.\n\n- Can I swap it with another word of the same kind and keep the sentence sensible? If yes, you have probably identified its type.\n\n## The eight jobs at a glance\n\n| Part of speech | Its job | Example in a sentence |\n| --- | --- | --- |\n| Noun | Names a person, place, thing or idea | The intern submitted the proposal. |\n| Pronoun | Stands in for a noun | She submitted it yesterday. |\n| Verb | Shows action, state or occurrence | Nisha presents on Friday. |\n| Adjective | Describes a noun or pronoun | It was a clear, concise summary. |\n| Adverb | Describes a verb, adjective or adverb | He answered confidently. |\n| Preposition | Links a noun to the rest (time, place, direction) | We met after the seminar. |\n| Conjunction | Joins words, phrases or clauses | I prepared well, but I felt nervous. |\n| Interjection | Expresses a sudden feeling | Oops! That was the wrong file. |\n\n## By the end of this module, you will be able to\n\n- Name the seven parts of speech covered here and say what each one does.\n\n- Tell common, proper, abstract and collective nouns apart.\n\n- Choose the right pronoun form: I or me, myself or my, its or it's.\n\n- Recognise action, linking and helping verbs, and use correct verb forms.\n\n- Use adjectives and adverbs correctly, including comparisons.\n\n- Join ideas with the right conjunction and avoid double-linking mistakes.\n\n- Work out the part of speech of any word by looking at its job in the sentence.\n\n## What is inside\n\n- Part 1: Nouns: Naming People, Places, Things and Ideas\n\n- Part 2: Pronouns: Words That Stand in for Nouns\n\n- Part 3: Verbs: The Engine of the Sentence\n\n- Part 4: Adjectives: Adding Detail to Nouns\n\n- Part 5: Adverbs: How, When, Where and How Much\n\n- Part 6: Conjunctions and Interjections: Joining Ideas, Showing Feeling\n\n- Part 7: Same Word, Different Job: Putting It All Together\n\n- Final Challenge: Mixed Practice\n\n- Quick recap\n\nHow to study: Read each short explanation first, then try the exercises without looking at the answers. Check the answer key and read the reason, even when you got it right. If you score below about 70 percent in a part, read that explanation again and retry after a day.",
+      "practice_questions": [],
+      "duration_minutes": 4,
+      "status": "INACTIVE"
+    },
+    {
+      "id": "9eb876a5-4d0f-58eb-9b52-ed2ca203dee4",
+      "module_id": "0827da82-d000-5a82-82e6-49d02ffbadbf",
+      "title": "Part 1: Nouns: Naming People, Places, Things and Ideas",
+      "sequence": 2,
+      "content": "A noun is a naming word. It names a person (Kavya), a place (the library), a thing (a laptop) or an idea or feeling (honesty, stress). Nearly every sentence has at least one noun as its subject.\n\n## Kinds of nouns\n\n- Common nouns name general things: student, city, company. They begin with a small letter.\n\n- Proper nouns name particular people, places, brands or days, and always begin with a capital letter: Divya, Hyderabad, Infosys, Monday.\n\n- Concrete nouns can be seen or touched: bag, whiteboard, phone. Abstract nouns cannot: courage, teamwork, deadline pressure.\n\n- Collective nouns name a group as one unit: team, committee, audience, batch, jury.\n\n## Plural forms worth knowing\n\nMost nouns add -s (laptop, laptops) or -es after s, x, ch, sh (box, boxes). A consonant plus y becomes -ies (company, companies). Some are irregular: child becomes children, person becomes people (or persons in legal writing), man becomes men and woman becomes women.\n\nTip: For countable and uncountable nouns (advice, information, equipment), see Part 1 of the Articles module.\n\n| Type | Examples | Quick check |\n| --- | --- | --- |\n| Common | teacher, village, tablet | Any one of its kind |\n| Proper | Karnataka, Wipro, Diwali | A particular name, capital letter |\n| Abstract | honesty, freedom, stress | You cannot touch it |\n| Collective | family, class, orchestra | A group acting as a unit |\n\n## Practice: Part 1 (12 questions)\n\nTry the practice questions below before revealing each answer and explanation.",
+      "practice_questions": [
+        {
+          "question": "Which word is a proper noun?\na) city      b) Hyderabad      c) campus      d) airport",
+          "answer": "b) Hyderabad\n\nWhy: Hyderabad names one particular city, so it is a proper noun."
+        },
+        {
+          "question": "Which word is an abstract noun?\na) laptop      b) chair      c) courage      d) bus",
+          "answer": "c) courage\n\nWhy: You cannot see or touch courage; it is an idea."
+        },
+        {
+          "question": "Which word is a collective noun?\na) manager      b) happiness      c) Mumbai      d) committee",
+          "answer": "d) committee\n\nWhy: A committee is a group of people treated as one unit."
+        },
+        {
+          "question": "List all the nouns in this sentence: The trainer shared a list of companies on Friday.",
+          "answer": "trainer, list, companies, Friday\n\nWhy: Each of these names a person, thing or time; Friday is a proper noun."
+        },
+        {
+          "question": "In \"Patience is a valuable skill\", the word \"patience\" is a(n) ___ noun.\na) concrete      b) abstract      c) collective      d) proper",
+          "answer": "b) abstract\n\nWhy: Patience is a quality, not a physical object."
+        },
+        {
+          "question": "Choose the correct plural of \"company\".\na) companys      b) companyes      c) companies      d) company's",
+          "answer": "c) companies\n\nWhy: Consonant + y becomes -ies."
+        },
+        {
+          "question": "Choose the correct plural of \"child\".\na) childs      b) children      c) childrens      d) childes",
+          "answer": "b) children\n\nWhy: Child has an irregular plural."
+        },
+        {
+          "question": "Complete: In \"Our batch won the quiz\", the noun \"batch\" is a ___ noun.",
+          "answer": "collective\n\nWhy: A batch is a group seen as one unit."
+        },
+        {
+          "question": "Which sentence has a capital-letter error in a proper noun?\na) I study at Mysore University.      b) My friend lives in bengaluru.      c) We visited Hampi in March.      d) Kiran is my classmate.",
+          "answer": "b) My friend lives in bengaluru.\n\nWhy: Bengaluru is a name, so it needs a capital B."
+        },
+        {
+          "question": "My brother works in infosys in pune.",
+          "answer": "My brother works in Infosys in Pune.\n\nWhy: Company and city names are proper nouns and need capitals."
+        },
+        {
+          "question": "Rewrite in the plural: The woman and the child waited for the bus.",
+          "answer": "The women and the children waited for the buses.\n\nWhy: Woman becomes women, child becomes children, bus becomes buses."
+        },
+        {
+          "question": "Which of these words can work as both a noun and a verb?\na) quickly      b) beautiful      c) honest      d) email",
+          "answer": "d) email\n\nWhy: I got an email (noun). Please email me (verb)."
+        }
+      ],
+      "duration_minutes": 14,
+      "status": "INACTIVE"
+    },
+    {
+      "id": "a63b7695-23ff-503a-acf2-194aaf47866f",
+      "module_id": "0827da82-d000-5a82-82e6-49d02ffbadbf",
+      "title": "Part 2: Pronouns: Words That Stand in for Nouns",
+      "sequence": 3,
+      "content": "A pronoun replaces a noun so you do not have to repeat it. Without pronouns, we would say, \"Rahul told Meera that Rahul would send the file to Meera.\" With them: \"Rahul told Meera that he would send the file to her.\"\n\n## Personal pronouns change their form\n\n| Subject | Object | My/your... (before a noun) | Mine/yours... (alone) | Reflexive |\n| --- | --- | --- | --- | --- |\n| I | me | my | mine | myself |\n| you | you | your | yours | yourself |\n| he | him | his | his | himself |\n| she | her | her | hers | herself |\n| it | it | its | (none) | itself |\n| we | us | our | ours | ourselves |\n| they | them | their | theirs | themselves |\n\n- Use the subject form before the verb: She sent it. Priya and I attended.\n\n- Use the object form after a verb or preposition: He called me. This is between you and me.\n\n- Use reflexive pronouns only when the doer and the receiver are the same person: I taught myself Python. Never use them to introduce yourself (not \"Myself Kiran\").\n\n- Its has no apostrophe when it means \"belonging to it\". It's always means \"it is\" or \"it has\".\n\n## Other useful kinds\n\n- Demonstrative: this and these (near), that and those (far).\n\n- Indefinite: everyone, someone, nothing, each, both, few.\n\n- Interrogative: who, whom, whose, which, what.\n\nTip: To check a pair like \"Priya and I\", drop the other person. You would say \"I attended\", not \"Me attended\", so \"Priya and I attended\" is correct.\n\n## Practice: Part 2 (14 questions)\n\nTry the practice questions below before revealing each answer and explanation.",
+      "practice_questions": [
+        {
+          "question": "Priya and ___ are organising the event.\na) me      b) myself      c) I      d) mine",
+          "answer": "c) I\n\nWhy: \"I are organising\" is not needed; check by removing Priya: \"I am organising\"."
+        },
+        {
+          "question": "The manager gave ___ a new project.\na) I      b) me      c) myself      d) mine",
+          "answer": "b) me\n\nWhy: After a verb we use the object form."
+        },
+        {
+          "question": "Between you and ___, the paper was easy.\na) I      b) myself      c) my      d) me",
+          "answer": "d) me\n\nWhy: After a preposition (between) we use the object form."
+        },
+        {
+          "question": "The laptop on the desk is ___.\na) me      b) my      c) mine      d) myself",
+          "answer": "c) mine\n\nWhy: \"Mine\" stands alone; \"my\" needs a noun after it."
+        },
+        {
+          "question": "She prepared the report by ___.\na) her      b) herself      c) hers      d) she",
+          "answer": "b) herself\n\nWhy: The doer and the receiver are the same person, so use the reflexive."
+        },
+        {
+          "question": "Which sentence is correct for a self-introduction?\na) Myself Kiran, a final-year student.      b) Me Kiran, a final-year student.      c) I am Kiran, a final-year student.      d) Kiran is I, a final-year student.",
+          "answer": "c) I am Kiran, a final-year student.\n\nWhy: Reflexive pronouns are not used to introduce yourself."
+        },
+        {
+          "question": "The cat licked ___ paw.\na) it's      b) its      c) their      d) itself",
+          "answer": "b) its\n\nWhy: \"Its\" shows belonging; \"it's\" means \"it is\"."
+        },
+        {
+          "question": "___ of these two phones is yours?\na) Who      b) Whom      c) What      d) Which",
+          "answer": "d) Which\n\nWhy: \"Which\" is used when choosing from a limited set."
+        },
+        {
+          "question": "___ bag is this? There is no name on it.\na) Who      b) Whose      c) Whom      d) Which",
+          "answer": "b) Whose\n\nWhy: \"Whose\" asks about ownership."
+        },
+        {
+          "question": "Please look at ___ pictures on the far wall.\na) this      b) that      c) these      d) those",
+          "answer": "d) those\n\nWhy: Far and plural, so \"those\"."
+        },
+        {
+          "question": "Rewrite using pronouns to avoid repetition: Rahul told Meera that Rahul would send the file to Meera.",
+          "answer": "Rahul told Meera that he would send the file to her.\n\nWhy: He replaces Rahul as subject; her replaces Meera as object."
+        },
+        {
+          "question": "Me and my friends attended the workshop.",
+          "answer": "My friends and I attended the workshop.\n\nWhy: Subject form I is needed, and it is polite to name yourself last."
+        },
+        {
+          "question": "The principal will give the certificates to we.",
+          "answer": "The principal will give the certificates to us.\n\nWhy: After the preposition \"to\", use the object form."
+        },
+        {
+          "question": "In the question \"Who wrote this?\", the word \"who\" is a(n) ___ pronoun.\na) reflexive      b) personal      c) interrogative      d) demonstrative",
+          "answer": "c) interrogative\n\nWhy: It is used to ask a question."
+        }
+      ],
+      "duration_minutes": 16,
+      "status": "INACTIVE"
+    },
+    {
+      "id": "9332c791-ee85-594f-88b1-64534db74bdb",
+      "module_id": "0827da82-d000-5a82-82e6-49d02ffbadbf",
+      "title": "Part 3: Verbs: The Engine of the Sentence",
+      "sequence": 4,
+      "content": "Every complete sentence needs a verb. A verb can show an action (write, solve, call), a state (be, seem, belong) or something that simply happens (occur, become).\n\n## Three jobs a verb can do\n\n- Main verbs carry the meaning: The team delivered the project.\n\n- Helping (auxiliary) verbs support the main verb: be, do, have, and modals such as can, should, must. She has delivered. They did not reply.\n\n- Linking verbs connect the subject to a describing word instead of showing action: be, seem, become, look, feel, sound, smell, taste. After a linking verb we use an adjective, not an adverb. The plan sounds good, not \"sounds well\".\n\n## The five forms of a verb\n\n| Base | Past | Past participle | -ing form | -s form |\n| --- | --- | --- | --- | --- |\n| work | worked | worked | working | works |\n| speak | spoke | spoken | speaking | speaks |\n| write | wrote | written | writing | writes |\n| go | went | gone | going | goes |\n| bring | brought | brought | bringing | brings |\n| choose | chose | chosen | choosing | chooses |\n\nRegular verbs add -ed for both the past and the past participle. Irregular verbs change their form, so these are worth learning by heart. The past participle is used after have, has, had (I have written) and in passive sentences (the report was written).\n\nTip: After a modal verb (can, could, should, must, will, would) always use the base form, with no -s, -ing or \"to\": She can speak. They should leave.\n\n## Practice: Part 3 (14 questions)\n\nTry the practice questions below before revealing each answer and explanation.",
+      "practice_questions": [
+        {
+          "question": "In \"The room felt cold\", the verb \"felt\" is a ___ verb.\na) helping      b) linking      c) modal      d) action",
+          "answer": "b) linking\n\nWhy: It connects the subject to the describing word \"cold\", rather than showing an action."
+        },
+        {
+          "question": "Name the helping verb and the main verb: She has submitted the form.",
+          "answer": "helping verb: has; main verb: submitted\n\nWhy: Has supports the main verb submitted."
+        },
+        {
+          "question": "Past participle of \"write\":\na) wrote      b) writed      c) written      d) writen",
+          "answer": "c) written\n\nWhy: Write, wrote, written."
+        },
+        {
+          "question": "Past form of \"bring\":\na) brang      b) bringed      c) brung      d) brought",
+          "answer": "d) brought\n\nWhy: Bring, brought, brought."
+        },
+        {
+          "question": "Past participle of \"go\" in \"She has ___ home\":\na) went      b) gone      c) goed      d) going",
+          "answer": "b) gone\n\nWhy: Go, went, gone. After \"has\" we need the past participle."
+        },
+        {
+          "question": "I have ___ my lunch already.\na) eat      b) ate      c) eaten      d) eating",
+          "answer": "c) eaten\n\nWhy: After \"have\" use the past participle."
+        },
+        {
+          "question": "He ___ the report yesterday.\na) write      b) written      c) wrote      d) writes",
+          "answer": "c) wrote\n\nWhy: A finished action in the past takes the simple past form."
+        },
+        {
+          "question": "She can speaks three languages.",
+          "answer": "She can speak three languages.\n\nWhy: After a modal verb, use the base form."
+        },
+        {
+          "question": "They should to submit the form today.",
+          "answer": "They should submit the form today.\n\nWhy: Modals are followed by the base verb without \"to\"."
+        },
+        {
+          "question": "Which sentence is correct?\na) The food tastes well.      b) The food tastes good.      c) The food tastes goodly.      d) The food is tasting wellness.",
+          "answer": "b) The food tastes good.\n\nWhy: Taste is a linking verb here, so it takes an adjective (good)."
+        },
+        {
+          "question": "The new manager seems ___.\na) friend      b) friendship      c) friendly      d) friendlily",
+          "answer": "c) friendly\n\nWhy: Seem is a linking verb, followed by an adjective."
+        },
+        {
+          "question": "Write the base, past and past participle forms of \"choose\".",
+          "answer": "choose, chose, chosen\n\nWhy: Irregular verb."
+        },
+        {
+          "question": "Write the base, past and past participle forms of \"teach\".",
+          "answer": "teach, taught, taught\n\nWhy: Irregular verb; the past and participle are the same."
+        },
+        {
+          "question": "Which word in this sentence is an adverb? \"The team will launch the app soon.\"\na) team      b) will      c) launch      d) soon",
+          "answer": "d) soon\n\nWhy: \"Soon\" tells us when the action will happen."
+        }
+      ],
+      "duration_minutes": 16,
+      "status": "INACTIVE"
+    },
+    {
+      "id": "6edba9b7-5cff-54ee-afa6-7c92b4d144ff",
+      "module_id": "0827da82-d000-5a82-82e6-49d02ffbadbf",
+      "title": "Part 4: Adjectives: Adding Detail to Nouns",
+      "sequence": 5,
+      "content": "An adjective describes a noun or pronoun. It answers questions such as what kind, how many or which one: a practical idea, three rounds, this offer. Adjectives usually come before the noun, or after a linking verb (the idea is practical).\n\n## Degrees of comparison\n\n- Positive: describes one thing. This route is short.\n\n- Comparative: compares two things, usually with \"than\". This route is shorter than that one.\n\n- Superlative: picks the extreme among three or more, usually with \"the\". This is the shortest route.\n\nShort adjectives add -er and -est (tall, taller, tallest). Adjectives ending in -y change to -ier and -iest (happy, happier, happiest). Longer adjectives use more and most (useful, more useful, most useful). Never combine both: not \"more taller\" and not \"most easiest\".\n\n| Positive | Comparative | Superlative |\n| --- | --- | --- |\n| good | better | best |\n| bad | worse | worst |\n| far | farther / further | farthest / furthest |\n| little (amount) | less | least |\n| many / much | more | most |\n\n## Order of adjectives\n\nWhen you use several adjectives, the usual order is opinion, size, age, shape, colour, origin, material, then the noun. So we say a lovely small old wooden table, not a wooden old small lovely table.\n\nTip: Use fewer with countable nouns (fewer candidates) and less with uncountable ones (less time).\n\n## Practice: Part 4 (14 questions)\n\nTry the practice questions below before revealing each answer and explanation.",
+      "practice_questions": [
+        {
+          "question": "Which word is an adjective? \"She wore a bright yellow scarf.\"\na) wore      b) bright      c) She      d) scarf",
+          "answer": "b) bright\n\nWhy: Bright describes the scarf."
+        },
+        {
+          "question": "This route is ___ than that one.\na) short      b) shortest      c) shorter      d) more short",
+          "answer": "c) shorter\n\nWhy: Short adjectives add -er."
+        },
+        {
+          "question": "Rahul is the ___ student in our batch.\na) tall      b) taller      c) more tall      d) tallest",
+          "answer": "d) tallest\n\nWhy: \"The\" signals a superlative."
+        },
+        {
+          "question": "This course is ___ than I expected.\na) useful      b) more useful      c) most useful      d) usefuller",
+          "answer": "b) more useful\n\nWhy: Longer adjectives use more."
+        },
+        {
+          "question": "Her spoken English is much ___ now.\na) gooder      b) more good      c) better      d) best",
+          "answer": "c) better\n\nWhy: Good, better, best."
+        },
+        {
+          "question": "That was the ___ interview I have ever attended.\na) worse      b) worst      c) baddest      d) more bad",
+          "answer": "b) worst\n\nWhy: Bad, worse, worst."
+        },
+        {
+          "question": "He is more taller than his brother.",
+          "answer": "He is taller than his brother.\n\nWhy: Do not combine \"more\" with the -er form."
+        },
+        {
+          "question": "This is the most easiest question in the paper.",
+          "answer": "This is the easiest question in the paper.\n\nWhy: Do not combine \"most\" with the -est form."
+        },
+        {
+          "question": "Choose the correct order.\na) a wooden old big table      b) a big old wooden table      c) an old wooden big table      d) a wooden big old table",
+          "answer": "b) a big old wooden table\n\nWhy: Size, then age, then material."
+        },
+        {
+          "question": "Choose the correct order for \"a ___ bag\".\na) leather brown lovely      b) brown lovely leather      c) lovely brown leather      d) leather lovely brown",
+          "answer": "c) lovely brown leather\n\nWhy: Opinion, colour, material."
+        },
+        {
+          "question": "Write the comparative and superlative forms of \"happy\".",
+          "answer": "happier, happiest\n\nWhy: Change -y to -ier and -iest."
+        },
+        {
+          "question": "Write the comparative and superlative forms of \"expensive\".",
+          "answer": "more expensive, most expensive\n\nWhy: Long adjectives use more and most."
+        },
+        {
+          "question": "We have ___ candidates this year than last year.\na) less      b) lesser      c) fewer      d) little",
+          "answer": "c) fewer\n\nWhy: Candidates are countable, so use fewer."
+        },
+        {
+          "question": "The sky looks ___ this evening.\na) darkly      b) dark      c) darkness      d) darken",
+          "answer": "b) dark\n\nWhy: \"Looks\" is a linking verb followed by an adjective."
+        }
+      ],
+      "duration_minutes": 16,
+      "status": "INACTIVE"
+    },
+    {
+      "id": "35a5e3d4-fbf8-5ff5-83e3-0bb7154748fd",
+      "module_id": "0827da82-d000-5a82-82e6-49d02ffbadbf",
+      "title": "Part 5: Adverbs: How, When, Where and How Much",
+      "sequence": 6,
+      "content": "An adverb tells us more about a verb, an adjective or another adverb. It answers how, when, where, how often or to what extent: She spoke clearly. They arrived early. The test was extremely tough.\n\n## Common kinds\n\n| Kind | Answers | Examples |\n| --- | --- | --- |\n| Manner | How? | carefully, politely, well |\n| Time | When? | today, soon, already, yesterday |\n| Place | Where? | here, outside, nearby, upstairs |\n| Frequency | How often? | always, rarely, never, twice |\n| Degree | How much? | very, quite, too, extremely |\n\n## Forming adverbs\n\nMany adverbs are formed by adding -ly to an adjective: quick, quickly; polite, politely; happy, happily. A few have the same form as the adjective: fast, hard, late, early. Watch for look-alikes with different meanings: hardly means \"almost not\" and lately means \"recently\". The adverb form of good is well.\n\n## Where to place them\n\n- Manner adverbs usually come after the verb or object: She replied politely.\n\n- Frequency adverbs sit before the main verb but after be: He always checks. She is always punctual.\n\n- Degree adverbs come before the word they modify: very tired, quite clearly.\n\nTip: Adjectives describe nouns, adverbs describe actions. Quick reply (noun described), reply quickly (action described).\n\n## Practice: Part 5 (14 questions)\n\nTry the practice questions below before revealing each answer and explanation.",
+      "practice_questions": [
+        {
+          "question": "She speaks ___ at interviews.\na) confident      b) confidence      c) confidently      d) confidential",
+          "answer": "c) confidently\n\nWhy: We need an adverb to describe the verb \"speaks\"."
+        },
+        {
+          "question": "He drives very ___.\na) careful      b) carefully      c) care      d) carefulness",
+          "answer": "b) carefully\n\nWhy: Very modifies the adverb \"carefully\"."
+        },
+        {
+          "question": "She did ___ in the test.\na) good      b) goodly      c) nice      d) well",
+          "answer": "d) well\n\nWhy: The adverb form of good is well."
+        },
+        {
+          "question": "The train arrived ___ yesterday.\na) lately      b) lated      c) late      d) latest",
+          "answer": "c) late\n\nWhy: Late is both an adjective and an adverb. Lately means \"recently\"."
+        },
+        {
+          "question": "Which sentence places the adverb correctly?\na) She rarely is late.      b) She is rarely late.      c) She is late rarely.      d) Rarely she is late.",
+          "answer": "b) She is rarely late.\n\nWhy: Frequency adverbs come after be."
+        },
+        {
+          "question": "Which word is an adverb of frequency?\na) quickly      b) outside      c) very      d) never",
+          "answer": "d) never\n\nWhy: It answers how often."
+        },
+        {
+          "question": "Which word is an adverb of place?\na) tomorrow      b) slowly      c) extremely      d) outside",
+          "answer": "d) outside\n\nWhy: It answers where."
+        },
+        {
+          "question": "In \"This exam is extremely tough\", the adverb \"extremely\" modifies a(n)\na) verb      b) adjective      c) noun      d) pronoun",
+          "answer": "b) adjective\n\nWhy: It describes the adjective \"tough\"."
+        },
+        {
+          "question": "He runs very quick.",
+          "answer": "He runs very quickly.\n\nWhy: A verb needs an adverb."
+        },
+        {
+          "question": "I am real happy with my result.",
+          "answer": "I am really happy with my result.\n\nWhy: Use the adverb \"really\" to modify an adjective."
+        },
+        {
+          "question": "She works hardly to meet deadlines.",
+          "answer": "She works hard to meet deadlines.\n\nWhy: Hard is the adverb; hardly means \"almost not\"."
+        },
+        {
+          "question": "Write the adverb forms of \"polite\" and \"happy\".",
+          "answer": "politely, happily\n\nWhy: Add -ly; change -y to -ily."
+        },
+        {
+          "question": "Choose the correct comparison.\na) She types more faster than me.      b) She types faster than me.      c) She types most faster.      d) She types fastly.",
+          "answer": "b) She types faster than me.\n\nWhy: Fast has the same form as an adverb, and the comparative is faster."
+        },
+        {
+          "question": "Which word is the adverb of manner in this sentence? \"The team quietly entered the hall.\"\na) team      b) quietly      c) entered      d) hall",
+          "answer": "b) quietly\n\nWhy: It tells us how they entered."
+        }
+      ],
+      "duration_minutes": 16,
+      "status": "INACTIVE"
+    },
+    {
+      "id": "e0c69c88-f107-5a42-86e1-4891f2c85b44",
+      "module_id": "0827da82-d000-5a82-82e6-49d02ffbadbf",
+      "title": "Part 6: Conjunctions and Interjections: Joining Ideas, Showing Feeling",
+      "sequence": 7,
+      "content": "A conjunction joins words, phrases or clauses. An interjection is a short exclamation that shows a sudden feeling. One is about logic and the other about emotion, so we treat them together.\n\n## Three families of conjunctions\n\n- Coordinating conjunctions join equal parts: for, and, nor, but, or, yet, so. Use a comma before them when they join two full sentences: I prepared well, but I felt nervous.\n\n- Subordinating conjunctions begin a dependent clause: because, although, if, unless, while, when, since, after, before, until, whereas. Because it rained, we stayed in.\n\n- Correlative conjunctions come in pairs: both...and, either...or, neither...nor, not only...but also. Keep the structure balanced (parallel) on both sides.\n\n## A mistake to avoid\n\nDo not use two conjunctions to do one job. \"Although it was late, but we finished\" and \"Because he was ill, so he left\" are wrong. Choose one: Although it was late, we finished. Because he was ill, he left. Or: It was late, but we finished.\n\n## Interjections\n\nWords such as Wow!, Oops!, Hurray! and Ouch! express feeling. They are fine in friendly conversation and storytelling, but in professional emails and reports it is better to state the feeling in a full sentence: We are delighted to confirm your selection.\n\n## Practice: Part 6 (14 questions)\n\nTry the practice questions below before revealing each answer and explanation.",
+      "practice_questions": [
+        {
+          "question": "I wanted to attend the session, ___ I had a clash.\na) so      b) or      c) because      d) but",
+          "answer": "d) but\n\nWhy: The two ideas contrast, so \"but\"."
+        },
+        {
+          "question": "She studied hard, ___ she cleared the exam.\na) although      b) unless      c) so      d) because",
+          "answer": "c) so\n\nWhy: The second idea is the result of the first."
+        },
+        {
+          "question": "___ it was raining, the event went on.\na) Because      b) Although      c) Unless      d) So",
+          "answer": "b) Although\n\nWhy: The event continued despite the rain."
+        },
+        {
+          "question": "You cannot sit for the test ___ you register first.\na) although      b) unless      c) while      d) because",
+          "answer": "b) unless\n\nWhy: Unless means \"if not\"."
+        },
+        {
+          "question": "Neither the trainer ___ the students knew about the change.\na) or      b) and      c) but      d) nor",
+          "answer": "d) nor\n\nWhy: Neither pairs with nor."
+        },
+        {
+          "question": "She is not only talented ___ also hardworking.\na) and      b) but      c) or      d) so",
+          "answer": "b) but\n\nWhy: Not only pairs with but also."
+        },
+        {
+          "question": "Both Arun ___ Divya cleared the round.\na) or      b) nor      c) and      d) but",
+          "answer": "c) and\n\nWhy: Both pairs with and."
+        },
+        {
+          "question": "Although it was late, but we finished the report.",
+          "answer": "Although it was late, we finished the report.\n\nWhy: Use only one conjunction."
+        },
+        {
+          "question": "Because he was ill, so he missed the interview.",
+          "answer": "Because he was ill, he missed the interview.\n\nWhy: Because and so should not appear together."
+        },
+        {
+          "question": "Which word is an interjection? \"Oops! I sent it to the wrong person.\"\na) Oops      b) sent      c) wrong      d) person",
+          "answer": "a) Oops\n\nWhy: It expresses a sudden reaction."
+        },
+        {
+          "question": "Which one is a subordinating conjunction?\na) and      b) or      c) while      d) but",
+          "answer": "c) while\n\nWhy: While introduces a dependent clause."
+        },
+        {
+          "question": "Join with a suitable conjunction: I prepared well. I was nervous.",
+          "answer": "I prepared well, but I was nervous. (or: Although I prepared well, I was nervous.)\n\nWhy: The ideas contrast."
+        },
+        {
+          "question": "Which sentence is balanced (parallel)?\na) He likes reading, to write and sketching.      b) He likes reading, writing and sketching.      c) He likes to read, writing and to sketch.      d) He likes reading, to write and sketch.",
+          "answer": "b) He likes reading, writing and sketching.\n\nWhy: All three items use the same -ing form."
+        },
+        {
+          "question": "Which line is best for a formal email?\na) Wow! Awesome news!      b) Yay!! We got it!      c) OMG, you are selected.      d) We are delighted to inform you that you have been selected.",
+          "answer": "d) We are delighted to inform you that you have been selected.\n\nWhy: Professional writing states the feeling in a full sentence."
+        }
+      ],
+      "duration_minutes": 16,
+      "status": "INACTIVE"
+    },
+    {
+      "id": "19246ce3-a55f-5561-b182-9a83d958f200",
+      "module_id": "0827da82-d000-5a82-82e6-49d02ffbadbf",
+      "title": "Part 7: Same Word, Different Job: Putting It All Together",
+      "sequence": 8,
+      "content": "The most important idea in this module is that a word does not belong to one part of speech forever. Its job in the sentence decides what it is. Work can be a noun (My work is done) or a verb (I work in Pune). Fast can be an adjective (a fast laptop) or an adverb (she types fast).\n\n## How to decide\n\n- Ask what the word is doing here, not what it did in another sentence.\n\n- If it names something, it is a noun. If it describes a noun, it is an adjective. If it describes an action, it is an adverb.\n\n- Words like before, after and since can be prepositions (before the test) or conjunctions (before you leave), depending on whether a noun or a full clause follows.\n\nTip: In the exercises below, the word to identify is written in capital letters.\n\n## Practice: Part 7 (12 questions)\n\nTry the practice questions below before revealing each answer and explanation.",
+      "practice_questions": [
+        {
+          "question": "Please EMAIL the file by noon. Part of speech?",
+          "answer": "verb\n\nWhy: It shows an action."
+        },
+        {
+          "question": "I received an EMAIL from the HR team. Part of speech?",
+          "answer": "noun\n\nWhy: It names a thing; \"an\" comes before it."
+        },
+        {
+          "question": "She types FAST. Part of speech?",
+          "answer": "adverb\n\nWhy: It tells how she types."
+        },
+        {
+          "question": "He bought a FAST laptop. Part of speech?",
+          "answer": "adjective\n\nWhy: It describes the noun laptop."
+        },
+        {
+          "question": "We worked HARD on the project. Part of speech?",
+          "answer": "adverb\n\nWhy: It describes the verb worked."
+        },
+        {
+          "question": "That was a HARD question. Part of speech?",
+          "answer": "adjective\n\nWhy: It describes the noun question."
+        },
+        {
+          "question": "I will meet you AFTER the session. Part of speech?",
+          "answer": "preposition\n\nWhy: A noun phrase (the session) follows it."
+        },
+        {
+          "question": "Call me AFTER you finish. Part of speech?",
+          "answer": "conjunction\n\nWhy: A full clause (you finish) follows it."
+        },
+        {
+          "question": "WOW! That was quick. Part of speech?",
+          "answer": "interjection\n\nWhy: It expresses sudden feeling."
+        },
+        {
+          "question": "They forgot the keys, so THEY went back. Part of speech?",
+          "answer": "pronoun\n\nWhy: It stands in for a noun group."
+        },
+        {
+          "question": "I WORK in Pune. Part of speech?",
+          "answer": "verb\n\nWhy: It shows an action."
+        },
+        {
+          "question": "Her WORK is excellent. Part of speech?",
+          "answer": "noun\n\nWhy: It names a thing; \"her\" comes before it."
+        }
+      ],
+      "duration_minutes": 13,
+      "status": "INACTIVE"
+    },
+    {
+      "id": "b5311586-2618-5b5d-ae89-e909bfd45c10",
+      "module_id": "0827da82-d000-5a82-82e6-49d02ffbadbf",
+      "title": "Final Challenge: Mixed Practice",
+      "sequence": 9,
+      "content": "Choose the best answer. Each question may test a different idea from this module.\n\nYour score: 17 to 20: excellent, you are ready to use this confidently. 12 to 16: good, revise the parts where you slipped. Below 12: go back to the explanations and try again after a day.\n\nTry the practice questions below before revealing each answer and explanation.",
+      "practice_questions": [
+        {
+          "question": "Which word is a proper noun?\na) festival      b) Diwali      c) holiday      d) season",
+          "answer": "b) Diwali\n\nWhy: It names a particular festival."
+        },
+        {
+          "question": "Which word is a collective noun?\na) audience      b) joy      c) tablet      d) Chennai",
+          "answer": "a) audience\n\nWhy: An audience is a group seen as one unit."
+        },
+        {
+          "question": "The manager asked Kavya and ___ to join the call.\na) I      b) me      c) myself      d) mine",
+          "answer": "b) me\n\nWhy: After a verb, use the object form."
+        },
+        {
+          "question": "The decision is ___; nobody else can change it.\na) my      b) me      c) mine      d) I",
+          "answer": "c) mine\n\nWhy: Mine stands alone."
+        },
+        {
+          "question": "I taught ___ to code during the lockdown.\na) me      b) my      c) mine      d) myself",
+          "answer": "d) myself\n\nWhy: Doer and receiver are the same person."
+        },
+        {
+          "question": "The dog wagged ___ tail happily.\na) its      b) it's      c) their      d) it",
+          "answer": "a) its\n\nWhy: Belonging uses \"its\" with no apostrophe."
+        },
+        {
+          "question": "He has ___ the form twice already.\na) fill      b) filled      c) filling      d) fills",
+          "answer": "b) filled\n\nWhy: After \"has\", use the past participle."
+        },
+        {
+          "question": "She ___ to the client yesterday.\na) spoken      b) speak      c) speaks      d) spoke",
+          "answer": "d) spoke\n\nWhy: Simple past, since the time is finished."
+        },
+        {
+          "question": "You should to practise more.",
+          "answer": "You should practise more.\n\nWhy: No \"to\" after a modal verb."
+        },
+        {
+          "question": "The idea sounds ___.\na) interesting      b) interestingly      c) interest      d) interested",
+          "answer": "a) interesting\n\nWhy: Sounds is a linking verb; use an adjective."
+        },
+        {
+          "question": "This is the ___ route to the office.\na) more short      b) shorter      c) shortest      d) most short",
+          "answer": "c) shortest\n\nWhy: Superlative with the."
+        },
+        {
+          "question": "My sister is more smarter than me.",
+          "answer": "My sister is smarter than me.\n\nWhy: Do not double the comparison."
+        },
+        {
+          "question": "He answered all the questions ___.\na) confident      b) confidently      c) confidence      d) confidentially",
+          "answer": "b) confidently\n\nWhy: An adverb is needed to describe the verb."
+        },
+        {
+          "question": "The team is working ___ to meet the deadline.\na) hardly      b) hard      c) harder than      d) hardness",
+          "answer": "b) hard\n\nWhy: Hard is the adverb; hardly means \"almost not\"."
+        },
+        {
+          "question": "She ___ checks her email before the first meeting.\na) checks always      b) always      c) is always      d) always is",
+          "answer": "b) always\n\nWhy: Frequency adverbs sit before the main verb."
+        },
+        {
+          "question": "___ the traffic was heavy, we reached on time.\na) Because      b) So      c) Although      d) Unless",
+          "answer": "c) Although\n\nWhy: Despite the traffic, they reached on time."
+        },
+        {
+          "question": "Although he was tired, but he finished the task.",
+          "answer": "Although he was tired, he finished the task.\n\nWhy: Use one conjunction, not two."
+        },
+        {
+          "question": "Neither the manager ___ the interns were ready.\na) or      b) and      c) nor      d) but",
+          "answer": "c) nor\n\nWhy: Neither pairs with nor."
+        },
+        {
+          "question": "Part of speech of LIGHT in: \"Please light the lamp.\"",
+          "answer": "verb\n\nWhy: It shows an action."
+        },
+        {
+          "question": "Part of speech of WELL in: \"She performed well.\"",
+          "answer": "adverb\n\nWhy: It tells how she performed."
+        }
+      ],
+      "duration_minutes": 21,
+      "status": "INACTIVE"
+    },
+    {
+      "id": "721f8753-15b1-5ab1-8a6c-bfbc4b30bc9e",
+      "module_id": "0827da82-d000-5a82-82e6-49d02ffbadbf",
+      "title": "Quick Recap",
+      "sequence": 10,
+      "content": "- Nouns name; pronouns replace nouns; verbs show action or state.\n\n- Adjectives describe nouns; adverbs describe verbs, adjectives and other adverbs.\n\n- Conjunctions join; interjections express feeling; prepositions (Module 3) link nouns to the rest of the sentence.\n\n- Use I, he, she, we, they before the verb and me, him, her, us, them after a verb or preposition.\n\n- After a linking verb, use an adjective: it sounds good, he looks tired.\n\n- After a modal verb, use the base form: she can speak.\n\n- Never double a comparison: taller, not more taller.\n\n- Use one conjunction per link: although...(no but), because...(no so).\n\n- A word's job comes from its place in the sentence, not from the word alone.",
+      "practice_questions": [],
+      "duration_minutes": 3,
+      "status": "INACTIVE"
+    },
+    {
+      "id": "0e40715d-9c20-57a1-ac37-ecab2dce470c",
+      "module_id": "bba5f88a-a5a1-555c-b1e0-32f39021da50",
+      "title": "Introduction and learning objectives",
+      "sequence": 1,
+      "content": "CAMPUS TO CORPORATE  |  COMMUNICATION SKILLS  |  ENGLISH GRAMMAR\n\nArticles: A, An, The, and When to Use Nothing\n\nThink about the last time you read a CV or an email and felt that something was slightly off, even though every word was spelled correctly. Very often the culprit is a tiny word: a, an or the. Recruiters notice these slips in the first few lines of a resume, a self-introduction or a group discussion.\n\nThe good news is that articles follow patterns. You do not need to memorise a hundred rules. You need to ask three quick questions, and this module will train you to ask them automatically.\n\n## The three questions that fix most article mistakes\n\n- Is the noun countable and singular? (one laptop, one interview) If yes, it needs a, an or the. It cannot stand alone.\n\n- Does my listener know exactly which one I mean? If yes, use the. If not, use a or an.\n\n- Am I talking about things in general (plural or uncountable)? Then usually use no article at all.\n\n## By the end of this module, you will be able to\n\n- Tell countable and uncountable nouns apart and avoid forms like \"an advice\".\n\n- Choose a or an by listening to the sound, not by looking at the spelling.\n\n- Use \"the\" when both speaker and listener know which one is meant.\n\n- Know when to leave the article out completely.\n\n- Handle common special cases such as professions, college, home, rivers and countries.\n\n- Spot and fix article mistakes in your own resume, emails and interviews.\n\n## What is inside\n\n- Part 1: Countable and Uncountable Nouns: Your Starting Point\n\n- Part 2: A or An: Listen to the Sound, Not the Spelling\n\n- Part 3: Using The: When Both of You Know Which One\n\n- Part 4: No Article: Speaking in General\n\n- Part 5: Special Cases and Set Expressions\n\n- Part 6: Spot and Fix: Real Workplace Mistakes\n\n- Final Challenge: Mixed Practice\n\n- Quick recap\n\nHow to study: Read each short explanation first, then try the exercises without looking at the answers. Check the answer key and read the reason, even when you got it right. If you score below about 70 percent in a part, read that explanation again and retry after a day.",
+      "practice_questions": [],
+      "duration_minutes": 3,
+      "status": "INACTIVE"
+    },
+    {
+      "id": "0bc73d79-0bcd-512b-aaae-3433399695b7",
+      "module_id": "bba5f88a-a5a1-555c-b1e0-32f39021da50",
+      "title": "Part 1: Countable and Uncountable Nouns: Your Starting Point",
+      "sequence": 2,
+      "content": "Articles depend on one question first: can you count it? Before you pick a, an or the, check the noun.\n\n## Countable nouns\n\nYou can put a number in front of them: one resume, four interviews, ten candidates. A singular countable noun can never stand alone. It needs a, an, the, or a word like my or this.\n\n## Uncountable nouns\n\nThese name things we treat as one mass, not as separate pieces: advice, information, feedback, equipment, furniture, luggage, software, research, homework, progress, traffic, news and knowledge. They have no plural form, and they never take a or an.\n\n## How to talk about them\n\n- Use some, any, a lot of, much or little: some advice, a lot of feedback, much progress.\n\n- Or add a counting phrase: a piece of advice, an item of luggage, a word of warning, a bit of news.\n\n## Nouns that live a double life\n\nA few nouns change meaning depending on how they are used. Experience as a general idea is uncountable (she has experience in sales), but a single event is countable (it was an unforgettable experience). Paper as material is uncountable, while a paper can be a research paper. Room as space is uncountable (there is no room), while a room is a place with walls.\n\nTip: Quick test: can you say \"two ___s\"? If \"two advices\" sounds wrong, the noun is uncountable.\n\n| Not natural | Natural |\n| --- | --- |\n| The mentor gave me an advice. | The mentor gave me some advice. / ...a piece of advice. |\n| We got many feedbacks. | We got a lot of feedback. |\n| She packed three luggages. | She packed three bags. / ...a lot of luggage. |\n| He shared an interesting news. | He shared some interesting news. |\n\n## Practice: Part 1 (12 questions)\n\nTry the practice questions below before revealing each answer and explanation.",
+      "practice_questions": [
+        {
+          "question": "Which sentence is correct?\na) The manager gave us an advice.      b) The manager gave us some advice.      c) The manager gave us advices.      d) The manager gave us a advice.",
+          "answer": "b) The manager gave us some advice.\n\nWhy: Advice is uncountable, so it takes some (or a piece of), never a/an or a plural -s."
+        },
+        {
+          "question": "Which of these nouns is uncountable?\na) laptop      b) equipment      c) interview      d) candidate",
+          "answer": "b) equipment\n\nWhy: You cannot say \"two equipments\". The others can all be counted."
+        },
+        {
+          "question": "I need ___ information about the placement drive.\na) an      b) a      c) some      d) many",
+          "answer": "c) some\n\nWhy: Information is uncountable, and \"some\" works with uncountable nouns. \"Many\" is only for countable plurals."
+        },
+        {
+          "question": "We bought new ___ for the seminar hall.\na) furnitures      b) furniture      c) a furniture      d) an furniture",
+          "answer": "b) furniture\n\nWhy: Furniture is uncountable: no plural -s and no a/an."
+        },
+        {
+          "question": "Her luggage ___ very heavy.\na) were      b) are      c) was      d) have been",
+          "answer": "c) was\n\nWhy: Luggage is uncountable, so it takes a singular verb: was."
+        },
+        {
+          "question": "Could you give me ___ piece of feedback on my slides?\na) a      b) an      c) some      d) the",
+          "answer": "a) a\n\nWhy: \"Piece\" is a countable word that starts with a consonant sound, so we say a piece of feedback."
+        },
+        {
+          "question": "I have ___ good news for the whole team.\na) a      b) an      c) some      d) many",
+          "answer": "c) some\n\nWhy: News is uncountable, so use some. (\"A news\" is not English.)"
+        },
+        {
+          "question": "My first internship was ___ eye-opening experience.\na) a      b) an      c) some      d) no article",
+          "answer": "b) an\n\nWhy: Here experience means one particular event, so it is countable. \"Eye-opening\" begins with a vowel sound, so an."
+        },
+        {
+          "question": "Dhruv wrote ___ research paper on supply chains.\na) a      b) an      c) some      d) much",
+          "answer": "a) a\n\nWhy: A research paper is one countable document. \"Research\" starts with a consonant sound, so a."
+        },
+        {
+          "question": "She has a lot of homeworks this week.",
+          "answer": "She has a lot of homework this week.\n\nWhy: Homework is uncountable and has no plural."
+        },
+        {
+          "question": "We received many feedbacks from the interviewers.",
+          "answer": "We received a lot of feedback from the interviewers. (or: ...much feedback...)\n\nWhy: Feedback is uncountable, so avoid the plural. \"Many\" becomes \"a lot of\" or \"much\"."
+        },
+        {
+          "question": "Please carry your luggages to the hall.",
+          "answer": "Please carry your luggage to the hall.\n\nWhy: Luggage never takes -s."
+        }
+      ],
+      "duration_minutes": 14,
+      "status": "INACTIVE"
+    },
+    {
+      "id": "868e1217-8fbf-51e1-84c6-8eea1e01ac1a",
+      "module_id": "bba5f88a-a5a1-555c-b1e0-32f39021da50",
+      "title": "Part 2: A or An: Listen to the Sound, Not the Spelling",
+      "sequence": 3,
+      "content": "Both a and an mean \"one of many\". The only difference is sound. We use an before a vowel sound and a before a consonant sound. This is why the spelling can fool you.\n\n## The one rule\n\nSay the next word aloud and listen to its first sound. If it begins with an a, e, i, o or u sound, use an. Otherwise use a.\n\n## Where spelling misleads\n\n- Silent h: an hour, an heir, an honest answer, an honour. The h is not pronounced, so the word starts with a vowel sound.\n\n- A \"yoo\" sound is a consonant sound: a university, a user, a uniform, a European client, a unit.\n\n- The word one starts with a \"w\" sound: a one-day workshop.\n\n- Abbreviations follow the sound of the first letter's name: an MBA (em), an HR manager (aitch, which begins with an \"ay\" sound), an FAQ page (eff), an NGO (en), but a CEO (see), a PDF (pee), a URL (yoo).\n\n## The next word decides\n\nThe article belongs to the very next word, even if that word is an adjective. So it is a good idea but an excellent idea, a very useful tool but an extremely useful tool.\n\nTip: Habit builder: whenever you write a or an in an email, quietly say the next word. Your ear is more reliable than your eye.\n\n| Word | First sound | Correct |\n| --- | --- | --- |\n| hour | ow | an hour |\n| unit | yoo | a unit |\n| X-ray | eks | an X-ray |\n| one-time offer | wun | a one-time offer |\n| IT team | eye | an IT team |\n| union | yoo | a union |\n\n## Practice: Part 2 (14 questions)\n\nFill each blank with a or an.\n\nTry the practice questions below before revealing each answer and explanation.",
+      "practice_questions": [
+        {
+          "question": "___ HR executive called me this morning.\nChoose from: a / an",
+          "answer": "An\n\nWhy: HR is said \"aitch-ar\" and begins with an \"ay\" sound."
+        },
+        {
+          "question": "That was ___ unique opportunity.\nChoose from: a / an",
+          "answer": "A\n\nWhy: \"Unique\" begins with a \"yoo\" sound, which is a consonant sound."
+        },
+        {
+          "question": "Skill gaps are often ___ underrated problem.\nChoose from: a / an",
+          "answer": "an\n\nWhy: \"Underrated\" begins with an \"uh\" vowel sound."
+        },
+        {
+          "question": "We are attending ___ one-day workshop on Saturday.\nChoose from: a / an",
+          "answer": "a\n\nWhy: \"One\" is pronounced \"wun\", a consonant sound."
+        },
+        {
+          "question": "My grandfather is ___ honourable man.\nChoose from: a / an",
+          "answer": "an\n\nWhy: The h in honourable is silent."
+        },
+        {
+          "question": "Please paste ___ URL in the chat box.\nChoose from: a / an",
+          "answer": "a\n\nWhy: URL begins with the letter name \"yoo\"."
+        },
+        {
+          "question": "Is there ___ FAQ section on the website?\nChoose from: a / an",
+          "answer": "an\n\nWhy: FAQ starts with \"eff\", a vowel sound."
+        },
+        {
+          "question": "The interview lasted for ___ hour.\nChoose from: a / an",
+          "answer": "an\n\nWhy: Silent h: \"hour\" starts with an \"ow\" sound."
+        },
+        {
+          "question": "I downloaded ___ useful app for tracking deadlines.\nChoose from: a / an",
+          "answer": "a\n\nWhy: \"Useful\" starts with \"yoo\"."
+        },
+        {
+          "question": "That is ___ extremely tough question.\nChoose from: a / an",
+          "answer": "an\n\nWhy: The next word, \"extremely\", starts with a vowel sound."
+        },
+        {
+          "question": "She gave ___ very interesting presentation.\nChoose from: a / an",
+          "answer": "a\n\nWhy: The next word is \"very\", which begins with a consonant sound."
+        },
+        {
+          "question": "I got ___ OTP on my phone.\nChoose from: a / an",
+          "answer": "an\n\nWhy: OTP is said \"oh-tee-pee\", starting with an \"oh\" sound."
+        },
+        {
+          "question": "He works with ___ NGO that supports rural schools.\nChoose from: a / an",
+          "answer": "an\n\nWhy: NGO is said \"en-jee-oh\"."
+        },
+        {
+          "question": "Is there ___ ATM near the campus gate?\nChoose from: a / an",
+          "answer": "an\n\nWhy: ATM starts with the \"ay\" sound."
+        }
+      ],
+      "duration_minutes": 16,
+      "status": "INACTIVE"
+    },
+    {
+      "id": "5f284063-1160-5381-a3f6-380d2f1f3858",
+      "module_id": "bba5f88a-a5a1-555c-b1e0-32f39021da50",
+      "title": "Part 3: Using \"The\": When Both of You Know Which One",
+      "sequence": 4,
+      "content": "Use the when the listener can tell exactly which thing you mean. If you say a laptop, you are introducing any laptop. If you say the laptop, you are pointing at one that both of you already have in mind.\n\n## Five situations that call for \"the\"\n\n- It was mentioned before. We booked a hall for the event. The hall has a projector.\n\n- The situation makes it obvious. In an office you say, \"Could you switch off the AC?\" because there is only one AC in the room.\n\n- There is only one of it. the sun, the internet, the Prime Minister, the principal of our college.\n\n- Extra words point to it. the report you sent yesterday, the girl in the blue kurta, the canteen on the ground floor.\n\n- Superlatives, ordinals and a few special words: the best option, the third round, the same batch, the only seat, the next slide, the last question.\n\n## Plural nouns can take \"the\" too\n\nWhen you mean particular plural things, use the. The trainers in our department are very supportive means these particular trainers.\n\nTip: Test question: \"Which one?\" If you can answer it from the sentence or the situation, use the. If the answer is \"any one\", use a or an.\n\n| Sentence | What it means |\n| --- | --- |\n| I met a recruiter. | Any recruiter. This is new information. |\n| I met the recruiter. | A particular recruiter we both know about. |\n| She wants a manager's approval. | Approval from any manager. |\n| She wants the manager's approval. | Approval from our specific manager. |\n\n## Practice: Part 3 (14 questions)\n\nFill each blank with a, an or the.\n\nTry the practice questions below before revealing each answer and explanation.",
+      "practice_questions": [
+        {
+          "question": "I received a call and an email. ___ email had the interview schedule.\nChoose from: a / an / the",
+          "answer": "The\n\nWhy: The email was already mentioned, so both of us know which one."
+        },
+        {
+          "question": "Our college has a seminar hall. ___ hall seats five hundred people.\nChoose from: a / an / the",
+          "answer": "The\n\nWhy: Second mention of the same hall."
+        },
+        {
+          "question": "As you leave the room, please switch off ___ fan.\nChoose from: a / an / the",
+          "answer": "the\n\nWhy: The situation makes it clear which fan."
+        },
+        {
+          "question": "Nandini is ___ best speaker in our batch.\nChoose from: a / an / the",
+          "answer": "the\n\nWhy: Superlatives take \"the\"."
+        },
+        {
+          "question": "This is ___ third time I am applying to this company.\nChoose from: a / an / the",
+          "answer": "the\n\nWhy: Ordinal numbers (first, second, third) take \"the\"."
+        },
+        {
+          "question": "We both attended ___ same workshop last year.\nChoose from: a / an / the",
+          "answer": "the\n\nWhy: \"Same\" always comes with \"the\"."
+        },
+        {
+          "question": "___ Moon looks very bright tonight.\nChoose from: a / an / the",
+          "answer": "The\n\nWhy: There is only one Moon."
+        },
+        {
+          "question": "Do you still have ___ pen I lent you yesterday?\nChoose from: a / an / the",
+          "answer": "the\n\nWhy: The pen is made specific by the words \"I lent you yesterday\"."
+        },
+        {
+          "question": "Do you have ___ pen? I need to sign this form.\nChoose from: a / an / the",
+          "answer": "a\n\nWhy: Any pen will do, so a."
+        },
+        {
+          "question": "Arjun is the only candidate who solved ___ last question.\nChoose from: a / an / the",
+          "answer": "the\n\nWhy: \"Last\" works like an ordinal: the last question."
+        },
+        {
+          "question": "I am looking for ___ job in data analytics.\nChoose from: a / an / the",
+          "answer": "a\n\nWhy: Any job, not a specific one."
+        },
+        {
+          "question": "___ job I applied for last week has been cancelled.\nChoose from: a / an / the",
+          "answer": "The\n\nWhy: \"I applied for last week\" tells us which job."
+        },
+        {
+          "question": "We booked ___ room on the fifth floor, but ___ room had no window.\nChoose from: a / an / the",
+          "answer": "a ... the\n\nWhy: First mention is a; second mention is the."
+        },
+        {
+          "question": "Take ___ second exit after the signal.\nChoose from: a / an / the",
+          "answer": "the\n\nWhy: Ordinal again: the second exit."
+        }
+      ],
+      "duration_minutes": 16,
+      "status": "INACTIVE"
+    },
+    {
+      "id": "477a9494-53f5-590e-8880-f8cfa8edafc8",
+      "module_id": "bba5f88a-a5a1-555c-b1e0-32f39021da50",
+      "title": "Part 4: No Article: Speaking in General",
+      "sequence": 5,
+      "content": "Many learners put the in front of everything to \"sound correct\". In fact, one of the most important skills is knowing when to say nothing at all.\n\n## Use no article when you mean something in general\n\n- Plural countable nouns: Graduates need practice. Recruiters value honesty.\n\n- Uncountable nouns: Coffee keeps me awake. Experience matters more than marks in many interviews.\n\n- Names of people and most countries, cities and states: Meera, India, Mysuru, Karnataka.\n\n- Languages, subjects and games or sports: Kannada, economics, chess, cricket. Programming languages and software too: Python, Excel.\n\n- Meals in a general sense: have breakfast, skip lunch, cook dinner.\n\n- After a possessive or demonstrative: my notes, this laptop, her résumé (never \"the my notes\").\n\n## General versus specific\n\nCompare: Trainers inspire students (trainers in general) with The trainers at our college inspire students (a particular group). The moment you narrow it down with extra words such as at our college, of this batch or you mentioned, you can switch to the.\n\nTip: If you could replace the noun with \"all of them\" or \"in general\" and the sentence still makes sense, no article is the likely answer.\n\n| General (no article) | Specific (the) |\n| --- | --- |\n| Water is essential for life. | The water in this jug is cold. |\n| Interns make mistakes. | The interns in my team make very few mistakes. |\n| Advice from seniors is valuable. | The advice my senior gave me was valuable. |\n\n## Practice: Part 4 (14 questions)\n\nFill each blank with a, an, the or — (no article).\n\nTry the practice questions below before revealing each answer and explanation.",
+      "practice_questions": [
+        {
+          "question": "___ honesty is important in every interview.\nChoose from: a / an / the / — (no article)",
+          "answer": "— (no article)\n\nWhy: Honesty in general, an uncountable noun."
+        },
+        {
+          "question": "I speak ___ Kannada at home and ___ English at college.\nChoose from: a / an / the / — (no article)",
+          "answer": "— ... —\n\nWhy: Languages take no article."
+        },
+        {
+          "question": "___ cricket is hugely popular in our college.\nChoose from: a / an / the / — (no article)",
+          "answer": "— (no article)\n\nWhy: Sports and games take no article."
+        },
+        {
+          "question": "We had ___ lunch at the canteen before the session.\nChoose from: a / an / the / — (no article)",
+          "answer": "— (no article)\n\nWhy: Meals in general take no article."
+        },
+        {
+          "question": "___ students in my class are preparing for placements.\nChoose from: a / an / the / — (no article)",
+          "answer": "The\n\nWhy: A particular group: the students in my class."
+        },
+        {
+          "question": "___ students need guidance during placement season.\nChoose from: a / an / the / — (no article)",
+          "answer": "— (no article)\n\nWhy: Students in general."
+        },
+        {
+          "question": "She is studying ___ economics at university.\nChoose from: a / an / the / — (no article)",
+          "answer": "— (no article)\n\nWhy: Academic subjects take no article."
+        },
+        {
+          "question": "Rohan travels to college by ___ bus.\nChoose from: a / an / the / — (no article)",
+          "answer": "— (no article)\n\nWhy: By + means of transport takes no article."
+        },
+        {
+          "question": "I left ___ my notes at home.\nChoose from: a / an / the / — (no article)",
+          "answer": "— (no article)\n\nWhy: A possessive such as \"my\" already does the work of an article."
+        },
+        {
+          "question": "___ Mysuru is famous for its palace.\nChoose from: a / an / the / — (no article)",
+          "answer": "— (no article)\n\nWhy: Names of cities take no article."
+        },
+        {
+          "question": "___ Python is a good first language for beginners.\nChoose from: a / an / the / — (no article)",
+          "answer": "— (no article)\n\nWhy: Programming languages take no article."
+        },
+        {
+          "question": "___ water in this bottle has gone warm.\nChoose from: a / an / the / — (no article)",
+          "answer": "The\n\nWhy: Specific water: the water in this bottle."
+        },
+        {
+          "question": "___ advice from seniors is often very practical.\nChoose from: a / an / the / — (no article)",
+          "answer": "— (no article)\n\nWhy: Advice in general."
+        },
+        {
+          "question": "___ advice my senior gave me before the interview was very practical.\nChoose from: a / an / the / — (no article)",
+          "answer": "The\n\nWhy: \"My senior gave me before the interview\" identifies which advice."
+        }
+      ],
+      "duration_minutes": 16,
+      "status": "INACTIVE"
+    },
+    {
+      "id": "d8ccdae0-eeb2-5017-9645-b2fca9bfa588",
+      "module_id": "bba5f88a-a5a1-555c-b1e0-32f39021da50",
+      "title": "Part 5: Special Cases and Set Expressions",
+      "sequence": 6,
+      "content": "Some patterns do not follow the general logic. The trick is to learn them in groups, not as hundreds of separate rules.\n\n## Jobs and roles take a or an\n\nShe is a data analyst. My cousin is an architect. I want to become a product manager. Dropping the article in a self-introduction (\"I am engineer\") is one of the most noticeable slips.\n\n## Places used for their purpose\n\nWords like school, college, work, bed, church and home drop the article when we talk about the usual activity. She is at college (she is a student). He goes to bed early (to sleep). But when you mean the building or a particular object, add the: I went to the college to collect my marksheet. He sat on the bed. With home, we say at home or go home, with no article and no \"to\".\n\n## Meals\n\nNo article for the plain meal (we had dinner at nine). Add a if you describe it (we had a lovely dinner).\n\n## Transport\n\nBy metro, by bus, by train, by auto. But if you mean a particular vehicle, add the: I took the 9 o'clock bus.\n\n## Geography\n\n- Take the: rivers (the Kaveri, the Ganga), oceans and seas (the Indian Ocean, the Arabian Sea), mountain ranges (the Himalayas, the Western Ghats), deserts (the Thar Desert), and countries whose names are plural or a union (the Netherlands, the Philippines, the United Kingdom, the UAE).\n\n- No article: most single countries, cities, states, and single mountains (India, Germany, Bengaluru, Karnataka, Mount Everest).\n\n## Musical instruments\n\nIn standard English we say she plays the violin, he plays the guitar.\n\n## Fixed phrases worth memorising\n\n- a few and a little mean \"some\": I have a few doubts. Few and little (no a) mean \"hardly any\": few people came.\n\n- What a lovely surprise! Such a long day! Quite a challenge. Half an hour. Once in a while.\n\n- in a hurry, on time, in the morning, at night, at the moment, all the time.\n\n## Practice: Part 5 (15 questions)\n\nTry the practice questions below before revealing each answer and explanation.",
+      "practice_questions": [
+        {
+          "question": "My cousin is ___ chartered accountant.\nChoose from: a / an / the / — (no article)",
+          "answer": "a\n\nWhy: Professions take a/an. \"Chartered\" starts with a consonant sound."
+        },
+        {
+          "question": "Aditi is at ___ college till four every day.\nChoose from: a / an / the / — (no article)",
+          "answer": "— (no article)\n\nWhy: She is there for the usual purpose of studying."
+        },
+        {
+          "question": "I went to ___ college to collect my marksheet.\nChoose from: a / an / the / — (no article)",
+          "answer": "the\n\nWhy: Here we mean the building or institution, not studying there."
+        },
+        {
+          "question": "She was exhausted and went to ___ bed early.\nChoose from: a / an / the / — (no article)",
+          "answer": "— (no article)\n\nWhy: Go to bed means to sleep."
+        },
+        {
+          "question": "Mohan sat on ___ bed and opened his laptop.\nChoose from: a / an / the / — (no article)",
+          "answer": "the\n\nWhy: A particular piece of furniture."
+        },
+        {
+          "question": "Is anyone at ___ home right now?\nChoose from: a / an / the / — (no article)",
+          "answer": "— (no article)\n\nWhy: Home takes no article after at, go, come or reach."
+        },
+        {
+          "question": "___ Kaveri flows through Karnataka and Tamil Nadu.\nChoose from: a / an / the / — (no article)",
+          "answer": "The\n\nWhy: Rivers take the."
+        },
+        {
+          "question": "Several trekking routes cross ___ Western Ghats.\nChoose from: a / an / the / — (no article)",
+          "answer": "the\n\nWhy: Mountain ranges take the."
+        },
+        {
+          "question": "My cousin has just moved to ___ Netherlands.\nChoose from: a / an / the / — (no article)",
+          "answer": "the\n\nWhy: Plural country names take the."
+        },
+        {
+          "question": "He has applied for a masters programme in ___ Germany.\nChoose from: a / an / the / — (no article)",
+          "answer": "— (no article)\n\nWhy: Most single countries take no article."
+        },
+        {
+          "question": "We had ___ delicious dinner at my aunt's place.\nChoose from: a / an / the / — (no article)",
+          "answer": "a\n\nWhy: The meal is described with an adjective, so a is possible."
+        },
+        {
+          "question": "We usually have ___ dinner at nine.\nChoose from: a / an / the / — (no article)",
+          "answer": "— (no article)\n\nWhy: Plain meal, no description."
+        },
+        {
+          "question": "I go to the office by ___ metro.\nChoose from: a / an / the / — (no article)",
+          "answer": "— (no article)\n\nWhy: By + transport takes no article."
+        },
+        {
+          "question": "Dhwani plays ___ violin beautifully.\nChoose from: a / an / the / — (no article)",
+          "answer": "the\n\nWhy: Musical instruments usually take the."
+        },
+        {
+          "question": "I will be ready in half ___ hour.\nChoose from: a / an / the / — (no article)",
+          "answer": "an\n\nWhy: \"Hour\" starts with a vowel sound (silent h)."
+        }
+      ],
+      "duration_minutes": 17,
+      "status": "INACTIVE"
+    },
+    {
+      "id": "83d1dd7e-f0ac-5ede-b1db-30534317c4ea",
+      "module_id": "bba5f88a-a5a1-555c-b1e0-32f39021da50",
+      "title": "Part 6: Spot and Fix: Real Workplace Mistakes",
+      "sequence": 7,
+      "content": "This is where everything comes together. The sentences below look like the ones you will write in resumes, emails and interviews. Read each one, decide what is wrong, then rewrite it in your own words.\n\n## A short checking routine\n\n- Underline every singular countable noun. Does each one have a, an, the or a word like my?\n\n- Look for words such as advice, information, feedback, knowledge, equipment. These must not have a/an.\n\n- Check any superlative (best, most important). It almost always wants the.\n\n- Read the a/an words aloud. Does the next word start with a vowel sound?\n\nTip: A few expressions are common in everyday speech but sound unusual in formal English. Take leave (not \"take a leave\") is the standard expression. For a single day you can say a day off or a day's leave.\n\n## Practice: Part 6 (12 questions)\n\nRewrite each sentence correctly. Some may need more than one change.\n\nTry the practice questions below before revealing each answer and explanation.",
+      "practice_questions": [
+        {
+          "question": "I am final-year student of computer science.",
+          "answer": "I am a final-year student of computer science.\n\nWhy: A singular job or role noun needs a/an."
+        },
+        {
+          "question": "Please find attached resume.",
+          "answer": "Please find my resume attached. (or: Please find the attached resume.)\n\nWhy: A singular countable noun needs a determiner such as my or the."
+        },
+        {
+          "question": "I completed internship at software company last summer.",
+          "answer": "I completed an internship at a software company last summer.\n\nWhy: Both nouns are singular and countable; the first starts with a vowel sound."
+        },
+        {
+          "question": "She gave me an useful suggestion.",
+          "answer": "She gave me a useful suggestion.\n\nWhy: \"Useful\" begins with a \"yoo\" sound."
+        },
+        {
+          "question": "Sir, I need an advice about my project.",
+          "answer": "Sir, I need some advice about my project. (or: ...a piece of advice...)\n\nWhy: Advice is uncountable."
+        },
+        {
+          "question": "Sun rises in east.",
+          "answer": "The sun rises in the east.\n\nWhy: Unique things and directions take the."
+        },
+        {
+          "question": "He is best performer in our department.",
+          "answer": "He is the best performer in our department.\n\nWhy: Superlatives take the."
+        },
+        {
+          "question": "I want to become the data scientist.",
+          "answer": "I want to become a data scientist.\n\nWhy: A job in general takes a/an."
+        },
+        {
+          "question": "She is one of best students in the college.",
+          "answer": "She is one of the best students in the college.\n\nWhy: \"One of the + superlative + plural noun\" is a fixed pattern."
+        },
+        {
+          "question": "Can I take a leave tomorrow?",
+          "answer": "Can I take leave tomorrow? (or: Can I take a day off tomorrow?)\n\nWhy: Leave is used as an uncountable noun in this expression."
+        },
+        {
+          "question": "I have an one-year experience in sales.",
+          "answer": "I have one year of experience in sales. (or: I have a year's experience in sales.)\n\nWhy: Experience here is uncountable. Also \"one\" is pronounced \"wun\", so it would never take an."
+        },
+        {
+          "question": "I like to play the cricket on weekends.",
+          "answer": "I like to play cricket on weekends.\n\nWhy: Games and sports take no article."
+        }
+      ],
+      "duration_minutes": 13,
+      "status": "INACTIVE"
+    },
+    {
+      "id": "588896b1-c9be-5c06-b0c1-54cf740ef8e7",
+      "module_id": "bba5f88a-a5a1-555c-b1e0-32f39021da50",
+      "title": "Final Challenge: Mixed Practice",
+      "sequence": 8,
+      "content": "Choose the best answer. Each question may test a different idea from this module.\n\nYour score: 17 to 20: excellent, you are ready to use this confidently. 12 to 16: good, revise the parts where you slipped. Below 12: go back to the explanations and try again after a day.\n\nTry the practice questions below before revealing each answer and explanation.",
+      "practice_questions": [
+        {
+          "question": "We are hiring ___ analyst for our Pune office.\na) a      b) an      c) the      d) no article",
+          "answer": "b) an\n\nWhy: First mention and \"analyst\" starts with a vowel sound."
+        },
+        {
+          "question": "___ analyst we hired last month has resigned.\na) A      b) An      c) The      d) No article",
+          "answer": "c) The\n\nWhy: Specific: we hired last month."
+        },
+        {
+          "question": "___ analysts need strong Excel skills.\na) A      b) An      c) The      d) No article",
+          "answer": "d) No article\n\nWhy: Analysts in general."
+        },
+        {
+          "question": "Good mentors give ___ honest feedback.\na) a      b) an      c) the      d) no article",
+          "answer": "d) no article\n\nWhy: Feedback is uncountable and general."
+        },
+        {
+          "question": "My sister works as ___ UX designer.\na) a      b) an      c) the      d) no article",
+          "answer": "a) a\n\nWhy: UX begins with a \"yoo\" sound."
+        },
+        {
+          "question": "Priya is ___ youngest member of our team.\na) a      b) an      c) the      d) no article",
+          "answer": "c) the\n\nWhy: Superlative."
+        },
+        {
+          "question": "We reached ___ airport early.\na) a      b) an      c) the      d) no article",
+          "answer": "c) the\n\nWhy: The airport of the trip; the situation makes it clear."
+        },
+        {
+          "question": "I will call you in ___ hour.\na) a      b) an      c) the      d) no article",
+          "answer": "b) an\n\nWhy: Silent h."
+        },
+        {
+          "question": "___ Reserve Bank of India regulates banks in the country.\na) A      b) An      c) The      d) No article",
+          "answer": "c) The\n\nWhy: Names of institutions with \"of\" take the."
+        },
+        {
+          "question": "She speaks ___ French fluently.\na) a      b) an      c) the      d) no article",
+          "answer": "d) no article\n\nWhy: Languages take no article."
+        },
+        {
+          "question": "What ___ great idea!\na) a      b) an      c) the      d) no article",
+          "answer": "a) a\n\nWhy: \"What a + singular noun\" is an exclamation pattern."
+        },
+        {
+          "question": "He is ___ MBA graduate from a reputed college.\na) a      b) an      c) the      d) no article",
+          "answer": "b) an\n\nWhy: MBA is said \"em-bee-ay\"."
+        },
+        {
+          "question": "___ internet was down all morning.\na) A      b) An      c) The      d) No article",
+          "answer": "c) The\n\nWhy: Treated as unique."
+        },
+        {
+          "question": "Chennai is on ___ east coast of India.\na) a      b) an      c) the      d) no article",
+          "answer": "c) the\n\nWhy: Directions used as regions take the."
+        },
+        {
+          "question": "She has been invited to give ___ talk at a conference.\na) a      b) an      c) the      d) no article",
+          "answer": "a) a\n\nWhy: One talk, not yet specific; \"talk\" starts with a consonant sound."
+        },
+        {
+          "question": "Our team won ___ first round of the quiz.\na) a      b) an      c) the      d) no article",
+          "answer": "c) the\n\nWhy: Ordinal."
+        },
+        {
+          "question": "She wants to study ___ philosophy.\na) a      b) an      c) the      d) no article",
+          "answer": "d) no article\n\nWhy: Subjects take no article."
+        },
+        {
+          "question": "They live near ___ Arabian Sea.\na) a      b) an      c) the      d) no article",
+          "answer": "c) the\n\nWhy: Seas take the."
+        },
+        {
+          "question": "It was ___ unusual question for an interview.\na) a      b) an      c) the      d) no article",
+          "answer": "b) an\n\nWhy: \"Unusual\" starts with a vowel sound."
+        },
+        {
+          "question": "I would like ___ information about the course fees.\na) an      b) some      c) the      d) a",
+          "answer": "b) some\n\nWhy: Information is uncountable."
+        }
+      ],
+      "duration_minutes": 21,
+      "status": "INACTIVE"
+    },
+    {
+      "id": "e2093c25-248e-5c4b-ac0b-27c1338ef9db",
+      "module_id": "bba5f88a-a5a1-555c-b1e0-32f39021da50",
+      "title": "Quick Recap",
+      "sequence": 9,
+      "content": "- A or an = one, and you are not pointing at a particular one.\n\n- The = both of us know which one.\n\n- A/an only goes with singular countable nouns.\n\n- Choose a or an by sound, not spelling.\n\n- General plural and uncountable nouns usually take no article.\n\n- Jobs take a/an. Superlatives and ordinals take the.\n\n- Rivers, seas, ranges and plural country names take the; most single countries do not.\n\n- Learn useful phrases as chunks: I am an engineer. I have a question. Please send me the details.",
+      "practice_questions": [],
+      "duration_minutes": 3,
+      "status": "INACTIVE"
+    },
+    {
+      "id": "40cddad7-9452-5126-807d-c044f4ac838e",
+      "module_id": "586449ae-3eb8-5c59-a5bb-226613b9dfb1",
+      "title": "Introduction and learning objectives",
+      "sequence": 1,
+      "content": "CAMPUS TO CORPORATE  |  COMMUNICATION SKILLS  |  ENGLISH GRAMMAR\n\nPrepositions: Small Words, Big Impact\n\nPrepositions are the short words that sit in front of a noun or pronoun and tell us how it connects to the rest of the sentence: when something happens, where it is, or where it is going. In the sentence \"Please submit the report by Friday\", the little word by turns a vague request into a deadline.\n\nThey are also one of the biggest sources of mistakes in professional English, because many choices cannot be reasoned out. We say on Monday but in March, interested in but keen on. This module gives you the logic where logic exists, and a clear way to memorise the rest.\n\n## Three questions to choose the right preposition\n\n- Is this about time, place or direction? Time words (at, on, in, for, since) behave differently from place words (at, in, on, above, between).\n\n- Is the preposition tied to a particular word? Many verbs, adjectives and nouns come with a fixed partner (responsible for, depend on, interested in). Learn these as pairs.\n\n- Does this verb need a preposition at all? Some verbs, such as discuss, reach and attend, take none.\n\n## By the end of this module, you will be able to\n\n- Use at, on and in correctly for time and place.\n\n- Choose between for, since, during, by, until and within when talking about time.\n\n- Describe positions and movement with words like above, between, into, through and across.\n\n- Use common verb, adjective and noun partners such as responsible for and interested in.\n\n- Use fixed workplace phrases such as on behalf of, in charge of and due to.\n\n- Avoid unnecessary prepositions, as in \"discuss about\" or \"reach to\".\n\n## What is inside\n\n- Part 1: Prepositions of Time: At, On, In and Friends\n\n- Part 2: Prepositions of Place and Position\n\n- Part 3: Prepositions of Direction and Movement\n\n- Part 4: Words That Come with Fixed Prepositions\n\n- Part 5: Workplace Phrases and Fixed Expressions\n\n- Part 6: No Preposition Needed: Spot and Fix\n\n- Final Challenge: Mixed Practice\n\n- Quick recap\n\nHow to study: Read each short explanation first, then try the exercises without looking at the answers. Check the answer key and read the reason, even when you got it right. If you score below about 70 percent in a part, read that explanation again and retry after a day.",
+      "practice_questions": [],
+      "duration_minutes": 3,
+      "status": "INACTIVE"
+    },
+    {
+      "id": "ca5279d5-e84b-5bda-b090-b864623c3653",
+      "module_id": "586449ae-3eb8-5c59-a5bb-226613b9dfb1",
+      "title": "Part 1: Prepositions of Time: At, On, In and Friends",
+      "sequence": 2,
+      "content": "Time prepositions answer when and how long. The first three, at, on and in, follow a simple pattern: from small and exact to big and general.\n\n| Preposition | Used with | Examples |\n| --- | --- | --- |\n| at | exact clock times and a few set phrases | at 9:30, at noon, at midnight, at night, at the moment |\n| on | days and dates, including parts of a particular day | on Tuesday, on 15 August, on Monday morning, on my birthday |\n| in | longer periods: parts of the day, months, seasons, years, centuries | in the evening, in July, in winter, in 2024 |\n\n## Other useful time words\n\n- For tells how long: for two hours, for six months.\n\n- Since tells when something started: since 2021, since Monday. It goes with perfect tenses (I have lived here since 2021).\n\n- During is followed by a noun and means \"within that period\": during the lecture, during the break. While is followed by a clause: while the lecture was going on.\n\n- By means \"no later than\" (a deadline): submit by 5 p.m. Until means \"continuing up to\": wait until 5 p.m.\n\n- Within means \"inside a period\": reply within two days.\n\n- Before and after place events relative to another event. From...to and between...and mark a range: from 9 to 5, between 2 and 4.\n\n- In can also mean \"after this much time from now\": The session starts in ten minutes.\n\nTip: On time means punctual, exactly when planned. In time means early enough, with a little to spare: We reached in time to catch the last train.\n\n## Practice: Part 1 (15 questions)\n\nTry the practice questions below before revealing each answer and explanation.",
+      "practice_questions": [
+        {
+          "question": "The workshop starts ___ 10 a.m.\na) on      b) in      c) at      d) by",
+          "answer": "c) at\n\nWhy: Exact clock times take at."
+        },
+        {
+          "question": "My interview is ___ Thursday.\na) at      b) on      c) in      d) by",
+          "answer": "b) on\n\nWhy: Days take on."
+        },
+        {
+          "question": "We usually have exams ___ April.\na) on      b) at      c) in      d) by",
+          "answer": "c) in\n\nWhy: Months take in."
+        },
+        {
+          "question": "She has been working here ___ 2022.\na) for      b) since      c) during      d) from",
+          "answer": "b) since\n\nWhy: A starting point in time takes since."
+        },
+        {
+          "question": "She has been working here ___ three years.\na) since      b) for      c) by      d) in",
+          "answer": "b) for\n\nWhy: A length of time takes for."
+        },
+        {
+          "question": "Please reply ___ two working days.\na) within      b) since      c) at      d) during",
+          "answer": "a) within\n\nWhy: Within means no more than that period."
+        },
+        {
+          "question": "You must submit the form ___ Friday (Friday is the last day).\na) until      b) since      c) by      d) during",
+          "answer": "c) by\n\nWhy: By marks a deadline."
+        },
+        {
+          "question": "The lights stayed on ___ midnight.\na) by      b) until      c) within      d) since",
+          "answer": "b) until\n\nWhy: The action continued up to midnight."
+        },
+        {
+          "question": "Please keep your phones silent ___ the session.\na) while      b) during      c) since      d) for",
+          "answer": "b) during\n\nWhy: During is followed by a noun."
+        },
+        {
+          "question": "Please keep your phones silent ___ the session is on.\na) while      b) during      c) by      d) within",
+          "answer": "a) while\n\nWhy: While is followed by a clause."
+        },
+        {
+          "question": "Our team always meets ___ Monday morning.\na) at      b) in      c) on      d) by",
+          "answer": "c) on\n\nWhy: A part of a particular day takes on."
+        },
+        {
+          "question": "We reached the hall just ___ time for the first talk.\na) on      b) at      c) by      d) in",
+          "answer": "d) in\n\nWhy: In time means early enough, not late."
+        },
+        {
+          "question": "I will call you on 6 p.m.",
+          "answer": "I will call you at 6 p.m.\n\nWhy: Clock times take at."
+        },
+        {
+          "question": "She was born at 1999.",
+          "answer": "She was born in 1999.\n\nWhy: Years take in."
+        },
+        {
+          "question": "I am working here since two years.",
+          "answer": "I have been working here for two years.\n\nWhy: A length of time needs for, and the continuing action needs a perfect tense."
+        }
+      ],
+      "duration_minutes": 17,
+      "status": "INACTIVE"
+    },
+    {
+      "id": "47efea26-c250-58e3-9da8-867062b39df6",
+      "module_id": "586449ae-3eb8-5c59-a5bb-226613b9dfb1",
+      "title": "Part 2: Prepositions of Place and Position",
+      "sequence": 3,
+      "content": "Place prepositions answer where. Again, at, in and on are the core three, and the choice depends on how you see the place.\n\n| Preposition | How you see the place | Examples |\n| --- | --- | --- |\n| at | a point or an address on a map | at the gate, at the bus stop, at the reception, at a conference |\n| in | something enclosed or an area you are inside | in the lab, in a lift, in Mysuru, in India, in a car |\n| on | a surface, a line, or a floor level | on the table, on the third floor, on the left, on the train |\n\n## Relative position\n\n- Above and below describe higher and lower positions, with no contact needed: the clock above the door, the figures below the graph.\n\n- Over and under often suggest covering or a path directly across: a jacket over a shirt, a bridge over the river, a mat under the chair.\n\n- In front of, behind, next to, beside, opposite and near describe neighbours.\n\n- Between is used for two (or clearly separate) things: between the bank and the temple. Among is used for a group: a speaker among the audience.\n\n- Inside and outside describe containment: waiting outside the office.\n\nTip: You can be on a bus, train, plane or ship (large transport you can stand in) but in a car, taxi or auto (small, enclosed).\n\n## Practice: Part 2 (15 questions)\n\nTry the practice questions below before revealing each answer and explanation.",
+      "practice_questions": [
+        {
+          "question": "The receptionist is sitting ___ the front desk.\na) on      b) in      c) at      d) by",
+          "answer": "c) at\n\nWhy: A point where an activity happens takes at."
+        },
+        {
+          "question": "She lives ___ Mysuru.\na) at      b) on      c) in      d) to",
+          "answer": "c) in\n\nWhy: Cities take in."
+        },
+        {
+          "question": "The poster is hanging ___ the wall.\na) in      b) on      c) at      d) over to",
+          "answer": "b) on\n\nWhy: A surface takes on."
+        },
+        {
+          "question": "Our office is ___ the fourth floor.\na) in      b) at      c) on      d) by",
+          "answer": "c) on\n\nWhy: Floor levels take on."
+        },
+        {
+          "question": "I saw him ___ the bus stop.\na) in      b) at      c) on      d) to",
+          "answer": "b) at\n\nWhy: A point on a route takes at."
+        },
+        {
+          "question": "I am ___ a taxi right now.\na) on      b) at      c) in      d) by",
+          "answer": "c) in\n\nWhy: Small enclosed vehicles take in."
+        },
+        {
+          "question": "We travelled ___ the night train to Chennai.\na) in      b) on      c) at      d) by the",
+          "answer": "b) on\n\nWhy: Trains take on when we talk about being aboard."
+        },
+        {
+          "question": "The meeting room is ___ the canteen and the library.\na) among      b) between      c) inside      d) at",
+          "answer": "b) between\n\nWhy: Between is used for two places."
+        },
+        {
+          "question": "She stood ___ the crowd of students.\na) between      b) among      c) beside      d) over",
+          "answer": "b) among\n\nWhy: Among is used for a group."
+        },
+        {
+          "question": "The bank is ___ the post office, across the road.\na) opposite      b) above      c) into      d) under",
+          "answer": "a) opposite\n\nWhy: Opposite means facing across."
+        },
+        {
+          "question": "The figures ___ the graph show the totals.\na) on      b) below      c) among      d) inside",
+          "answer": "b) below\n\nWhy: Lower position."
+        },
+        {
+          "question": "Please leave your bags ___ the room.\na) outside      b) between      c) among      d) over",
+          "answer": "a) outside\n\nWhy: Outside means not inside."
+        },
+        {
+          "question": "The keys are at the drawer.",
+          "answer": "The keys are in the drawer.\n\nWhy: The drawer is an enclosed space."
+        },
+        {
+          "question": "She is waiting in the gate.",
+          "answer": "She is waiting at the gate.\n\nWhy: A gate is a point where you stand."
+        },
+        {
+          "question": "I am sitting in the third row on the left side at the hall.",
+          "answer": "I am sitting in the third row on the left side of the hall.\n\nWhy: Of belongs with part of a place."
+        }
+      ],
+      "duration_minutes": 17,
+      "status": "INACTIVE"
+    },
+    {
+      "id": "e2dc9804-a9bf-50ca-a103-df09d595ee5f",
+      "module_id": "586449ae-3eb8-5c59-a5bb-226613b9dfb1",
+      "title": "Part 3: Prepositions of Direction and Movement",
+      "sequence": 4,
+      "content": "When something moves, we describe the path or destination with direction prepositions. Choose the one that matches the movement you are picturing.\n\n| Preposition | Meaning | Example |\n| --- | --- | --- |\n| to | towards a destination | She went to the airport. |\n| into | from outside to inside | He walked into the interview room. |\n| out of | from inside to outside | She came out of the lift. |\n| onto / off | to / from a surface | The cat jumped onto the table and then off it. |\n| through | from one end to the other inside something | The train passed through a tunnel. |\n| across | from one side to the other of a surface | We walked across the bridge. |\n| along | following a line | We strolled along the river. |\n| past | going by without stopping | She drove past the college. |\n| towards | in the direction of | He ran towards the exit. |\n| up / down | to a higher / lower point | They climbed up the hill. |\n| from | starting point | I came from the hostel. |\n\n## Home is special\n\nWe say go home, come home, reach home with no to. We say go to school, go to work, go to bed with no article. And enter takes no preposition at all: She entered the hall.\n\nTip: Towards means moving in the direction of something; to means arriving at it. You walk towards the gate, then you get to the gate.\n\n## Practice: Part 3 (15 questions)\n\nTry the practice questions below before revealing each answer and explanation.",
+      "practice_questions": [
+        {
+          "question": "She went ___ the airport early.\na) at      b) in      c) to      d) on",
+          "answer": "c) to\n\nWhy: Destination."
+        },
+        {
+          "question": "He walked ___ the room and sat down.\na) at      b) into      c) onto      d) through of",
+          "answer": "b) into\n\nWhy: From outside to inside."
+        },
+        {
+          "question": "The train goes ___ a long tunnel before Mangaluru.\na) across      b) past      c) through      d) along",
+          "answer": "c) through\n\nWhy: Passing from one end to the other inside a tunnel."
+        },
+        {
+          "question": "We walked ___ the bridge to reach the other side.\na) across      b) into      c) through      d) off",
+          "answer": "a) across\n\nWhy: From one side to the other of a surface."
+        },
+        {
+          "question": "The cat jumped ___ the sofa.\na) into      b) onto      c) through      d) past",
+          "answer": "b) onto\n\nWhy: Moving to the top of a surface."
+        },
+        {
+          "question": "We walked ___ the lake for an hour.\na) through      b) along      c) onto      d) out of",
+          "answer": "b) along\n\nWhy: Following the line of the lake."
+        },
+        {
+          "question": "The bus drove ___ our stop without slowing down.\na) to      b) past      c) into      d) at",
+          "answer": "b) past\n\nWhy: Going by without stopping."
+        },
+        {
+          "question": "She came ___ the lift looking worried.\na) out of      b) into      c) onto      d) across",
+          "answer": "a) out of\n\nWhy: From inside to outside."
+        },
+        {
+          "question": "He is running ___ the exit.\na) to the      b) towards      c) into      d) at",
+          "answer": "b) towards\n\nWhy: Moving in the direction of the exit."
+        },
+        {
+          "question": "I will come ___ after the workshop.\na) to home      b) at home      c) home      d) in home",
+          "answer": "c) home\n\nWhy: Home takes no preposition after come, go or reach."
+        },
+        {
+          "question": "I reached to the venue at nine.",
+          "answer": "I reached the venue at nine.\n\nWhy: Reach takes no preposition."
+        },
+        {
+          "question": "She entered into the hall quietly.",
+          "answer": "She entered the hall quietly.\n\nWhy: Enter takes no preposition here."
+        },
+        {
+          "question": "We are going to home after the session.",
+          "answer": "We are going home after the session.\n\nWhy: Do not use to with home."
+        },
+        {
+          "question": "He got ___ the bus at the last stop.\na) off      b) out of      c) over      d) onto",
+          "answer": "a) off\n\nWhy: Get off a bus; get out of a car."
+        },
+        {
+          "question": "They climbed ___ the hill to see the sunrise.\na) down      b) up      c) in      d) at",
+          "answer": "b) up\n\nWhy: Moving to a higher point."
+        }
+      ],
+      "duration_minutes": 17,
+      "status": "INACTIVE"
+    },
+    {
+      "id": "edb90586-9fcf-5473-9104-50825476c3bb",
+      "module_id": "586449ae-3eb8-5c59-a5bb-226613b9dfb1",
+      "title": "Part 4: Words That Come with Fixed Prepositions",
+      "sequence": 5,
+      "content": "This is the area where learners lose the most marks, because the preposition is decided by the word before it, not by logic. The best approach is to learn them in pairs, in small groups, and to read them in full sentences.\n\n## Adjective + preposition\n\n| Pair | Example |\n| --- | --- |\n| good at / bad at | She is good at data analysis. |\n| interested in | He is interested in cybersecurity. |\n| afraid of / proud of / aware of | We are proud of our team. |\n| responsible for | Who is responsible for the budget? |\n| different from | This plan is different from the last one. |\n| keen on / fond of | She is keen on joining the startup. |\n| capable of | You are capable of leading a team. |\n\n## Verb + preposition\n\n| Pair | Example |\n| --- | --- |\n| depend on / rely on | Our success depends on teamwork. |\n| apply for (a job) / apply to (a company) | I applied for the role at Wipro. |\n| wait for | Please wait for my signal. |\n| listen to | Listen to the instructions carefully. |\n| belong to | This laptop belongs to the department. |\n| believe in / succeed in | She succeeded in clearing the aptitude round. |\n| apologise for (a mistake) / to (a person) | He apologised to the client for the delay. |\n| congratulate on | We congratulated her on her promotion. |\n| participate in / contribute to | Everyone contributed to the project. |\n| look forward to + -ing | I look forward to meeting you. |\n\n## Noun + preposition\n\nA reason for the delay, a solution to the problem, an increase in sales, a demand for skilled workers, a lack of experience, a reply to your email.\n\nTip: After a preposition, a verb takes the -ing form: interested in learning, good at writing, look forward to hearing. This is why \"I look forward to meet you\" is wrong.\n\n## Practice: Part 4 (15 questions)\n\nTry the practice questions below before revealing each answer and explanation.",
+      "practice_questions": [
+        {
+          "question": "She is very good ___ solving puzzles.\na) in      b) at      c) on      d) for",
+          "answer": "b) at\n\nWhy: Good at."
+        },
+        {
+          "question": "He is interested ___ data science.\na) on      b) at      c) for      d) in",
+          "answer": "d) in\n\nWhy: Interested in."
+        },
+        {
+          "question": "Our manager is responsible ___ the final report.\na) for      b) of      c) to      d) on",
+          "answer": "a) for\n\nWhy: Responsible for."
+        },
+        {
+          "question": "This version is different ___ the earlier one.\na) to      b) than      c) from      d) with",
+          "answer": "c) from\n\nWhy: Different from."
+        },
+        {
+          "question": "The success of the event depends ___ everyone's effort.\na) of      b) on      c) at      d) for",
+          "answer": "b) on\n\nWhy: Depend on."
+        },
+        {
+          "question": "I applied ___ a position in the marketing team.\na) to      b) at      c) for      d) in",
+          "answer": "c) for\n\nWhy: Apply for a job."
+        },
+        {
+          "question": "She applied ___ three companies last week.\na) at      b) for      c) with      d) to",
+          "answer": "d) to\n\nWhy: Apply to a company."
+        },
+        {
+          "question": "Please wait ___ me at the gate.\na) to      b) for      c) on      d) at",
+          "answer": "b) for\n\nWhy: Wait for."
+        },
+        {
+          "question": "He apologised ___ the delay.\na) to      b) of      c) for      d) on",
+          "answer": "c) for\n\nWhy: Apologise for a mistake or action."
+        },
+        {
+          "question": "We congratulated Aisha ___ her promotion.\na) for      b) on      c) at      d) with",
+          "answer": "b) on\n\nWhy: Congratulate on."
+        },
+        {
+          "question": "I look forward ___ you soon.\na) to meet      b) to meeting      c) for meeting      d) to meet with",
+          "answer": "b) to meeting\n\nWhy: Look forward to + -ing."
+        },
+        {
+          "question": "There has been a sharp increase ___ demand for software skills.\na) of      b) at      c) in      d) for to",
+          "answer": "c) in\n\nWhy: An increase in."
+        },
+        {
+          "question": "She is afraid from public speaking.",
+          "answer": "She is afraid of public speaking.\n\nWhy: Afraid of."
+        },
+        {
+          "question": "I am not aware about the new policy.",
+          "answer": "I am not aware of the new policy.\n\nWhy: Aware of."
+        },
+        {
+          "question": "He is very keen in playing chess.",
+          "answer": "He is very keen on playing chess.\n\nWhy: Keen on."
+        }
+      ],
+      "duration_minutes": 18,
+      "status": "INACTIVE"
+    },
+    {
+      "id": "67234dfd-e649-5170-bd8f-3f498e4c7698",
+      "module_id": "586449ae-3eb8-5c59-a5bb-226613b9dfb1",
+      "title": "Part 5: Workplace Phrases and Fixed Expressions",
+      "sequence": 6,
+      "content": "Some prepositions appear in phrases you will meet in every office, email and interview. Treat them as ready-made blocks and learn them whole.\n\n| Phrase | Meaning | Example |\n| --- | --- | --- |\n| on behalf of | representing someone | I am writing on behalf of the placement cell. |\n| in charge of | responsible for managing | Rekha is in charge of recruitment. |\n| in addition to | as well as | In addition to Java, we need SQL. |\n| because of / due to | caused by (followed by a noun) | The session was cancelled due to rain. |\n| instead of | in place of | Let us meet on Friday instead of Thursday. |\n| in spite of / despite | even though (followed by a noun) | Despite the delay, we met the deadline. |\n| according to | as stated by | According to the schedule, the test is at 11. |\n| with regard to | about | With regard to your query, please see below. |\n| at the end / in the end | at the final point / finally | At the end of the day, we won. In the end, she accepted. |\n| by hand / by email | the method or means | Please send the form by email. |\n| in touch with | in contact with | I will stay in touch with the recruiter. |\n\nTip: Because of, due to, in spite of and despite are followed by a noun or -ing form, not by a full clause. Say \"because of the rain\" but \"because it rained\".\n\n## Practice: Part 5 (15 questions)\n\nTry the practice questions below before revealing each answer and explanation.",
+      "practice_questions": [
+        {
+          "question": "I am writing ___ behalf of the college.\na) in      b) on      c) at      d) for the",
+          "answer": "b) on\n\nWhy: On behalf of."
+        },
+        {
+          "question": "Divya is ___ charge of the event team.\na) on      b) at      c) in      d) with",
+          "answer": "c) in\n\nWhy: In charge of."
+        },
+        {
+          "question": "___ addition to the interview, there will be a written test.\na) On      b) In      c) At      d) By",
+          "answer": "b) In\n\nWhy: In addition to."
+        },
+        {
+          "question": "The flight was delayed ___ heavy fog.\na) despite      b) due to      c) instead of      d) in spite",
+          "answer": "b) due to\n\nWhy: Due to gives the cause."
+        },
+        {
+          "question": "___ the poor weather, the match went ahead.\na) Due to      b) Because of      c) Despite      d) Instead",
+          "answer": "c) Despite\n\nWhy: Despite shows contrast."
+        },
+        {
+          "question": "Let us have the meeting on Friday ___ Thursday.\na) instead of      b) because of      c) according to      d) in charge of",
+          "answer": "a) instead of\n\nWhy: Instead of means in place of."
+        },
+        {
+          "question": "___ the notice, the form must be submitted online.\na) According to      b) In spite      c) Instead      d) On behalf",
+          "answer": "a) According to\n\nWhy: Reports what the notice says."
+        },
+        {
+          "question": "Please send the signed form ___ email.\na) with      b) in      c) by      d) on",
+          "answer": "c) by\n\nWhy: By + means of communication."
+        },
+        {
+          "question": "I will stay ___ touch with the recruiter.\na) on      b) in      c) at      d) by",
+          "answer": "b) in\n\nWhy: In touch with."
+        },
+        {
+          "question": "We were stuck in traffic, but ___ the end we reached on time.\na) on      b) at      c) in      d) by",
+          "answer": "c) in\n\nWhy: In the end means finally."
+        },
+        {
+          "question": "The talk will be held ___ the end of the course.\na) on      b) in      c) at      d) to",
+          "answer": "c) at\n\nWhy: At the end means at the final point of something."
+        },
+        {
+          "question": "She arrived late ___ spite of leaving early.\na) in      b) on      c) at      d) by",
+          "answer": "a) in\n\nWhy: In spite of."
+        },
+        {
+          "question": "The match was cancelled because of it rained.",
+          "answer": "The match was cancelled because it rained.\n\nWhy: Because of is followed by a noun; use because before a clause."
+        },
+        {
+          "question": "Despite of the delay, we finished on time.",
+          "answer": "Despite the delay, we finished on time.\n\nWhy: Despite is never followed by of; in spite of is the longer form."
+        },
+        {
+          "question": "According to me, the plan is risky.",
+          "answer": "In my opinion, the plan is risky.\n\nWhy: According to refers to another source, not to yourself."
+        }
+      ],
+      "duration_minutes": 17,
+      "status": "INACTIVE"
+    },
+    {
+      "id": "a010e60d-f7dc-524f-ae65-79679b337afe",
+      "module_id": "586449ae-3eb8-5c59-a5bb-226613b9dfb1",
+      "title": "Part 6: No Preposition Needed: Spot and Fix",
+      "sequence": 7,
+      "content": "Adding a preposition that does not belong is just as common as choosing the wrong one. These verbs already contain the preposition's meaning, so they take their object directly.\n\n| Verb | Wrong | Right |\n| --- | --- | --- |\n| discuss | We discussed about the plan. | We discussed the plan. |\n| reach | She reached to the office. | She reached the office. |\n| attend | He attended to the meeting. | He attended the meeting. |\n| enter | They entered into the hall. | They entered the hall. |\n| mention | She mentioned about it. | She mentioned it. |\n| emphasise | He emphasised on punctuality. | He emphasised punctuality. |\n| marry | She married with Rohan. | She married Rohan. |\n| resemble | He resembles to his father. | He resembles his father. |\n| approach | I approached to the manager. | I approached the manager. |\n\n## Careful: some verbs do need a preposition\n\nTalk about is fine because talk is a different verb: We talked about the plan. Similarly, listen to, wait for, look at, search for and ask for need their prepositions. And note that many learners add the wrong one: it is explain it to me (not explain me), suggest an idea to me (not suggest me), tell me (not tell to me).\n\nTip: If you are unsure, test with the noun form. We say a discussion about the plan, but the verb discuss takes no about.\n\n## Practice: Part 6 (14 questions)\n\nTry the practice questions below before revealing each answer and explanation.",
+      "practice_questions": [
+        {
+          "question": "We discussed about the budget in the meeting.",
+          "answer": "We discussed the budget in the meeting.\n\nWhy: Discuss takes no preposition."
+        },
+        {
+          "question": "She reached to the venue before nine.",
+          "answer": "She reached the venue before nine.\n\nWhy: Reach takes no preposition."
+        },
+        {
+          "question": "Over a hundred students attended to the seminar.",
+          "answer": "Over a hundred students attended the seminar.\n\nWhy: Attend takes no preposition when it means to be present."
+        },
+        {
+          "question": "He mentioned about his internship in the interview.",
+          "answer": "He mentioned his internship in the interview.\n\nWhy: Mention takes no preposition."
+        },
+        {
+          "question": "The trainer emphasised on the importance of punctuality.",
+          "answer": "The trainer emphasised the importance of punctuality.\n\nWhy: Emphasise takes no preposition."
+        },
+        {
+          "question": "She is going to marry with her classmate.",
+          "answer": "She is going to marry her classmate.\n\nWhy: Marry takes no preposition."
+        },
+        {
+          "question": "Please explain me the process.",
+          "answer": "Please explain the process to me.\n\nWhy: Explain needs to before the person."
+        },
+        {
+          "question": "Can you suggest me a good course?",
+          "answer": "Can you suggest a good course to me? (or: Can you recommend a good course?)\n\nWhy: Suggest takes the idea first, then to the person."
+        },
+        {
+          "question": "He told to me that the exam was postponed.",
+          "answer": "He told me that the exam was postponed.\n\nWhy: Tell takes the person directly."
+        },
+        {
+          "question": "She approached to the HR manager for advice.",
+          "answer": "She approached the HR manager for advice.\n\nWhy: Approach takes no preposition."
+        },
+        {
+          "question": "Choose the correct sentence.\na) We talked about our career goals.      b) We talked our career goals.      c) We talked on about our career goals.      d) We talked to about our career goals.",
+          "answer": "a) We talked about our career goals.\n\nWhy: Talk needs about before the topic."
+        },
+        {
+          "question": "Choose the correct sentence.\na) I am waiting you at the gate.      b) I am waiting to you at the gate.      c) I am waiting for you at the gate.      d) I am waiting of you at the gate.",
+          "answer": "c) I am waiting for you at the gate.\n\nWhy: Wait for."
+        },
+        {
+          "question": "Choose the correct sentence.\na) Listen the recording carefully.      b) Listen to the recording carefully.      c) Listen at the recording carefully.      d) Listen for the recording carefully.",
+          "answer": "b) Listen to the recording carefully.\n\nWhy: Listen to."
+        },
+        {
+          "question": "Choose the correct sentence.\na) She resembles to her mother.      b) She resembles with her mother.      c) She resembles her mother.      d) She resembles of her mother.",
+          "answer": "c) She resembles her mother.\n\nWhy: Resemble takes no preposition."
+        }
+      ],
+      "duration_minutes": 16,
+      "status": "INACTIVE"
+    },
+    {
+      "id": "e5bfe888-e639-505b-8955-3172b5af25bf",
+      "module_id": "586449ae-3eb8-5c59-a5bb-226613b9dfb1",
+      "title": "Final Challenge: Mixed Practice",
+      "sequence": 8,
+      "content": "Choose the best answer. Each question may test a different idea from this module.\n\nYour score: 17 to 20: excellent, you are ready to use this confidently. 12 to 16: good, revise the parts where you slipped. Below 12: go back to the explanations and try again after a day.\n\nTry the practice questions below before revealing each answer and explanation.",
+      "practice_questions": [
+        {
+          "question": "The training begins ___ 9:30 a.m.\na) on      b) in      c) at      d) by",
+          "answer": "c) at\n\nWhy: Clock time."
+        },
+        {
+          "question": "We have our internal review ___ the first week of March.\na) on      b) at      c) in      d) by",
+          "answer": "c) in\n\nWhy: Periods such as weeks and months take in."
+        },
+        {
+          "question": "Please submit the assignment ___ Monday evening at the latest.\na) until      b) by      c) since      d) during",
+          "answer": "b) by\n\nWhy: Deadline."
+        },
+        {
+          "question": "I have been learning German ___ six months.\na) since      b) for      c) during      d) by",
+          "answer": "b) for\n\nWhy: A length of time takes for."
+        },
+        {
+          "question": "I have been learning German ___ June.\na) for      b) since      c) during      d) within",
+          "answer": "b) since\n\nWhy: A starting point takes since."
+        },
+        {
+          "question": "Nobody should leave the hall ___ the presentation.\na) while      b) during      c) since      d) for",
+          "answer": "b) during\n\nWhy: During + noun."
+        },
+        {
+          "question": "The notice is pinned ___ the board near the entrance.\na) in      b) at      c) on      d) among",
+          "answer": "c) on\n\nWhy: Surface."
+        },
+        {
+          "question": "We met ___ the airport and travelled to the hotel together.\na) in      b) at      c) on      d) to",
+          "answer": "b) at\n\nWhy: A point in a journey."
+        },
+        {
+          "question": "She walked ___ the corridor and into her cabin.\na) along      b) past of      c) into the      d) at",
+          "answer": "a) along\n\nWhy: Following a line."
+        },
+        {
+          "question": "The auto went ___ the narrow lane very slowly.\na) through      b) at      c) on to      d) in",
+          "answer": "a) through\n\nWhy: Moving along inside a lane."
+        },
+        {
+          "question": "He is not good ___ managing time.\na) in      b) at      c) on      d) with",
+          "answer": "b) at\n\nWhy: Good at."
+        },
+        {
+          "question": "She is proud ___ her college.\na) with      b) for      c) of      d) on",
+          "answer": "c) of\n\nWhy: Proud of."
+        },
+        {
+          "question": "Our plan depends ___ the budget.\na) of      b) on      c) at      d) for",
+          "answer": "b) on\n\nWhy: Depend on."
+        },
+        {
+          "question": "I look forward ___ your reply.\na) to receive      b) for      c) to      d) on",
+          "answer": "c) to\n\nWhy: Look forward to + noun or -ing."
+        },
+        {
+          "question": "The match was postponed ___ rain.\na) in spite      b) instead      c) due to      d) according",
+          "answer": "c) due to\n\nWhy: Cause."
+        },
+        {
+          "question": "___ the traffic, we reached early.\na) Because of      b) Despite      c) Due to      d) Instead of",
+          "answer": "b) Despite\n\nWhy: Contrast."
+        },
+        {
+          "question": "We discussed about the new policy.",
+          "answer": "We discussed the new policy.\n\nWhy: Discuss takes no preposition."
+        },
+        {
+          "question": "She entered into the room silently.",
+          "answer": "She entered the room silently.\n\nWhy: Enter takes no preposition here."
+        },
+        {
+          "question": "I am waiting since 9 o'clock.",
+          "answer": "I have been waiting since 9 o'clock.\n\nWhy: Since needs a perfect tense."
+        },
+        {
+          "question": "Please explain me this concept.",
+          "answer": "Please explain this concept to me.\n\nWhy: Explain needs to before the person."
+        }
+      ],
+      "duration_minutes": 21,
+      "status": "INACTIVE"
+    },
+    {
+      "id": "fddd5a6a-aa17-59af-a95f-465e6fd02568",
+      "module_id": "586449ae-3eb8-5c59-a5bb-226613b9dfb1",
+      "title": "Quick Recap",
+      "sequence": 9,
+      "content": "- At = exact time or point; on = day, date, surface; in = period, area, enclosed space.\n\n- For = how long; since = from when; during + noun; while + clause.\n\n- By = deadline; until = continuing up to; within = inside a period.\n\n- To = destination; into = going inside; through, across, along, past, towards = path words.\n\n- Learn fixed pairs: good at, interested in, responsible for, depend on, apply for.\n\n- After a preposition, a verb takes -ing.\n\n- Discuss, reach, attend, enter, mention and emphasise take no preposition.\n\n- Because of, due to, in spite of and despite take a noun, not a full clause.",
+      "practice_questions": [],
+      "duration_minutes": 3,
+      "status": "INACTIVE"
+    },
+    {
+      "id": "46a1b22e-c8b3-5410-bce7-1594c3e4dd9d",
+      "module_id": "12317970-9ddb-5de8-b1e3-cc7e6534c4a0",
+      "title": "Introduction and learning objectives",
+      "sequence": 1,
+      "content": "CAMPUS TO CORPORATE  |  COMMUNICATION SKILLS  |  ENGLISH GRAMMAR\n\nTenses: Showing Time Clearly in Your English\n\nTenses tell your listener when something happens and what kind of action it is: finished, still going on, repeated, or connected to the present. A wrong tense does not just break a rule. It can change the message. \"I completed the report\" and \"I have been completing the report\" tell two different stories.\n\nEnglish has twelve tense forms, but you do not need to memorise twelve separate lists. Each tense is built from a time (present, past, future) and an aspect (simple, continuous, perfect, perfect continuous). Learn the logic once and the rest follows.\n\n## Three questions that pick the right tense\n\n- When did it happen: before now, around now, or after now?\n\n- Is the action finished, still in progress, or repeated? Is its link to another moment important?\n\n- Which clue words are in the sentence? Words such as yesterday, since, now, by the time and every day usually point to one tense.\n\n## The twelve tenses on one page\n\nThe same sentence is shown in every tense so you can compare the changes.\n\n| Tense | Structure | Example |\n| --- | --- | --- |\n| Simple present | base verb (+ s/es for he, she, it) | Meera reviews the code every morning. |\n| Present continuous | am / is / are + verb-ing | I am reviewing the code now. |\n| Present perfect | have / has + past participle | I have reviewed the code. |\n| Present perfect continuous | have / has been + verb-ing | I have been reviewing the code since noon. |\n| Simple past | past form | I reviewed the code yesterday. |\n| Past continuous | was / were + verb-ing | I was reviewing the code when the power went out. |\n| Past perfect | had + past participle | I had reviewed the code before the meeting began. |\n| Past perfect continuous | had been + verb-ing | I had been reviewing the code for two hours when you called. |\n| Simple future | will + base verb | I will review the code tomorrow. |\n| Future continuous | will be + verb-ing | I will be reviewing the code at 4 p.m. |\n| Future perfect | will have + past participle | I will have reviewed the code by Friday. |\n| Future perfect continuous | will have been + verb-ing | By Friday, I will have been reviewing the code for a week. |\n\nTip: Note that the future perfect continuous is will have been + verb-ing. Some charts wrongly show it as will have + past participle, which is the plain future perfect.\n\n## By the end of this module, you will be able to\n\n- Use the simple present and present continuous correctly, including with state verbs.\n\n- Choose between the simple past and the present perfect.\n\n- Use the past continuous and the past perfect to show how past events relate.\n\n- Talk about the future with will, going to, the present continuous and the future perfect.\n\n- Avoid the common time-clause mistakes, such as \"when he will come\".\n\n- Keep tenses consistent in a paragraph, an email or an interview answer.\n\n## What is inside\n\n- Part 1: Simple Present and Present Continuous\n\n- Part 2: Present Perfect and Present Perfect Continuous\n\n- Part 3: Simple Past and Past Continuous\n\n- Part 4: Past Perfect and Past Perfect Continuous\n\n- Part 5: Talking About the Future\n\n- Part 6: Choosing the Right Tense: Clues and Common Errors\n\n- Final Challenge: Mixed Practice\n\n- Quick recap\n\nHow to study: Read each short explanation first, then try the exercises without looking at the answers. Check the answer key and read the reason, even when you got it right. If you score below about 70 percent in a part, read that explanation again and retry after a day.",
+      "practice_questions": [],
+      "duration_minutes": 4,
+      "status": "INACTIVE"
+    },
+    {
+      "id": "d80af7ac-cb42-528d-8448-041baeab0234",
+      "module_id": "12317970-9ddb-5de8-b1e3-cc7e6534c4a0",
+      "title": "Part 1: Simple Present and Present Continuous",
+      "sequence": 2,
+      "content": "These two tenses describe the present, but in different ways. The simple present is about what is generally true or regular. The present continuous is about what is happening now or around now.\n\n## Simple present\n\n- Habits and routines: Kavya goes to college by bus.\n\n- Facts and general truths: Water boils at 100 degrees Celsius.\n\n- Fixed timetables: The library opens at 8 a.m.\n\n- Add -s or -es for he, she, it: she works, he watches. Use do/does for questions and negatives: Does he work here? He does not work here. After does, the verb stays in the base form.\n\n## Present continuous\n\n- An action in progress at this moment: The trainer is showing the slides.\n\n- A temporary situation: I am staying with my cousin this month.\n\n- A fixed arrangement for the near future: I am meeting the placement officer at 3 tomorrow.\n\n## State verbs resist the continuous\n\nVerbs of thinking, feeling, wanting and owning describe states, not actions, and are normally used in the simple form: know, believe, understand, want, need, like, love, hate, prefer, own, belong, seem. We say \"I know the answer\", not \"I am knowing the answer\". Some verbs have two meanings: She has two brothers (possession, simple) but She is having lunch (action, continuous).\n\nTip: Clue words: always, usually, every day, on Mondays point to the simple present. Now, at the moment, currently, these days point to the continuous.\n\n## Practice: Part 1 (14 questions)\n\nTry the practice questions below before revealing each answer and explanation.",
+      "practice_questions": [
+        {
+          "question": "Kavya ___ to college by bus every day.\na) go      b) is going      c) goes      d) going",
+          "answer": "c) goes\n\nWhy: A daily routine takes the simple present, with -es for she."
+        },
+        {
+          "question": "Water ___ at 100 degrees Celsius.\na) boil      b) is boiling      c) boiled      d) boils",
+          "answer": "d) boils\n\nWhy: A general truth."
+        },
+        {
+          "question": "Look! The trainer ___ the new slides.\na) shows      b) is showing      c) show      d) showed",
+          "answer": "b) is showing\n\nWhy: The action is happening now."
+        },
+        {
+          "question": "I ___ the answer to this question.\na) am knowing      b) knowing      c) know      d) knows",
+          "answer": "c) know\n\nWhy: Know is a state verb and is not used in the continuous."
+        },
+        {
+          "question": "She ___ two brothers.\na) is having      b) have      c) having      d) has",
+          "answer": "d) has\n\nWhy: Have meaning possession is not used in the continuous."
+        },
+        {
+          "question": "Please call later; we ___ lunch right now.\na) have      b) are having      c) having      d) has",
+          "answer": "b) are having\n\nWhy: Having lunch is an action in progress."
+        },
+        {
+          "question": "The library ___ at 8 a.m. on weekdays.\na) opens      b) is opening      c) open      d) opening",
+          "answer": "a) opens\n\nWhy: A regular timetable."
+        },
+        {
+          "question": "Meera ___ for internships these days.\na) apply      b) applies      c) applied      d) is applying",
+          "answer": "d) is applying\n\nWhy: A temporary, ongoing activity around now."
+        },
+        {
+          "question": "He ___ coffee. He prefers tea.\na) isn't liking      b) doesn't like      c) don't like      d) not like",
+          "answer": "b) doesn't like\n\nWhy: A state verb with does not + base form."
+        },
+        {
+          "question": "I am going to office every day by metro.",
+          "answer": "I go to the office every day by metro.\n\nWhy: A daily habit takes the simple present."
+        },
+        {
+          "question": "She is knowing the answer.",
+          "answer": "She knows the answer.\n\nWhy: Know is a state verb."
+        },
+        {
+          "question": "Does your brother works in Pune?",
+          "answer": "Does your brother work in Pune?\n\nWhy: After does, use the base form."
+        },
+        {
+          "question": "They doesn't attend the weekend class.",
+          "answer": "They don't attend the weekend class.\n\nWhy: They takes do not, not does not."
+        },
+        {
+          "question": "Make a question using does: Arjun plays chess on Sundays.",
+          "answer": "Does Arjun play chess on Sundays?\n\nWhy: Does + subject + base verb."
+        }
+      ],
+      "duration_minutes": 16,
+      "status": "INACTIVE"
+    },
+    {
+      "id": "13f01ae6-57aa-5ab0-832b-17306c0d4d11",
+      "module_id": "12317970-9ddb-5de8-b1e3-cc7e6534c4a0",
+      "title": "Part 2: Present Perfect and Present Perfect Continuous",
+      "sequence": 3,
+      "content": "The present perfect links the past to the present. The action may have happened earlier, but what matters is its result or relevance now. Because it is not about a finished time, it never goes with words like yesterday, last year, in 2022 or ago. For those, use the simple past.\n\n## Present perfect: have / has + past participle\n\n- Experience, with ever and never: Have you ever given a mock interview?\n\n- A recent action with a result you can see: I have updated my resume. (Here it is.)\n\n- Unfinished periods: I have written three emails today. This week has been busy.\n\n- States continuing up to now, with for and since: She has lived in Bengaluru for two years.\n\n## Present perfect continuous: have / has been + verb-ing\n\nThis tense focuses on an activity and its duration. It describes something that began in the past and is still going on, or has only just stopped with visible effects. They have been waiting for thirty minutes. My eyes hurt because I have been staring at the screen all day.\n\n## Perfect or perfect continuous?\n\nUse the plain perfect when you care about the number or the result (I have written three reports). Use the continuous when you care about the activity or how long (I have been writing reports all morning). State verbs stay simple: I have known him since college, not \"have been knowing\".\n\nTip: Since + a starting point (since 2020, since Monday). For + a length of time (for two years, for an hour).\n\n## Practice: Part 2 (14 questions)\n\nTry the practice questions below before revealing each answer and explanation.",
+      "practice_questions": [
+        {
+          "question": "I ___ my resume. Would you like to see it?\na) updated      b) am updating      c) had updated      d) have updated",
+          "answer": "d) have updated\n\nWhy: A recent action whose result is relevant now."
+        },
+        {
+          "question": "She ___ in Bengaluru for two years.\na) lived      b) has lived      c) lives      d) is living",
+          "answer": "b) has lived\n\nWhy: A state that began in the past and continues now, with for."
+        },
+        {
+          "question": "Have you ever ___ a mock interview?\na) gave      b) giving      c) given      d) give",
+          "answer": "c) given\n\nWhy: Present perfect needs the past participle."
+        },
+        {
+          "question": "We ___ the project yesterday.\na) have finished      b) had finished      c) finished      d) finish",
+          "answer": "c) finished\n\nWhy: Yesterday is a finished time, so use the simple past."
+        },
+        {
+          "question": "He ___ here since 2019.\na) works      b) worked      c) is working      d) has worked",
+          "answer": "d) has worked\n\nWhy: Since + a starting point needs the present perfect."
+        },
+        {
+          "question": "They ___ for the bus for thirty minutes.\na) waited      b) wait      c) have been waiting      d) are waited",
+          "answer": "c) have been waiting\n\nWhy: An activity that has continued up to now."
+        },
+        {
+          "question": "My eyes hurt because I ___ at the screen all day.\na) look      b) looked      c) had looked      d) have been looking",
+          "answer": "d) have been looking\n\nWhy: An ongoing activity with a visible effect."
+        },
+        {
+          "question": "I ___ three reports so far today.\na) have been writing      b) wrote      c) have written      d) had written",
+          "answer": "c) have written\n\nWhy: A completed number of things."
+        },
+        {
+          "question": "I have completed my degree in 2022.",
+          "answer": "I completed my degree in 2022.\n\nWhy: A finished year needs the simple past."
+        },
+        {
+          "question": "She has went to the library.",
+          "answer": "She has gone to the library.\n\nWhy: Use the past participle gone."
+        },
+        {
+          "question": "I am working here since five years.",
+          "answer": "I have been working here for five years.\n\nWhy: Duration up to now needs the perfect continuous, and five years needs for."
+        },
+        {
+          "question": "I have seen him yesterday.",
+          "answer": "I saw him yesterday.\n\nWhy: Yesterday is a finished time."
+        },
+        {
+          "question": "I have been knowing him since college.",
+          "answer": "I have known him since college.\n\nWhy: Know is a state verb."
+        },
+        {
+          "question": "Complete with the present perfect continuous of \"prepare\": Aman ___ for the exam since morning.",
+          "answer": "has been preparing\n\nWhy: Has been + verb-ing."
+        }
+      ],
+      "duration_minutes": 16,
+      "status": "INACTIVE"
+    },
+    {
+      "id": "63e8d3b4-724b-51bd-96d6-fecae203650a",
+      "module_id": "12317970-9ddb-5de8-b1e3-cc7e6534c4a0",
+      "title": "Part 3: Simple Past and Past Continuous",
+      "sequence": 4,
+      "content": "Both tenses talk about the past, but they look at it differently. The simple past states what happened. The past continuous paints the scene: what was going on at a certain moment.\n\n## Simple past\n\n- A finished action at a definite time: She joined the company in 2021.\n\n- A sequence of events: He opened the file, checked the data and closed it.\n\n- Regular verbs add -ed (worked); irregular verbs change (went, wrote, bought).\n\n- Questions and negatives use did + base verb: Did you go? She did not submit. After did, never use the past form.\n\n## Past continuous: was / were + verb-ing\n\n- An action in progress at a particular time: At 11 p.m. last night, I was studying.\n\n- An action interrupted by another one: I was giving a presentation when the power went off. (The longer action is continuous; the shorter, interrupting action is simple past.)\n\n- Two actions happening together: While she was cooking, he was setting the table.\n\n## Past habits\n\nFor habits that no longer continue, use used to + base verb: He used to go to school by bike. Questions use use to: Did you use to play cricket?\n\nTip: When introduces a short, interrupting event; while introduces the longer, ongoing action.\n\n## Practice: Part 3 (14 questions)\n\nTry the practice questions below before revealing each answer and explanation.",
+      "practice_questions": [
+        {
+          "question": "She ___ the email and closed her laptop.\na) was sending      b) sends      c) has sent      d) sent",
+          "answer": "d) sent\n\nWhy: A sequence of finished actions."
+        },
+        {
+          "question": "I ___ a presentation when the power went off.\na) gave      b) was giving      c) give      d) have given",
+          "answer": "b) was giving\n\nWhy: The longer action in progress, interrupted by a short one."
+        },
+        {
+          "question": "While Arjun ___, his phone rang.\na) drove      b) was driving      c) drives      d) has driven",
+          "answer": "b) was driving\n\nWhy: While introduces the longer ongoing action."
+        },
+        {
+          "question": "Did you ___ the notice yesterday?\na) saw      b) seen      c) see      d) seeing",
+          "answer": "c) see\n\nWhy: After did, use the base form."
+        },
+        {
+          "question": "They ___ dinner and then watched a movie.\na) were having      b) has      c) had      d) have",
+          "answer": "c) had\n\nWhy: A sequence of finished events."
+        },
+        {
+          "question": "At 11 p.m. last night, I ___ for my exam.\na) studied      b) study      c) have studied      d) was studying",
+          "answer": "d) was studying\n\nWhy: An action in progress at a specific past time."
+        },
+        {
+          "question": "It ___ heavily when we left the hall.\na) rained      b) was raining      c) rains      d) has rained",
+          "answer": "b) was raining\n\nWhy: Background action in progress."
+        },
+        {
+          "question": "He ___ go to school by bike when he was a student.\na) use to      b) uses to      c) used to      d) is used to",
+          "answer": "c) used to\n\nWhy: A past habit that has stopped."
+        },
+        {
+          "question": "Did you went to the seminar?",
+          "answer": "Did you go to the seminar?\n\nWhy: After did, use the base form."
+        },
+        {
+          "question": "She didn't submitted the form.",
+          "answer": "She didn't submit the form.\n\nWhy: After did not, use the base form."
+        },
+        {
+          "question": "We are going to Ooty last summer.",
+          "answer": "We went to Ooty last summer.\n\nWhy: A finished time needs the simple past."
+        },
+        {
+          "question": "I was reading the notice when I was hearing a loud noise.",
+          "answer": "I was reading the notice when I heard a loud noise.\n\nWhy: The interrupting event is simple past, and hear is a state verb."
+        },
+        {
+          "question": "Complete with the correct form of \"walk\": As I ___ to college, I met my professor.",
+          "answer": "was walking\n\nWhy: An action in progress when another event happened."
+        },
+        {
+          "question": "Put into the simple past: She buys a new laptop and gives her old one to her sister.",
+          "answer": "She bought a new laptop and gave her old one to her sister.\n\nWhy: Both are irregular verbs."
+        }
+      ],
+      "duration_minutes": 16,
+      "status": "INACTIVE"
+    },
+    {
+      "id": "e92453a0-e80c-5589-9e58-3c722006d082",
+      "module_id": "12317970-9ddb-5de8-b1e3-cc7e6534c4a0",
+      "title": "Part 4: Past Perfect and Past Perfect Continuous",
+      "sequence": 5,
+      "content": "When you talk about two events in the past, you sometimes need to show which came first. The past perfect marks the earlier one. Think of it as \"the past of the past\".\n\n## Past perfect: had + past participle\n\nWhen I reached the station, the train had left. Two past events: the train leaving (first), my reaching the station (second). The earlier event takes had + past participle; the later one takes the simple past.\n\n- Common clues: before, after, by the time, already, just, never...before.\n\n- Reported speech: She said that she had finished. (The original words were: I have finished.)\n\n- If the order is already clear from before or after, the simple past is often enough: After he finished, he left.\n\n## Past perfect continuous: had been + verb-ing\n\nThis shows how long an activity went on before a past moment, or the cause of a past situation. She was tired because she had been studying all night. I had been waiting for an hour when the bus finally came.\n\nTip: Do not mix the present perfect into a past story. After he has finished, he left is wrong. Use After he had finished, he left.\n\n## Practice: Part 4 (14 questions)\n\nTry the practice questions below before revealing each answer and explanation.",
+      "practice_questions": [
+        {
+          "question": "By the time we reached the hall, the session ___.\na) started      b) has started      c) was starting      d) had started",
+          "answer": "d) had started\n\nWhy: The session started first."
+        },
+        {
+          "question": "By the time the meeting began, she ___ her lunch.\na) finished      b) had finished      c) was finishing      d) finishes",
+          "answer": "b) had finished\n\nWhy: The earlier past event takes had + past participle."
+        },
+        {
+          "question": "I realised I ___ my ID card at home.\na) left      b) leave      c) was leaving      d) had left",
+          "answer": "d) had left\n\nWhy: Leaving it happened before realising."
+        },
+        {
+          "question": "He was exhausted because he ___ for six hours.\na) travelled      b) travels      c) had been travelling      d) has been travelling",
+          "answer": "c) had been travelling\n\nWhy: Duration up to a past moment."
+        },
+        {
+          "question": "Rohit ___ a code review before his first job.\na) never did      b) had never done      c) has never done      d) never does",
+          "answer": "b) had never done\n\nWhy: Experience before a past point."
+        },
+        {
+          "question": "The ground was wet because it ___ all night.\na) rained      b) has been raining      c) was rained      d) had been raining",
+          "answer": "d) had been raining\n\nWhy: A cause for a past situation."
+        },
+        {
+          "question": "I ___ for an hour when the bus finally came.\na) waited      b) have been waiting      c) had been waiting      d) was wait",
+          "answer": "c) had been waiting\n\nWhy: Duration before a past event."
+        },
+        {
+          "question": "Ananya got the job because she ___ hard for months.\na) prepared      b) had been preparing      c) has prepared      d) prepares",
+          "answer": "b) had been preparing\n\nWhy: Preparation continued before the job offer."
+        },
+        {
+          "question": "After he has finished, he left.",
+          "answer": "After he had finished, he left.\n\nWhy: Use the past perfect for the earlier past action."
+        },
+        {
+          "question": "The meeting already started when I arrived.",
+          "answer": "The meeting had already started when I arrived.\n\nWhy: Already + earlier event takes the past perfect."
+        },
+        {
+          "question": "She told me that she has been busy all week.",
+          "answer": "She told me that she had been busy all week.\n\nWhy: In reported speech, shift the tense back."
+        },
+        {
+          "question": "We had been knowing each other since school.",
+          "answer": "We had known each other since school.\n\nWhy: Know is a state verb."
+        },
+        {
+          "question": "Combine using the past perfect for the earlier event: The bus left. We reached the stop.",
+          "answer": "The bus had left by the time we reached the stop. (or: When we reached the stop, the bus had left.)\n\nWhy: Earlier event = past perfect."
+        },
+        {
+          "question": "Complete: She ___ (work) at the firm for five years before she resigned.",
+          "answer": "had worked (or: had been working)\n\nWhy: Duration before a past event."
+        }
+      ],
+      "duration_minutes": 16,
+      "status": "INACTIVE"
+    },
+    {
+      "id": "75e27b63-b64f-5264-b49d-cb567a0ce761",
+      "module_id": "12317970-9ddb-5de8-b1e3-cc7e6534c4a0",
+      "title": "Part 5: Talking About the Future",
+      "sequence": 6,
+      "content": "English has no single future tense. We choose a form depending on what we mean: a decision, a plan, an arrangement, a prediction or a timetable.\n\n| Form | Use | Example |\n| --- | --- | --- |\n| will + base verb | instant decisions, promises, offers, predictions | The printer has stopped. I will fix it. |\n| be going to | plans already made, and predictions based on evidence | Look at those clouds. It is going to rain. |\n| present continuous | fixed arrangements | I am meeting the placement officer at 3 tomorrow. |\n| simple present | timetables | The exam starts at 10 a.m. on Monday. |\n\n## Future continuous, future perfect and future perfect continuous\n\n- Future continuous (will be + verb-ing): in progress at a future time. At 4 p.m. tomorrow, we will be giving the final presentation.\n\n- Future perfect (will have + past participle): finished before a future time. By the time you arrive, I will have completed the setup.\n\n- Future perfect continuous (will have been + verb-ing): duration up to a future point. By December, she will have been working here for ten years.\n\n## Time clauses use the present\n\nAfter when, if, before, after, until, as soon as and unless, use the simple present, not will. Say \"I will call you when I reach\", not \"when I will reach\". Say \"If it rains, we will cancel the event\", not \"if it will rain\".\n\nTip: Will can also go in the main part of the sentence: If you register early, you will get a seat. The \"if\" part stays in the present.\n\n## Practice: Part 5 (14 questions)\n\nTry the practice questions below before revealing each answer and explanation.",
+      "practice_questions": [
+        {
+          "question": "A: The printer isn't working. B: Don't worry, I ___ it.\na) fix      b) am fixing      c) fixed      d) will fix",
+          "answer": "d) will fix\n\nWhy: An instant decision or offer takes will."
+        },
+        {
+          "question": "Look at those dark clouds. It ___ rain.\na) will      b) is going to      c) shall      d) rains",
+          "answer": "b) is going to\n\nWhy: A prediction based on present evidence."
+        },
+        {
+          "question": "I ___ the placement officer at 3 p.m. tomorrow (it is already arranged).\na) am meeting      b) met      c) have met      d) meeting",
+          "answer": "a) am meeting\n\nWhy: A fixed arrangement takes the present continuous."
+        },
+        {
+          "question": "The exam ___ at 10 a.m. on Monday according to the timetable.\na) start      b) starts      c) starting      d) started",
+          "answer": "b) starts\n\nWhy: A timetable uses the simple present."
+        },
+        {
+          "question": "I will call you when I ___ the venue.\na) will reach      b) am reaching      c) reached      d) reach",
+          "answer": "d) reach\n\nWhy: After when, use the present."
+        },
+        {
+          "question": "If the results ___ today, we will celebrate.\na) come      b) will come      c) came      d) are coming",
+          "answer": "a) come\n\nWhy: After if, use the present."
+        },
+        {
+          "question": "At 4 p.m. tomorrow, we ___ the final presentation.\na) give      b) gave      c) will be giving      d) have given",
+          "answer": "c) will be giving\n\nWhy: In progress at a future time."
+        },
+        {
+          "question": "By the time you arrive, I ___ the setup.\na) will complete      b) complete      c) completed      d) will have completed",
+          "answer": "d) will have completed\n\nWhy: Finished before a future time."
+        },
+        {
+          "question": "By December, she ___ in this company for ten years.\na) will work      b) works      c) is working      d) will have been working",
+          "answer": "d) will have been working\n\nWhy: Duration up to a future point."
+        },
+        {
+          "question": "Which sentence is correct?\na) I will call you when I will reach.      b) I will call you when I reach.      c) I call you when I will reach.      d) I am call you when I reach.",
+          "answer": "b) I will call you when I reach.\n\nWhy: No will in the time clause."
+        },
+        {
+          "question": "If it will rain tomorrow, the event will be cancelled.",
+          "answer": "If it rains tomorrow, the event will be cancelled.\n\nWhy: No will after if."
+        },
+        {
+          "question": "I will have been work here for five years next month.",
+          "answer": "I will have been working here for five years next month.\n\nWhy: Will have been needs the -ing form."
+        },
+        {
+          "question": "We will be discuss the plan tomorrow.",
+          "answer": "We will be discussing the plan tomorrow.\n\nWhy: Will be needs the -ing form."
+        },
+        {
+          "question": "Complete with the future perfect of \"complete\": By the end of this year, I ___ my degree.",
+          "answer": "will have completed\n\nWhy: Will have + past participle."
+        }
+      ],
+      "duration_minutes": 16,
+      "status": "INACTIVE"
+    },
+    {
+      "id": "7c9ec223-25ea-53b9-8a10-c7cc06637453",
+      "module_id": "12317970-9ddb-5de8-b1e3-cc7e6534c4a0",
+      "title": "Part 6: Choosing the Right Tense: Clues and Common Errors",
+      "sequence": 7,
+      "content": "In real conversations, you will not have a worksheet in front of you. You choose a tense in a second. These clue words and habits will help you choose correctly almost every time.\n\n| Clue words | Usual tense |\n| --- | --- |\n| every day, usually, always, on Sundays | simple present |\n| now, at the moment, currently, these days | present continuous |\n| ever, never, already, just, yet, so far, this week | present perfect |\n| for + length, since + start (still continuing) | present perfect / perfect continuous |\n| yesterday, last year, in 2022, ago | simple past |\n| when, while (past interruption) | simple past + past continuous |\n| before, by the time (earlier past) | past perfect |\n| tomorrow, next week, soon | will / going to / present continuous |\n| by Friday, by the time you come | future perfect |\n\n## Habits that keep your English clean\n\n- Stay consistent. In a story or a paragraph, keep one main tense unless the time really changes.\n\n- After did, use the base form. Did you complete, not did you completed.\n\n- Never use the present perfect with a finished time. I completed my degree in 2022.\n\n- In reported speech, the verb usually shifts back: She said that she was busy.\n\n- Place already and just between the helping verb and the main verb: I have already finished.\n\nTip: In interviews, use the simple past for finished projects (I developed a mobile app) and the present perfect for experience that is still relevant (I have worked with three programming languages).\n\n## Practice: Part 6 (12 questions)\n\nTry the practice questions below before revealing each answer and explanation.",
+      "practice_questions": [
+        {
+          "question": "I ___ my degree in 2023.\na) have completed      b) completed      c) had completed      d) am completing",
+          "answer": "b) completed\n\nWhy: A definite past year."
+        },
+        {
+          "question": "She ___ three internships so far.\na) did      b) was doing      c) has done      d) does",
+          "answer": "c) has done\n\nWhy: So far points to the present perfect."
+        },
+        {
+          "question": "He said that he ___ busy.\na) is      b) has been      c) will be      d) was",
+          "answer": "d) was\n\nWhy: Reported speech shifts back."
+        },
+        {
+          "question": "They ___ in Hyderabad ten years ago.\na) live      b) have lived      c) lived      d) are living",
+          "answer": "c) lived\n\nWhy: Ago needs the simple past."
+        },
+        {
+          "question": "___ you ever ___ in a team of ten people?\na) Did / work      b) Have / worked      c) Do / work      d) Had / worked",
+          "answer": "b) Have / worked\n\nWhy: Ever points to the present perfect."
+        },
+        {
+          "question": "Right now, the class ___ a mock group discussion.\na) has      b) had      c) will have      d) is having",
+          "answer": "d) is having\n\nWhy: Right now takes the present continuous."
+        },
+        {
+          "question": "She is tired because she ___ since morning.\na) works      b) worked      c) has been working      d) will work",
+          "answer": "c) has been working\n\nWhy: A continuing activity with a visible effect."
+        },
+        {
+          "question": "Yesterday I have met my old professor.",
+          "answer": "Yesterday I met my old professor.\n\nWhy: Yesterday needs the simple past."
+        },
+        {
+          "question": "I already have finished my work.",
+          "answer": "I have already finished my work.\n\nWhy: Already goes between have and the participle."
+        },
+        {
+          "question": "She said that she is not well.",
+          "answer": "She said that she was not well.\n\nWhy: Reported speech shifts back."
+        },
+        {
+          "question": "Correct the tenses in this paragraph: Last week I am attending a workshop in Mysuru. The trainer explains the rules and we are practising in groups. I have learned a lot and I was feeling confident at the end.",
+          "answer": "Last week I attended a workshop in Mysuru. The trainer explained the rules and we practised in groups. I learned a lot and I felt confident at the end.\n\nWhy: A finished past event takes the simple past throughout."
+        },
+        {
+          "question": "Write one sentence about what you have been doing this week, using the present perfect continuous.",
+          "answer": "Sample: I have been preparing for my placement interviews.\n\nWhy: Any sentence with have/has been + verb-ing about the week is correct."
+        }
+      ],
+      "duration_minutes": 14,
+      "status": "INACTIVE"
+    },
+    {
+      "id": "098a368b-9efa-5cfa-b72a-8296d4f6d9e6",
+      "module_id": "12317970-9ddb-5de8-b1e3-cc7e6534c4a0",
+      "title": "Final Challenge: Mixed Practice",
+      "sequence": 8,
+      "content": "Choose the best answer. Each question may test a different idea from this module.\n\nYour score: 17 to 20: excellent, you are ready to use this confidently. 12 to 16: good, revise the parts where you slipped. Below 12: go back to the explanations and try again after a day.\n\nTry the practice questions below before revealing each answer and explanation.",
+      "practice_questions": [
+        {
+          "question": "Nisha ___ to the gym every evening.\na) go      b) goes      c) is going      d) went",
+          "answer": "b) goes\n\nWhy: A regular habit; she takes -es."
+        },
+        {
+          "question": "Please be quiet; the students ___ the test.\na) take      b) takes      c) are taking      d) took",
+          "answer": "c) are taking\n\nWhy: In progress now."
+        },
+        {
+          "question": "I ___ what you mean.\na) am understanding      b) understanding      c) understand      d) have been understanding",
+          "answer": "c) understand\n\nWhy: A state verb."
+        },
+        {
+          "question": "She ___ in Chennai since June.\na) works      b) has been working      c) worked      d) will work",
+          "answer": "b) has been working\n\nWhy: Since needs the perfect continuous (or perfect)."
+        },
+        {
+          "question": "I ___ three interviews this week, and one more is tomorrow.\na) attended      b) have attended      c) attend      d) was attending",
+          "answer": "b) have attended\n\nWhy: This week is not over, so use the present perfect."
+        },
+        {
+          "question": "We ___ the hall booking last Monday.\na) have confirmed      b) had confirmed      c) confirmed      d) confirm",
+          "answer": "c) confirmed\n\nWhy: Last Monday is finished."
+        },
+        {
+          "question": "He ___ for the call when his manager walked in.\na) prepared      b) was preparing      c) has prepared      d) prepares",
+          "answer": "b) was preparing\n\nWhy: In progress when interrupted."
+        },
+        {
+          "question": "When she reached the office, the others ___.\na) left      b) leave      c) were left      d) had left",
+          "answer": "d) had left\n\nWhy: They left before she arrived."
+        },
+        {
+          "question": "He was nervous because he ___ for an interview before.\na) never prepared      b) had never prepared      c) has never prepared      d) never prepares",
+          "answer": "b) had never prepared\n\nWhy: Earlier experience before a past moment."
+        },
+        {
+          "question": "I ___ you as soon as I get the results.\na) call      b) called      c) will call      d) am calling",
+          "answer": "c) will call\n\nWhy: A promise takes will."
+        },
+        {
+          "question": "It ___ be a long day, so carry some snacks.\na) is going to      b) has      c) was      d) does",
+          "answer": "a) is going to\n\nWhy: A prediction based on the situation."
+        },
+        {
+          "question": "By the time you read this, I ___ my certification.\na) will complete      b) complete      c) will have completed      d) completed",
+          "answer": "c) will have completed\n\nWhy: Finished before a future moment."
+        },
+        {
+          "question": "If I ___ early, I will join the first session.\na) will reach      b) reach      c) reached      d) reaching",
+          "answer": "b) reach\n\nWhy: No will after if."
+        },
+        {
+          "question": "I am knowing the process well.",
+          "answer": "I know the process well.\n\nWhy: State verb."
+        },
+        {
+          "question": "Did she submitted the form?",
+          "answer": "Did she submit the form?\n\nWhy: Base form after did."
+        },
+        {
+          "question": "I have completed my graduation in 2024.",
+          "answer": "I completed my graduation in 2024.\n\nWhy: A definite year needs the simple past."
+        },
+        {
+          "question": "When he will come, I will tell him.",
+          "answer": "When he comes, I will tell him.\n\nWhy: No will after when."
+        },
+        {
+          "question": "They had been knowing each other for years.",
+          "answer": "They had known each other for years.\n\nWhy: State verb."
+        },
+        {
+          "question": "He said that he will join next week.",
+          "answer": "He said that he would join next week.\n\nWhy: Reported speech shifts will to would."
+        },
+        {
+          "question": "Write the future perfect continuous of \"work\" with \"I\": By next year, I ___ here for ten years.",
+          "answer": "will have been working\n\nWhy: Will have been + verb-ing."
+        }
+      ],
+      "duration_minutes": 21,
+      "status": "INACTIVE"
+    },
+    {
+      "id": "ebc84ae0-0d8b-5697-811c-509220106029",
+      "module_id": "12317970-9ddb-5de8-b1e3-cc7e6534c4a0",
+      "title": "Quick Recap",
+      "sequence": 9,
+      "content": "- Simple present for habits and facts; present continuous for now and temporary situations.\n\n- State verbs (know, like, want, own) stay in the simple form.\n\n- Present perfect links the past to now; never use it with yesterday, ago or a past year.\n\n- Simple past for finished events; past continuous for the scene or the interrupted action.\n\n- Past perfect shows the earlier of two past events.\n\n- Will for decisions and promises; going to for plans and evidence; present continuous for arrangements.\n\n- Future perfect continuous is will have been + verb-ing.\n\n- After when, if, before, after, until, unless, use the present, not will.\n\n- After did and modals, use the base verb. Keep your tenses consistent.",
+      "practice_questions": [],
+      "duration_minutes": 3,
+      "status": "INACTIVE"
+    }
+  ],
+  "sources": [
+    {
+      "file": "C2C_Module_1_Parts_of_Speech.docx",
+      "sha256": "96dab0b7ff5cb3d51920b30361d1740c27ece2bf09bf7a8b2b28c8f5b7ee503f",
+      "topic": "Parts of Speech",
+      "blocks": 368,
+      "tables": 22
+    },
+    {
+      "file": "C2C_Module_2_Articles.docx",
+      "sha256": "b32831502594a46dcf22b042e491bebd28fc2483186cc674457040ad380ec7d0",
+      "topic": "Articles",
+      "blocks": 342,
+      "tables": 18
+    },
+    {
+      "file": "C2C_Module_3_Prepositions.docx",
+      "sha256": "2bd8be944fd42fe98e36631dc74f064f38065a858f193fb32b0689e4caa440e5",
+      "topic": "Prepositions",
+      "blocks": 323,
+      "tables": 22
+    },
+    {
+      "file": "C2C_Module_4_Tenses.docx",
+      "sha256": "f2cad66ca7d7053b0c6762c1f363562966f754692010ae30dfe55ba589d96626",
+      "topic": "Tenses",
+      "blocks": 337,
+      "tables": 19
+    }
+  ]
+}

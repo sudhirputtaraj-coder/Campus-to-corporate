@@ -9,5 +9,6 @@ export default function config(phase: string): NextConfig {
     typescript: { tsconfigPath: development ? 'tsconfig.json' : 'tsconfig.build.json' },
     // The parent directory contains a separate project and lockfile.
     outputFileTracingRoot: __dirname,
+    experimental: { serverActions: { bodySizeLimit: '3mb' } },
   };
 }

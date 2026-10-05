@@ -21,6 +21,22 @@ async function requireSuperAdmin() {
   return { supabase, user, error: null };
 }
 
+export async function assignCourseSkill(courseId: string, formData: FormData) {
+  const { supabase, user, error } = await requireSuperAdmin();
+  if (error || !user) return { error: error || 'Unauthorized' };
+  const skillId = String(formData.get('skill_id') || '').trim();
+  if (!skillId) return { error: 'Choose a skill.' };
+  const { data: skill, error: skillError } = await supabase.from('skills').select('id, name').eq('id', skillId).maybeSingle();
+  if (skillError || !skill) return { error: 'Choose a skill from Manage Skills.' };
+  const { data, error: saveError } = await supabase.from('courses').update({ skill_id: skill.id, category: skill.name }).eq('id', courseId).select('id').maybeSingle();
+  if (saveError || !data) return { error: 'Unable to save the course skill. Check migration 038 has been applied.' };
+  revalidatePath('/admin/courses');
+  revalidatePath('/admin/skills');
+  revalidatePath('/student', 'layout');
+  revalidatePath('/admin/courses/' + courseId);
+  return { success: true };
+}
+
 export async function createModule(courseId: string, formData: FormData) {
   const { supabase, user, error } = await requireSuperAdmin();
   if (error || !user) return { error: error || 'Unauthorized' };
@@ -30,10 +46,12 @@ export async function createModule(courseId: string, formData: FormData) {
   const sequence = parseInt(String(formData.get('sequence') || '1'), 10) || 1;
   if (!title) return { error: 'Title is required.' };
 
-  const skillId = String(formData.get('skill_id') || '').trim();
+  const { data: course, error: courseError } = await supabase.from('courses').select('id, skill_id').eq('id', courseId).maybeSingle();
+  if (courseError || !course) return { error: 'Choose an existing course.' };
+  const skillId = String(formData.get('skill_id') || course.skill_id || '').trim();
   if (skillId) {
-    const { data: skill, error: skillError } = await supabase.from('skills').select('id').eq('id', skillId).eq('status', 'ACTIVE').maybeSingle();
-    if (skillError || !skill) return { error: 'Choose an active skill.' };
+    const { data: skill, error: skillError } = await supabase.from('skills').select('id').eq('id', skillId).maybeSingle();
+    if (skillError || !skill) return { error: 'Choose a skill from Manage Skills.' };
   }
 
   const { error: err } = await supabase.from('modules').insert({
@@ -56,6 +74,7 @@ export async function createModule(courseId: string, formData: FormData) {
     metadata: { title },
   });
   revalidatePath(`/admin/courses/${courseId}`);
+  revalidatePath('/admin/skills', 'layout');
   revalidatePath('/admin/skills');
   revalidatePath('/student/skills', 'layout');
   return { success: true };
@@ -66,13 +85,14 @@ export async function assignModuleSkill(moduleId: string, courseId: string, form
   if (error || !user) return { error: error || 'Unauthorized' };
   const skillId = String(formData.get('skill_id') || '').trim();
   if (skillId) {
-    const { data: skill, error: skillError } = await supabase.from('skills').select('id').eq('id', skillId).eq('status', 'ACTIVE').maybeSingle();
-    if (skillError || !skill) return { error: 'Choose an active skill.' };
+    const { data: skill, error: skillError } = await supabase.from('skills').select('id').eq('id', skillId).maybeSingle();
+    if (skillError || !skill) return { error: 'Choose a skill from Manage Skills.' };
   }
   const { data, error: updateError } = await supabase.from('modules').update({ skill_id: skillId || null })
     .eq('id', moduleId).eq('course_id', courseId).select('id').maybeSingle();
   if (updateError || !data) return { error: 'The module could not be updated.' };
   revalidatePath(`/admin/courses/${courseId}`);
+  revalidatePath('/admin/skills', 'layout');
   revalidatePath('/admin/skills');
   revalidatePath('/student/skills', 'layout');
   return { success: true };
@@ -113,6 +133,7 @@ export async function createLesson(moduleId: string, courseId: string, formData:
     return { error: err.code === 'P0001' ? err.message : 'Something went wrong. Please try again.' };
   }
   revalidatePath(`/admin/courses/${courseId}`);
+  revalidatePath('/admin/skills', 'layout');
   revalidatePath('/student/skills', 'layout');
   return { success: true };
 }
@@ -129,9 +150,15 @@ export async function createAssessment(courseId: string, formData: FormData) {
   if (!title) return { error: 'Title is required.' };
 
   if (!['MCQ', 'MIXED', 'TRUE_FALSE'].includes(type) || !Number.isInteger(duration) || duration < 1 || duration > 240 || !Number.isFinite(passing) || passing < 0 || passing > 100) return { error: 'Choose an automatic assessment, 1–240 minutes, and a pass mark from 0 to 100.' };
+  const lessonId = String(formData.get('lesson_id') || '').trim();
+  if (lessonId) {
+    const { data: lesson } = await supabase.from('lessons').select('id,module:modules!inner(course_id)').eq('id',lessonId).eq('module.course_id',courseId).maybeSingle();
+    if (!lesson) return {error:'Choose a lesson in this module.'};
+  }
   const { data, error: err } = await supabase
     .from('assessments')
     .insert({
+      lesson_id: lessonId || null,
       course_id: courseId,
       title,
       description,
@@ -157,6 +184,7 @@ export async function createAssessment(courseId: string, formData: FormData) {
     metadata: { course_id: courseId, title },
   });
   revalidatePath(`/admin/courses/${courseId}`);
+  revalidatePath('/admin/skills', 'layout');
   return { success: true, id: data.id };
 }
 
@@ -210,5 +238,6 @@ export async function createQuestion(assessmentId: string, courseId: string, for
     entity_id: assessmentId,
   });
   revalidatePath(`/admin/courses/${courseId}`);
+  revalidatePath('/admin/skills', 'layout');
   return { success: true };
 }

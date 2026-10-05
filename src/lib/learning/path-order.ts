@@ -1,5 +1,5 @@
 export interface PathSkill { id: string; code: string; name: string; display_order?: number; }
-export interface PathLesson { id: string; module_id: string; title: string; sequence: number; status: string; }
+export interface PathLesson { id: string; module_id: string; duration_minutes?: number; practice_count?: number; title: string; sequence: number; status: string; }
 export interface PathModule { id: string; skill_id: string | null; course_id: string; title: string; sequence: number; status: string; }
 const foundation = ['PROF', 'COMM', 'CRT', 'PROB', 'TEAM', 'TIME', 'ADAPT'];
 export function skillRank(skill: PathSkill) {

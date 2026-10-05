@@ -194,21 +194,24 @@ export async function createCourse(formData: FormData) {
 
   const { data: profile } = await supabase
     .from('profiles')
-    .select('role')
+    .select('role, status')
     .eq('user_id', user.id)
     .single();
 
-  if (profile?.role !== 'SUPER_ADMIN') {
+  if (profile?.role !== 'SUPER_ADMIN' || profile.status !== 'ACTIVE') {
     return { error: "You don't have permission to access this resource." };
   }
 
   const title = (formData.get('title') as string)?.trim();
   const description = (formData.get('description') as string)?.trim() || null;
-  const category = (formData.get('category') as string)?.trim();
+  const skillId = String(formData.get('skill_id') || '').trim();
   const level = (formData.get('level') as string) || 'BEGINNER';
   const duration = parseInt(String(formData.get('duration_minutes') || '0'), 10) || 0;
 
-  if (!title || !category) return { error: 'Title and category are required.' };
+  if (!title || !skillId) return { error: 'Title and skill are required.' };
+  const { data: skill, error: skillError } = await supabase.from('skills').select('id, name').eq('id', skillId).maybeSingle();
+  if (skillError || !skill) return { error: 'Choose a skill from Manage Skills.' };
+  const category = skill.name;
 
   const { data, error: insertError } = await supabase
     .from('courses')
@@ -216,6 +219,7 @@ export async function createCourse(formData: FormData) {
       title,
       description,
       category,
+      skill_id: skill.id,
       level,
       duration_minutes: duration,
       status: 'INACTIVE',
@@ -238,6 +242,7 @@ export async function createCourse(formData: FormData) {
   });
 
   revalidatePath('/admin/courses');
+  revalidatePath('/admin/skills');
   return { success: true, id: data.id };
 }
 

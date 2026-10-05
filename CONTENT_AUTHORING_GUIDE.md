@@ -1,33 +1,38 @@
-# Prepare and publish content gradually
+# Manage skills, modules, lessons and assessments
 
-Apply migration **037_content_publishing.sql** after 036 to enable assessment copying and publication checks. Existing courses, lessons, assessments, enrolments and results keep their current state. New items default to hidden. No content is published by applying this migration.
+Apply migration **039_skill_module_lesson_assessments.sql** after 038 before using the updated authoring screens. It adds lesson-linked assessments and direct module creation under skills. It preserves existing IDs, content, enrolments, lesson progress and assessment results. Applying it does not publish the imported grammar drafts or enrol learners.
 
-## Your authoring workflow
+## One content structure
 
-1. Sign in as Super Admin → Course Management → Create draft course.
-2. Add a draft module and select its parent skill.
-3. Select **Write, edit & preview lessons / publish module**. This opens the existing rich lesson editor, including written text, video/reading links and practice Q&A.
-4. Add lessons as **Draft / hidden**. Use **Preview current lesson** to inspect the current input before saving. Preview is not a save; edit fields and preview again. Links open separately so you can check them.
-5. When a lesson is ready, choose **Published** and save. Publish its module and parent skill as well. Content remains inaccessible until its course is published.
-6. Back on the course page, choose **Review & publish**. The course needs at least one published module/lesson. Assign the course to colleges or enrol eligible students using the existing enrolment workflow.
-7. Add further modules or lessons as hidden drafts whenever needed, then publish each finished sequence. Students retain their recorded lesson completions. New lessons change the amount of available learning; a previously issued certificate is not revoked automatically.
+**Skill → Module → Lesson → Assessment**
 
-Editing a published lesson updates the live text immediately. For substantial changes, work in a separate hidden lesson and plan the replacement. This release does not maintain separate unpublished revisions of an already-published lesson. Hidden and draft share the existing INACTIVE database status.
+1. Open Super Admin → Manage Skills. Add a skill or edit an existing one. There is no fixed eight-skill limit. Hide a skill to remove it from the learning path while retaining its records.
+2. Under the skill, add a module. There is no course selector. New modules are hidden drafts.
+3. Open the module to add or edit lessons, videos, reading links and practice questions. Preview a lesson before saving. Each lesson has its own visibility setting.
+4. Inside a lesson, open **Manage this lesson’s assessments** to add questions, answer keys and skill mappings. New assessments are drafts.
+5. Publish the lesson and module when reviewed; its parent skill must also be published. The platform handles the underlying access container. Published content is available only to appropriately enrolled learners with active access.
+6. Students choose a skill, open its modules and lessons, and take assessments listed beside the relevant lesson. Course names and course assessment sections are removed from this learning view.
 
-## Assessments
+## Existing material
 
-New assessments are hidden. Select **Practice only** for quizzes that should not affect skill scores. For formal evidence, map every question to an active skill and supply at least three questions per measured skill.
+Old course editor links redirect to Manage Skills. Course records remain internally for enrolment, access and certificate compatibility; they are not a second content-authoring structure. College and programme access assignments remain separate from publishing.
 
-Questions must have 2–10 distinct choices, a matching answer key and positive marks. Use the edit control on draft questions to correct copied questions. Review the full questions and keys before publishing. A published assessment must be hidden before questions can be edited; attempted assessments remain locked even when hidden.
+Modules without a skill appear under **Modules needing a skill** for an admin to assign. They do not create an extra pseudo-skill in the learner menu.
 
-Use **Create editable draft copy** to revise an attempted assessment. It copies questions, answers and skill mappings into a separate hidden assessment with a source reference. It does not copy attempts, grades, certificates or used attempt counts. Existing results stay with the original. Publication of the copy does not automatically hide the original; manage both deliberately. Hide actions refuse unresolved in-progress assessment attempts.
+Existing assessments without a lesson are not guessed onto a lesson. In the lesson assessment editor, use **Use an existing assessment** to create and attach a draft copy from the same underlying learning content. Original results remain intact. Review and publish the new copy when ready. Historical assessments and results remain accessible through existing result links.
 
-## Work on content in parallel
+## Assessment integrity
 
-Use `content-workspace/LESSON_TEMPLATE.md` for offline writing and review. `content-workspace/meeting-preparation-draft.md` is an original sample for editorial review, not automatically imported or published. Copy the learner text into a draft lesson, enter self-study questions through the practice editor, and enter the formal quiz separately. Do not paste formal answer keys into learner lesson text.
+Formal questions need positive marks, 2–10 distinct options, a matching answer key and valid skill mappings. Each measured skill needs at least three questions. Practice assessments do not affect skill scores. Hidden lessons, modules and skills cannot be bypassed by starting a lesson assessment through a direct link.
 
-Review each lesson for a clear outcome, an example, a practical activity, useful answer explanations, accessibility and realistic duration. Test links and ensure you have permission to use external material. For the pilot, finish one coherent sequence before expanding the catalogue.
+Questions and grading settings are locked after the first attempt. Use an editable draft copy for revisions. Copies keep their lesson association and questions, but never copy attempts or grades. Existing in-progress attempts can still be submitted under the existing assessment submission rules.
 
-## Verification and remaining rollout checks
+## Publishing and editing
 
-Database tests run locally against isolated PostgreSQL, not your hosted Supabase project. After applying 037, verify with one Super Admin and one learner: save draft → learner cannot see it → preview → publish parents/course → learner can see it. Then copy an attempted assessment and confirm original results remain unchanged. No hosted content, account roles or enrolments were changed during implementation.
+Editing a published lesson changes the text for current learners while preserving progress. There is no separate unpublished revision of the same lesson. Draft and hidden both use INACTIVE status. Hiding is reversible; it does not delete learning history.
+
+The English Grammar import remains four separate modules: Parts of Speech, Articles, Prepositions and Tenses. Content edited in one lesson never silently replaces another lesson with a similar title. Use the module and lesson editor as the authoritative location for that content.
+
+## Checks
+
+The hierarchy migration has isolated database tests for admin access, hidden-parent assessment access, publication, copying and preserved history. After applying 039, test one module and lesson with a super admin and an assigned student before publishing more content.

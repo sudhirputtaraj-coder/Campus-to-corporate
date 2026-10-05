@@ -58,7 +58,7 @@ export default function ContentForm({ kind, item = {}, moduleId = '', skills = [
       <option value="ACTIVE">Published</option><option value="INACTIVE">Draft / hidden</option>
       {item.status && !['ACTIVE', 'INACTIVE'].includes(item.status) && <option value={item.status} disabled>{item.status} — choose a visibility</option>}
     </select></label>
-    <p className="text-xs text-slate-600">New content stays hidden until you choose Published and save. The course, module and parent skill must also be published. Editing a published lesson updates it for current learners without resetting their progress.</p>
+    <p className="text-xs text-slate-600">New content stays hidden until you choose Published and save. The module and parent skill must also be published. Editing a published lesson updates it for current learners without resetting their progress.</p>
     {kind === 'lesson' && <><button type="button" className="rounded-lg border px-4 py-2 text-sm" onClick={() => {
       if (!formRef.current) return; const data = new FormData(formRef.current); setPreview({ title: String(data.get('title') || ''), content: String(data.get('content') || ''), video: String(data.get('video_url') || ''), resource: String(data.get('resource_url') || ''), questions });
     }}>Preview current lesson</button>{preview && <LessonPreview data={preview} />}</>}

@@ -1,4 +1,3 @@
-import { adminLinks } from '@/lib/admin-navigation';
 import { createClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
@@ -74,12 +73,7 @@ export default async function AdminDashboard() {
           ))}
         </div>
 
-        <div className="bg-white border border-slate-200 rounded-xl p-6">
-          <h2 className="font-semibold text-slate-900 mb-4">Quick actions</h2>
-          <div className="flex flex-wrap gap-3">
-            {adminLinks.slice(1).map(([label,href])=><Link key={href} href={href} className="rounded-lg border px-4 py-2 text-sm font-medium">{label}</Link>)}
-          </div>
-        </div>
+        <p className="text-sm text-slate-600">Use the navigation menu to manage skills, modules and platform access.</p>
       </main>
     </div>
   );

@@ -58,3 +58,17 @@ export async function saveLesson(id: string | null, moduleId: string, form: Form
   if (error || !data) return { error: 'Lesson could not be saved.' };
   refresh(); return { success: true };
 }
+
+export async function createSkillModule(skillId: string, form: FormData) {
+ const client=await admin(); if(!client)return {error:'Active Super Admin access is required.'};
+ const title=String(form.get('title')||'').trim(); const sequence=Number(form.get('sequence')||1);
+ if(!title || title.length>200 || !Number.isSafeInteger(sequence) || sequence<1 || sequence>100000)return {error:'Enter a module name and valid display order.'};
+ const {error}=await client.rpc('fn_create_skill_module',{p_skill:skillId,p_title:title,p_description:String(form.get('description')||''),p_sequence:sequence});
+ if(error)return {error:'Unable to add module. Check that migration 039 is applied.'};refresh();return {success:true};
+}
+
+export async function attachLessonAssessment(assessmentId:string,lessonId:string){
+ const client=await admin();if(!client)return {error:'Active Super Admin access is required.'};
+ const {error}=await client.rpc('fn_copy_assessment_to_lesson',{p_assessment:assessmentId,p_lesson:lessonId});
+ if(error)return {error:error.code==='P0001'?error.message:'Unable to add assessment. Check migration 039.'};refresh();return {success:true};
+}

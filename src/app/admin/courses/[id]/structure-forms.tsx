@@ -37,11 +37,15 @@ type Asmt = {
 
 export function CourseStructureForms({
   courseId,
+  lessonId,
+  courseSkillId,
   modules,
   assessments,
   skills,
 }: {
   courseId: string;
+  lessonId?: string;
+  courseSkillId?: string | null;
   modules: Mod[];
   assessments: Asmt[];
   skills: { id: string; name: string }[];
@@ -70,7 +74,7 @@ export function CourseStructureForms({
       {msg && <div className="bg-green-50 text-green-700 text-sm px-3 py-2 rounded-lg">{msg}</div>}
 
       {/* Modules list */}
-      <section className="bg-white border border-slate-200 rounded-xl p-5">
+      {!lessonId && <section className="bg-white border border-slate-200 rounded-xl p-5">
         <h2 className="font-semibold text-slate-900 mb-4">Modules & Lessons</h2>
         {modules.length === 0 ? (
           <p className="text-sm text-slate-500 mb-4">No modules yet.</p>
@@ -134,8 +138,8 @@ export function CourseStructureForms({
         >
           <input name="title" required placeholder="Module title" className="border border-slate-300 rounded-lg px-3 py-2 text-sm" />
           <label className="text-sm text-slate-600">Parent skill
-            <select name="skill_id" className="ml-2 rounded-lg border border-slate-300 px-3 py-2">
-              <option value="">Not assigned</option>
+            <select key={courseSkillId} name="skill_id" defaultValue={courseSkillId || ''} className="ml-2 rounded-lg border border-slate-300 px-3 py-2">
+              <option value="">Use course skill</option>
               {skills.map(skill => <option key={skill.id} value={skill.id}>{skill.name}</option>)}
             </select>
           </label>
@@ -145,7 +149,7 @@ export function CourseStructureForms({
             Add draft module
           </button>
         </form>
-      </section>
+      </section>}
 
       {/* Assessments */}
       <section className="bg-white border border-slate-200 rounded-xl p-5">
@@ -207,6 +211,7 @@ export function CourseStructureForms({
           onSubmit={(e) => {
             e.preventDefault();
             const fd = new FormData(e.currentTarget);
+            if (lessonId) fd.set('lesson_id',lessonId);
             run(() => createAssessment(courseId, fd));
           }}
         >

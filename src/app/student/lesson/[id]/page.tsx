@@ -63,6 +63,8 @@ export default async function StudentLessonPage({
   // Follow the same cross-module and cross-course sequence as My Learning Path.
   const path=await loadLearningPath(student.id);
   const idx=path.lessons.findIndex(l=>l.id===lessonId);
+  const skillId=path.lessons[idx]?.skill_id;
+  const learningHref='/student/learning?skill='+encodeURIComponent(skillId || 'additional')+'#module-'+lesson.module.id;
   const prev=idx>0?path.lessons[idx-1]:null;
   const next=idx>=0?path.lessons[idx+1]||null:null;
 
@@ -73,6 +75,7 @@ export default async function StudentLessonPage({
     .eq('lesson_id', lessonId)
     .maybeSingle();
 
+  const {data:lessonAssessments,error:lessonAssessmentError}=await supabase.from('assessments').select('id,title,is_practice,duration_minutes').eq('lesson_id',lessonId).eq('status','ACTIVE').order('title');
   const isComplete = progress?.status === 'COMPLETED';
 
   return (
@@ -80,12 +83,12 @@ export default async function StudentLessonPage({
       <header className="page-navigation bg-white border-b border-slate-200">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
           <Link
-            href={`/student/course/${courseId}`}
+            href={learningHref}
             className="flex items-center gap-2 text-sm text-slate-600 hover:text-slate-900"
           >
             <span className="text-sm font-semibold">Campus-to-Corporate</span>
             <span className="truncate max-w-[180px] sm:max-w-xs">
-              {lesson.module?.course?.title || 'Course'}
+              Back to learning path
             </span>
           </Link>
           <Link href="/" className="text-slate-500 hover:text-slate-900" title="Home">
@@ -135,7 +138,10 @@ export default async function StudentLessonPage({
           </a>
         )}
 
-        {Array.isArray(lesson.practice_questions) && lesson.practice_questions.length>0 && <section className="mt-6 rounded-xl border bg-white p-5"><h2 className="text-lg font-semibold">Practise what you learned</h2><p className="mt-2 text-sm">Think through each question before revealing the answer. This practice does not change your skill score.</p>{lesson.practice_questions.map((q:{question:string;answer:string},i:number)=><details key={i} className="mt-4 border-t pt-3"><summary className="cursor-pointer font-medium">{i+1}. {q.question}</summary><p className="mt-3 whitespace-pre-wrap break-words">{q.answer}</p></details>)}</section>}
+        {Array.isArray(lesson.practice_questions) && lesson.practice_questions.length>0 && <section id="lesson-practice" className="mt-6 scroll-mt-6 rounded-xl border bg-white p-5"><h2 className="text-lg font-semibold">Practise what you learned</h2><p className="mt-2 text-sm">Think through each question before revealing the answer. This practice does not change your skill score.</p>{lesson.practice_questions.map((q:{question:string;answer:string},i:number)=><details key={i} className="mt-4 border-t pt-3"><summary className="cursor-pointer font-medium">{i+1}. {q.question}</summary><p className="mt-3 whitespace-pre-wrap break-words">{q.answer}</p></details>)}</section>}
+        <section className="mt-6 rounded-xl border bg-white p-5"><h2 className="text-lg font-semibold">Lesson assessments</h2>
+          {lessonAssessmentError ? <p className="mt-2 text-sm">Assessments could not be loaded. Please try again later.</p> : lessonAssessments?.length ? <ul className="mt-3 space-y-3">{lessonAssessments.map(a=><li key={a.id}><Link className="underline" href={'/student/assessment/'+a.id}>{a.title}</Link><p className="text-sm">{a.is_practice?'Practice':'Formal assessment'} · {a.duration_minutes} min</p></li>)}</ul> : <p className="mt-2 text-sm text-slate-600">No formal assessment is available for this lesson yet.</p>}
+        </section>
         <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
           <div className="flex min-w-0 flex-wrap gap-2">
             {prev ? (
@@ -157,7 +163,7 @@ export default async function StudentLessonPage({
               </Link>
             ) : (
               <Link
-                href="/student/assessments"
+                href={learningHref}
                 className="px-4 py-2.5 border border-slate-300 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50"
               >
                 Review assessments
