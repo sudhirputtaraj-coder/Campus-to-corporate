@@ -16,7 +16,7 @@ export default async function StructurePage({kind,collegeId}:{kind:'department'|
       {college.status==='ACTIVE'?<details className="rounded-xl border bg-white p-5"><summary className="cursor-pointer font-semibold">Add {kind}</summary><StructureForm key={college.id} kind={kind} collegeId={college.id} departments={depts as any}/></details>:<p>This college is inactive. Contact the platform administrator to enable changes.</p>}
       <p className="my-4 text-sm text-slate-600">{rows.length} {title.toLowerCase()}. Open a record to edit it. Inactive records remain available for history.</p>
       <div className="space-y-4">{rows.map(row=><details key={row.id} className="rounded-xl border bg-white p-5"><summary className="cursor-pointer font-medium">{row.name} · {row.code||row.academic_year||''} · {row.status}</summary>{college.status==='ACTIVE'&&<StructureForm key={row.id} kind={kind} collegeId={college.id} record={row} departments={depts as any}/>}</details>)}</div>
-      <p className="mt-5">Assign students through <Link href="/college/students" className="text-blue-700 underline">Students & Progress</Link>, then use <Link href="/college/courses" className="text-blue-700 underline">Courses / Enroll</Link> to enrol a batch.</p>
+      <p className="mt-5">Assign students through <Link href="/college/students" className="text-blue-700 underline">Students & Progress</Link>, then use <Link href="/college/programs" className="text-blue-700 underline">Programs</Link> to manage access for the whole college.</p>
     </>}
   </div></main>;
 }

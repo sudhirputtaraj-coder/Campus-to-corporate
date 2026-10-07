@@ -41,7 +41,7 @@ export default function BulkInvite({ collegeId, departments, batches }: { colleg
   const failed = jobs.filter(j => j.status === 'FAILED' && j.attempts < 5);
   let validationError = '';
   if (rows.length) { try { validateRoster(rows); } catch (e) { validationError = e instanceof Error ? e.message : 'Check the student details.'; } }
-  const template = 'email,full_name,register_number\r\nstudent@example.com,Student Name,REG001\r\n';
+  const template = 'email,full_name,register_number\r\nstudent1@example.com,Ananya Rao,REG001\r\nstudent2@example.com,Rahul Kumar,REG002\r\n';
   return <section className="mb-6 rounded-xl border border-blue-200 bg-white p-5" aria-labelledby="bulk-title">
     <h2 id="bulk-title" className="text-xl font-semibold">Invite students in bulk</h2>
     <p className="mt-2 text-sm text-slate-600">Add up to 500 students at once. Upload Excel (.xlsx, first sheet), Word (.docx, one table or an email list), CSV or text; or paste email addresses below.</p>
@@ -49,8 +49,25 @@ export default function BulkInvite({ collegeId, departments, batches }: { colleg
     {!configured && !queueError && <p className="mt-3 rounded-lg bg-amber-50 p-3 text-sm">You can prepare and review your list now. Sending requires a Gmail account with an App Password (or a verified Resend sender), and the public HTTPS platform address. Ask your platform administrator to configure these.</p>}
     <form className="mt-4 space-y-3" onSubmit={e => { e.preventDefault(); const form = new FormData(e.currentTarget); void run(async () => { const result = await previewStudentRoster(collegeId, form); setRows(result.rows); setGenerated(result.generated); setResults([]); setMessage(result.error || `Loaded ${result.rows.length} students. Review their details below.`); }); }}>
       <fieldset disabled={busy} className="space-y-3">
-        <label className="block text-sm font-medium">Upload student list<input type="file" name="file" accept=".xlsx,.docx,.csv,.txt" className="mt-1 block w-full rounded-lg border p-2" /></label>
-        <p className="text-xs text-slate-600">Maximum 2 MB. Use headings email, full_name and register_number. Email-only lists work too. Format register numbers as text in Excel to keep leading zeros. A selected file takes priority over pasted text.</p>
+        <section aria-labelledby="student-file-format" className="rounded-lg border border-slate-200 bg-slate-50 p-4">
+          <h3 id="student-file-format" className="font-semibold text-slate-900">How to format your student list</h3>
+          <p className="mt-1 text-sm text-slate-600">Use these three column headings, with one student per row. Replace the examples with your students’ details.</p>
+          <div className="mt-3 overflow-x-auto rounded-lg border bg-white">
+            <table className="w-full text-left text-sm">
+              <caption className="sr-only">Example format for an Excel worksheet or Word table</caption>
+              <thead className="bg-slate-100"><tr><th scope="col" className="px-3 py-2 font-mono">email</th><th scope="col" className="px-3 py-2 font-mono">full_name</th><th scope="col" className="px-3 py-2 font-mono">register_number</th></tr></thead>
+              <tbody><tr className="border-t"><td className="px-3 py-2">student1@example.com</td><td className="whitespace-nowrap px-3 py-2">Ananya Rao</td><td className="px-3 py-2">REG001</td></tr><tr className="border-t"><td className="px-3 py-2">student2@example.com</td><td className="whitespace-nowrap px-3 py-2">Rahul Kumar</td><td className="px-3 py-2">REG002</td></tr></tbody>
+            </table>
+          </div>
+          <div className="mt-3 grid gap-3 text-sm sm:grid-cols-2">
+            <div><h4 className="font-semibold">Excel (.xlsx) or CSV</h4><p className="mt-1 text-slate-600">Put the headings in the first row of the first worksheet. Format register numbers as Text to keep leading zeros, such as 00125. Replace formulas with values.</p></div>
+            <div><h4 className="font-semibold">Word (.docx)</h4><p className="mt-1 text-slate-600">Create one table with the three headings shown above. Add one student per row. Save the document as .docx.</p></div>
+          </div>
+          <p className="mt-3 text-sm text-slate-600"><strong>Only have email addresses?</strong> Use one email per row in Excel, one email per line in Word, or paste them below. Missing names are filled from the email and missing register numbers receive temporary IDs. Review and edit these before sending.</p>
+          <p className="mt-2 text-sm text-slate-600">Choose the department and batch after previewing the list. Use a separate list for each group.</p>
+        </section>
+        <label className="block text-sm font-medium">Upload student list<input type="file" name="file" accept=".xlsx,.docx,.csv,.txt" aria-describedby="student-file-limits" className="mt-1 block w-full rounded-lg border p-2" /></label>
+        <p id="student-file-limits" className="text-xs text-slate-600">Up to 500 students · Maximum 2 MB · .xlsx, .docx, .csv or .txt. A selected file takes priority over pasted text.</p>
         <a href={`data:text/csv;charset=utf-8,${encodeURIComponent(template)}`} download="student-invitation-template.csv" className="inline-block text-sm text-blue-800 underline">Download Excel-compatible CSV template</a>
         <label className="block text-sm font-medium">Or paste email addresses<textarea name="emails" rows={4} maxLength={500000} placeholder="One email per line, or separated by commas" className="mt-1 w-full rounded-lg border p-2" /></label>
         <button className="rounded-lg border border-blue-800 px-4 py-2 text-blue-900">Preview student list</button>

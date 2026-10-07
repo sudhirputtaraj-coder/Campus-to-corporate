@@ -15,7 +15,7 @@ export default function StructureForm({kind,collegeId,record={},departments=[],b
       {kind==='batch'&&<label>Academic year<input name="academic_year" maxLength={40} placeholder="2026–2027" defaultValue={record.academic_year||''} className={css}/></label>}
       {kind==='placement'&&<label>Batch<select key={dept} name="batch_id" defaultValue={dept===(record.department_id||'')?record.batch_id||'':''} className={css}><option value="">No batch</option>{batches.filter(b=>b.status==='ACTIVE'&&(!b.department_id||b.department_id===dept)).map(b=><option key={b.id} value={b.id}>{b.name}</option>)}</select></label>}
     </fieldset>
-    {kind==='placement'&&<p className="text-sm text-slate-600">Changes apply to future batch enrolment. Existing course enrolments and progress are retained.</p>}
+    {kind==='placement'&&<p className="text-sm text-slate-600">Departments and batches organise students and reports. Programme access applies college-wide, and existing progress is retained.</p>}
     {result.error&&<p role="alert" className="text-red-700">{result.error}</p>}{result.success&&<p role="status" className="text-green-800">Saved successfully.</p>}
     <button disabled={busy} className="rounded-lg bg-slate-900 px-4 py-2 text-white disabled:opacity-50">{busy?'Saving…':'Save'}</button>
   </form>;

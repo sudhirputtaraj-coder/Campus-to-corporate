@@ -8,13 +8,17 @@ import { enrollBatchInCourse } from '@/lib/learning/actions';
 export function EnrollBatchForm({
   courses,
   batches,
+  departments = [],
 }: {
   courses: { id: string; title: string; category: string }[];
-  batches: { id: string; name: string; academic_year: string | null }[];
+  batches: { id: string; name: string; academic_year: string | null; department_id?: string | null }[];
+  departments?: { id: string; name: string }[];
 }) {
   const router = useRouter();
   const [courseId, setCourseId] = useState('');
   const [batchId, setBatchId] = useState('');
+  const [departmentId, setDepartmentId] = useState('');
+  const visibleBatches = batches.filter(b => !departmentId || (departmentId === 'unassigned' ? !b.department_id : b.department_id === departmentId));
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
   const [pending, startTransition] = useTransition();
@@ -48,7 +52,7 @@ export function EnrollBatchForm({
       {success && (
         <div className="bg-green-50 text-green-700 text-sm px-3 py-2 rounded-lg">{success}</div>
       )}
-      <div className="grid sm:grid-cols-2 gap-4">
+      <div className="grid sm:grid-cols-3 gap-4">
         <div>
           <label className="block text-sm font-medium text-slate-700 mb-1">Course</label>
           <select
@@ -66,6 +70,14 @@ export function EnrollBatchForm({
           </select>
         </div>
         <div>
+          <label htmlFor="enrolment-department" className="block text-sm font-medium text-slate-700 mb-1">Department</label>
+          <select id="enrolment-department" value={departmentId} onChange={e => { setDepartmentId(e.target.value); setBatchId(''); }} className="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm">
+            <option value="">All departments</option>
+            <option value="unassigned">No department assigned</option>
+            {departments.map(d => <option key={d.id} value={d.id}>{d.name}</option>)}
+          </select>
+        </div>
+        <div>
           <label className="block text-sm font-medium text-slate-700 mb-1">Batch</label>
           <select
             value={batchId}
@@ -74,18 +86,20 @@ export function EnrollBatchForm({
             required
           >
             <option value="">Select batch…</option>
-            {batches.map((b) => (
+            {visibleBatches.map((b) => (
               <option key={b.id} value={b.id}>
                 {b.name}
                 {b.academic_year ? ` · ${b.academic_year}` : ''}
+                {b.department_id ? ` · ${departments.find(d => d.id === b.department_id)?.name || 'Department'}` : ' · No department'}
               </option>
             ))}
           </select>
         </div>
       </div>
+      {!visibleBatches.length && <p role="status" className="text-sm text-slate-600">No active batches in this department yet. Create a batch under Batches and select this department.</p>}
       <button
         type="submit"
-        disabled={pending}
+        disabled={pending || !courseId || !batchId}
         className="inline-flex items-center gap-2 bg-slate-900 text-white px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-slate-800 disabled:opacity-60"
       >
         {pending && <Loader2 className="w-4 h-4 animate-spin" />}
