@@ -1,3 +1,4 @@
+import { LandingVideo } from '@/components/landing-video';
 import Link from 'next/link';
 import {
   Target,
@@ -34,9 +35,9 @@ export default function LandingPage() {
       </header>
 
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-blue-50/40 to-slate-100" />
+        <LandingVideo />
         <div className="relative max-w-6xl mx-auto px-4 sm:px-6 pt-20 pb-24 text-center">
-          <p className="landing-eyebrow text-slate-600 uppercase mb-4">
+          <p className="landing-eyebrow uppercase mb-4" style={{ color: '#000000', fontWeight: 750 }}>
             Workplace readiness for colleges and individual students
           </p>
           <h1 className="landing-hero-title landing-journey mx-auto" aria-label="Campus Corporate">
@@ -60,10 +61,10 @@ export default function LandingPage() {
               </svg>
             </span>
           </h1>
-          <p className="mt-6 text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto">
+          <p className="mt-6 text-lg sm:text-xl max-w-2xl mx-auto" style={{ color: '#000000', fontWeight: 750 }}>
             Build the skills. Measure the readiness. Prepare for the workplace.
           </p>
-          <p className="mt-3 text-slate-500 max-w-xl mx-auto">
+          <p className="mt-3 max-w-xl mx-auto" style={{ color: '#000000', fontWeight: 700 }}>
             Learn independently or through your college, with courses, assessments, and evidence of your skill progress.
           </p>
           <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">

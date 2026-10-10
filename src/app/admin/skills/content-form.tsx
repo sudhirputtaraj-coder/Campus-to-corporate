@@ -43,11 +43,11 @@ export default function ContentForm({ kind, item = {}, moduleId = '', skills = [
       <label className="block text-sm">Reading / text link (optional)<input className={field} name="resource_url" type="url" placeholder="https://…" defaultValue={item.resource_url || ''} /></label>
       <p className="text-xs text-slate-500">Add another lesson for each additional video or reading link. Use HTTPS links; videos must support embedding.</p>
       <fieldset className="rounded-lg border p-3"><legend className="text-sm font-semibold">Practice questions and answers</legend>
-        <p className="text-xs text-slate-600">Students can reveal each answer. These are self-study activities, not graded assessments, and do not change skill scores. Add more lessons for additional question sets.</p>
+        <p className="text-xs text-slate-600">Students answer, check the correct answer and explanation, then see a practice score. For automatic scoring, put choices on separate lines as a) option, b) option, and so on. Start the answer with the matching choice, for example b) Hyderabad, then add a new line explaining why. Other questions use written self-review. Practice does not change formal skill scores.</p>
         <input type="hidden" name="practice_questions" value={JSON.stringify(questions)}/>
         {questions.map((q,i)=><div key={i} className="mt-3 border-t pt-3">
           <label className="block text-sm">Question {i+1}<textarea className={field} required maxLength={1000} value={q.question} onChange={e=>setQuestions(questions.map((v,j)=>j===i?{...v,question:e.target.value}:v))}/></label>
-          <label className="block text-sm">Answer / explanation<textarea className={field} required maxLength={5000} value={q.answer} onChange={e=>setQuestions(questions.map((v,j)=>j===i?{...v,answer:e.target.value}:v))}/></label>
+          <label className="block text-sm">Correct answer and explanation (why it is correct)<textarea className={field} required maxLength={5000} value={q.answer} onChange={e=>setQuestions(questions.map((v,j)=>j===i?{...v,answer:e.target.value}:v))}/></label>
           <button type="button" className="mt-2 rounded px-3 py-1" onClick={()=>setQuestions(questions.filter((_,j)=>j!==i))}>Remove question {i+1}</button>
         </div>)}
         <button type="button" disabled={questions.length>=50} className="mt-3 rounded px-3 py-2" onClick={()=>setQuestions([...questions,{question:'',answer:''}])}>Add question and answer</button>

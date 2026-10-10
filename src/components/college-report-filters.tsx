@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import type { PerformanceFilters } from '@/lib/college/performance';
 export interface ReportOption {id:string;name?:string;title?:string;college_id?:string;department_id?:string|null}
-export function CollegeReportFilters({base,filters,options,benchmark,support}:{base:string;filters:PerformanceFilters;options:ReportOption[][];benchmark?:number;support:boolean}) {
+export function CollegeReportFilters({base,filters,options,benchmark,support,showCourse=true}:{base:string;filters:PerformanceFilters;options:ReportOption[][];benchmark?:number;support:boolean;showCourse?:boolean}) {
   const [college,setCollege]=useState(filters.college??'');
   const [department,setDepartment]=useState(filters.department??'');
   const [batch,setBatch]=useState(filters.batch??'');
@@ -11,7 +11,7 @@ export function CollegeReportFilters({base,filters,options,benchmark,support}:{b
     <label>College<select name="college" value={college} onChange={e=>{setCollege(e.target.value);setDepartment('');setBatch('');}}><option value="">All colleges</option>{options[0].map(o=><option key={o.id} value={o.id}>{o.name}</option>)}</select></label>
     <label>Department<select name="department" value={department} onChange={e=>{setDepartment(e.target.value);setBatch('');}}><option value="">All departments</option>{options[1].filter(o=>!college||o.college_id===college).map(o=><option key={o.id} value={o.id}>{o.name}{!college?` · ${options[0].find(c=>c.id===o.college_id)?.name??'College'}`:''}</option>)}</select></label>
     <label>Batch<select name="batch" value={batch} onChange={e=>setBatch(e.target.value)}><option value="">All batches</option>{options[2].filter(o=>(!college||o.college_id===college)&&(!department||o.department_id===department)).map(o=><option key={o.id} value={o.id}>{o.name}{!college?` · ${options[0].find(c=>c.id===o.college_id)?.name??'College'}`:''}</option>)}</select></label>
-    <label>Course<select name="course" defaultValue={filters.course??''}><option value="">All courses</option>{options[3].map(o=><option key={o.id} value={o.id}>{o.title}</option>)}</select></label>
+    {showCourse && <label>Course<select name="course" defaultValue={filters.course??''}><option value="">All courses</option>{options[3].map(o=><option key={o.id} value={o.id}>{o.title}</option>)}</select></label>}
     <label>Score / assessment from (IST)<input type="date" name="from" defaultValue={filters.from}/></label>
     <label>Through (IST)<input type="date" name="to" defaultValue={filters.to}/></label>
     <label>Readiness benchmark / 100<input type="number" name="minimum" min={0} max={100} step="0.01" defaultValue={filters.minimum??benchmark}/></label>

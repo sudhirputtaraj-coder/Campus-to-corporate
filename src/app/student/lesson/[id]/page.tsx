@@ -7,6 +7,7 @@ import { LogOut, Home } from 'lucide-react';
 import { logout } from '@/lib/auth/actions';
 import { touchLesson } from '@/lib/learning/actions';
 import { MarkCompleteButton } from './mark-complete-button';
+import { LessonPractice } from '../lesson-practice';
 import { LessonContent } from '../lesson-content';
 
 export default async function StudentLessonPage({
@@ -138,7 +139,7 @@ export default async function StudentLessonPage({
           </a>
         )}
 
-        {Array.isArray(lesson.practice_questions) && lesson.practice_questions.length>0 && <section id="lesson-practice" className="mt-6 scroll-mt-6 rounded-xl border bg-white p-5"><h2 className="text-lg font-semibold">Practise what you learned</h2><p className="mt-2 text-sm">Think through each question before revealing the answer. This practice does not change your skill score.</p>{lesson.practice_questions.map((q:{question:string;answer:string},i:number)=><details key={i} className="mt-4 border-t pt-3"><summary className="cursor-pointer font-medium">{i+1}. {q.question}</summary><p className="mt-3 whitespace-pre-wrap break-words">{q.answer}</p></details>)}</section>}
+        {Array.isArray(lesson.practice_questions) && <LessonPractice key={lesson.id + lesson.updated_at} questions={lesson.practice_questions} />}
         <section className="mt-6 rounded-xl border bg-white p-5"><h2 className="text-lg font-semibold">Lesson assessments</h2>
           {lessonAssessmentError ? <p className="mt-2 text-sm">Assessments could not be loaded. Please try again later.</p> : lessonAssessments?.length ? <ul className="mt-3 space-y-3">{lessonAssessments.map(a=><li key={a.id}><Link className="underline" href={'/student/assessment/'+a.id}>{a.title}</Link><p className="text-sm">{a.is_practice?'Practice':'Formal assessment'} · {a.duration_minutes} min</p></li>)}</ul> : <p className="mt-2 text-sm text-slate-600">No formal assessment is available for this lesson yet.</p>}
         </section>

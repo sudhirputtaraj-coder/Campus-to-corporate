@@ -1,6 +1,6 @@
 # Controlled college pilot release checklist
 
-Updated 3 October 2026. Security release 035 is required before pilot acceptance; follow SECURITY_ASSESSMENT_SETUP.md for the coordinated database/application rollout. Start with one college and 10-20 students after the gates below pass. Local automated tests do not establish hosted readiness. Do not rerun old migrations indiscriminately.
+Updated 8 October 2026. Security release 035 is required before pilot acceptance; follow SECURITY_ASSESSMENT_SETUP.md for the coordinated database/application rollout. Start with one college and 10-20 students after the gates below pass. Local automated tests do not establish hosted readiness. Do not rerun old migrations indiscriminately.
 
 ## Local release checks
 
@@ -18,7 +18,7 @@ npm run start -- -p 3107
 
 Development uses .next. Production build/start use .next-build and tsconfig.build.json, so a running development server cannot replace production artifacts. Both builds retain lint and type validation. The explicit tracing root prevents the separate parent project from being inferred as this application's root. Do not manually point next start at .next. CI includes lint, typecheck, tests, dependency audit and build; a successful local run does not establish a successful GitHub Actions run.
 
-Current source checks: lint passes with 58 pre-existing warnings; typecheck and all 33 regression scripts pass. Dependency audit returned zero known vulnerabilities during this audit. The production build passed with type validation and all 51 page-generation steps. A local production-server smoke check passed: six public pages and the Geist font returned 200; five protected role routes redirected anonymous users to login. Signed-in browser, hosted schema, email, mobile and recovery checks remain pending.
+Latest feature validation before the dependency update: TypeScript, all 54 test scripts, and the production build passed. See SECURITY_DEPENDENCY_STATUS.md for the 8 October dependency changes and unresolved development-tool advisories. Production dependency audit is clean; the full dependency audit is not. Do not treat previous clean-audit results as current. Signed-in browser, hosted schema, email, mobile and recovery checks remain pending.
 
 ## Database and content gate
 
